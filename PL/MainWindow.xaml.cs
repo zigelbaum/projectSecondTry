@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BL;
+using BE;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,13 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MyBL bL;
         public MainWindow()
         {
             InitializeComponent();
+            bL = MyBL.Instance;
+            string hostingUnitName = " ";
+            bL.addHostingUnit(new HostingUnit(new Host(), hostingUnitName));
         }
     }
 }

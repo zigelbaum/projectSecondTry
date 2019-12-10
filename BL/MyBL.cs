@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using BE;
+using DAL;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    class MyBL : IBL
+    public class MyBL : IBL
     {
         #region Singleton
         private static readonly MyBL instance = new MyBL();
@@ -26,6 +27,11 @@ namespace BL
             string TypeDAL = ConfigurationSettings.AppSettings.Get("TypeDS");
             //string TypeDAL = "List";
             myDAL = factoryDAL.getDAL(TypeDAL);
+        }
+
+        public void addHostingUnit(HostingUnit hostingUnit)
+        {
+            myDAL.addHostingUnit(hostingUnit);
         }
     }
 }

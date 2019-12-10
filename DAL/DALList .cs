@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BE;
+using DS;
 
 namespace DAL
 {
@@ -18,7 +20,11 @@ namespace DAL
         private DALList() { }
         static DALList() { }
 
-        #endregion
 
+        #endregion
+        public void addHostingUnit(HostingUnit hostingUnit)
+        {
+            DataSource.hostingUnits.Add(hostingUnit);
+        }
     }
 }

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BE;
 
-namespace DAL
+namespace BE
 {
-    public interface IDAL
+    public class Host
     {
-        void addHostingUnit(HostingUnit hostingUnit);
+        public Host() { }
     }
 }
