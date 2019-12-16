@@ -27,8 +27,12 @@ namespace PL
         {
             InitializeComponent();
             bL = MyBL.Instance;
-            string hostingUnitName = " ";
-            bL.addHostingUnit(new HostingUnit(new Host(), hostingUnitName));
+            string hostingUnitName = "Nave Mahmad";
+            bL.addHostingUnit(new HostingUnit(new Host(), hostingUnitName, Enums.HostingUnitType.Zimmer));
+            bL.addOrder(new BE.Order(Enums.OrderStatus.Closed, DateTime.Now));
+
+            // lb_HostingUnits.DataContext = bL.getAllHostingUnits();
+            lb_HostingUnits.DataContext = bL.getHostingUnits(hostingUnit => hostingUnit.HostingUnitType == Enums.HostingUnitType.Zimmer);
         }
     }
 }

@@ -9,6 +9,20 @@ namespace DAL
 {
     public interface IDAL
     {
+        #region HostingUnit        
         void addHostingUnit(HostingUnit hostingUnit);
+        List<HostingUnit> getAllHostingUnits();
+        List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate = null);
+        #endregion
+
+        #region GuestRequest
+
+        void addGuestRequest(String id, String name, int age);
+        #endregion
+
+        #region Order
+        void addOrder(Order order);
+        List<Order> getOrders(Func<Order, bool> predicate);
+        #endregion
     }
 }
