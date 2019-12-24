@@ -25,7 +25,7 @@ namespace BE
 
         public Enums.HostingUnitType HostingUnitType { get => hostingUnitType; }
         public string HostingUnitName { get => hostingUnitName;  }
-
+        
         public object Clone()
         {
             return new HostingUnit(this.host,this.HostingUnitName,this.HostingUnitType);
