@@ -34,12 +34,13 @@ namespace DAL
 
         public List<HostingUnit> getAllHostingUnits()
         {
-           return DataSource.hostingUnits;
+           return DataSource.hostingUnits.Select(hu =>(HostingUnit) hu.Clone()).ToList();
+           // return DataSource.hostingUnits.ToArray().Clone();
         }
 
         public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate = null)
         {
-            return DataSource.hostingUnits.Where(predicate).ToList();
+            return DataSource.hostingUnits.Where(predicate).Select(hu => (HostingUnit)hu.Clone()).ToList();
         }
 
         public void addGuestRequest(string id, string name, int age)

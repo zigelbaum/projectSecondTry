@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class HostingUnit
+    public class HostingUnit : ICloneable
     {
         private Host host;
         private string hostingUnitName;
@@ -24,10 +24,16 @@ namespace BE
         }
 
         public Enums.HostingUnitType HostingUnitType { get => hostingUnitType; }
+        public string HostingUnitName { get => hostingUnitName;  }
+
+        public object Clone()
+        {
+            return new HostingUnit(this.host,this.HostingUnitName,this.HostingUnitType);
+        }
 
         public override string ToString()
         {
-            return this.hostingUnitName + " " + HostingUnitType ;
+            return this.HostingUnitName + " " + HostingUnitType ;
         }
     }
 }
