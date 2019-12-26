@@ -8,32 +8,36 @@ namespace BE
 {
     public class HostingUnit : ICloneable
     {
-        private Host host;
+        #region fileds
+        readonly Int32 _HostingUnitKey = Configuration.HostingUnitKey;
+        private Host owner;
         private string hostingUnitName;
-        private Enums.HostingUnitType hostingUnitType;
+        private Enums.Type/*HostingUnitType*/ hostingUnitType;
+        private bool[,] diary = new bool[12, 31];
+        #endregion
 
-        public HostingUnit()
-        {
-        }
-
-        public HostingUnit(Host host, string hostingUnitName, Enums.HostingUnitType hostingUnitType)
+       /* public HostingUnit(Host host, string hostingUnitName, Enums.HostingUnitType hostingUnitType)
         {
             this.host = host;
             this.hostingUnitName = hostingUnitName;
             this.hostingUnitType = hostingUnitType;
-        }
+        }*/
 
+        #region properties
         public Enums.HostingUnitType HostingUnitType { get => hostingUnitType; }
         public string HostingUnitName { get => hostingUnitName;  }
+        #endregion
         
-        public object Clone()
+       /* public object Clone()
         {
             return new HostingUnit(this.host,this.HostingUnitName,this.HostingUnitType);
-        }
+        }*/
 
+        #region functions
         public override string ToString()
         {
             return this.HostingUnitName + " " + HostingUnitType ;
         }
+        #endregion
     }
 }

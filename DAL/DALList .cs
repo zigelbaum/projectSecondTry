@@ -22,14 +22,20 @@ namespace DAL
 
         #endregion
 
+        #region HostingUnit
         public void addHostingUnit(HostingUnit hostingUnit)
         {
             DataSource.hostingUnits.Add(hostingUnit);
         }
 
-        public void addOrder(Order order)
+        void DeleteHostingUnit(HostingUnit hostingUnit)
         {
-            DataSource.orders.Add(order);
+            DataSource.hostingUnits.Remove(hostingUnit);
+        }
+
+        void SetHostingUnit(HostingUnit hostingUnit)
+        {
+            //!!!!!!!!!!!!!!!!!
         }
 
         public List<HostingUnit> getAllHostingUnits()
@@ -42,15 +48,47 @@ namespace DAL
         {
             return DataSource.hostingUnits.Where(predicate).Select(hu => (HostingUnit)hu.Clone()).ToList();
         }
+        #endregion
+
+        #region GuestRequest
+        void SetGuestRequest(GuestRequest guest)
+        {
+            //????????
+        }
 
         public void addGuestRequest(string id, string name, int age)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();//???
+        }
+
+        List<GuestRequest> GetGuestRequests()
+        {
+            //??????
+        }
+        #endregion
+
+        #region Order
+        public void addOrder(Order order)
+        {
+            DataSource.orders.Add(order);
+        }
+
+        void setOrder()
+        {
+            //????????
         }
 
         public List<Order> getOrders(Func<Order, bool> predicate)
         {
             throw new NotImplementedException();
         }
+        #endregion
+
+        #region BanckBranch
+        List<BankBranch> GetBankBranches()
+        {
+            //????
+        }
+        #endregion
     }
 }
