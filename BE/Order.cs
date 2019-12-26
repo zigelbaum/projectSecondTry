@@ -8,13 +8,26 @@ namespace BE
 {
     public class Order
     {
+        #region fileds
+        readonly Int32 _GuestRequestKey = Configuration.orderKey;
+        readonly Int32 _GuestRequestKey = Configuration.GuestRequestKey;
+        readonly Int32 _GuestRequestKey = Configuration.HostingUnitKey;
         private Enums.OrderStatus orderStatus;
         private DateTime createDate;
+        private DateTime orderDate;
+        #endregion
 
-        public Order(Enums.OrderStatus orderStatus, DateTime createDate)
+        #region functions
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+        #endregion
+
+        /*public Order(Enums.OrderStatus orderStatus, DateTime createDate)
         {
             this.orderStatus = orderStatus;
             this.createDate = createDate;
-        }
+        }*/
     }
 }

@@ -2,7 +2,7 @@
 {
     public static class Enums
     {
-        public enum HostingUnitType
+        public enum /*HostingUnit*/Type
         {
             Zimmer,
             Hotel,
@@ -16,9 +16,23 @@
         } 
         public enum OrderStatus
         {
-            Closed,
-            Mailed,
+            SentEmail, NoAnswer, NotAddressedYet, Closed, Active
         }
+
+        public enum GuestRequestStatus
+        { 
+            Active, 
+            ClosedOnTheWeb,
+            RequestExpired
+        }
+
+        public enum Area
+        { 
+            All, North, South, Center, Jerusalem
+        }
+
+        public enum intrested
+        { Necessary, Possible, NoThanks }
     }
 
 
