@@ -16,7 +16,7 @@ namespace DAL
         #endregion
 
         #region GuestRequest
-
+        void SetGuestRequest();
         void addGuestRequest(String id, String name, int age);
         #endregion
 
