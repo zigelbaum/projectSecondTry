@@ -9,10 +9,10 @@ namespace BE
     public class HostingUnit : ICloneable
     {
         #region fileds
-        readonly Int32 _HostingUnitKey = Configuration.HostingUnitKey;
+        readonly Int32 hostingUnitKey = Configuration.HostingUnitKey;
         private Host owner;
         private string hostingUnitName;
-        private Enums.Type/*HostingUnitType*/ hostingUnitType;
+        private Enums.HostingUnitType hostingUnitType;
         private bool[,] diary = new bool[12, 31];
         #endregion
 

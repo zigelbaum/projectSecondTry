@@ -19,7 +19,7 @@ namespace DAL
 
         #region GuestRequest
         void SetGuestRequest(GuestRequest guest);
-        void addGuestRequest(String id, String name, int age);
+        void addGuestRequest(GuestRequest guest/*String id, String name, int age*/);
         List<GuestRequest> GetGuestRequests();
         #endregion
 

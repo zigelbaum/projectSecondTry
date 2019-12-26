@@ -16,7 +16,6 @@ namespace BE
         String MailAddress { get=> MailAddress; set=> MailAddress=value; }
         BankBranch bankBranchDetails {get=> bankBranchDetails; set=> bankBranchDetails=value;}
         int BankAccountNumber { get=> BankAccountNumber; set=> BankAccountNumber=value; }//might be confused
-        //String CollectionClearance { get; set; }
         bool CollectionClearance {get=> CollectionClearance; set=> CollectionClearance=value;}
         #endregion
 
