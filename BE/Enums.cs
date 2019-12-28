@@ -2,11 +2,11 @@
 {
     public static class Enums
     {
-        public enum /*HostingUnit*/Type
+        public enum HostingUnitType
         {
             Zimmer,
             Hotel,
-            Camping,
+            Camping
         }
 
         public enum DataSourseType

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class HostingUnit : ICloneable
+    public class HostingUnit /*: ICloneable*/
     {
         #region fileds
         readonly Int32 _HostingUnitKey = Configuration.HostingUnitKey;
         private Host owner;
         private string hostingUnitName;
-        private Enums.Type/*HostingUnitType*/ hostingUnitType;
+        private Enums.HostingUnitType hostingUnitType;
         private bool[,] diary = new bool[12, 31];
         #endregion
 
@@ -26,18 +26,22 @@ namespace BE
         #region properties
         public Enums.HostingUnitType HostingUnitType { get => hostingUnitType; }
         public string HostingUnitName { get => hostingUnitName;  }
+        public bool[,] Diary { get => diary; set => diary = value; }
+        public Host Owner { get => owner; set => owner = value; }
+        public int HostingUnitKey => _HostingUnitKey;
         #endregion
-        
-       /* public object Clone()
-        {
-            return new HostingUnit(this.host,this.HostingUnitName,this.HostingUnitType);
-        }*/
+
+        /* public object Clone()
+         {
+             return new HostingUnit(this.host,this.HostingUnitName,this.HostingUnitType);
+         }*/
 
         #region functions
         public override string ToString()
         {
-            return this.HostingUnitName + " " + HostingUnitType ;
+            return this.HostingUnitName + " " + HostingUnitType;
         }
+
         #endregion
     }
 }

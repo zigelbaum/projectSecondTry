@@ -20,7 +20,7 @@ namespace DAL
         #region GuestRequest
         void SetGuestRequest(GuestRequest guest);
         void addGuestRequest(String id, String name, int age);
-        List<GuestRequest> GetGuestRequests();
+        List<GuestRequest> GetGuestRequestsList();
         #endregion
 
         #region Order
@@ -32,5 +32,11 @@ namespace DAL
         #region BanckBranch
         List<BankBranch> GetBankBranches();
         #endregion
+
+        #region HostingUnits
+        List<HostingUnit> GetHostingUnitsList();
+        #endregion
+
+
     }
 }
