@@ -9,7 +9,7 @@ namespace BE
     public class HostingUnit /*: ICloneable*/
     {
         #region fileds
-        readonly Int32 _HostingUnitKey = Configuration.HostingUnitKey;
+        readonly Int32 hostingUnitKey = Configuration.HostingUnitKey;
         private Host owner;
         private string hostingUnitName;
         private Enums.HostingUnitType hostingUnitType;
