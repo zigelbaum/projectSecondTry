@@ -13,6 +13,7 @@ namespace DAL
         void addHostingUnit(HostingUnit hostingUnit);
         void DeleteHostingUnit(HostingUnit hostingUnit);
         void SetHostingUnit(HostingUnit hostingUnit);
+        bool UnitExist(HostingUnit unit);
         List<HostingUnit> getHostingUnitsList();
         List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate = null);
         #endregion
@@ -21,12 +22,14 @@ namespace DAL
         void SetGuestRequest(GuestRequest guest);
         void addGuestRequest(GuestRequest guest);
         List<GuestRequest> GetGuestRequestsList();
+        bool RequestExist(GuestRequest request);
         #endregion
 
         #region Order
         void addOrder(Order order);
         void setOrder(Order order);
         List<Order> getOrders(Func<Order, bool> predicate);
+        bool OrderExist(Order order);
         #endregion
 
         #region BanckBranch
