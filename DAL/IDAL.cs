@@ -14,29 +14,26 @@ namespace DAL
         void DeleteHostingUnit(HostingUnit hostingUnit);
         void SetHostingUnit(HostingUnit hostingUnit);
         List<HostingUnit> getHostingUnitsList();
-        List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate = null);
+        List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate);
         #endregion
 
         #region GuestRequest
         void SetGuestRequest(GuestRequest guest);
         void addGuestRequest(GuestRequest guest);
         List<GuestRequest> GetGuestRequestsList();
+        List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate);
         #endregion
 
         #region Order
         void addOrder(Order order);
         void setOrder(Order order);
         List<Order> getOrders(Func<Order, bool> predicate);
+        List<Order> GetOrdersList(); 
         #endregion
 
         #region BanckBranch
         List<BankBranch> GetBankBranchesList();
         #endregion
-
-        #region HostingUnits
-        List<HostingUnit> GetHostingUnitsList();
-        #endregion
-
-
+        
     }
 }

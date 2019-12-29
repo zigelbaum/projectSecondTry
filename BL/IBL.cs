@@ -11,18 +11,23 @@ namespace BL
         #region HostingUnit
         void AddHostingUnit();
         void DeleteHostingUnit();
-        void SetHostingUnit();
-        List<HostingUnit> getAllHostingUnits();
+        void SetHostingUnit(HostingUnit hostingUnit);
+        List<HostingUnit> getHostingUnitsList();
+        List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate);
         #endregion
 
         #region GuestRequest
         void AddGuestRequest();
-        void SetGuestRequest();
+        void SetGuestRequest(GuestRequest guestRequest);
+        List<GuestRequest> GetGuestRequestsList();
+        List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate);
         #endregion
 
         #region Order
         bool AddOrder();
         void SetOrder();
+        void setOrder(Order order);
+        List<Order> getOrders(Func<Order, bool> predicate);
         List<BE.Order> OrderExistenceEqualsDays(Int32 days);
         #endregion
 
@@ -44,6 +49,6 @@ namespace BL
         IEnumerable<IGrouping<int, Host>> GroupHostByHostingUnit();
         IEnumerable<IGrouping<Area, HostingUnit>> GroupHostByHostingUnit();
         #endregion
-        //Int32 NumDays(DateTime start);
+        
     }
 }

@@ -10,7 +10,7 @@ namespace DS
     public class DataSource
     {
         public static List<HostingUnit> hostingUnitsCollection = new List<HostingUnit>();
-        public static List<Order> orders = new List<Order>();
+        public static List<Order> ordersCollection = new List<Order>();
         public static List<GuestRequest> guestRequestsCollection = new List<GuestRequest>()
         {
             new GuestRequest(){PrivateName="Esther", FamilyName="burack", MailAddress="stburack@gmail.com",Status=(Enums.GuestRequestStatus)1,RegistrationDate=new DateTime(2020, 09, 09), EnteryDate=new DateTime(2020, 09, 25), ReleaseDate=new DateTime(2020, 09, 28), Area=Enums.Area.Jerusalem, SubArea="Old City", Type=VacationType.Hut, Adults=2, Children=3, Pool=Choices.Yes, Jacuzzi=Choices.No, Garden=Choices.DontCare, ChildrensAttractions=Choices.Yes, FitnessCenter=Choices.DontCare, Parking=Choices.Yes, GuestRequestKey=12345678, Pet=false, Stars=StarRating.four_star, WiFi=Choices.Yes},

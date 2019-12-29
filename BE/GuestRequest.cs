@@ -9,7 +9,7 @@ namespace BE
     public class GuestRequest
     {
         #region fileds
-        Int32 _GuestRequestKey = Configuration.GuestRequestKey;
+        Int32 _GuestRequestKey;
         string _PrivateName;
         string _FamilyName;
         string _MailAddress;
@@ -47,7 +47,9 @@ namespace BE
         public Enums.intrested Jacuzzi { get => _Jacuzzi; set => _Jacuzzi = value; }
         public Enums.intrested Garden { get => _Garden; set => _Garden = value; }
         public Enums.intrested ChildrenAttraction { get => _ChildrenAttraction; set => _ChildrenAttraction = value; }
+
         
+
 
         #endregion
 

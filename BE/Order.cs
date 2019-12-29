@@ -9,22 +9,22 @@ namespace BE
     public class Order
     {
         #region fileds
-        readonly Int32 _OrderKey = Configuration.OrderKey;
-        readonly Int32 _GuestRequestKey = Configuration.GuestRequestKey;
-        readonly Int32 _HostingUnitKey = Configuration.HostingUnitKey;
+        Int32 _OrderKey ;
+        Int32 _GuestRequestKey = Configuration.GuestRequestKey;
+        Int32 _HostingUnitKey = Configuration.HostingUnitKey;
         private Enums.OrderStatus orderStatus;
         private DateTime createDate;
         private DateTime orderDate;
         #endregion
 
 
-        #region properties
-        public int OrderKey => _OrderKey;
-        public int GuestRequestKey => _GuestRequestKey;
-        public int HostingUnitKey => _HostingUnitKey;
+        #region properties  
         public Enums.OrderStatus OrderStatus { get => orderStatus; set => orderStatus = value; }
         public DateTime CreateDate { get => createDate; set => createDate = value; }
         public DateTime OrderDate { get => orderDate; set => orderDate = value; }
+        public int OrderKey { get => _OrderKey; set => _OrderKey = value; }
+        public int GuestRequestKey { get => _GuestRequestKey; set => _GuestRequestKey = value; }
+        public int HostingUnitKey { get => _HostingUnitKey; set => _HostingUnitKey = value; }
         #endregion
 
 

@@ -17,7 +17,7 @@
 
         public enum OrderStatus
         {
-            SentEmail, NoAnswer, NotAddressedYet, Closed, Active
+            SentEmail, NoAnswer, NotAddressedYet, Closed, Active,NotRelevent
         }
 
         public enum GuestRequestStatus

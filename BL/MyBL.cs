@@ -30,7 +30,124 @@ namespace BL
             myDAL = factoryDAL.getDAL(TypeDAL);
         }
         private MyBL() { }
-        #endregion        
+        #endregion
+
+        #region enforcements
+        public bool OverNightVacation(GuestRequest guestRequest)
+        {
+            TimeSpan vacationDays = guestRequest.ReleaseDate - guestRequest.EnteryDate;
+            if (vacationDays.Days < 1)
+                return false;
+            return true;
+        }
+
+        public bool BankAccountDebitAuthorization(Host host)
+        {
+            return host.CollectionClearance1;
+
+        }
+
+        public bool HostingUnitAvability(Order order)
+        {
+            List<HostingUnit> hostingUnits = getHostingUnits(x => order.HostingUnitKey == x.HostingUnitKey);
+            bool[,] diary = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey).Diary;
+            List<GuestRequest> guestRequests = getGuestRequests(x => order.GuestRequestKey == x.GuestRequestKey);
+            GuestRequest guest = guestRequests.Find(x => order.GuestRequestKey == x.GuestRequestKey);
+            TimeSpan d = guest.ReleaseDate - guest.EnteryDate;
+            Int32 i = guest.EnteryDate.Month - 1;
+            Int32 j = guest.EnteryDate.Day - 1;
+            for (int k = 0; k < d.Days; k++)
+            {
+                if (j > 30)
+                {
+                    j = 0;
+                    i++;
+                }
+                if (diary[i, j] == true)
+                { 
+                    return false;
+                }
+                j++;
+            }
+            return true;
+
+        }
+
+        public void UpdateDiary(Order order)
+        {
+            List<HostingUnit> hostingUnits = getHostingUnits(x => order.HostingUnitKey == x.HostingUnitKey);
+            HostingUnit unit=hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
+            bool[,] diary = unit.Diary;
+            List<GuestRequest> guestRequests = getGuestRequests(x => order.GuestRequestKey == x.GuestRequestKey);
+            GuestRequest guest = guestRequests.Find(x => order.GuestRequestKey == x.GuestRequestKey);
+            TimeSpan d = guest.ReleaseDate - guest.EnteryDate;
+            Int32 i = guest.EnteryDate.Month - 1;
+            Int32 j = guest.EnteryDate.Day - 1;
+
+            for (int k = 0; k < d.Days; k++)
+            {
+                if (j > 30)
+                {
+                    j = 0;
+                    i++;
+                }
+                diary[i, j] = true;
+                j++;
+            }
+            unit.Diary = diary;
+            SetHostingUnit(unit);
+        }
+
+        public void UpdateInfoAfterOrderClosed(Order order)
+        {
+            List<GuestRequest> guestRequest = getGuestRequests(x => x.GuestRequestKey == order.GuestRequestKey);
+            guestRequest.Find(x => x.GuestRequestKey == order.GuestRequestKey).Status = Enums.GuestRequestStatus.ClosedOnTheWeb;
+            List<Order> ordersForTheRequest = getOrders(x => x.GuestRequestKey == order.GuestRequestKey);
+            foreach (var order1 in ordersForTheRequest)
+                if (order1.OrderStatus != Enums.OrderStatus.Closed)
+                    order1.OrderStatus = Enums.OrderStatus.NotRelevent;
+        }
+
+        public bool ableToChangeOrderStatus(Order order)
+        {
+            if (order.OrderStatus == Enums.OrderStatus.Closed) 
+            return false;
+                return true;
+        }
+
+        public double TotalFee(Order order)
+        {
+            List<GuestRequest> guestRequest = getGuestRequests(x => x.GuestRequestKey == order.GuestRequestKey);
+            GuestRequest request= guestRequest.Find(x => x.GuestRequestKey == order.GuestRequestKey);
+            return Configuration.Fee * (double)NumDays(request.EnteryDate, request.ReleaseDate);
+        }
+
+        public bool TheHostingUnitHasAnOpenOrder(HostingUnit hostingUnit)
+        {
+            List<Order> openOrders = getOrders(x => x.HostingUnitKey == hostingUnit.HostingUnitKey && x.OrderStatus == Enums.OrderStatus.Active);
+            if (openOrders.Count == 0)
+                return true;
+            return false;
+        }
+        #endregion
+
+       
+
+        #region Dalfunctions
+        public void SetGuestRequest(GuestRequest guestRequest)
+        {
+            myDAL.SetGuestRequest(guestRequest);
+        }
+
+        public List<GuestRequest> GetGuestRequestsList()
+        {
+            return myDAL.GetGuestRequestsList();
+        }
+
+        public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)
+        {
+            return myDAL.getGuestRequests(predicate);
+        }
 
         public void addHostingUnit(HostingUnit hostingUnit)
         {
@@ -42,21 +159,34 @@ namespace BL
            myDAL.addOrder(order);
         }
 
-        public List<HostingUnit> getAllHostingUnits()
+        void SetHostingUnit(HostingUnit hostingUnit)
         {
-           return myDAL.getAllHostingUnits();
+            myDAL.SetHostingUnit(hostingUnit);
         }
 
-        public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> p)
+        public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate)
         {
-            return myDAL.getHostingUnits(p);
+            return myDAL.getHostingUnits(predicate);
         }
+
+        public List<HostingUnit> getHostingUnitsList()
+        {
+           return myDAL.getHostingUnitsList();
+        }
+
+        public List<Order> getOrders(Func<Order, bool> predicate)
+        {
+            return myDAL.getOrders(predicate);
+        }
+
+        #endregion
 
         #region change now
         public bool RevocationPermission(int bankAccountNumber, BankBranch bankBranchDetails)
         {
             //?????????????????/
         }
+
         void SendEmail(Order ord)
         {
             MailMessage my_mail = new MailMessage();
@@ -78,6 +208,7 @@ namespace BL
                throw ex;
             }
         }
+
         bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays)
         {
              //לבדוק אם יש תאריכים חופפים-לקחת חלק מהקוד מתרגיל 2
@@ -96,6 +227,7 @@ namespace BL
              }
              return true;
         }
+
         List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays)
         {
             IDAL dal = DAL.FactoryDal.getDal();
@@ -111,10 +243,12 @@ namespace BL
             }
             return listToReturn;
         }
+
         Int32 NumDays(DateTime start, DateTime end=default(DateTime.Now))
         {
             return (end-start).Days;
         }
+
         List<Order> DaysPassedOrders(Int32 days)
         {
             List<Order> listToReturn;
@@ -129,6 +263,7 @@ namespace BL
             }
             return listToReturn;
         }
+
         List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic)
         {
             List<GuestRequest> listToReturn;
@@ -141,6 +276,7 @@ namespace BL
             }
             return listToReturn;
         }
+
         Int32 NumOfInvetations(GuestRequest costumer)
         {
             int i=0;            
@@ -153,6 +289,7 @@ namespace BL
             }
             return i;
         }
+
         Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit)
         {
             int i=0;            
@@ -168,7 +305,7 @@ namespace BL
         #endregion
 
         #region grouping
-        IEnumerable<IGrouping<Area, GuestRequest>> GroupGRByArea()
+        IEnumerable<IGrouping<Enums.Area , GuestRequest>> GroupGRByArea()
         {
             IDAL dal = DAL.FactoryDal.getDal();
             IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();

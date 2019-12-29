@@ -8,32 +8,49 @@ using DS;
 
 namespace DAL
 {
-    internal class DALList : IDAL
+    internal class DALList :IDAL
     {
         #region Singleton
-        private static readonly DALList instance = new DALList();
+        //private static readonly DALList instance = new DALList();
+        //public static DALList Instance
+        //{
+        //    get { return instance; }
+        //}
+
+        //private DALList() { }
+        //static DALList() { }
+        private static DALList instance;
+
         public static DALList Instance
         {
-            get { return instance; }
+            get
+            {
+                if (instance == null)
+                    instance = new DALList();
+                return instance;
+            }
         }
 
         private DALList() { }
-        static DALList() { }
 
         #endregion
 
         #region HostingUnit
-        List<HostingUnit> getHostingUnitsList()
+        public List<HostingUnit> getHostingUnitsList()
         {
-
+            return DS.DataSource.hostingUnitsCollection.Select(item => (HostingUnit)item.Clone()).ToList();
         }
 
         public void addHostingUnit(HostingUnit hostingUnit)
         {
             try
             {
-                if(DataSource.hostingUnits.Any(h=>h.HostingUnitKey == hostingUnit.HostingUnitKey))
-                    DataSource.hostingUnits.Add(hostingUnit);
+                if (DataSource.hostingUnitsCollection.Any(h => h.HostingUnitKey == hostingUnit.HostingUnitKey))
+                {
+                    hostingUnit.HostingUnitKey = Configuration.HostingUnitKey;
+                    Configuration.HostingUnitKey++;
+                    DataSource.hostingUnitsCollection.Add(hostingUnit);
+                }
                 else
                     throw new ExistException("Hosting Unit already exists");
             }
@@ -43,14 +60,14 @@ namespace DAL
             }
         }
 
-        void DeleteHostingUnit(HostingUnit hostingUnit)
+        public void DeleteHostingUnit(HostingUnit hostingUnit)
         {
             try
             {
-                if(DataSource.hostingUnits.Any(h=>h.HostingUnitKey == hostingUnit.HostingUnitKey))
+                if(DataSource.hostingUnitsCollection.Any(h=>h.HostingUnitKey == hostingUnit.HostingUnitKey))
                     throw new NotExistException("Hosting Unit not exists");
                 else
-                    DataSource.hostingUnits.Remove(hostingUnit);
+                    DataSource.hostingUnitsCollection.Remove(hostingUnit);
             }
             catch (NotExistException c)
             {
@@ -58,14 +75,14 @@ namespace DAL
             }
         }
 
-        void SetHostingUnit(HostingUnit hostingUnit)
+        public void SetHostingUnit(HostingUnit hostingUnit)
         {
             //!!!!!!!!!!!!!!!!!
             try
             {
                 HostingUnit hosting=null;
-                IDAL dal = DAL.FactoryDal.getDal();
-                IEnumerable<HostingUnit> listHostingUnits = dal.getAllHostingUnits();
+                IDAL dal = DAL.factoryDAL.getDAL("List");
+                IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
                 foreach (HostingUnit host in listHostingUnit)
                 {
                     if(hostingUnit.hostingUnitKey == host.hostingUnitKey)
@@ -85,26 +102,20 @@ namespace DAL
             }
         }
 
-        public List<HostingUnit> getAllHostingUnits()
+        public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate )
         {
-           return DataSource.hostingUnits.Select(hu =>(HostingUnit) hu.Clone()).ToList();
-           // return DataSource.hostingUnits.ToArray().Clone();
-        }
-
-        public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate = null)
-        {
-            return DataSource.hostingUnits.Where(predicate).Select(hu => (HostingUnit)hu.Clone()).ToList();
+            return DataSource.hostingUnitsCollection.Where(predicate).Select(hu => (HostingUnit)hu.Clone()).ToList();
         }
         #endregion
 
         #region GuestRequest
-        void SetGuestRequest(GuestRequest guest)
+        public void SetGuestRequest(GuestRequest guest)
         {
             //????????
             try
             {
-                GuestRequest = my_request = null;
-                IDAL dal = DAL.FactoryDal.getDal();
+                GuestRequest  my_request = null;
+                IDAL dal = DAL.factoryDAL.getDAL("List");
                 IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();
                 foreach(GuestRequest request in listGuestRequests)
                 {
@@ -128,14 +139,16 @@ namespace DAL
             }
         }
 
-        public void addGuestRequest(GuestRequest guest/*string id, string name, int age*/)
+        public void addGuestRequest(GuestRequest guest)
         {
             //throw new NotImplementedException();//???
             try
             {
-                if(DataSource.guestRequests.Any(g=>g.GuestRequestKey == guest.GuestRequestKey))
+                if(DataSource.guestRequestsCollection.Any(g=>g.GuestRequestKey == guest.GuestRequestKey))
                 {
-                    DataSource.guestRequests.Add(guest);
+                    guest.GuestRequestKey = Configuration.GuestRequestKey;
+                    Configuration.GuestRequestKey++;
+                    DataSource.guestRequestsCollection.Add(guest);
                 }
                 else
                     throw new DuplicateObjectException("Request already exists");
@@ -146,9 +159,14 @@ namespace DAL
             }
         }
 
-        List<GuestRequest> GetGuestRequests()
+        public List<GuestRequest> GetGuestRequestsList()
+        { 
+                return DS.DataSource.guestRequestsCollection.Select(item => (GuestRequest)item.Clone()).ToList();
+        }
+
+        public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)
         {
-            //??????
+            return DataSource.guestRequestsCollection.Where(predicate).Select(hu => (GuestRequest)hu.Clone()).ToList();
         }
         #endregion
 
@@ -157,8 +175,12 @@ namespace DAL
         {
             try
             {
-                if(DataSource.orders.Any(ord=>ord.orderKey == order.orderKey))
-                     DataSource.orders.Add(order);
+                if (DataSource.ordersCollection.Any(ord => ord.OrderKey == order.OrderKey))
+                {
+                    order.OrderKey = Configuration.OrderKey;
+                    Configuration.OrderKey++;
+                    DataSource.ordersCollection.Add(order);
+                }
                 else
                     throw new ExistException("This order already exists");
             }
@@ -168,21 +190,21 @@ namespace DAL
             }
         }
 
-        void setOrder(Order order)
+        public void setOrder(Order order)
         {
             //????????
             try
             {
                 Order my_order = null;
-                IDAL dal = DAL.FactoryDal.getDal();
-                IEnumerable<Order> listOrders = dal.getOrders();
+                IDAL dal = DAL.factoryDAL.getDAL("List");
+                IEnumerable<Order> listOrders = dal.GetOrdersList();
                 foreach(Order ord in listOrders)
                 {
-                    if(ord._orderKey == order._orderKey)
+                    if(ord.OrderKey == order.OrderKey)
                         my_order = ord;
                 }
                 if(my_order == null)
-                    throw new NotExist("The order is not exist");
+                    throw new NotExist("The order does not exist");
                 else
                 {
                     //לעדכן סטטוס
@@ -196,14 +218,19 @@ namespace DAL
 
         public List<Order> getOrders(Func<Order, bool> predicate)
         {
-            throw new NotImplementedException();
+           return DataSource.ordersCollection.Where(predicate).Select(hu => (Order)hu.Clone()).ToList();
+        }
+
+        public List<Order> GetOrdersList()
+        {
+            return DS.DataSource.ordersCollection.Select(item => (Order)item.Clone()).ToList();
         }
         #endregion
 
         #region BanckBranch
-        List<BankBranch> GetBankBranchesList()
+        public List<BankBranch> GetBankBranchesList()
         {
-            //????
+            return DS.DataSource.BankBranchesCollection.Select(item => (BankBranch)item.Clone()).ToList();
         }
         #endregion
     }
