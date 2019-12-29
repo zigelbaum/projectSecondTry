@@ -23,6 +23,11 @@ namespace DAL
         #endregion
 
         #region HostingUnit
+        List<HostingUnit> getHostingUnitsList()
+        {
+
+        }
+
         public void addHostingUnit(HostingUnit hostingUnit)
         {
             try
@@ -176,7 +181,7 @@ namespace DAL
         #endregion
 
         #region BanckBranch
-        List<BankBranch> GetBankBranches()
+        List<BankBranch> GetBankBranchesList()
         {
             //????
         }

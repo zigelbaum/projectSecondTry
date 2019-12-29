@@ -9,7 +9,7 @@ namespace BE
     public class GuestRequest
     {
         #region fileds
-        readonly Int32 _GuestRequestKey = Configuration.GuestRequestKey;
+        Int32 _GuestRequestKey = Configuration.GuestRequestKey;
         string _PrivateName;
         string _FamilyName;
         string _MailAddress;
@@ -30,7 +30,7 @@ namespace BE
 
         #region properties
         //has to checked if set exsitence requested
-        public int GuestRequestKey { get => _GuestRequestKey; }
+        public int GuestRequestKey { get => _GuestRequestKey; set => _GuestRequestKey=value; }
         public string PrivateName { get => _PrivateName; set => _PrivateName = value; }
         public string FamilyName { get => _FamilyName; set => _FamilyName = value; }
         public string MailAddress { get => _MailAddress; set => _MailAddress = value; }

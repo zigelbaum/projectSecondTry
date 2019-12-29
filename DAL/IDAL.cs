@@ -13,13 +13,13 @@ namespace DAL
         void addHostingUnit(HostingUnit hostingUnit);
         void DeleteHostingUnit(HostingUnit hostingUnit);
         void SetHostingUnit(HostingUnit hostingUnit);
-        List<HostingUnit> getAllHostingUnits();
+        List<HostingUnit> getHostingUnitsList();
         List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate = null);
         #endregion
 
         #region GuestRequest
         void SetGuestRequest(GuestRequest guest);
-        void addGuestRequest(String id, String name, int age);
+        void addGuestRequest(GuestRequest guest);
         List<GuestRequest> GetGuestRequestsList();
         #endregion
 
@@ -30,7 +30,7 @@ namespace DAL
         #endregion
 
         #region BanckBranch
-        List<BankBranch> GetBankBranches();
+        List<BankBranch> GetBankBranchesList();
         #endregion
 
         #region HostingUnits

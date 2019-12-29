@@ -35,10 +35,6 @@ namespace BE
         }
         #endregion
 
-        /*public Order(Enums.OrderStatus orderStatus, DateTime createDate)
-        {
-            this.orderStatus = orderStatus;
-            this.createDate = createDate;
-        }*/
+        
     }
 }
