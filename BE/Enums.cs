@@ -14,6 +14,7 @@
             List,
             XML
         } 
+
         public enum OrderStatus
         {
             SentEmail, NoAnswer, NotAddressedYet, Closed, Active

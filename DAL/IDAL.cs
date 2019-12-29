@@ -25,7 +25,7 @@ namespace DAL
 
         #region Order
         void addOrder(Order order);
-        void setOrder();
+        void setOrder(Order order);
         List<Order> getOrders(Func<Order, bool> predicate);
         #endregion
 
