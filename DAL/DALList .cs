@@ -63,10 +63,16 @@ namespace DAL
             //!!!!!!!!!!!!!!!!!
             try
             {
-                var my_request = from gu in DataSource.guestRequests
-                                 where gu.GuestRequestKey == guest.GuestRequestKey
-                                 select gu;
-                if(my_request == null)
+                HostingUnit hosting=null;
+                IDAL dal = DAL.FactoryDal.getDal();
+                IEnumerable<HostingUnit> listHostingUnits = dal.getAllHostingUnits();
+                foreach (HostingUnit host in listHostingUnit)
+                {
+                    if(hostingUnit.hostingUnitKey == host.hostingUnitKey)
+                        hosting=host;
+
+                }
+                if(hosting == null)
                     throw new NotExist("The hosting unit is not exist");
                 else
                 {
@@ -97,14 +103,23 @@ namespace DAL
             //????????
             try
             {
-                var my_request = from gu in DataSource.guestRequests
-                                 where gu.GuestRequestKey == guest.GuestRequestKey
-                                 select gu;
+                GuestRequest = my_request = null;
+                IDAL dal = DAL.FactoryDal.getDal();
+                IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();
+                foreach(GuestRequest request in listGuestRequests)
+                {
+                    if(request._GuestRequestKey == guest._GuestRequestKey)
+                        my_request = guest;
+                }
                 if(my_request == null)
                     throw new NotExist("The request is not exist");
                 else
                 {
                     //לעדכן סטטוס
+                    if(my_request._Status == Active)
+                        my_request._Status = Enums.GuestRequestStatus[1];
+                    if(my_request._Status ==  ClosedOnTheWeb)
+                        my_request._Status = Enums.GuestRequestStatus[2];
                 }
             }
             catch (NotExist c)
@@ -153,15 +168,20 @@ namespace DAL
             }
         }
 
-        void setOrder()
+        void setOrder(Order order)
         {
             //????????
             try
             {
-                var my_request = from gu in DataSource.guestRequests
-                                 where gu.GuestRequestKey == guest.GuestRequestKey
-                                 select gu;
-                if(my_request == null)
+                Order my_order = null;
+                IDAL dal = DAL.FactoryDal.getDal();
+                IEnumerable<Order> listOrders = dal.getOrders();
+                foreach(Order ord in listOrders)
+                {
+                    if(ord._orderKey == order._orderKey)
+                        my_order = ord;
+                }
+                if(my_order == null)
                     throw new NotExist("The order is not exist");
                 else
                 {
