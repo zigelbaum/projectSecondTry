@@ -14,6 +14,7 @@ namespace BE
         private string hostingUnitName;
         private Enums.HostingUnitType hostingUnitType;
         private bool[,] diary = new bool[12, 31];
+        Enums.Area area;
         #endregion
 
        /* public HostingUnit(Host host, string hostingUnitName, Enums.HostingUnitType hostingUnitType)
@@ -29,6 +30,7 @@ namespace BE
         public bool[,] Diary { get => diary; set => diary = value; }
         public Host Owner { get => owner; set => owner = value; }
         public int HostingUnitKey => _HostingUnitKey;
+        public Enums.Area Area { get => _Area; set => _Area = value; }
         #endregion
 
         /* public object Clone()

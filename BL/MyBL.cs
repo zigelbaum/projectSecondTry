@@ -166,5 +166,48 @@ namespace BL
             return i;
         }
         #endregion
+
+        #region grouping
+        IEnumerable<IGrouping<Area, GuestRequest>> GroupGRByArea()
+        {
+            IDAL dal = DAL.FactoryDal.getDal();
+            IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();
+            var groupToReturn = from request in listGuestRequests
+                                group request by request.Area into newGroup
+                                //orderby newGroup.Key
+                                select newGroup;
+            return groupToReturn;
+        }
+        IEnumerable<IGrouping<int, GuestRequest>> GroupGRByVacationers()
+        {
+            IDAL dal = DAL.FactoryDal.getDal();
+            IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();
+            var groupToReturn = from request in listGuestRequests
+                                group request by (request.Children+request.Adults) into newGroup
+                                //orderby newGroup.Key
+                                select newGroup;
+            return groupToReturn;
+        }
+        IEnumerable<IGrouping<int, Host>> GroupHostByHostingUnit()
+        {
+            IDAL dal = DAL.FactoryDal.getDal();
+            IEnumerable<HostingUnit> listHostingUnits = dal.getAllHostingUnits();
+            var groupToReturn = from unit in listHostingUnits
+                                group unit by unit.Owner into newGroup
+                                //orderby newGroup.Key
+                                select newGroup;
+            return groupToReturn;
+        }
+        IEnumerable<IGrouping<Area, HostingUnit>> GroupHostByHostingUnit()
+        {
+            IDAL dal = DAL.FactoryDal.getDal();
+            IEnumerable<HostingUnit> listHostingUnits = dal.getAllHostingUnits();
+            var groupToReturn = from unit in listHostingUnits
+                                group unit by unit.Area into newGroup
+                                //orderby newGroup.Key
+                                select newGroup;
+            return groupToReturn;
+        }
+        #endregion
     }
 }
