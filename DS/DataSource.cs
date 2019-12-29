@@ -13,18 +13,6 @@ namespace DS
         public static List<Order> orders = new List<Order>();
         public static List<GuestRequest> guestRequests = new List<GuestRequest>();
 
-        static DataSource()
-        {
-            initData();
-           
-        }
-
-        private static void initData()
-        {
-            foreach (int i in Enumerable.Range(1, 10))
-            {
-                hostingUnits.Add(new HostingUnit(new Host(), "Unit " + i, (Enums.HostingUnitType)(i % 3)));
-            }
-        }
+        
     }
 }

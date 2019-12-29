@@ -9,12 +9,12 @@ namespace BE
     public class BankBranch
     {
         #region fildes
-        /*private*/ Int32 bankNumber;
-        /*private*/ string bankName;
-        /*private*/ Int32 branchNumber;
-        /*private*/ string branchAddress;
-        /*private*/ string branchCity;
-        /*private*/ long bankAccountNumber;
+        private Int32 bankNumber;
+        private string bankName;
+        private Int32 branchNumber;
+        private string branchAddress;
+        string branchCity;
+        long bankAccountNumber;
         #endregion
 
         #region properties

@@ -19,7 +19,7 @@ namespace BE
         DateTime _ReleaseDate;
         Enums.Area _Area;
         string _SubArea;
-        Enums.Type _Type;
+        Enums.HostingUnitType _Type;
         int _Adults;
         int _Children;
         Enums.intrested _pool;
@@ -40,7 +40,7 @@ namespace BE
         public DateTime ReleaseDate { get => _ReleaseDate; set => _ReleaseDate = value; }
         public Enums.Area Area { get => _Area; set => _Area = value; }
         public string SubArea { get => _SubArea; set => _SubArea = value; }
-        public Enums.Type Type { get => _Type; set => _Type = value; }
+        public Enums.HostingUnitType Type { get => _Type; set => _Type = value; }
         public int Adults { get => _Adults; set => _Adults = value; }
         public int Children { get => _Children; set => _Children = value; }
         public Enums.intrested Pool { get => _pool; set => _pool = value; }
@@ -48,6 +48,7 @@ namespace BE
         public Enums.intrested Garden { get => _Garden; set => _Garden = value; }
         public Enums.intrested ChildrenAttraction { get => _ChildrenAttraction; set => _ChildrenAttraction = value; }
         
+
         #endregion
 
         #region functions

@@ -14,9 +14,12 @@ namespace BE
         String FamilyName { get=> FamilyName; set=> FamilyName=value; }
         String PhoneNumber { get=> PhoneNumber; set=> PhoneNumber=value; }
         String MailAddress { get=> MailAddress; set=> MailAddress=value; }
-        BankBranch bankBranchDetails {get=> bankBranchDetails; set=> bankBranchDetails=value;}
-        int BankAccountNumber { get=> BankAccountNumber; set=> BankAccountNumber=value; }//might be confused
-        bool CollectionClearance {get=> CollectionClearance; set=> CollectionClearance=value;}
+        BankBranch bankBranchDetails;
+        int BankAccountNumber;
+        bool CollectionClearance;
+        public BankBranch BankBranchDetails { get => bankBranchDetails; set => bankBranchDetails = value; }
+        public int BankAccountNumber1 { get => BankAccountNumber; set => BankAccountNumber = value; }
+        public bool CollectionClearance1 { get => CollectionClearance; set => CollectionClearance = value; }
         #endregion
 
         #region functions
