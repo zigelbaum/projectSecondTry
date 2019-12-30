@@ -24,6 +24,7 @@ namespace BE
         private bool childrenAttraction;
         private int stars;
         private bool meals;
+
         #endregion
 
         #region properties
@@ -42,6 +43,7 @@ namespace BE
         public bool ChildrenAttraction { get => childrenAttraction; set => childrenAttraction = value; }
         public int Stars { get => stars; set => stars = value; }
         public bool Meals { get => meals; set => meals = value; }
+        public bool ChildrenAttraction { get => childrenAttraction; set => childrenAttraction = value; }
         #endregion
 
         #region functions
