@@ -75,7 +75,6 @@ namespace DAL
 
         public void SetHostingUnit(HostingUnit hostingUnit)
         {
-            //!!!!!!!!!!!!!!!!!
             try
             {
                 if(!UnitExist(hostingUnit))
@@ -83,7 +82,6 @@ namespace DAL
                     //throw new NotExist("The hosting unit is not exist");
                 else
                 {
-                    //לעדכן
                     HostingUnit unit = hostingUnit.Clone();
                     DataSource.hostingUnitsCollection.Remove(unit);
                 }
@@ -116,7 +114,6 @@ namespace DAL
 
         public void SetGuestRequest(GuestRequest guest)
         {
-            //????????
             try
             {
                 if(!RequestExist(guest))
@@ -124,10 +121,6 @@ namespace DAL
                     //throw new NotExist("The request is not exist");
                 else
                 {
-                    /*if(my_request._Status == Active)
-                        my_request._Status = Enums.GuestRequestStatus[1];
-                    if(my_request._Status ==  ClosedOnTheWeb)
-                        my_request._Status = Enums.GuestRequestStatus[2];*/
                     GuestRequest request = guest.Clone();
                     DataSource.guestRequestsCollection.Remove(request);
                 }
@@ -141,7 +134,6 @@ namespace DAL
 
         public void addGuestRequest(GuestRequest guest)
         {
-            //throw new` NotImplementedException();//???
             try
             {
                 if(!RequestExist(guest))
@@ -200,7 +192,6 @@ namespace DAL
 
         public void setOrder(Order order)
         {
-            //????????
             try
             {
                 if(!OrderExist(order))
@@ -208,7 +199,6 @@ namespace DAL
                     //throw new NotExist("The order is not exist");
                 else
                 {
-                    //לעדכן סטטוס
                     Order ord = order.Clone();
                     DataSource.ordersCollection.Remove(ord);
                 }
