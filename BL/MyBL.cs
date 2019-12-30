@@ -301,9 +301,16 @@ namespace BL
 
         public HostingUnit FindHostingUnit(int unitKey)
         {
-            List<HostingUnit> hostingUnits = myDAL.getHostingUnits(x => x.HostingUnitKey == unitKey);
-             var unit=hostingUnits.Find(x => x.HostingUnitKey == unitKey);
-            return (unit == null) ? throw new InvalidException("unit not found") : unit;
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            IEnumerable<HostingUnit> listHostingUnit = dal.getHostingUnitsList();
+            foreach (HostingUnit unit in listHostingUnit)
+            {
+                if (unit.HostingUnitKey == unitKey)
+                    return unit;
+                //List<HostingUnit> hostingUnits = myDAL.getHostingUnits(x => x.HostingUnitKey == unitKey);
+                //throw new InvalidException("unit not found") : unit;
+            }
+            return null;
         }
 
         public List<Order> DaysPassedOrders(Int32 days)
