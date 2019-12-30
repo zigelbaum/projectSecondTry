@@ -390,7 +390,7 @@ namespace BL
             if (hosting.Pool)
                 pred += RGPool;
             else pred += RGNoPool;
-            if (hosting.Jacuzzi)
+            if (hosting.Jaccuzi)
                 pred += RGJacuzzi;
             else pred += RGNoJacuzzi;
             if (hosting.Garden)

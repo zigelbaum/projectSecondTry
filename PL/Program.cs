@@ -56,7 +56,9 @@ namespace PL
                 Pool = Enums.intrested.Possible,
                 Jacuzzi = Enums.intrested.NoThanks,
                 Garden = Enums.intrested.Possible,
-                ChildrenAttraction = Enums.intrested.Possible
+                ChildrenAttraction = Enums.intrested.Possible,
+                Stars = 0,
+                Meals = Enums.intrested.Possible
             };
             GuestRequest guest2 = new GuestRequest
             {
@@ -75,7 +77,9 @@ namespace PL
                 Pool = Enums.intrested.Necessary,
                 Jacuzzi = Enums.intrested.Possible,
                 Garden = Enums.intrested.Necessary,
-                ChildrenAttraction = Enums.intrested.NoThanks
+                ChildrenAttraction = Enums.intrested.NoThanks,
+                Stars = 0,
+                Meals = Enums.intrested.Possible
             };
             GuestRequest guest3 = new GuestRequest
             {
@@ -94,7 +98,9 @@ namespace PL
                 Pool = Enums.intrested.Possible,
                 Jacuzzi = Enums.intrested.Possible,
                 Garden = Enums.intrested.Possible,
-                ChildrenAttraction = Enums.intrested.NoThanks
+                ChildrenAttraction = Enums.intrested.NoThanks,
+                Stars = 4,
+                Meals = Enums.intrested.Necessary
             };
 
             HostingUnit unit1 = new HostingUnit
@@ -102,21 +108,27 @@ namespace PL
                 Owner = host1,
                 HostingUnitName = "aaaaa",
                 HostingUnitType = Enums.HostingUnitType.Hotel,
-                Area = Enums.Area.Jerusalem
+                Area = Enums.Area.Jerusalem,
+                Stars = 5,
+                Meals = true
             };
             HostingUnit unit2 = new HostingUnit
             {
                 Owner = host2,
                 HostingUnitName = "bbbbb",
                 HostingUnitType = Enums.HostingUnitType.Zimmer,
-                Area = Enums.Area.North
+                Area = Enums.Area.North,
+                Stars = 3,
+                Meals = true
             };
             HostingUnit unit3 = new HostingUnit
             {
                 Owner = host2,
                 HostingUnitName = "ccccc",
                 HostingUnitType = Enums.HostingUnitType.Zimmer,
-                Area = Enums.Area.North
+                Area = Enums.Area.North,
+                Stars = 3,
+                Meals = true
             };
 
             try
@@ -139,7 +151,7 @@ namespace PL
             {
                 foreach (HostingUnit unit in hosting)
                 {
-                    matchRequests = my_bl1.getGuestRequests(my_bl1.BuildPredicate(unit)); 
+                    matchRequests = my_bl1.getGuestRequests(my_bl1.BuildPredicate(unit) /*my_bl1.BuildPredicate(unit)*/); 
                     foreach (GuestRequest guest in matchRequests)
                     {
                         my_bl1.AddOrder(my_bl1.NewOrder(unit1.HostingUnitKey, guest.GuestRequestKey));

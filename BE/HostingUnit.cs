@@ -21,6 +21,7 @@ namespace BE
         private int kids;
         private bool jaccuzi;
         private bool garden;
+        private bool childrenAttraction;
         private int stars;
         private bool meals;
         #endregion
@@ -38,6 +39,7 @@ namespace BE
         public int Kids { get => kids; set => kids = value; }
         public bool Jaccuzi { get => jaccuzi; set => jaccuzi = value; }
         public bool Garden { get => garden; set => garden = value; }
+        public bool ChildrenAttraction { get => childrenAttraction; set => childrenAttraction = value; }
         public int Stars { get => stars; set => stars = value; }
         public bool Meals { get => meals; set => meals = value; }
         #endregion
