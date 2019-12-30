@@ -108,7 +108,7 @@ namespace BL
                     order1.OrderStatus = Enums.OrderStatus.NotRelevent;
         }
 
-        public bool ableToChangeOrderStatus(Order order)
+        public bool AbleToChangeOrderStatus(Order order)
         {
             if (order.OrderStatus == Enums.OrderStatus.Closed) 
             return false;
@@ -126,12 +126,10 @@ namespace BL
         {
             List<Order> openOrders = getOrders(x => x.HostingUnitKey == hostingUnit.HostingUnitKey && x.OrderStatus == Enums.OrderStatus.Active);
             if (openOrders.Count == 0)
-                return true;
-            return false;
+                return false;
+            return true;
         }
         #endregion
-
-
 
         #region Dalfunctions
 
@@ -143,6 +141,7 @@ namespace BL
 
         public void DeleteHostingUnit(HostingUnit hostingUnit)
         {
+            if (TheHostingUnitHasAnOpenOrder (hostingUnit)==false)
             myDAL.DeleteHostingUnit(hostingUnit);
         }
 
@@ -180,7 +179,10 @@ namespace BL
 
         public void addGuestRequest(GuestRequest guestRequest)
         {
+            if (OverNightVacation(guestRequest)==true)
             myDAL.addGuestRequest(guestRequest);
+            else 
+                //throw "not over night vacation"
         }
         #endregion
 
@@ -188,12 +190,39 @@ namespace BL
         
         public void setOrder(Order order)
         {
-            myDAL.setOrder(order);
+            if (order.OrderStatus == Enums.OrderStatus.Closed)
+            {
+                myDAL.setOrder(order);
+                UpdateDiary(order);
+                TotalFee(order);//what to do with returned value?
+                UpdateInfoAfterOrderClosed(order);
+            }
+            else
+            {
+                List<Order> orders = getOrders(x => x.OrderKey == order.OrderKey);
+                Order ord = orders.Find(x => x.OrderKey == order.OrderKey);
+                if (AbleToChangeOrderStatus(ord) == true)
+                {
+                    if (order.OrderStatus == Enums.OrderStatus.SentEmail)
+                    {
+                        List<HostingUnit> hostingUnits = getHostingUnits(x => order.HostingUnitKey == x.HostingUnitKey);
+                        HostingUnit unit = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
+                        if (BankAccountDebitAuthorization(unit.Owner) == true)
+                            myDAL.setOrder(order);
+                    }
+                    else
+                        myDAL.setOrder(order);
+                }
+
+            }
+            
+            
         }
         
         public void AddOrder(Order order)
         {
-            myDAL.addOrder(order);
+            if (HostingUnitAvability(order)==true)
+             myDAL.addOrder(order);
         }
 
         public List<Order> GetOrdersList()
