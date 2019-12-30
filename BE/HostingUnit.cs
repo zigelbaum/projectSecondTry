@@ -21,8 +21,10 @@ namespace BE
         private int kids;
         private bool jaccuzi;
         private bool garden;
+        private bool childrenAttraction;
         private int stars;
         private bool meals;
+
         #endregion
 
         #region properties
@@ -40,6 +42,7 @@ namespace BE
         public bool Garden { get => garden; set => garden = value; }
         public int Stars { get => stars; set => stars = value; }
         public bool Meals { get => meals; set => meals = value; }
+        public bool ChildrenAttraction { get => childrenAttraction; set => childrenAttraction = value; }
         #endregion
 
         #region functions

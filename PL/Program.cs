@@ -37,7 +37,7 @@ namespace PL
                 CollectionClearance = false
             };
 
-            IBL my_bl1 = FactoryBL.("List");
+            IBL my_bl1 = FactoryBL.getBL("List");
 
             GuestRequest guest1 = new GuestRequest
             {
