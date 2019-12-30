@@ -211,10 +211,9 @@ namespace BL
 
         bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays)
         {
-             //לבדוק אם יש תאריכים חופפים-לקחת חלק מהקוד מתרגיל 2
              bool[,] diary=hostingUnit.Diary;
-             int i=entry.Month;
-             int j=entry.Day; 
+             int i=entry.Month-1;
+             int j=entry.Day-1; 
              for(int k=0; k<vactiondays; k++)
              {
                 if(diary[i,j])
@@ -230,7 +229,7 @@ namespace BL
 
         List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays)
         {
-            IDAL dal = DAL.FactoryDal.getDal();
+            IDAL dal = DAL.factoryDal.getDal("List");
             List<BE.HostingUnit> listToReturn;
             //List<BE.HostingUnit> listHostingUnit = dal.getAllHostingUnits();
             IEnumerable<HostingUnit> listHostingUnit = dal.getAllHostingUnits();
@@ -252,7 +251,7 @@ namespace BL
         List<Order> DaysPassedOrders(Int32 days)
         {
             List<Order> listToReturn;
-            IDAL dal = DAL.FactoryDal.getDal();
+            IDAL dal = DAL.factoryDal.getDal("List");
             IEnumerable<Order> listOrders = dal.getOrders();
             foreach(Order ord in listOrders)
             {
@@ -267,7 +266,7 @@ namespace BL
         List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic)
         {
             List<GuestRequest> listToReturn;
-            IDAL dal = DAL.FactoryDal.getDal();
+            IDAL dal = DAL.factoryDal.getDal("List");
             IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();
             foreach(GuestRequest request in listGuestRequests)
             {
@@ -280,7 +279,7 @@ namespace BL
         Int32 NumOfInvetations(GuestRequest costumer)
         {
             int i=0;            
-            IDAL dal = DAL.FactoryDal.getDal();
+            IDAL dal = DAL.factoryDal.getDal("List");
             IEnumerable<Order> listOrders = dal.getOrders();
             foreach(Order ord in listOrders)
             {
@@ -293,11 +292,11 @@ namespace BL
         Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit)
         {
             int i=0;            
-            IDAL dal = DAL.FactoryDal.getDal();
+            IDAL dal = DAL.factoryDal.getDal("List");
             IEnumerable<Order> listOrders = dal.getOrders();
             foreach(Order ord in listOrders)
             {
-                if(ord._HostingUnitKey == costumer._HostingUnitKey)
+                if(ord._HostingUnitKey == hostingunit._HostingUnitKey)
                     i++;
             }
             return i;
@@ -307,7 +306,7 @@ namespace BL
         #region grouping
         IEnumerable<IGrouping<Enums.Area , GuestRequest>> GroupGRByArea()
         {
-            IDAL dal = DAL.FactoryDal.getDal();
+            IDAL dal = DAL.factoryDal.getDal("List");
             IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();
             var groupToReturn = from request in listGuestRequests
                                 group request by request.Area into newGroup
@@ -317,7 +316,7 @@ namespace BL
         }
         IEnumerable<IGrouping<int, GuestRequest>> GroupGRByVacationers()
         {
-            IDAL dal = DAL.FactoryDal.getDal();
+            IDAL dal = DAL.factoryDal.getDal("List");
             IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();
             var groupToReturn = from request in listGuestRequests
                                 group request by (request.Children+request.Adults) into newGroup
@@ -327,7 +326,7 @@ namespace BL
         }
         IEnumerable<IGrouping<int, Host>> GroupHostByHostingUnit()
         {
-            IDAL dal = DAL.FactoryDal.getDal();
+            IDAL dal = DAL.factoryDal.getDal("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getAllHostingUnits();
             var groupToReturn = from unit in listHostingUnits
                                 group unit by unit.Owner into newGroup
@@ -337,7 +336,7 @@ namespace BL
         }
         IEnumerable<IGrouping<Area, HostingUnit>> GroupHostByHostingUnit()
         {
-            IDAL dal = DAL.FactoryDal.getDal();
+            IDAL dal = DAL.factoryDal.getDal("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getAllHostingUnits();
             var groupToReturn = from unit in listHostingUnits
                                 group unit by unit.Area into newGroup

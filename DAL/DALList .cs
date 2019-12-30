@@ -36,7 +36,19 @@ namespace DAL
         #endregion
 
         #region HostingUnit
-        public List<HostingUnit> getHostingUnitsList()
+        bool UnitExist(HostingUnit unit)
+        {
+            IDAL dal = DAL.factoryDal.getDal("List");
+            IEnumerable<HostingUnit> listHostingUnits = dal.getAllHostingUnits();
+            foreach (HostingUnit host in listHostingUnit)
+            {
+                if(unit.HostingUnitKey == host.HostingUnitKey)
+                    return true;
+            }
+            return false;
+        }
+
+        List<HostingUnit> getHostingUnitsList()
         {
             return DS.DataSource.hostingUnitsCollection.Select(item => (HostingUnit)item.Clone()).ToList();
         }
@@ -64,7 +76,7 @@ namespace DAL
         {
             try
             {
-                if(DataSource.hostingUnitsCollection.Any(h=>h.HostingUnitKey == hostingUnit.HostingUnitKey))
+                if(!UnitExist(hostingUnit))
                     throw new NotExistException("Hosting Unit not exists");
                 else
                     DataSource.hostingUnitsCollection.Remove(hostingUnit);
@@ -80,16 +92,7 @@ namespace DAL
             //!!!!!!!!!!!!!!!!!
             try
             {
-                HostingUnit hosting=null;
-                IDAL dal = DAL.factoryDAL.getDAL("List");
-                IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
-                foreach (HostingUnit host in listHostingUnit)
-                {
-                    if(hostingUnit.hostingUnitKey == host.hostingUnitKey)
-                        hosting=host;
-
-                }
-                if(hosting == null)
+                if(!UnitExist(hostingUnit))
                     throw new NotExist("The hosting unit is not exist");
                 else
                 {
@@ -109,20 +112,24 @@ namespace DAL
         #endregion
 
         #region GuestRequest
-        public void SetGuestRequest(GuestRequest guest)
+        bool RequestExist(GuestRequest request)
+        {
+            IDAL dal = DAL.factoryDal.getDal("List");
+            IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();
+            foreach(GuestRequest guest in listGuestRequests)
+            {
+                if(request._GuestRequestKey == guest._GuestRequestKey)
+                    return true;
+            }
+            return false;
+        }
+
+        void SetGuestRequest(GuestRequest guest)
         {
             //????????
             try
             {
-                GuestRequest  my_request = null;
-                IDAL dal = DAL.factoryDAL.getDAL("List");
-                IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();
-                foreach(GuestRequest request in listGuestRequests)
-                {
-                    if(request._GuestRequestKey == guest._GuestRequestKey)
-                        my_request = guest;
-                }
-                if(my_request == null)
+                if(!RequestExist(guest))
                     throw new NotExist("The request is not exist");
                 else
                 {
@@ -144,7 +151,7 @@ namespace DAL
             //throw new NotImplementedException();//???
             try
             {
-                if(DataSource.guestRequestsCollection.Any(g=>g.GuestRequestKey == guest.GuestRequestKey))
+                if(!RequestExist(guest))
                 {
                     guest.GuestRequestKey = Configuration.GuestRequestKey;
                     Configuration.GuestRequestKey++;
@@ -171,16 +178,24 @@ namespace DAL
         #endregion
 
         #region Order
+        bool OrderExist(Order order)
+        {
+            IDAL dal = DAL.factoryDal.getDal("List");
+            IEnumerable<Order> listOrders = dal.getOrders();
+            foreach(Order ord in listOrders)
+            {
+                if(ord._orderKey == order._orderKey)
+                    return true;
+            }
+            return false;
+        }
+
         public void addOrder(Order order)
         {
             try
             {
-                if (DataSource.ordersCollection.Any(ord => ord.OrderKey == order.OrderKey))
-                {
-                    order.OrderKey = Configuration.OrderKey;
-                    Configuration.OrderKey++;
-                    DataSource.ordersCollection.Add(order);
-                }
+                if(!OrderExist(order))
+                     DataSource.orders.Add(order);
                 else
                     throw new ExistException("This order already exists");
             }
@@ -195,16 +210,9 @@ namespace DAL
             //????????
             try
             {
-                Order my_order = null;
-                IDAL dal = DAL.factoryDAL.getDAL("List");
-                IEnumerable<Order> listOrders = dal.GetOrdersList();
-                foreach(Order ord in listOrders)
-                {
-                    if(ord.OrderKey == order.OrderKey)
-                        my_order = ord;
-                }
-                if(my_order == null)
-                    throw new NotExist("The order does not exist");
+                
+                if(!OrderExist(order))
+                    throw new NotExist("The order is not exist");
                 else
                 {
                     //לעדכן סטטוס
@@ -214,6 +222,8 @@ namespace DAL
             {
                 throw c;
             }
+
+            throw new NotImplementedException();
         }
 
         public List<Order> getOrders(Func<Order, bool> predicate)
