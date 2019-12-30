@@ -14,7 +14,6 @@ namespace BE
         private Int32 branchNumber;
         private string branchAddress;
         string branchCity;
-        long bankAccountNumber;
         #endregion
 
         #region properties
@@ -23,8 +22,6 @@ namespace BE
         public int BranchNumber { get => branchNumber; set => branchNumber = value; }
         public string BranchAddress { get => branchAddress; set => branchAddress = value; }
         public string BranchCity { get => branchCity; set => branchCity = value; }
-        public long BankAccountNumber { get => bankAccountNumber; set => bankAccountNumber = value; }
-
         #endregion
 
         #region functions
