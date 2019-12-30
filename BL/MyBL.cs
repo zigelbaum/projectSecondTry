@@ -159,7 +159,7 @@ namespace BL
            myDAL.addOrder(order);
         }
 
-        void SetHostingUnit(HostingUnit hostingUnit)
+        public void SetHostingUnit(HostingUnit hostingUnit)
         {
             myDAL.SetHostingUnit(hostingUnit);
         }
@@ -187,7 +187,7 @@ namespace BL
             //?????????????????/
         }
 
-        void SendEmail(Order ord)
+        public void SendEmail(Order ord)
         {
             MailMessage my_mail = new MailMessage();
             my_mail.To.Add("Client");
@@ -209,7 +209,7 @@ namespace BL
             }
         }
 
-        bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays)
+        public bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays)
         {
              bool[,] diary=hostingUnit.Diary;
              int i=entry.Month-1;
@@ -227,7 +227,7 @@ namespace BL
              return true;
         }
 
-        List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays)
+        public List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays)
         {
             IDAL dal = DAL.factoryDal.getDal("List");
             List<BE.HostingUnit> listToReturn;
@@ -243,12 +243,12 @@ namespace BL
             return listToReturn;
         }
 
-        Int32 NumDays(DateTime start, DateTime end=default(DateTime.Now))
+        public Int32 NumDays(DateTime start, DateTime end=default(DateTime.Now))
         {
             return (end-start).Days;
         }
 
-        List<Order> DaysPassedOrders(Int32 days)
+        public List<Order> DaysPassedOrders(Int32 days)
         {
             List<Order> listToReturn;
             IDAL dal = DAL.factoryDal.getDal("List");
@@ -263,7 +263,7 @@ namespace BL
             return listToReturn;
         }
 
-        List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic)
+        public List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic)
         {
             List<GuestRequest> listToReturn;
             IDAL dal = DAL.factoryDal.getDal("List");
@@ -276,7 +276,7 @@ namespace BL
             return listToReturn;
         }
 
-        Int32 NumOfInvetations(GuestRequest costumer)
+        public Int32 NumOfInvetations(GuestRequest costumer)
         {
             int i=0;            
             IDAL dal = DAL.factoryDal.getDal("List");
@@ -289,7 +289,7 @@ namespace BL
             return i;
         }
 
-        Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit)
+        public Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit)
         {
             int i=0;            
             IDAL dal = DAL.factoryDal.getDal("List");

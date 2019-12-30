@@ -11,32 +11,18 @@ namespace DAL
     internal class DALList :IDAL
     {
         #region Singleton
-        //private static readonly DALList instance = new DALList();
-        //public static DALList Instance
-        //{
-        //    get { return instance; }
-        //}
-
-        //private DALList() { }
-        //static DALList() { }
-        private static DALList instance;
-
+        private static readonly DALList instance = new DALList();
         public static DALList Instance
         {
-            get
-            {
-                if (instance == null)
-                    instance = new DALList();
-                return instance;
-            }
+            get { return instance; }
         }
 
         private DALList() { }
-
+        static DALList() { }
         #endregion
 
         #region HostingUnit
-        bool UnitExist(HostingUnit unit)
+        public bool UnitExist(HostingUnit unit)
         {
             IDAL dal = DAL.factoryDal.getDal("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getAllHostingUnits();
@@ -48,7 +34,7 @@ namespace DAL
             return false;
         }
 
-        List<HostingUnit> getHostingUnitsList()
+        public List<HostingUnit> getHostingUnitsList()
         {
             return DS.DataSource.hostingUnitsCollection.Select(item => (HostingUnit)item.Clone()).ToList();
         }
@@ -116,7 +102,7 @@ namespace DAL
         #endregion
 
         #region GuestRequest
-        bool RequestExist(GuestRequest request)
+        public bool RequestExist(GuestRequest request)
         {
             IDAL dal = DAL.factoryDal.getDal("List");
             IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();
@@ -128,7 +114,7 @@ namespace DAL
             return false;
         }
 
-        void SetGuestRequest(GuestRequest guest)
+        public void SetGuestRequest(GuestRequest guest)
         {
             //????????
             try
@@ -185,7 +171,7 @@ namespace DAL
         #endregion
 
         #region Order
-        bool OrderExist(Order order)
+        public bool OrderExist(Order order)
         {
             IDAL dal = DAL.factoryDal.getDal("List");
             IEnumerable<Order> listOrders = dal.getOrders();
