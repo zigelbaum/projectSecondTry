@@ -12,8 +12,6 @@ namespace PL
     {
         static void Main(string[] args)
         {
-            // The code provided will print ‘Hello World’ to the console.
-            // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
             Host host1 = new Host
             {
                 HostKey = 10000023,
