@@ -9,56 +9,73 @@ namespace DS
 {
     public class DataSource
     {
-        public static List<HostingUnit> hostingUnitsCollection = new List<HostingUnit>();
-        public static List<Order> ordersCollection = new List<Order>();
+        public static List<HostingUnit> hostingUnitsCollection = new List<HostingUnit>()
+        {
+            new HostingUnit(){HostingUnitKey=10000001, HostingUnitName="Chani", Owner=My_Host.First(), Area=Enums.Area.Center, HostingUnitType=Enums.HostingUnitType.Hotel},
+            new HostingUnit(){HostingUnitKey=10000002, HostingUnitName="Shira Tel", Owner=My_Host.First(), Area=Enums.Area.Jerusalem, HostingUnitType=Enums.HostingUnitType.Zimmer},
+            new HostingUnit(){HostingUnitKey=10000003, HostingUnitName="Roni", Owner=My_Host.Last(), Area=Enums.Area.North, HostingUnitType=Enums.HostingUnitType.Camping}
+        };
+        public static List<Order> ordersCollection = new List<Order>()
+        {
+            new Order(){HostingUnitKey=10000001,GuestRequestKey=10000011,OrderKey=10000111,OrderStatus=Enums.OrderStatus.Active, CreateDate=new DateTime(2019, 10, 04), OrderDate=new DateTime(2019, 10, 04)},
+            new Order(){HostingUnitKey=10000002,GuestRequestKey=10000012,OrderKey=10000211,OrderStatus=Enums.OrderStatus.NoAnswer, CreateDate=new DateTime(2005, 04, 16), OrderDate=new DateTime(2005, 04, 19)},
+            new Order(){HostingUnitKey=10000003,GuestRequestKey=10000013,OrderKey=10000311,OrderStatus=Enums.OrderStatus.Closed, CreateDate=new DateTime(2019, 11, 29), OrderDate=new DateTime(2019, 12, 01)}
+        };
         public static List<GuestRequest> guestRequestsCollection = new List<GuestRequest>()
         {
-            new GuestRequest(){PrivateName="Esther", FamilyName="burack", MailAddress="stburack@gmail.com",Status=(Enums.GuestRequestStatus)1,RegistrationDate=new DateTime(2020, 09, 09), EnteryDate=new DateTime(2020, 09, 25), ReleaseDate=new DateTime(2020, 09, 28), Area=Enums.Area.Jerusalem, SubArea="Old City", Type=VacationType.Hut, Adults=2, Children=3, Pool=Choices.Yes, Jacuzzi=Choices.No, Garden=Choices.DontCare, ChildrensAttractions=Choices.Yes, FitnessCenter=Choices.DontCare, Parking=Choices.Yes, GuestRequestKey=12345678, Pet=false, Stars=StarRating.four_star, WiFi=Choices.Yes},
-            new GuestRequest(){PrivateName="Aviva", FamilyName="Nam", MailAddress="Man@gmail.com",Status=(Enums.GuestRequestStatus)0,RegistrationDate=new DateTime(2019, 08, 10), EnteryDate=new DateTime(2019, 08, 29), ReleaseDate=new DateTime(2019, 09, 03), Area=Enums.Area.North, SubArea="Ramot", Type=VacationType.LogCabin, Adults=4, Children=17, Pool=Choices.No, Jacuzzi=Choices.Yes, Garden=Choices.Yes, ChildrensAttractions=Choices.DontCare, WiFi=Choices.No, Stars=StarRating.five_star, FitnessCenter=Choices.Yes, GuestRequestKey=12365479, Parking=Choices.Yes, Pet=true},
-            new GuestRequest(){PrivateName="Sara", FamilyName="Teig", MailAddress="Teig@gmail.com",Status=(Enums.GuestRequestStatus)2,RegistrationDate=new DateTime(2020, 03, 16), EnteryDate=new DateTime(2020, 04, 01), ReleaseDate=new DateTime(2020, 04, 04), Area=Enums.Area.South, SubArea="Eilat", Type=VacationType.Hotel, Adults=1, Children=8, Pool=Choices.Yes, Jacuzzi=Choices.Yes, Garden=Choices.No, ChildrensAttractions=Choices.Yes, Pet=false, Parking=Choices.DontCare, GuestRequestKey=98765432, FitnessCenter=Choices.DontCare, Stars=StarRating.unrated, WiFi=Choices.Yes }
+            new GuestRequest(){GuestRequestKey=10000011, PrivateName="Avrohom", FamilyName="Diter", MailAddress="dit@gmail.com",Status=Enums.GuestRequestStatus.Active, RegistrationDate=new DateTime(2019, 10, 04), EnteryDate=new DateTime(2019, 10, 20), ReleaseDate=new DateTime(2019, 10, 28), Area=Enums.Area.Center, SubArea="Tel Aviv", Type=Enums.HostingUnitType.Hotel, Adults=2, Children=5, Pool=Enums.intrested.Necessary, Jacuzzi=Enums.intrested.Possible, Garden=Enums.intrested.Possible, ChildrenAttraction=Enums.intrested.Necessary},
+            new GuestRequest(){GuestRequestKey=10000012, PrivateName="Yzchak", FamilyName="Molivt", MailAddress="Mol@gmail.com",Status=Enums.GuestRequestStatus.RequestExpired, RegistrationDate=new DateTime(2005, 04, 16), EnteryDate=new DateTime(2005, 08, 03), ReleaseDate=new DateTime(2005, 08, 10), Area=Enums.Area.All, SubArea=" ", Type=Enums.HostingUnitType.Zimmer, Adults=6, Children=14, Pool=Enums.intrested.Possible, Jacuzzi=Enums.intrested.Possible, Garden=Enums.intrested.Necessary, ChildrenAttraction=Enums.intrested.Possible},
+            new GuestRequest(){GuestRequestKey=10000013, PrivateName="Yaakov", FamilyName="Zigbel", MailAddress="yaZ@gmail.com",Status=Enums.GuestRequestStatus.ClosedOnTheWeb, RegistrationDate=new DateTime(2019, 11, 29), EnteryDate=new DateTime(2020, 01, 05), ReleaseDate=new DateTime(2020, 01, 20), Area=Enums.Area.North, SubArea=" ", Type=Enums.HostingUnitType.Camping, Adults=2, Children=6, Pool=Enums.intrested.NoThanks, Jacuzzi=Enums.intrested.NoThanks, Garden=Enums.intrested.Necessary, ChildrenAttraction=Enums.intrested.NoThanks}
         };
 
+        #region BankBranch
+        static BankBranch BB1 = new BankBranch() { BankNumber = 1111, BankName = "yahav", BranchNumber = 987, BranchAddress = "Hagalil", BranchCity = "Bet Shemesh" };
+        static BankBranch BB2 = new BankBranch() { BankNumber = 2222, BankName = "mizrahi", BranchNumber = 975, BranchAddress = "Yafo", BranchCity = "Tel Aviv" };
+        static BankBranch BB3 = new BankBranch() { BankNumber = 3333, BankName = "pagi", BranchNumber = 234, BranchAddress = "King Daivid", BranchCity = "Jerusalem" };
+        static BankBranch BB4 = new BankBranch() { BankNumber = 4444, BankName = "hapoalim", BranchNumber = 246, BranchAddress = "Amir", BranchCity = "Ramat Gan" };
+        static BankBranch BB5 = new BankBranch() { BankNumber = 5555, BankName = "leumi", BranchNumber = 159, BranchAddress = "Bezalel", BranchCity = "Beer Sheva" };
+        #endregion
 
-        static BankBranch B1 = new BankBranch() { BankNumber = 123, BankName = "hapoalim", BranchNumber = 290, BranchAddress = "beitar", BranchCity = "Tzfat" };
-        static BankBranch B2 = new BankBranch() { BankNumber = 456, BankName = "pagi", BranchNumber = 291, BranchAddress = "kanfei nesharim", BranchCity = "Beit Shemesh" };
-        static BankBranch B3 = new BankBranch() { BankNumber = 789, BankName = "leumi", BranchNumber = 292, BranchAddress = "har nof", BranchCity = "Tel Aviv" };
-        static BankBranch B4 = new BankBranch() { BankNumber = 101, BankName = "mizrahi", BranchNumber = 293, BranchAddress = "beit hadfus", BranchCity = "Jerusalem" };
-        static BankBranch B5 = new BankBranch() { BankNumber = 202, BankName = "yahav", BranchNumber = 294, BranchAddress = "arieli", BranchCity = "Beitar" };
+        public static List<BankBranch> BankBranchesCollection = new List<BankBranch>() { BB1, BB2, BB3, BB4, BB5 };
 
-        public static List<BankBranch> BankBranchesCollection = new List<BankBranch>() { B1, B2, B3, B4, B5 };
+        internal static List<Host> My_Host = new List<Host>
+        {
+            new Host(){HostKey=11111111, PrivateName="Yael", FamilyName="Shilo", PhoneNumber="0587100429", MailAddress="YSH1234@gmail.com", CollectionClearance=true, BankBranchDetails=BB1, BankAccountNumber=13579246},
+            new Host(){HostKey=12121212, PrivateName="Abigail", FamilyName="Cohen", PhoneNumber="0508456123", MailAddress="abigail12@gmail.com", CollectionClearance=true, BankBranchDetails=BB2, BankAccountNumber=24680135},
+            new Host(){HostKey=12222222, PrivateName="Rebeka", FamilyName="Levi", PhoneNumber="0503681400", MailAddress="Levi400@gmail.com", CollectionClearance=false, BankBranchDetails=BB3, BankAccountNumber=1000034}
+        };
 
         #region data
 
 
-        internal static List<GuestRequest> requestCollection = new List<GuestRequest>()
+       /* internal static List<GuestRequest> requestCollection = new List<GuestRequest>()
         {
-            new GuestRequest(){/*GuestRequestKey=10000011,*/ PrivateName="Esther", FamilyName="burack", MailAddress="stburack@gmail.com",Status=Status.NotAddressedYet,RegistrationDate=new DateTime(2020, 09, 09), EntryDate=new DateTime(2020, 09, 25), ReleaseDate=new DateTime(2020, 09, 28), Area=VacationArea.Center, SubArea=VacationSubArea.BatYam, Type=VacationType.Hut, Adults=2, Children=3, Pool=Choices.Yes, Jacuzzi=Choices.No, Garden=Choices.DontCare, ChildrensAttractions=Choices.Yes, FitnessCenter=Choices.DontCare, Parking=Choices.Yes, GuestRequestKey=12345678, Pet=false, Stars=StarRating.four_star, WiFi=Choices.Yes},
-            new GuestRequest(){PrivateName="Aviva", FamilyName="Nam", MailAddress="Man@gmail.com",Status=Status.Closed,RegistrationDate=new DateTime(2019, 08, 10), EntryDate=new DateTime(2019, 08, 29), ReleaseDate=new DateTime(2019, 09, 03), Area=VacationArea.East, SubArea=VacationSubArea.Arad, Type=VacationType.LogCabin, Adults=4, Children=17, Pool=Choices.No, Jacuzzi=Choices.Yes, Garden=Choices.Yes, ChildrensAttractions=Choices.DontCare, WiFi=Choices.No, Stars=StarRating.five_star, FitnessCenter=Choices.Yes, GuestRequestKey=12365479, Parking=Choices.Yes, Pet=true},
-            new GuestRequest(){PrivateName="Sara", FamilyName="Teig", MailAddress="Teig@gmail.com",Status=Status.Active,RegistrationDate=new DateTime(2020, 03, 16), EntryDate=new DateTime(2020, 04, 01), ReleaseDate=new DateTime(2020, 04, 04), Area=VacationArea.South, SubArea=VacationSubArea.Netanya, Type=VacationType.Hotel, Adults=1, Children=8, Pool=Choices.Yes, Jacuzzi=Choices.Yes, Garden=Choices.No, ChildrensAttractions=Choices.Yes, Pet=false, Parking=Choices.DontCare, GuestRequestKey=98765432, FitnessCenter=Choices.DontCare, Stars=StarRating.unrated, WiFi=Choices.Yes }
+            new GuestRequest(){GuestRequestKey=10000011, PrivateName="Avrohom", FamilyName="Diter", MailAddress="dit@gmail.com",Status=Enums.GuestRequestStatus.Active, RegistrationDate=new DateTime(2019, 10, 04), EnteryDate=new DateTime(2019, 10, 20), ReleaseDate=new DateTime(2019, 10, 28), Area=Enums.Area.Center, SubArea="Tel Aviv", Type=Enums.HostingUnitType.Hotel, Adults=2, Children=5, Pool=Enums.intrested.Necessary, Jacuzzi=Enums.intrested.Possible, Garden=Enums.intrested.Possible, ChildrenAttraction=Enums.intrested.Necessary},
+            new GuestRequest(){GuestRequestKey=10000012, PrivateName="Yzchak", FamilyName="Molivt", MailAddress="Mol@gmail.com",Status=Enums.GuestRequestStatus.RequestExpired, RegistrationDate=new DateTime(2005, 04, 16), EnteryDate=new DateTime(2005, 08, 03), ReleaseDate=new DateTime(2005, 08, 10), Area=Enums.Area.All, SubArea=" ", Type=Enums.HostingUnitType.Zimmer, Adults=6, Children=14, Pool=Enums.intrested.Possible, Jacuzzi=Enums.intrested.Possible, Garden=Enums.intrested.Necessary, ChildrenAttraction=Enums.intrested.Possible},
+            new GuestRequest(){GuestRequestKey=10000013, PrivateName="Yaakov", FamilyName="Zigbel", MailAddress="yaZ@gmail.com",Status=Enums.GuestRequestStatus.ClosedOnTheWeb, RegistrationDate=new DateTime(2019, 11, 29), EnteryDate=new DateTime(2020, 01, 05), ReleaseDate=new DateTime(2020, 01, 20), Area=Enums.Area.North, SubArea=" ", Type=Enums.HostingUnitType.Camping, Adults=2, Children=6, Pool=Enums.intrested.NoThanks, Jacuzzi=Enums.intrested.NoThanks, Garden=Enums.intrested.Necessary, ChildrenAttraction=Enums.intrested.NoThanks}
+        };*/
 
-        };
-
-        internal static List<Host> My_Host = new List<Host>
+        /*internal static List<Host> My_Host = new List<Host>
         {
-            new Host(){HostKey=11111111, PrivateName="Yael", FamilyName="Shilo", PhoneNumber=0587100429, MailAddress="YSH1234@gmail.com", CollectionClearance=true, BankBranchDetails=B1, BankAccountNumber=13579246},
-            new Host(){HostKey=12121212, PrivateName="Abigail", FamilyName="Cohen", PhoneNumber=0508456123, MailAddress="tamarbuterman@gmail.com", CollectionClearance=true, BankBranchDetails=B2, BankAccountNumber=24680135},
-            new Host(){HostKey=12222222, PrivateName="Rebeka", FamilyName="Levi", PhoneNumber=0503681400, MailAddress="Levi400@gmail.com", CollectionClearance=false, BankBranchDetails=B3, BankAccountNumber=1000034}
-        };
+            new Host(){HostKey=11111111, PrivateName="Yael", FamilyName="Shilo", PhoneNumber="0587100429", MailAddress="YSH1234@gmail.com", CollectionClearance=true, BankBranchDetails=B1, BankAccountNumber=13579246},
+            new Host(){HostKey=12121212, PrivateName="Abigail", FamilyName="Cohen", PhoneNumber="0508456123", MailAddress="abigail12@gmail.com", CollectionClearance=true, BankBranchDetails=B2, BankAccountNumber=24680135},
+            new Host(){HostKey=12222222, PrivateName="Rebeka", FamilyName="Levi", PhoneNumber="0503681400", MailAddress="Levi400@gmail.com", CollectionClearance=false, BankBranchDetails=B3, BankAccountNumber=1000034}
+        };*/
 
-        internal static List<HostingUnit> HostingUnitCollection = new List<HostingUnit>()
+        /*internal static List<HostingUnit> HostingUnitCollection = new List<HostingUnit>()
         {
-            new HostingUnit(){HostingUnitKey=10000001, HostingUnitName="Chani", Owner=My_Host.Last(), /*WiFi=true, Stars=StarRating.three_star, FitnessCenter=false,*/ Area=Enums.Area.Center, /*Beds=6, ChildrensAttractions=true, Garden=true,Jacuzzi=true, Parking=true, Pet=false, SubArea=VacationSubArea.Jerusalem, Pool=true,*/ HostingUnitType=Enums.HostingUnitType.Hotel},
-            new HostingUnit(){HostingUnitKey=10000002, HostingUnitName="Shira Tel", Owner=My_Host.Last(),/* WiFi=true, Stars=StarRating.five_star, FitnessCenter=true,*/ Area=Enums.Area.Jerusalem, /*Beds=5, ChildrensAttractions=true, Garden=true, Jacuzzi=true, Parking=true, Pet=true, SubArea=VacationSubArea.Netanya, Pool=true,*/ HostingUnitType=Enums.HostingUnitType.Hotel},
-            new HostingUnit(){HostingUnitKey=10000003, HostingUnitName="Roni", Owner=My_Host.First(), /*WiFi=false, Stars=StarRating.three_star, FitnessCenter=false,*/ Area=Enums.Area.North, /*Beds=9, ChildrensAttractions=false, Garden=false, Jacuzzi=false, Parking=false, SubArea=VacationSubArea.TelAviv, Pool=false,*/ HostingUnitType=Enums.HostingUnitType.Zimmer/*, Pet=true*/}
+            new HostingUnit(){HostingUnitKey=10000001, HostingUnitName="Chani", Owner=My_Host.Last(), Area=Enums.Area.Center, HostingUnitType=Enums.HostingUnitType.Hotel},
+            new HostingUnit(){HostingUnitKey=10000002, HostingUnitName="Shira Tel", Owner=My_Host.Last(), Area=Enums.Area.Jerusalem, HostingUnitType=Enums.HostingUnitType.Hotel},
+            new HostingUnit(){HostingUnitKey=10000003, HostingUnitName="Roni", Owner=My_Host.First(), Area=Enums.Area.North, HostingUnitType=Enums.HostingUnitType.Zimmer}
 
-        };
+        };*/
 
-        internal static List<Order> OrderCollection = new List<Order>()
+        /*internal static List<Order> OrderCollection = new List<Order>()
         {
-            new Order(){HostingUnitKey=10000001,GuestRequestKey=10000011,OrderKey=10000111,Status=Status.NoAnswer, CreateDate=new DateTime(2019, 10, 04), OrderDate=new DateTime(2019, 10, 04), SentEmail=default(DateTime)},
-            new Order(){HostingUnitKey=10000002,GuestRequestKey=10000012,OrderKey=10000211,Status=Status.Closed, CreateDate=new DateTime(2005, 04, 16), OrderDate=new DateTime(2005, 04, 19), SentEmail=default(DateTime)/*new DateTime(2019, 04, 25)*/},
-            new Order(){HostingUnitKey=10000003,GuestRequestKey=10000013,OrderKey=10000311,Status=Status.Active, CreateDate=new DateTime(2019, 11, 29), OrderDate=new DateTime(2019, 12, 01), SentEmail=default(DateTime)}
-        };
+            new Order(){HostingUnitKey=10000001,GuestRequestKey=10000011,OrderKey=10000111,OrderStatus=Enums.OrderStatus.NoAnswer, CreateDate=new DateTime(2019, 10, 04), OrderDate=new DateTime(2019, 10, 04)},
+            new Order(){HostingUnitKey=10000002,GuestRequestKey=10000012,OrderKey=10000211,OrderStatus=Enums.OrderStatus.Closed, CreateDate=new DateTime(2005, 04, 16), OrderDate=new DateTime(2005, 04, 19)},
+            new Order(){HostingUnitKey=10000003,GuestRequestKey=10000013,OrderKey=10000311,OrderStatus=Enums.OrderStatus.Active, CreateDate=new DateTime(2019, 11, 29), OrderDate=new DateTime(2019, 12, 01)}
+        };*/
 
         #endregion
     }

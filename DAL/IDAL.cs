@@ -10,36 +10,33 @@ namespace DAL
     public interface IDAL
     {
         #region HostingUnit        
-        void addHostingUnit(HostingUnit hostingUnit);
-        void DeleteHostingUnit(HostingUnit hostingUnit);
-        void SetHostingUnit(HostingUnit hostingUnit);
-        bool UnitExist(HostingUnit unit);
-        List<HostingUnit> getHostingUnitsList();
-        List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate);
+        void addHostingUnit(HostingUnit hostingUnit);//Add a hosting unit
+        void DeleteHostingUnit(HostingUnit hostingUnit);//Removes hosting unit
+        void SetHostingUnit(HostingUnit hostingUnit);//Updating hosting unit
+        bool UnitExist(HostingUnit unit);//Checks if the hosting unit exists
+        List<HostingUnit> getHostingUnitsList();//Returns a list of all accommodation units
+        List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate);//Returns a list of all accommodation units that meet certain conditions
         #endregion
 
         #region GuestRequest
-        void SetGuestRequest(GuestRequest guest);
-        void addGuestRequest(GuestRequest guest);
-        List<GuestRequest> GetGuestRequestsList();
-        List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate);
-        bool RequestExist(GuestRequest request);
+        void SetGuestRequest(GuestRequest guest);//Updating customer status
+        void addGuestRequest(GuestRequest guest);//Add a customer requirement
+        List<GuestRequest> GetGuestRequestsList();//Returns a list of all customer requirements
+        List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate);//Returns a list of customer requirements that meet a specific condition
+        bool RequestExist(GuestRequest request);//Checks whether the customer requirement exists in the system
         #endregion
 
         #region Order
-        void addOrder(Order order);
-        void setOrder(Order order);
-        List<Order> GetOrdersList();
-        List<Order> getOrders(Func<Order, bool> predicate);
-        bool OrderExist(Order order);
+        void addOrder(Order order);//Add an invitation
+        void setOrder(Order order);//Update order status
+        List<Order> GetOrdersList();//Returns a list of all orders
+        List<Order> getOrders(Func<Order, bool> predicate);//Returns a list of all orders that fulfill a particular condition
+        bool OrderExist(Order order);//Checks if the order exists in the system
         #endregion
 
         #region BanckBranch
-        List<BankBranch> GetBankBranchesList();
+        List<BankBranch> GetBankBranchesList();//Returns a list of all bank branches
         #endregion
-
-        
-
 
     }
 }
