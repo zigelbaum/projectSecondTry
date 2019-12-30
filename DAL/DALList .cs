@@ -24,9 +24,9 @@ namespace DAL
         #region HostingUnit
         public bool UnitExist(HostingUnit unit)
         {
-            IDAL dal = DAL.factoryDal.getDal("List");
-            IEnumerable<HostingUnit> listHostingUnits = dal.getAllHostingUnits();
-            foreach (HostingUnit host in listHostingUnit)
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
+            foreach (HostingUnit host in listHostingUnits)
             {
                 if(unit.HostingUnitKey == host.HostingUnitKey)
                     return true;
@@ -104,11 +104,11 @@ namespace DAL
         #region GuestRequest
         public bool RequestExist(GuestRequest request)
         {
-            IDAL dal = DAL.factoryDal.getDal("List");
-            IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequests();
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
             foreach(GuestRequest guest in listGuestRequests)
             {
-                if(request._GuestRequestKey == guest._GuestRequestKey)
+                if(request.GuestRequestKey == guest.GuestRequestKey)
                     return true;
             }
             return false;
@@ -173,11 +173,11 @@ namespace DAL
         #region Order
         public bool OrderExist(Order order)
         {
-            IDAL dal = DAL.factoryDal.getDal("List");
-            IEnumerable<Order> listOrders = dal.getOrders();
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            IEnumerable<Order> listOrders = dal.GetOrdersList();
             foreach(Order ord in listOrders)
             {
-                if(ord._orderKey == order._orderKey)
+                if(ord.OrderKey == order.OrderKey)
                     return true;
             }
             return false;
@@ -188,7 +188,7 @@ namespace DAL
             try
             {
                 if(!OrderExist(order))
-                     DataSource.orders.Add(order);
+                     DataSource.ordersCollection.Add(order);
                 else
                     throw new NotImplementedException();
             }
@@ -210,9 +210,9 @@ namespace DAL
                 {
                     //לעדכן סטטוס
                     Order ord = order.Clone();
-                    DataSource.orders.Remove(ord);
+                    DataSource.ordersCollection.Remove(ord);
                 }
-                DataSource.orders.Add(order);
+                DataSource.ordersCollection.Add(order);
             }
             catch (NotImplementedException c)
             {

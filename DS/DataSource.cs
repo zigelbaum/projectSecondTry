@@ -19,6 +19,13 @@ namespace DS
         };
 
 
+        static BankBranch B1 = new BankBranch() { BankNumber = 123, BankName = "hapoalim", BranchNumber = 290, BranchAddress = "beitar", BranchCity = "Tzfat" };
+        static BankBranch B2 = new BankBranch() { BankNumber = 456, BankName = "pagi", BranchNumber = 291, BranchAddress = "kanfei nesharim", BranchCity = "Beit Shemesh" };
+        static BankBranch B3 = new BankBranch() { BankNumber = 789, BankName = "leumi", BranchNumber = 292, BranchAddress = "har nof", BranchCity = "Tel Aviv" };
+        static BankBranch B4 = new BankBranch() { BankNumber = 101, BankName = "mizrahi", BranchNumber = 293, BranchAddress = "beit hadfus", BranchCity = "Jerusalem" };
+        static BankBranch B5 = new BankBranch() { BankNumber = 202, BankName = "yahav", BranchNumber = 294, BranchAddress = "arieli", BranchCity = "Beitar" };
+
+        internal static List<BankBranch> BankBranchesCollection = new List<BankBranch>() { B1, B2, B3, B4, B5 };
 
         #region data
 
