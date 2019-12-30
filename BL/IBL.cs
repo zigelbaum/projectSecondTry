@@ -45,6 +45,8 @@ namespace BL
         List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic);
         Int32 NumOfInvetations(BE.GuestRequest costumer);
         Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit);
+        Predicate<GuestRequest> BuildPredicate(HostingUnit hosting);
+        Order NewOrder(int , int );
         #endregion
 
         #region grouping

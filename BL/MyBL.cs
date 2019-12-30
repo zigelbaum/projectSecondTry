@@ -359,6 +359,52 @@ namespace BL
             }
             return i;
         }
+
+        public Predicate<GuestRequest> BuildPredicate(HostingUnit hosting)//!!
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            IEnumerable<GuestRequest> guestRequests = dal.GetGuestRequestsList();
+            Predicate<GuestRequest> pred = default(Predicate<GuestRequest>);
+            bool RGPool(GuestRequest request) { return request.Pool == Enums.intrested.Necessary || request.Pool == Enums.intrested.Possible; }
+            bool RGNoPool(GuestRequest request) { return request.Pool == Enums.intrested.NoThanks || request.Pool == Enums.intrested.Possible; }
+            bool RGJacuzzi(GuestRequest request) { return request.Jacuzzi == Enums.intrested.Necessary || request.Jacuzzi == Enums.intrested.Possible; }
+            bool RGNoJacuzzi(GuestRequest request) { return request.Jacuzzi == Enums.intrested.NoThanks || request.Jacuzzi == Enums.intrested.Possible; }
+            bool RGGarden(GuestRequest request) { return request.Garden == Enums.intrested.Necessary || request.Garden == Enums.intrested.Possible; }
+            bool RGNoGarden(GuestRequest request) { return request.Garden == Enums.intrested.NoThanks || request.Garden == Enums.intrested.Possible; }
+            bool RGChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == Enums.intrested.Necessary || request.ChildrenAttraction == Enums.intrested.Possible; }
+            bool RGNoChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == Enums.intrested.NoThanks || request.ChildrenAttraction == Enums.intrested.Possible; }            
+
+            bool RGArea(GuestRequest request) { return request.Area == hosting.Area; }
+            bool RGSubArea(GuestRequest request) { return request.SubArea == hosting.SubArea; }
+            bool RGType(GuestRequest request) { return request.Type == hosting.HostingUnitType; }           
+            
+            if (hosting.Pool)
+                pred += RGPool;
+            else pred += RGNoPool;
+            if (hosting.Jacuzzi)
+                pred += RGJacuzzi;
+            else pred += RGNoJacuzzi;
+            if (hosting.Garden)
+                pred += RGGarden;
+            else pred += RGNoGarden;
+            if (hosting.ChildrenAttraction)
+                pred += RGChildrenAttraction;
+            else pred += RGNoChildrenAttraction;            
+            pred += RGArea;
+            pred += RGSubArea;
+            pred += RGType;
+            return pred;
+        }
+
+        public Order NewOrder(int guestRequestKey, int hostingUnitkey)
+        {
+            Order ord = new Order
+            { GuestRequestKey = guestRequestKey, HostingUnitKey = hostingUnitkey, OrderStatus = Enums.OrderStatus.Active,
+                CreateDate = new DateTime(2019, 11, 28),
+                OrderDate = DateTime.Now
+            };
+            return ord;
+        }
         #endregion
 
         #region grouping
