@@ -16,6 +16,13 @@ namespace BE
         private bool[,] diary = new bool[12, 31];
         private Enums.Area area;
         private string subArea;
+        private bool pool;
+        private int adults;
+        private int kids;
+        private bool jaccuzi;
+        private bool garden;
+        private int stars;
+        private bool meals;
         #endregion
 
         #region properties
@@ -26,6 +33,13 @@ namespace BE
         public int HostingUnitKey { get => hostingUnitKey; set => hostingUnitKey = value; }
         public Enums.Area Area { get => area; set => area = value; }
         public string SubArea { get => subArea; set => subArea = value; }
+        public bool Pool { get => pool; set => pool = value; }
+        public int Adults { get => adults; set => adults = value; }
+        public int Kids { get => kids; set => kids = value; }
+        public bool Jaccuzi { get => jaccuzi; set => jaccuzi = value; }
+        public bool Garden { get => garden; set => garden = value; }
+        public int Stars { get => stars; set => stars = value; }
+        public bool Meals { get => meals; set => meals = value; }
         #endregion
 
         #region functions
