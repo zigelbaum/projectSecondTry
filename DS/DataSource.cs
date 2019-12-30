@@ -36,7 +36,7 @@ namespace DS
         static BankBranch BB5 = new BankBranch() { BankNumber = 5555, BankName = "leumi", BranchNumber = 159, BranchAddress = "Bezalel", BranchCity = "Beer Sheva" };
         #endregion
 
-        internal static List<BankBranch> BankBranchesCollection = new List<BankBranch>() { BB1, BB2, BB3, BB4, BB5 };
+        public static List<BankBranch> BankBranchesCollection = new List<BankBranch>() { BB1, BB2, BB3, BB4, BB5 };
 
         internal static List<Host> My_Host = new List<Host>
         {

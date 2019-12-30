@@ -218,8 +218,6 @@ namespace DAL
             {
                 throw c;
             }
-
-            throw new NotImplementedException();
         }
 
         public List<Order> getOrders(Func<Order, bool> predicate)
