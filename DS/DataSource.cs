@@ -25,7 +25,7 @@ namespace DS
         static BankBranch B4 = new BankBranch() { BankNumber = 101, BankName = "mizrahi", BranchNumber = 293, BranchAddress = "beit hadfus", BranchCity = "Jerusalem" };
         static BankBranch B5 = new BankBranch() { BankNumber = 202, BankName = "yahav", BranchNumber = 294, BranchAddress = "arieli", BranchCity = "Beitar" };
 
-        internal static List<BankBranch> BankBranchesCollection = new List<BankBranch>() { B1, B2, B3, B4, B5 };
+        public static List<BankBranch> BankBranchesCollection = new List<BankBranch>() { B1, B2, B3, B4, B5 };
 
         #region data
 
