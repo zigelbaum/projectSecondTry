@@ -43,7 +43,7 @@ namespace BL
 
         public bool BankAccountDebitAuthorization(Host host)
         {
-            return host.CollectionClearance1;
+            return host;
 
         }
 

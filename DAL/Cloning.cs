@@ -13,7 +13,6 @@ namespace DAL
         public static BankBranch Clone(this BankBranch original)
         {
             BankBranch target = new BankBranch();
-            target.BankAccountNumber = original.BankAccountNumber;
             target.BankName = original.BankName;
             target.BankNumber = original.BankNumber;
             target.BranchAddress = original.BranchAddress;
@@ -53,9 +52,9 @@ namespace DAL
         public static Host Clone(this Host original)
         {
             Host target = new Host();
-            target.BankAccountNumber1 = original.BankAccountNumber1;
+            target.BankAccountNumber = original.BankAccountNumber;
             target.BankBranchDetails = original.BankBranchDetails;
-            target.CollectionClearance1 = original.CollectionClearance1;
+            target.CollectionClearance= original.CollectionClearance;
             return target;
         }
         #endregion

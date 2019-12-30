@@ -18,8 +18,10 @@ namespace BE
         int bankAccountNumber;
         bool collectionClearance;
         public BankBranch BankBranchDetails { get => bankBranchDetails; set => bankBranchDetails = value; }
-        public int BankAccountNumber { get => BankAccountNumber; set => BankAccountNumber = value; }
-        public bool CollectionClearance { get => CollectionClearance; set => CollectionClearance = value; }
+        public int BankAccountNumber { get => bankAccountNumber; set => bankAccountNumber = value; }
+        public bool CollectionClearance { get => collectionClearance; set => collectionClearance = value; }
+
+
         #endregion
 
         #region functions
