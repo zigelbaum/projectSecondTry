@@ -145,13 +145,13 @@ namespace PL
                 Console.WriteLine(a.Message);
             }
 
-            IEnumerable<GuestRequest> matchRequests;
+            List<GuestRequest> matchRequests;
             IEnumerable<IGrouping<Host, HostingUnit>> my_units = my_bl1.GroupHostByHostingUnit();
             foreach (IGrouping<Host, HostingUnit> hosting in my_units)
             {
                 foreach (HostingUnit unit in hosting)
                 {
-                    matchRequests = my_bl1.getGuestRequests(my_bl1.BuildPredicate(unit) /*my_bl1.BuildPredicate(unit)*/); 
+                    matchRequests = my_bl1.RequestMatchToStipulation(my_bl1.BuildPredicate(unit)); 
                     foreach (GuestRequest guest in matchRequests)
                     {
                         my_bl1.AddOrder(my_bl1.NewOrder(unit1.HostingUnitKey, guest.GuestRequestKey));
