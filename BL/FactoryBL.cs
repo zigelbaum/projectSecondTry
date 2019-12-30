@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    class FactoryBL
+    public class FactoryBL
     {
-        public static IBL getDAL(string typeBL)
+        public static IBL getBL(string typeBL)
         {
             switch (typeBL)
             {

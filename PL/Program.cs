@@ -142,11 +142,10 @@ namespace PL
                     matchRequests = my_bl1.getGuestRequests(my_bl1.BuildPredicate(unit)); 
                     foreach (GuestRequest guest in matchRequests)
                     {
-                        my_bl1.AddOrder(my_bl1.NewOrder(unit.HostingUnitKey, guest.GuestRequestKey));
+                        my_bl1.AddOrder(my_bl1.NewOrder(unit1.HostingUnitKey, guest.GuestRequestKey));
                     }
                 }
             }
         }  
-        }
     }
 }
