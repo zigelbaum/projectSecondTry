@@ -142,9 +142,9 @@ namespace PL
                 foreach (HostingUnit unit in hosting)
                 {
                     matchRequests = my_bl1.getGuestRequests(my_bl1.BuildPredicate(unit)); 
-                    foreach (GuestRequest item in matchRequests)
+                    foreach (GuestRequest guest in matchRequests)
                     {
-                        my_bl1.AddOrder(my_bl1.NewOrder()//ibl.AddOrder(ibl.CreateOrder(hu.HostingUnitKey, item.GuestRequestKey));
+                        my_bl1.AddOrder(my_bl1.NewOrder(unit.HostingUnitKey, guest.GuestRequestKey));
                     }
                 }
             }

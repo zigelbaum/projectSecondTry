@@ -360,7 +360,7 @@ namespace BL
             return i;
         }
 
-        public Predicate<GuestRequest> BuildPredicate(HostingUnit hosting)//!!
+        public Predicate<GuestRequest> BuildPredicate(HostingUnit hosting)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<GuestRequest> guestRequests = dal.GetGuestRequestsList();
@@ -372,8 +372,10 @@ namespace BL
             bool RGGarden(GuestRequest request) { return request.Garden == Enums.intrested.Necessary || request.Garden == Enums.intrested.Possible; }
             bool RGNoGarden(GuestRequest request) { return request.Garden == Enums.intrested.NoThanks || request.Garden == Enums.intrested.Possible; }
             bool RGChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == Enums.intrested.Necessary || request.ChildrenAttraction == Enums.intrested.Possible; }
-            bool RGNoChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == Enums.intrested.NoThanks || request.ChildrenAttraction == Enums.intrested.Possible; }            
-
+            bool RGNoChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == Enums.intrested.NoThanks || request.ChildrenAttraction == Enums.intrested.Possible; }
+            bool RGMeals(GuestRequest request) { return request.Meals == Enums.intrested.Necessary || request.Meals == Enums.intrested.Possible;}
+            bool RGNoMeals(GuestRequest request) { return request.Meals == Enums.intrested.NoThanks || request.Meals == Enums.intrested.Possible;}
+            bool RGStars(GuestRequest request) {return request.Stars <= hosting.Stars; }
             bool RGArea(GuestRequest request) { return request.Area == hosting.Area; }
             bool RGSubArea(GuestRequest request) { return request.SubArea == hosting.SubArea; }
             bool RGType(GuestRequest request) { return request.Type == hosting.HostingUnitType; }           
@@ -389,20 +391,21 @@ namespace BL
             else pred += RGNoGarden;
             if (hosting.ChildrenAttraction)
                 pred += RGChildrenAttraction;
-            else pred += RGNoChildrenAttraction;            
+            else pred += RGNoChildrenAttraction; 
+            if(hosting.Meals)
+                pred += RGMeals;
+            else pred += RGNoMeals;
             pred += RGArea;
             pred += RGSubArea;
             pred += RGType;
+            pred += RGStars;
             return pred;
         }
 
         public Order NewOrder(int guestRequestKey, int hostingUnitkey)
         {
             Order ord = new Order
-            { GuestRequestKey = guestRequestKey, HostingUnitKey = hostingUnitkey, OrderStatus = Enums.OrderStatus.Active,
-                CreateDate = new DateTime(2019, 11, 28),
-                OrderDate = DateTime.Now
-            };
+            { GuestRequestKey = guestRequestKey, HostingUnitKey = hostingUnitkey, OrderStatus = Enums.OrderStatus.Active, CreateDate = DateTime.Now };
             return ord;
         }
         #endregion

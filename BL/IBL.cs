@@ -36,7 +36,7 @@ namespace BL
         #endregion
 
         #region change now
-        bool RevocationPermission(Host host);//??????
+        bool RevocationPermission(Host host);
         void SendEmail(Order ord);
         List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays);
         Int32 NumDays(DateTime start, DateTime end);
@@ -46,7 +46,7 @@ namespace BL
         Int32 NumOfInvetations(BE.GuestRequest costumer);
         Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit);
         Predicate<GuestRequest> BuildPredicate(HostingUnit hosting);
-        Order NewOrder(int , int );
+        Order NewOrder(int guestRequestKey, int hostingUnitkey);
         #endregion
 
         #region grouping
