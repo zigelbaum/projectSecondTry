@@ -3,6 +3,11 @@
 using BE;
 using System.Collections.Generic;
 using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DAL;
+using System.Net.Mail;
 
 namespace BL
 {
@@ -31,12 +36,11 @@ namespace BL
         #endregion
 
         #region change now
-        List<BE.Order> OrderExistenceEqualsDays(Int32 days);
         bool RevocationPermission(int bankAccountNumber, BankBranch bankBranchDetails);//??????
         void SendEmail(Order ord);
-        //bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays);
         List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays);
-        Int32 NumDays(DateTime start, DateTime end= DateTime.Now);
+        Int32 NumDays(DateTime start, DateTime end);
+        Int32 NumDays(DateTime start);
         List<Order> DaysPassedOrders(Int32 days);
         List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic);
         Int32 NumOfInvetations(BE.GuestRequest costumer);
@@ -46,8 +50,8 @@ namespace BL
         #region grouping
         IEnumerable<IGrouping<Enums.Area, GuestRequest>> GroupGRByArea();
         IEnumerable<IGrouping<int, GuestRequest>> GroupGRByVacationers();
-        IEnumerable<IGrouping<int, Host>> GroupHostByHostingUnit();
-        IEnumerable<IGrouping<Area, HostingUnit>> GroupHostByHostingUnit();
+        IEnumerable<IGrouping<Host, HostingUnit>> GroupHostByHostingUnit();
+        IEnumerable<IGrouping<Enums.Area, HostingUnit>> GroupHostingUnitByArea();
         #endregion
         
     }

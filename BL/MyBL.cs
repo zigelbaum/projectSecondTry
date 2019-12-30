@@ -241,32 +241,12 @@ namespace BL
         #region change now
         public bool RevocationPermission(int bankAccountNumber, BankBranch bankBranchDetails)
         {
-            //?????????????????/
+            //?????????????????
         }
-
-        public List<BE.Order> OrderExistenceEqualsDays(Int32 days)
-        { }
 
         public void SendEmail(Order ord)
         {
-            MailMessage my_mail = new MailMessage();
-            my_mail.To.Add("Client");
-            my_mail.From = new MailAddress("zimmers");
-            mail.Subject = "your request";
-            mail.Body = "items";
-            mail.IsBodyHtml = true;
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.Credentials = new System.Net.NetworkCredential("tamarbuterman@gmail.com", "myGmailPassword");
-            smtp.EnableSsl = true;
-            try
-            {
-                smtp.Send(mail);
-            }
-            catch (Exception ex)
-            {
-               throw ex;
-            }
+            Console.WriteLine("email was sent");
         }
 
         public bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays)
@@ -290,27 +270,30 @@ namespace BL
         public List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
-            List<BE.HostingUnit> listToReturn;
-            //List<BE.HostingUnit> listHostingUnit = dal.getAllHostingUnits();
+            List<BE.HostingUnit> listToReturn = null;
             IEnumerable<HostingUnit> listHostingUnit = dal.getHostingUnitsList();
-            //IEnumerator enumerator = listHostingUnit.GetEnumerator();
-            //while (enumerator.MoveNext())
             foreach (HostingUnit hostingUnit in listHostingUnit)
             {
-                if(CheckAvailable(hostingUnit, entry, vactiondays))
-                    listToReturn.Add(hostingUnit);
+                if (CheckAvailable(hostingUnit, entry, vactiondays))
+                    listToReturn.Add(hostingUnit.Clone());
             }
             return listToReturn;
         }
 
-        public Int32 NumDays(DateTime start, DateTime end=default(DateTime.Now))
+        public Int32 NumDays(DateTime start, DateTime end)
         {
             return (end-start).Days;
         }
 
+        public Int32 NumDays(DateTime start)
+        {
+            DateTime end = DateTime.Now;
+            return (end - start).Days;
+        }
+
         public List<Order> DaysPassedOrders(Int32 days)
         {
-            List<Order> listToReturn;
+            List<Order> listToReturn = null;
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<Order> listOrders = dal.GetOrdersList();
             foreach(Order ord in listOrders)
@@ -325,7 +308,7 @@ namespace BL
 
         public List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic)
         {
-            List<GuestRequest> listToReturn;
+            List<GuestRequest> listToReturn = null;
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
             foreach(GuestRequest request in listGuestRequests)
@@ -338,15 +321,15 @@ namespace BL
 
         public Int32 NumOfInvetations(GuestRequest costumer)
         {
-            int i=0;            
+            List<Order> temp = null; ;            
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<Order> listOrders = dal.GetOrdersList();
             foreach(Order ord in listOrders)
             {
-                if(ord.GuestRequestKey == costumer.GuestRequestKey
-                    i++;
+                if (ord.GuestRequestKey == costumer.GuestRequestKey)
+                    temp.Add(ord.Clone());
             }
-            return i;
+            return temp.Count;
         }
 
         public Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit)
@@ -386,7 +369,7 @@ namespace BL
             return groupToReturn;
         }
 
-        IEnumerable<IGrouping<int, Host>> GroupHostByHostingUnit()
+        public IEnumerable<IGrouping<Host, HostingUnit>> GroupHostByHostingUnit()
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
@@ -397,7 +380,7 @@ namespace BL
             return groupToReturn;
         }
 
-        IEnumerable<IGrouping<Area, HostingUnit>> GroupHostByHostingUnit()
+        IEnumerable<IGrouping<Enums.Area, HostingUnit>> GroupHostingUnitByArea()
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
