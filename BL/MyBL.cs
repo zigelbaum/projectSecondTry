@@ -367,7 +367,7 @@ namespace BL
             return i;
         }
 
-        public Predicate<GuestRequest> BuildPredicate(HostingUnit hosting)
+        public Predicate<GuestRequest> BuildPredicate(HostingUnit hosting)//Builds a predicate that filters the hosting units according to the client's requirements
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<GuestRequest> guestRequests = dal.GetGuestRequestsList();

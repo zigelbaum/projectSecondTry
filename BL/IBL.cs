@@ -14,39 +14,40 @@ namespace BL
     public interface IBL
     {
         #region HostingUnit
-        void addHostingUnit(HostingUnit hostingUnit);
-        void DeleteHostingUnit(HostingUnit hostingUnit);
-        void SetHostingUnit(HostingUnit hostingUnit);
-        List<HostingUnit> getHostingUnitsList();
-        List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate);
+        void addHostingUnit(HostingUnit hostingUnit);//Add a hosting unit
+        void DeleteHostingUnit(HostingUnit hostingUnit);//Removing a hosting unit
+        void SetHostingUnit(HostingUnit hostingUnit);//Hosting unit update
+        List<HostingUnit> getHostingUnitsList();//Returns a list of all accommodation units
+        List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate);//Returns a list of accommodation units that meet a specific condition
         #endregion
 
         #region GuestRequest
-        void addGuestRequest(GuestRequest guestRequest);
-        void SetGuestRequest(GuestRequest guestRequest);
-        List<GuestRequest> GetGuestRequestsList();
-        List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate);
+        void addGuestRequest(GuestRequest guestRequest);//Add a customer requirement
+        void SetGuestRequest(GuestRequest guestRequest);//Customer Requirement Status Update
+        List<GuestRequest> GetGuestRequestsList();//Returns a list of all existing client requirements in the system
+        List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate);//Returns a list of customer requirements that meet a certain condition
         #endregion
 
         #region Order
-        void AddOrder(Order order);
-        void setOrder(Order order);
-        List<Order> GetOrdersList();
-        List<Order> getOrders(Func<Order, bool> predicate);
+        void AddOrder(Order order);//Add an invitation
+        void setOrder(Order order);//Update Order Status
+        List<Order> GetOrdersList();//Returns a list of existing orders in the system
+        List<Order> getOrders(Func<Order, bool> predicate);//Returns a list of orders that fulfill a particular condition
         #endregion
 
         #region change now
-        bool RevocationPermission(Host host);
-        void SendEmail(Order ord);
-        List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays);
-        Int32 NumDays(DateTime start, DateTime end);
-        Int32 NumDays(DateTime start);
-        List<Order> DaysPassedOrders(Int32 days);
-        List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic);
-        Int32 NumOfInvetations(BE.GuestRequest costumer);
-        Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit);
-        Predicate<GuestRequest> BuildPredicate(HostingUnit hosting);
-        Order NewOrder(int guestRequestKey, int hostingUnitkey);
+        bool RevocationPermission(Host host);//Checks whether account debit authorization can be revoked
+        void SendEmail(Order ord);//Sends a customer to the customer with the order details
+        bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays);//Checks whether the requested vacation time in a particular unit is free
+        List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays);//Returns the list of all available accommodation units on this date
+        Int32 NumDays(DateTime start, DateTime end);//Returns the number of days passed from the first date to the second
+        Int32 NumDays(DateTime start);//Returns the number of days that have passed from the given date to the present
+        List<Order> DaysPassedOrders(Int32 days);//Returns all orders that have elapsed since they were created / since sent emails to a customer greater than or equal to the number of days the function received
+        List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic);//Returns all customer requirements that fit a particular condition
+        Int32 NumOfInvetations(BE.GuestRequest costumer);//Returns the number of orders sent to a customer
+        Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit);//Returns the number of orders sent / number of successfully closed orders for a unit through the site
+        Predicate<GuestRequest> BuildPredicate(HostingUnit hosting);//Builds a predicate that filters the hosting units according to the client's requirements
+        Order NewOrder(int guestRequestKey, int hostingUnitkey);//Creating order
         #endregion
 
         #region grouping
