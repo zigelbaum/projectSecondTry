@@ -17,8 +17,6 @@ namespace BE
         private Enums.Area area;
         #endregion
 
-       
-
         #region properties
         public Enums.HostingUnitType HostingUnitType { get => hostingUnitType; set => hostingUnitType=value; }
         public string HostingUnitName { get => hostingUnitName; set => hostingUnitName=value; }
@@ -26,10 +24,7 @@ namespace BE
         public Host Owner { get => owner; set => owner = value; }
         public int HostingUnitKey { get => hostingUnitKey; set => hostingUnitKey = value; }
         public Enums.Area Area { get => area; set => area = value; }
-
         #endregion
-
-
 
         #region functions
         public override string ToString()
