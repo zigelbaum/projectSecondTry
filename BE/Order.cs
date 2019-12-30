@@ -10,8 +10,8 @@ namespace BE
     {
         #region fileds
         Int32 _OrderKey ;
-        Int32 _GuestRequestKey = Configuration.GuestRequestKey;
-        Int32 _HostingUnitKey = Configuration.HostingUnitKey;
+        Int32 _GuestRequestKey;
+        Int32 _HostingUnitKey;
         private Enums.OrderStatus orderStatus;
         private DateTime createDate;
         private DateTime orderDate;
@@ -31,6 +31,9 @@ namespace BE
         #region functions
         public override string ToString()
         {
+            string order;
+            order="OrderKey: "+OrderKey+"@Guest Request Key: "+GuestRequestKey+
+                "@Hosting Unit Key: "
             return base.ToString();
         }
         #endregion

@@ -36,7 +36,7 @@ namespace BL
         #endregion
 
         #region change now
-        bool RevocationPermission(int bankAccountNumber, BankBranch bankBranchDetails);//??????
+        bool RevocationPermission(Host host);//??????
         void SendEmail(Order ord);
         List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays);
         Int32 NumDays(DateTime start, DateTime end);

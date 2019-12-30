@@ -27,7 +27,11 @@ namespace BE
         #region functions
         public override string ToString()
         {
-            return base.ToString();
+            string host;
+           host= "Host ID: " + HostKey + "@Name: " + PrivateName + " " + FamilyName + "@Phone number: " + PhoneNumber +
+                "@Mail address: " + MailAddress + "@Bank Account: " + BankBranchDetails + "@Collection permission: " + CollectionClearance;
+            host = host.Replace("@", System.Environment.NewLine);
+            return host.ToString();
         }
         #endregion
 

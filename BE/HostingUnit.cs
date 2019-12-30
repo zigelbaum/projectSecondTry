@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class HostingUnit 
+    public class HostingUnit
     {
         #region fileds
         Int32 hostingUnitKey;
@@ -27,6 +27,7 @@ namespace BE
         #endregion
 
         #region functions
+      
         public override string ToString()
         {
             return this.HostingUnitName + " " + HostingUnitType;

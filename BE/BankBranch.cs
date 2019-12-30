@@ -27,7 +27,9 @@ namespace BE
         #region functions
         public override string ToString()
         {
-            return base.ToString();
+            string text = "Bank Name: " + BankName + "@Branch Number: " + BranchNumber + "@Branch Adress: " + BranchCity + " " + branchAddress + "@Bank Number: " + BankNumber;
+            text = text.Replace("@", System.Environment.NewLine);
+            return text.ToString();
         }
 
         #endregion

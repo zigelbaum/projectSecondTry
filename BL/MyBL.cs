@@ -43,7 +43,7 @@ namespace BL
 
         public bool BankAccountDebitAuthorization(Host host)
         {
-            return host;
+            return host.CollectionClearance;
 
         }
 
@@ -181,7 +181,7 @@ namespace BL
         {
             if (OverNightVacation(guestRequest)==true)
             myDAL.addGuestRequest(guestRequest);
-            else 
+            //else 
                 //throw "not over night vacation"
         }
         #endregion
@@ -239,9 +239,17 @@ namespace BL
         #endregion
 
         #region change now
-        public bool RevocationPermission(int bankAccountNumber, BankBranch bankBranchDetails)
+        public bool RevocationPermission(Host host)
         {
-            //?????????????????
+            List<Order> openOrders = getOrders(x =>  x.OrderStatus == Enums.OrderStatus.Active);
+            List<HostingUnit> hostingUnits=null;
+            foreach (var order in openOrders)
+                hostingUnits.Add(FindHostingUnit(order.HostingUnitKey));
+            foreach(var unit in hostingUnits)
+                if (unit.Owner.HostKey==host.HostKey)
+            
+                return false;
+            return true;
         }
 
         public void SendEmail(Order ord)
@@ -289,6 +297,13 @@ namespace BL
         {
             DateTime end = DateTime.Now;
             return (end - start).Days;
+        }
+
+        public HostingUnit FindHostingUnit(int unitKey)
+        {
+            List<HostingUnit> hostingUnits = myDAL.getHostingUnits(x => x.HostingUnitKey == unitKey);
+             var unit=hostingUnits.Find(x => x.HostingUnitKey == unitKey);
+            return (unit == null) ? throw new InvalidException("unit not found") : unit;
         }
 
         public List<Order> DaysPassedOrders(Int32 days)
@@ -347,7 +362,7 @@ namespace BL
         #endregion
 
         #region grouping
-        IEnumerable<IGrouping<Enums.Area , GuestRequest>> GroupGRByArea()
+        public IEnumerable<IGrouping<Enums.Area , GuestRequest>> GroupGRByArea()
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
@@ -358,7 +373,7 @@ namespace BL
             return groupToReturn;
         }
 
-        IEnumerable<IGrouping<int, GuestRequest>> GroupGRByVacationers()
+        public IEnumerable<IGrouping<int, GuestRequest>> GroupGRByVacationers()
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
@@ -380,7 +395,7 @@ namespace BL
             return groupToReturn;
         }
 
-        IEnumerable<IGrouping<Enums.Area, HostingUnit>> GroupHostingUnitByArea()
+        public IEnumerable<IGrouping<Enums.Area, HostingUnit>> GroupHostingUnitByArea()
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
