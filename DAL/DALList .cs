@@ -47,9 +47,9 @@ namespace DAL
                 if(!UnitExist(hostingUnit))
                     DataSource.hostingUnitsCollection.Add(hostingUnit);
                 else
-                    throw new ExistException("Hosting Unit already exists");
+                    throw new NotImplementedException();
             }
-            catch (ExistException c)
+            catch (NotImplementedException c)
             {
                 throw c;
             }
@@ -60,11 +60,11 @@ namespace DAL
             try
             {
                 if(!UnitExist(hostingUnit))
-                    throw new NotExistException("Hosting Unit not exists");
+                    throw new NotImplementedException();
                 else
                     DataSource.hostingUnitsCollection.Remove(hostingUnit);
             }
-            catch (NotExistException c)
+            catch (NotImplementedException c)
             {
                 throw c;
             }
@@ -76,13 +76,17 @@ namespace DAL
             try
             {
                 if(!UnitExist(hostingUnit))
-                    throw new NotExist("The hosting unit is not exist");
+                    throw new NotImplementedException();
+                    //throw new NotExist("The hosting unit is not exist");
                 else
                 {
                     //לעדכן
+                    HostingUnit unit = hostingUnit.Clone();
+                    DataSource.hostingUnitsCollection.Remove(unit);
                 }
+                DataSource.hostingUnitsCollection.Add(hostingUnit);
             }
-            catch (NotExist c)
+            catch (NotImplementedException c)
             {
                 throw c;
             }
@@ -119,17 +123,20 @@ namespace DAL
             try
             {
                 if(!RequestExist(guest))
-                    throw new NotExist("The request is not exist");
+                    throw new NotImplementedException();
+                    //throw new NotExist("The request is not exist");
                 else
                 {
-                    //לעדכן סטטוס
-                    if(my_request._Status == Active)
+                    /*if(my_request._Status == Active)
                         my_request._Status = Enums.GuestRequestStatus[1];
                     if(my_request._Status ==  ClosedOnTheWeb)
-                        my_request._Status = Enums.GuestRequestStatus[2];
+                        my_request._Status = Enums.GuestRequestStatus[2];*/
+                    GuestRequest request = guest.Clone();
+                    DataSource.guestRequestsCollection.Remove(request);
                 }
+                DataSource.guestRequestsCollection.Add(guest);
             }
-            catch (NotExist c)
+            catch (NotImplementedException c)
             {
                 throw c;
             }
@@ -137,7 +144,7 @@ namespace DAL
 
         public void addGuestRequest(GuestRequest guest/*string id, string name, int age*/)
         {
-            //throw new NotImplementedException();//???
+            //throw new` NotImplementedException();//???
             try
             {
                 if(!RequestExist(guest))
@@ -145,9 +152,9 @@ namespace DAL
                     DataSource.guestRequestsCollection.Add(guest);
                 }
                 else
-                    throw new DuplicateObjectException("Request already exists");
+                    throw new NotImplementedException();
             }
-            catch (DuplicateObjectException c)
+            catch (NotImplementedException c)
             {
                 throw c;
             }
@@ -179,9 +186,9 @@ namespace DAL
                 if(!OrderExist(order))
                      DataSource.orders.Add(order);
                 else
-                    throw new ExistException("This order already exists");
+                    throw new NotImplementedException();
             }
-            catch (ExistException c)
+            catch (NotImplementedException c)
             {
                 throw c;
             }
@@ -192,15 +199,18 @@ namespace DAL
             //????????
             try
             {
-                
                 if(!OrderExist(order))
-                    throw new NotExist("The order is not exist");
+                    throw new NotImplementedException();
+                    //throw new NotExist("The order is not exist");
                 else
                 {
                     //לעדכן סטטוס
+                    Order ord = order.Clone();
+                    DataSource.orders.Remove(ord);
                 }
+                DataSource.orders.Add(order);
             }
-            catch (NotExist c)
+            catch (NotImplementedException c)
             {
                 throw c;
             }

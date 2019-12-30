@@ -14,9 +14,8 @@ namespace BE
         private string hostingUnitName;
         private Enums.HostingUnitType hostingUnitType;
         private bool[,] diary = new bool[12, 31];
+        private Enums.Area area;
         #endregion
-
-       
 
         #region properties
         public Enums.HostingUnitType HostingUnitType { get => hostingUnitType; set => hostingUnitType=value; }
@@ -24,10 +23,8 @@ namespace BE
         public bool[,] Diary { get => diary; set => diary = value; }
         public Host Owner { get => owner; set => owner = value; }
         public int HostingUnitKey { get => hostingUnitKey; set => hostingUnitKey = value; }
-
+        public Enums.Area Area { get => area; set => area = value; }
         #endregion
-
-
 
         #region functions
         public override string ToString()
