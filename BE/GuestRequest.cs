@@ -29,7 +29,7 @@ namespace BE
         #endregion
 
         #region properties
-        //has to checked if set exsitence requested
+       
         public int GuestRequestKey { get => _GuestRequestKey; set => _GuestRequestKey=value; }
         public string PrivateName { get => _PrivateName; set => _PrivateName = value; }
         public string FamilyName { get => _FamilyName; set => _FamilyName = value; }
@@ -47,16 +47,19 @@ namespace BE
         public Enums.intrested Jacuzzi { get => _Jacuzzi; set => _Jacuzzi = value; }
         public Enums.intrested Garden { get => _Garden; set => _Garden = value; }
         public Enums.intrested ChildrenAttraction { get => _ChildrenAttraction; set => _ChildrenAttraction = value; }
-
-        
-
-
+            
         #endregion
 
         #region functions
         public override string ToString()
         {
-            return base.ToString();
+            string request;
+            request = "Request ID: " + GuestRequestKey + "@costumer Details: Name: " + PrivateName + " " + FamilyName +
+                " Mail:" + MailAddress + "@Vacation Details: Date: " + EnteryDate + "-" + ReleaseDate +
+                "Place: " + Area + " " + SubArea + "Number Of Travelers: " + (Adults + Children) +
+                "@Registration Date: " + RegistrationDate + "@Request's status: " + Status;
+            request = request.Replace("@", System.Environment.NewLine);
+            return request.ToString();
         }
 
         #endregion

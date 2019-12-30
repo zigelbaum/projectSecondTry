@@ -32,9 +32,11 @@ namespace BE
         public override string ToString()
         {
             string order;
-            order="OrderKey: "+OrderKey+"@Guest Request Key: "+GuestRequestKey+
-                "@Hosting Unit Key: "
-            return base.ToString();
+            order = "OrderKey: " + OrderKey + "@Guest Request Key: " + GuestRequestKey +
+                "@Hosting Unit Key: " + HostingUnitKey + "@OrderStatus: " + OrderStatus +
+                "@Created At: " + CreateDate + "@Order Date: " + OrderDate;
+            order = order.Replace("@", System.Environment.NewLine);
+            return order.ToString();
         }
         #endregion
 
