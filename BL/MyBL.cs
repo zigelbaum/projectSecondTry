@@ -284,7 +284,10 @@ namespace BL
                             List<HostingUnit> hostingUnits = getHostingUnits(x => order.HostingUnitKey == x.HostingUnitKey);
                             HostingUnit unit = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
                             if (BankAccountDebitAuthorization(unit.Owner) == true)
+                            {
                                 dal.setOrder(order);
+                                SendEmail(order);
+                            }
                             else
                                 throw new ExceptionBL("Has not banck account permission");
                         }
@@ -332,6 +335,19 @@ namespace BL
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             return dal.OrderExist(order);
+        }
+
+        public Order FindOrder(Int32 ordKey)
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            /*List<Order> orders = dal.GetOrdersList();
+            foreach (Order order in orders)
+            {
+                if (order.OrderKey == ordKey)
+                    return order;
+            }
+            return null;*/
+            return dal.FindOrder(ordKey);
         }
         #endregion
 
@@ -507,19 +523,7 @@ namespace BL
             Order ord = new Order
             { GuestRequestKey = guestRequestKey, HostingUnitKey = hostingUnitkey, OrderStatus = Enums.OrderStatus.Active, CreateDate = DateTime.Now };
             return ord;
-        }
-
-        public Order FindOrder(Int32 ordKey)
-        {
-            IDAL dal = DAL.factoryDAL.getDAL("List");
-            List<Order> orders = dal.GetOrdersList();
-            foreach(Order order in orders)
-            {
-                if(order.OrderKey == ordKey)
-                    return order;
-            }
-            return null;
-        }
+        }  
 
         public GuestRequest FindGuestRequest(Int32 requestKey)
         {

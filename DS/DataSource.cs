@@ -51,8 +51,8 @@ namespace DS
             hostingUnitsCollection.Add(new HostingUnit() { HostingUnitKey = 10050003, HostingUnitName = "Roni", Owner = My_Host.Last(), Area = Enums.Area.North, HostingUnitType = Enums.HostingUnitType.Camping, SubArea = "Golan", Pool = true, Adults = 2, Kids = 10, Jaccuzi = false, Garden = true, ChildrenAttraction = false, Meals = false, Stars = 1 });
             #endregion
             #region addOrders
-            ordersCollection.Add(new Order() { HostingUnitKey = 10030001, GuestRequestKey = 10000011, OrderKey = 10000111, OrderStatus = Enums.OrderStatus.Active, CreateDate = new DateTime(2019, 10, 04), OrderDate = new DateTime(2019, 10, 04) });
             ordersCollection.Add(new Order() { HostingUnitKey = 10040002, GuestRequestKey = 10000012, OrderKey = 10000211, OrderStatus = Enums.OrderStatus.NoAnswer, CreateDate = new DateTime(2005, 04, 16), OrderDate = new DateTime(2005, 04, 19) });
+            ordersCollection.Add(new Order() { HostingUnitKey = 10030001, GuestRequestKey = 10000011, OrderKey = 10000111, OrderStatus = Enums.OrderStatus.Active, CreateDate = new DateTime(2019, 10, 04), OrderDate = new DateTime(2019, 10, 04) });
             ordersCollection.Add(new Order() { HostingUnitKey = 10050003, GuestRequestKey = 10000013, OrderKey = 10000311, OrderStatus = Enums.OrderStatus.Closed, CreateDate = new DateTime(2019, 11, 29), OrderDate = new DateTime(2019, 12, 01) });
             #endregion
         }

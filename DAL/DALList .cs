@@ -85,9 +85,8 @@ namespace DAL
                 if(!UnitExist(hostingUnit))
                     throw new DataException("The hosting unit is not exist");
                 else
-                {
-                    HostingUnit unit = hostingUnit.Clone();
-                    hostingUnitsCollection.Remove(unit);
+                {                    
+                    hostingUnitsCollection.RemoveAll(u=>u.HostingUnitKey == hostingUnit.HostingUnitKey);
                 }
                 hostingUnitsCollection.Add(hostingUnit);
             }
@@ -124,8 +123,7 @@ namespace DAL
                     throw new DataException("The request is not exist");
                 else
                 {
-                    GuestRequest request = guest.Clone();
-                    guestRequestsCollection.Remove(request);
+                    guestRequestsCollection.RemoveAll(g=>g.GuestRequestKey == guest.GuestRequestKey);
                 }
                 guestRequestsCollection.Add(guest);
             }
@@ -178,6 +176,17 @@ namespace DAL
             return false;
         }
 
+        public Order FindOrder(Int32 ordKey)
+        {
+            List<Order> orders = GetOrdersList();
+            foreach (Order order in orders)
+            {
+                if (order.OrderKey == ordKey)
+                    return order;
+            }
+            return null;
+        }
+
         public int addOrder(Order order)
         {
             try
@@ -206,8 +215,7 @@ namespace DAL
                     throw new DataException("The order is not exist");
                 else
                 {
-                    Order ord = order.Clone();
-                    ordersCollection.Remove(ord);
+                    ordersCollection.RemoveAll(o => o.OrderKey == order.OrderKey);
                 }
                 ordersCollection.Add(order);
             }

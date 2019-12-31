@@ -32,6 +32,7 @@ namespace DAL
         List<Order> GetOrdersList();//Returns a list of all orders
         List<Order> getOrders(Func<Order, bool> predicate);//Returns a list of all orders that fulfill a particular condition
         bool OrderExist(Order order);//Checks if the order exists in the system
+        Order FindOrder(Int32 ordKey);//Return  Order with this key
         #endregion
 
         #region BanckBranch

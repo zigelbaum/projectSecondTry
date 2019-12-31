@@ -172,9 +172,13 @@ namespace PL
                     }
                 }
             }
-
-           
-
+            my_bl1.setOrder(new Order() { HostingUnitKey = 10040002, GuestRequestKey = 10000012, OrderKey = 10000211, OrderStatus = Enums.OrderStatus.SentEmail, CreateDate = new DateTime(2005, 04, 16), OrderDate = new DateTime(2005, 04, 19) });
+            List<Order> orders = my_bl1.GetOrdersList();
+            foreach(Order ord in orders)
+            {
+                Console.WriteLine();
+                Console.WriteLine(ord.ToString());
+            }
 
         }  
     }
