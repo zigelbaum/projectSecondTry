@@ -38,8 +38,7 @@ namespace BL
         {
             TimeSpan vacationDays = guestRequest.ReleaseDate - guestRequest.EnteryDate;
             if (vacationDays.Days < 1)
-                throw new ArgumentException("The vacation less one day");
-            // return false;
+                throw new ArgumentException("The vacation is less than one day");
             return true;
         }
 
@@ -53,27 +52,13 @@ namespace BL
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             List<HostingUnit> hostingUnits = dal.getHostingUnits(x => x.HostingUnitKey == order.HostingUnitKey);
-            bool[,] diary = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey).Diary;
+            HostingUnit unit = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
             List<GuestRequest> guestRequests = dal.getGuestRequests(x => order.GuestRequestKey == x.GuestRequestKey);
             GuestRequest guest = guestRequests.Find(x => order.GuestRequestKey == x.GuestRequestKey);
-            TimeSpan d = guest.ReleaseDate - guest.EnteryDate;
-            Int32 i = guest.EnteryDate.Month - 1;
-            Int32 j = guest.EnteryDate.Day - 1;
-            for (int k = 0; k < d.Days; k++)
-            {
-                if (j > 30)
-                {
-                    j = 0;
-                    i++;
-                }
-                if (diary[i, j] == true)
-                {
-                    throw new ArgumentException("This hosting unit full in this date");
-                }
-                j++;
-            }
+            if (!CheckAvailable(unit, guest.EnteryDate, guest.ReleaseDate))
+                throw new ArgumentException("the unit is not available for these dates");
             return true;
-
+           
         }
 
         public void UpdateDiary(Order order)
@@ -128,9 +113,9 @@ namespace BL
         public bool TheHostingUnitHasAnOpenOrder(HostingUnit hostingUnit)
         {
             List<Order> openOrders = getOrders(x => x.HostingUnitKey == hostingUnit.HostingUnitKey && x.OrderStatus == Enums.OrderStatus.Active);
-            if (openOrders.Count == 0)
-                return false;
-            return true;
+            if (openOrders.Count != 0)
+                throw new ExceptionBL("the Hosting unit has open orders");
+            return false; 
         }
 
         public bool RevocationPermission(Host host)
@@ -355,12 +340,13 @@ namespace BL
 
         #region functions       
 
-        public bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays)
+        public bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, DateTime realese)
         {
+            int d =(realese - entry).Days;
             bool[,] diary = hostingUnit.Diary;
             int i = entry.Month - 1;
             int j = entry.Day - 1;
-            for (int k = 0; k < vactiondays; k++)
+            for (int k = 0; k < d; k++)
             {
                 if (diary[i, j])
                     return false;
@@ -380,7 +366,7 @@ namespace BL
             IEnumerable<HostingUnit> listHostingUnit = dal.getHostingUnitsList();
             foreach (HostingUnit hostingUnit in listHostingUnit)
             {
-                if (CheckAvailable(hostingUnit, entry, vactiondays))
+                if (CheckAvailable(hostingUnit, entry, entry.AddDays(vactiondays)))
                     listToReturn.Add(hostingUnit.Clone());
             }
             return listToReturn;
