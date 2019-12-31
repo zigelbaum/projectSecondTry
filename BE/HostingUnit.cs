@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class HostingUnit
+    public class HostingUnit:IComparable
     {
         #region fileds
         Int32 hostingUnitKey;
@@ -54,6 +54,16 @@ namespace BE
                Area+ "@Sub Area: " + SubArea + "@Host ID: " + Owner.HostKey;
             unit = unit.Replace("@", System.Environment.NewLine);
             return unit.ToString();
+        }
+
+        public Int32 CompareTo(object obj)
+        {
+            Int32 my_owner = this.Owner.CompareTo((obj as HostingUnit).Owner);
+            Int32 my_name = this.HostingUnitName.CompareTo((obj as HostingUnit).HostingUnitName);
+            int my_type = this.HostingUnitType.CompareTo((obj as HostingUnit).HostingUnitType);
+            if (my_owner == 0 && my_name == 0 && my_type == 0)
+                return 0;
+            return 1;
         }
 
         #endregion

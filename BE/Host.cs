@@ -33,7 +33,7 @@ namespace BE
         }
         public Int32 CompareTo(object obj)
         {
-            return HostKey.CompareTo(obj);
+            return this.HostKey.CompareTo((obj as Host).HostKey);
         }
         #endregion
 

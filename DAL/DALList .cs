@@ -42,7 +42,7 @@ namespace DAL
         {
             try
             {
-                if (hostingUnitsCollection.Any(h => h.HostingUnitKey == hostingUnit.HostingUnitKey))
+                if (hostingUnitsCollection.Any(h => h== hostingUnit))
                 {
                     hostingUnit.HostingUnitKey = Configuration.HostingUnitKey;
                     Configuration.HostingUnitKey++;
@@ -151,14 +151,7 @@ namespace DAL
         }
 
         public List<GuestRequest> GetGuestRequestsList()
-        {
-            /*List<GuestRequest> listToReturn = null;
-            List<GuestRequest> myListGuestRequest = guestRequestsCollection;
-            foreach(GuestRequest request in myListGuestRequest)
-            {
-                listToReturn.Add(request.Clone());
-            }
-            return listToReturn;   */
+        { 
            return DS.DataSource.guestRequestsCollection.Select(item => (GuestRequest)item.Clone()).ToList(); 
         }
 

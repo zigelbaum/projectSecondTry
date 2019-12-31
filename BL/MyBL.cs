@@ -147,6 +147,14 @@ namespace BL
         {
             Console.WriteLine("email was sent");
         }
+
+        public bool validDate(GuestRequest guest)
+        {
+            DateTime nowDate = new DateTime(2004, 01, 01);
+            if (nowDate > guest.EnteryDate)
+                return false;
+            return true;
+        }
         #endregion
 
         #region Dalfunctions
@@ -154,7 +162,8 @@ namespace BL
         #region HostingUnit
         public void addHostingUnit(HostingUnit hostingUnit)
         {
-            myDAL.addHostingUnit(hostingUnit);
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+                dal.addHostingUnit(hostingUnit);
         }
 
         public void DeleteHostingUnit(HostingUnit hostingUnit)
@@ -193,14 +202,6 @@ namespace BL
         public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)
         {
             return myDAL.getGuestRequests(predicate);
-        }
-
-        public bool validDate(GuestRequest guest)
-        {
-            DateTime nowDate = new DateTime(2004, 01, 01);
-            if(nowDate>guest.EnteryDate)
-                return false;
-            return true;
         }
 
         public void addGuestRequest(GuestRequest guestRequest)

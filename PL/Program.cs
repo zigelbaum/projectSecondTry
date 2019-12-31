@@ -135,7 +135,7 @@ namespace PL
             {
                 my_bl1.addGuestRequest(guest1);
                 my_bl1.addGuestRequest(guest2);
-                my_bl1.addGuestRequest(guest3);
+                //my_bl1.addGuestRequest(guest3);
                 my_bl1.addHostingUnit(unit1);
                 my_bl1.addHostingUnit(unit2);
                 my_bl1.addHostingUnit(unit3);
