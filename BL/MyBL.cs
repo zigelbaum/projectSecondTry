@@ -341,7 +341,7 @@ namespace BL
         {
             List<GuestRequest> listToReturn = null;
             IDAL dal = DAL.factoryDAL.getDAL("List");
-            IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
+            List<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
             foreach(GuestRequest request in listGuestRequests)
             {
                 if(predic(request))

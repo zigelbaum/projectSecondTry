@@ -159,7 +159,7 @@ namespace DAL
                 listToReturn.Add(request.Clone());
             }
             return listToReturn;   */
-            return DS.DataSource.guestRequestsCollection;
+           return DS.DataSource.guestRequestsCollection.Select(item => (GuestRequest)item.Clone()).ToList(); 
         }
 
         public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)

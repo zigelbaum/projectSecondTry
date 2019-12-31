@@ -17,25 +17,12 @@ namespace DS
         static BankBranch BB5 = new BankBranch() { BankNumber = 5555, BankName = "leumi", BranchNumber = 159, BranchAddress = "Bezalel", BranchCity = "Beer Sheva" };
         #endregion
 
-        public static List<HostingUnit> hostingUnitsCollection = new List<HostingUnit>()
-        {
-            new HostingUnit(){HostingUnitKey=10000001, HostingUnitName="Chani", Owner=My_Host.First(), Area=Enums.Area.Center, HostingUnitType=Enums.HostingUnitType.Hotel, SubArea = "Tel Aviv", Pool = true, Adults = 2, Kids = 6, Jaccuzi = true, Garden = false, ChildrenAttraction = true, Meals = true, Stars=5},
-            new HostingUnit(){HostingUnitKey=10000002, HostingUnitName="Shira Tel", Owner=My_Host.First(), Area=Enums.Area.Jerusalem, HostingUnitType=Enums.HostingUnitType.Zimmer, SubArea = "Jerusalem", Pool = true, Adults = 10, Kids = 40, Jaccuzi = false, Garden = true, ChildrenAttraction = false, Meals = true, Stars=3},
-            new HostingUnit(){HostingUnitKey=10000003, HostingUnitName="Roni", Owner=My_Host.Last(), Area=Enums.Area.North, HostingUnitType=Enums.HostingUnitType.Camping, SubArea = "Golan", Pool = true, Adults = 2, Kids = 10, Jaccuzi = false, Garden = true, ChildrenAttraction = false, Meals = false, Stars = 1}
-        };
-        public static List<Order> ordersCollection = new List<Order>()
-        {
-            new Order(){HostingUnitKey=10000001,GuestRequestKey=10000011,OrderKey=10000111,OrderStatus=Enums.OrderStatus.Active, CreateDate=new DateTime(2019, 10, 04), OrderDate=new DateTime(2019, 10, 04)},
-            new Order(){HostingUnitKey=10000002,GuestRequestKey=10000012,OrderKey=10000211,OrderStatus=Enums.OrderStatus.NoAnswer, CreateDate=new DateTime(2005, 04, 16), OrderDate=new DateTime(2005, 04, 19)},
-            new Order(){HostingUnitKey=10000003,GuestRequestKey=10000013,OrderKey=10000311,OrderStatus=Enums.OrderStatus.Closed, CreateDate=new DateTime(2019, 11, 29), OrderDate=new DateTime(2019, 12, 01)}
-        };
-        public static List<GuestRequest> guestRequestsCollection = new List<GuestRequest>()
-       {
-            new GuestRequest(){GuestRequestKey=10000011, PrivateName="Avrohom", FamilyName="Diter", MailAddress="dit@gmail.com",Status=Enums.GuestRequestStatus.Active, RegistrationDate=new DateTime(2019, 10, 04), EnteryDate=new DateTime(2019, 10, 20), ReleaseDate=new DateTime(2019, 10, 28), Area=Enums.Area.Center, SubArea="Tel Aviv", Type=Enums.HostingUnitType.Hotel, Adults=2, Children=5, Pool=Enums.intrested.Necessary, Jacuzzi=Enums.intrested.Possible, Garden=Enums.intrested.Possible, ChildrenAttraction=Enums.intrested.Necessary, Meals = Enums.intrested.Necessary, Stars = 4},
-            new GuestRequest(){GuestRequestKey=10000012, PrivateName="Yizchak", FamilyName="Molivt", MailAddress="Mol@gmail.com",Status=Enums.GuestRequestStatus.RequestExpired, RegistrationDate=new DateTime(2005, 04, 16), EnteryDate=new DateTime(2005, 08, 03), ReleaseDate=new DateTime(2005, 08, 10), Area=Enums.Area.All, SubArea=" ", Type=Enums.HostingUnitType.Zimmer, Adults=6, Children=14, Pool=Enums.intrested.Possible, Jacuzzi=Enums.intrested.Possible, Garden=Enums.intrested.Necessary, ChildrenAttraction=Enums.intrested.Possible, Meals = Enums.intrested.Possible, Stars = 3},
-            new GuestRequest(){GuestRequestKey=10000013, PrivateName="Yaakov", FamilyName="Zigbel", MailAddress="yaZ@gmail.com",Status=Enums.GuestRequestStatus.ClosedOnTheWeb, RegistrationDate=new DateTime(2019, 11, 29), EnteryDate=new DateTime(2020, 01, 05), ReleaseDate=new DateTime(2020, 01, 20), Area=Enums.Area.North, SubArea=" ", Type=Enums.HostingUnitType.Camping, Adults=2, Children=6, Pool=Enums.intrested.NoThanks, Jacuzzi=Enums.intrested.NoThanks, Garden=Enums.intrested.Necessary, ChildrenAttraction=Enums.intrested.NoThanks, Meals = Enums.intrested.NoThanks, Stars = 0}
-        };
+        public static List<HostingUnit> hostingUnitsCollection = new List<HostingUnit>();
 
+        public static List<Order> ordersCollection = new List<Order>();
+        
+        public static List<GuestRequest> guestRequestsCollection = new List<GuestRequest>();
+       
         public static List<BankBranch> BankBranchesCollection = new List<BankBranch>() { BB1, BB2, BB3, BB4, BB5 };
 
         internal static List<Host> My_Host = new List<Host>
@@ -45,6 +32,30 @@ namespace DS
             new Host(){HostKey=12222222, PrivateName="Rebeka", FamilyName="Levi", PhoneNumber="0503681400", MailAddress="Levi400@gmail.com", CollectionClearance=false, BankBranchDetails=BB3, BankAccountNumber=1000034}
         };
 
-   
+        static DataSource()
+        {
+            initData();
+
+        }
+
+        private static void initData()
+        {
+            #region addGeustRequest
+            guestRequestsCollection.Add(new GuestRequest() { GuestRequestKey = 10000011, PrivateName = "Avrohom", FamilyName = "Diter", MailAddress = "dit@gmail.com", Status = Enums.GuestRequestStatus.Active, RegistrationDate = new DateTime(2019, 10, 04), EnteryDate = new DateTime(2019, 10, 20), ReleaseDate = new DateTime(2019, 10, 28), Area = Enums.Area.Center, SubArea = "Tel Aviv", Type = Enums.HostingUnitType.Hotel, Adults = 2, Children = 5, Pool = Enums.intrested.Necessary, Jacuzzi = Enums.intrested.Possible, Garden = Enums.intrested.Possible, ChildrenAttraction = Enums.intrested.Necessary, Meals = Enums.intrested.Necessary, Stars = 4 });
+            guestRequestsCollection.Add(new GuestRequest() { GuestRequestKey = 10000012, PrivateName = "Yizchak", FamilyName = "Molivt", MailAddress = "Mol@gmail.com", Status = Enums.GuestRequestStatus.RequestExpired, RegistrationDate = new DateTime(2005, 04, 16), EnteryDate = new DateTime(2005, 08, 03), ReleaseDate = new DateTime(2005, 08, 10), Area = Enums.Area.All, SubArea = " ", Type = Enums.HostingUnitType.Zimmer, Adults = 6, Children = 14, Pool = Enums.intrested.Possible, Jacuzzi = Enums.intrested.Possible, Garden = Enums.intrested.Necessary, ChildrenAttraction = Enums.intrested.Possible, Meals = Enums.intrested.Possible, Stars = 3 });
+            guestRequestsCollection.Add(new GuestRequest() { GuestRequestKey = 10000013, PrivateName = "Yaakov", FamilyName = "Zigbel", MailAddress = "yaZ@gmail.com", Status = Enums.GuestRequestStatus.ClosedOnTheWeb, RegistrationDate = new DateTime(2019, 11, 29), EnteryDate = new DateTime(2020, 01, 05), ReleaseDate = new DateTime(2020, 01, 20), Area = Enums.Area.North, SubArea = " ", Type = Enums.HostingUnitType.Camping, Adults = 2, Children = 6, Pool = Enums.intrested.NoThanks, Jacuzzi = Enums.intrested.NoThanks, Garden = Enums.intrested.Necessary, ChildrenAttraction = Enums.intrested.NoThanks, Meals = Enums.intrested.NoThanks, Stars = 0 });
+            #endregion
+            #region  addHostingUnit
+            hostingUnitsCollection.Add(new HostingUnit() { HostingUnitKey = 10000001, HostingUnitName = "Chani", Owner = My_Host.First(), Area = Enums.Area.Center, HostingUnitType = Enums.HostingUnitType.Hotel, SubArea = "Tel Aviv", Pool = true, Adults = 2, Kids = 6, Jaccuzi = true, Garden = false, ChildrenAttraction = true, Meals = true, Stars = 5 });
+            hostingUnitsCollection.Add(new HostingUnit() { HostingUnitKey = 10000002, HostingUnitName = "Shira Tel", Owner = My_Host.First(), Area = Enums.Area.Jerusalem, HostingUnitType = Enums.HostingUnitType.Zimmer, SubArea = "Jerusalem", Pool = true, Adults = 10, Kids = 40, Jaccuzi = false, Garden = true, ChildrenAttraction = false, Meals = true, Stars = 3 });
+            hostingUnitsCollection.Add(new HostingUnit() { HostingUnitKey = 10000003, HostingUnitName = "Roni", Owner = My_Host.Last(), Area = Enums.Area.North, HostingUnitType = Enums.HostingUnitType.Camping, SubArea = "Golan", Pool = true, Adults = 2, Kids = 10, Jaccuzi = false, Garden = true, ChildrenAttraction = false, Meals = false, Stars = 1 });
+            #endregion
+            #region addOrders
+            ordersCollection.Add(new Order() { HostingUnitKey = 10000001, GuestRequestKey = 10000011, OrderKey = 10000111, OrderStatus = Enums.OrderStatus.Active, CreateDate = new DateTime(2019, 10, 04), OrderDate = new DateTime(2019, 10, 04) });
+            ordersCollection.Add(new Order() { HostingUnitKey = 10000002, GuestRequestKey = 10000012, OrderKey = 10000211, OrderStatus = Enums.OrderStatus.NoAnswer, CreateDate = new DateTime(2005, 04, 16), OrderDate = new DateTime(2005, 04, 19) });
+            ordersCollection.Add(new Order() { HostingUnitKey = 10000003, GuestRequestKey = 10000013, OrderKey = 10000311, OrderStatus = Enums.OrderStatus.Closed, CreateDate = new DateTime(2019, 11, 29), OrderDate = new DateTime(2019, 12, 01) });
+            #endregion
+        }
+
     }
 }
