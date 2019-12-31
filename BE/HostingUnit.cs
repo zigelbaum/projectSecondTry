@@ -13,7 +13,7 @@ namespace BE
         private Host owner;
         private string hostingUnitName;
         private Enums.HostingUnitType hostingUnitType;
-        private bool[,] diary = new bool[12, 31];
+        private bool[,] diary;
         private Enums.Area area;
         private string subArea;
         private bool pool;
@@ -26,7 +26,10 @@ namespace BE
         private bool meals;
 
         #endregion
-
+        public HostingUnit()
+        {
+            diary = new bool[12, 31];
+        }
         #region properties
         public Enums.HostingUnitType HostingUnitType { get => hostingUnitType; set => hostingUnitType=value; }
         public string HostingUnitName { get => hostingUnitName; set => hostingUnitName=value; }

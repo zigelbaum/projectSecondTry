@@ -320,7 +320,8 @@ namespace BL
 
         #endregion
 
-        #region functions
+        #region functions       
+
         public bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays)
         {
              bool[,] diary=hostingUnit.Diary;
