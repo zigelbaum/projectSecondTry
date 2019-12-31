@@ -31,10 +31,11 @@ namespace BL
         #endregion
 
         #region Order
-        void AddOrder(Order order);//Add an invitation
+        int AddOrder(Order order);//Add an invitation
         void setOrder(Order order);//Update Order Status
         List<Order> GetOrdersList();//Returns a list of existing orders in the system
         List<Order> getOrders(Func<Order, bool> predicate);//Returns a list of orders that fulfill a particular condition
+        bool OrderExist(Order order);//Checks if the order exists in the system
         #endregion
         #endregion
 

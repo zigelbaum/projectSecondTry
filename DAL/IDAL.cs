@@ -27,7 +27,7 @@ namespace DAL
         #endregion
 
         #region Order
-        void addOrder(Order order);//Add an invitation
+        int addOrder(Order order);//Add an invitation
         void setOrder(Order order);//Update order status
         List<Order> GetOrdersList();//Returns a list of all orders
         List<Order> getOrders(Func<Order, bool> predicate);//Returns a list of all orders that fulfill a particular condition

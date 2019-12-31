@@ -49,6 +49,7 @@ namespace DAL
                     if (hostingUnit.CompareTo(host) == 0)
                         throw new NotImplementedException();
                 }
+
                 hostingUnit.HostingUnitKey = Configuration.HostingUnitKey;
                 Configuration.HostingUnitKey++;
                 hostingUnitsCollection.Add(hostingUnit);  
@@ -141,6 +142,8 @@ namespace DAL
                 {
                     guest.GuestRequestKey = Configuration.GuestRequestKey;
                     Configuration.GuestRequestKey++;
+                    guest.Status = Enums.GuestRequestStatus.Active;
+                    guest.RegistrationDate = DateTime.Now;
                     guestRequestsCollection.Add(guest);
                 }
                 else
@@ -176,12 +179,17 @@ namespace DAL
             return false;
         }
 
-        public void addOrder(Order order)
+        public int addOrder(Order order)
         {
             try
             {
-                if(!OrderExist(order))
-                     ordersCollection.Add(order);
+                if (!OrderExist(order))
+                {
+                    order.OrderKey = Configuration.OrderKey;
+                    Configuration.OrderKey++;
+                    ordersCollection.Add(order);
+                    return order.OrderKey;
+                }
                 else
                     throw new NotImplementedException();
             }
@@ -203,6 +211,7 @@ namespace DAL
                     Order ord = order.Clone();
                     ordersCollection.Remove(ord);
                 }
+
                 ordersCollection.Add(order);
             }
             catch (NotImplementedException c)

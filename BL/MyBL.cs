@@ -236,7 +236,10 @@ namespace BL
                         List<HostingUnit> hostingUnits = getHostingUnits(x => order.HostingUnitKey == x.HostingUnitKey);
                         HostingUnit unit = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
                         if (BankAccountDebitAuthorization(unit.Owner) == true)
+                        {
+                            order.OrderDate = DateTime.Now;
                             myDAL.setOrder(order);
+                        }
                     }
                     else
                         myDAL.setOrder(order);
@@ -247,10 +250,10 @@ namespace BL
             
         }
         
-        public void AddOrder(Order order)
+        public int AddOrder(Order order)
         {
             if (HostingUnitAvability(order)==true)
-             myDAL.addOrder(order);
+             return myDAL.addOrder(order);
         }
 
         public List<Order> GetOrdersList()
@@ -261,6 +264,11 @@ namespace BL
         public List<Order> getOrders(Func<Order, bool> predicate)
         {
             return myDAL.getOrders(predicate);
+        }
+
+        public bool OrderExist(Order order)
+        {
+            return myDAL.OrderExist(order);
         }
         #endregion
 
@@ -347,14 +355,17 @@ namespace BL
             bool temp = true;
             foreach (GuestRequest request in listGuestRequests)
             {
-                foreach (Predicate<GuestRequest> item in predic.GetInvocationList())
+                if (request.Status == Enums.GuestRequestStatus.Active)
                 {
-                    if (!item(request))
-                        temp = false;
+                    foreach (Predicate<GuestRequest> item in predic.GetInvocationList())
+                    {
+                        if (!item(request))
+                            temp = false;
+                    }
+                    if (temp)
+                        listToReturn.Add(request);
+                    temp = true;
                 }
-                if (temp)
-                    listToReturn.Add(request);
-                temp = true;
             }
             return listToReturn;
         }

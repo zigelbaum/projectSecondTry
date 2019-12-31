@@ -44,8 +44,6 @@ namespace PL
                 PrivateName = "customer1",
                 FamilyName = "Levi",
                 MailAddress = "customer1@gmail.com",
-                Status = Enums.GuestRequestStatus.Active,
-                RegistrationDate = new DateTime(2019, 11, 01),
                 EnteryDate = new DateTime(2019, 11, 28),
                 ReleaseDate = new DateTime(2019, 11, 30),
                 Area = Enums.Area.North,
@@ -65,12 +63,10 @@ namespace PL
                 PrivateName = "customer2",
                 FamilyName = "Family",
                 MailAddress = "Family2@gmail.com",
-                Status = Enums.GuestRequestStatus.Active,
-                RegistrationDate = DateTime.Now,
                 EnteryDate = new DateTime(2020, 05, 01),
                 ReleaseDate = new DateTime(2020, 05, 09),
                 Area = Enums.Area.South,
-                SubArea = " ",
+                SubArea = "Eilat",
                 Type = Enums.HostingUnitType.Zimmer,
                 Adults = 3,
                 Children = 11,
@@ -145,6 +141,7 @@ namespace PL
                 Console.WriteLine(a.Message);
             }
 
+            //match requests to units
             List<GuestRequest> matchRequests;
             IEnumerable<IGrouping<Host, HostingUnit>> my_units = my_bl1.GroupHostByHostingUnit();
             foreach (IGrouping<Host, HostingUnit> hosting in my_units)
@@ -155,6 +152,7 @@ namespace PL
                     foreach (GuestRequest guest in matchRequests)
                     {
                         my_bl1.AddOrder(my_bl1.NewOrder(unit1.HostingUnitKey, guest.GuestRequestKey));
+                        IEnumerable<Order> order
                     }
                 }
             }
