@@ -340,13 +340,21 @@ namespace BL
 
         public List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic)
         {
-            List<GuestRequest> listToReturn = null;
+            
+            List<GuestRequest> listToReturn = new List<GuestRequest>();
             IDAL dal = DAL.factoryDAL.getDAL("List");
             List<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
-            foreach(GuestRequest request in listGuestRequests)
+            bool temp = true;
+            foreach (GuestRequest request in listGuestRequests)
             {
-                if(predic(request))
+                foreach (Predicate<GuestRequest> item in predic.GetInvocationList())
+                {
+                    if (!item(request))
+                        temp = false;
+                }
+                if (temp)
                     listToReturn.Add(request);
+                temp = true;
             }
             return listToReturn;
         }
@@ -433,9 +441,7 @@ namespace BL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
             var groupToReturn = from request in listGuestRequests
-                                group request by request.Area into newGroup
-                                //orderby newGroup.Key
-                                select newGroup;
+                                group request by request.Area;
             return groupToReturn;
         }
 
@@ -444,9 +450,7 @@ namespace BL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
             var groupToReturn = from request in listGuestRequests
-                                group request by (request.Children+request.Adults) into newGroup
-                                //orderby newGroup.Key
-                                select newGroup;
+                                group request by (request.Children + request.Adults);
             return groupToReturn;
         }
 
@@ -455,9 +459,7 @@ namespace BL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
             IEnumerable<IGrouping<Host, HostingUnit>> groupToReturn = from unit in listHostingUnits
-                                group unit by unit.Owner into newGroup
-                                //orderby newGroup.Key
-                                select newGroup;
+                                                                      group unit by unit.Owner;                               
             return groupToReturn;
         }
 
@@ -466,9 +468,7 @@ namespace BL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
             var groupToReturn = from unit in listHostingUnits
-                                group unit by unit.Area into newGroup
-                                //orderby newGroup.Key
-                                select newGroup;
+                                group unit by unit.Area;
             return groupToReturn;
         }
         #endregion
