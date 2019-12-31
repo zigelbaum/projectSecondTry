@@ -135,6 +135,7 @@ namespace PL
                 my_bl1.addHostingUnit(unit1);
                 my_bl1.addHostingUnit(unit2);
                 my_bl1.addHostingUnit(unit3);
+
             }
             catch (Exception a)
             {
@@ -148,11 +149,12 @@ namespace PL
             {
                 foreach (HostingUnit unit in hosting)
                 {
-                    matchRequests = my_bl1.RequestMatchToStipulation(my_bl1.BuildPredicate(unit)); 
+                    matchRequests = my_bl1.RequestMatchToStipulation(my_bl1.BuildPredicate(unit));
                     foreach (GuestRequest guest in matchRequests)
                     {
-                        my_bl1.AddOrder(my_bl1.NewOrder(unit1.HostingUnitKey, guest.GuestRequestKey));
-                        IEnumerable<Order> order
+                        int orderKey;
+                        orderKey = my_bl1.AddOrder(my_bl1.NewOrder(unit1.HostingUnitKey, guest.GuestRequestKey));
+                        my_bl1.getOrders(x => x.OrderKey == orderKey).Find(x => x.OrderKey == orderKey).ToString();
                     }
                 }
             }

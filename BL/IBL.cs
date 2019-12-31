@@ -15,7 +15,7 @@ namespace BL
     {
         #region Dalfunctions
         #region HostingUnit
-        void addHostingUnit(HostingUnit hostingUnit);//Add a hosting unit
+        int addHostingUnit(HostingUnit hostingUnit);//Add a hosting unit
         void DeleteHostingUnit(HostingUnit hostingUnit);//Removing a hosting unit
         void SetHostingUnit(HostingUnit hostingUnit);//Hosting unit update
         List<HostingUnit> getHostingUnitsList();//Returns a list of all accommodation units
@@ -24,7 +24,7 @@ namespace BL
 
         #region GuestRequest
         bool validDate(GuestRequest guest);//Checks that the vacation start date has not passed
-        void addGuestRequest(GuestRequest guestRequest);//Add a customer requirement
+        int addGuestRequest(GuestRequest guestRequest);//Add a customer requirement
         void SetGuestRequest(GuestRequest guestRequest);//Customer Requirement Status Update
         List<GuestRequest> GetGuestRequestsList();//Returns a list of all existing client requirements in the system
         List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate);//Returns a list of customer requirements that meet a certain condition

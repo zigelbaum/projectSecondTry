@@ -161,12 +161,12 @@ namespace BL
         #region Dalfunctions
 
         #region HostingUnit
-        public void addHostingUnit(HostingUnit hostingUnit)
+        public int addHostingUnit(HostingUnit hostingUnit)
         {
             try
             {
                 IDAL dal = DAL.factoryDAL.getDAL("List");
-                dal.addHostingUnit(hostingUnit);
+                return dal.addHostingUnit(hostingUnit);
             }
             catch (Exception e)
             {
@@ -233,18 +233,19 @@ namespace BL
             return myDAL.getGuestRequests(predicate);
         }
 
-        public void addGuestRequest(GuestRequest guestRequest)
+        public int addGuestRequest(GuestRequest guestRequest)
         {
             try
             {
                 IDAL dal = DAL.factoryDAL.getDAL("List");
                 if ((OverNightVacation(guestRequest)) && (validDate(guestRequest)))
-                    dal.addGuestRequest(guestRequest);
+                    return dal.addGuestRequest(guestRequest);
             }
             catch (Exception e)
             {
                 throw new ExceptionBL(e.Message);
             }
+            return 0;
         }
         #endregion
 
@@ -292,12 +293,13 @@ namespace BL
             try
             {
                 if (HostingUnitAvability(order))
-                    myDAL.addOrder(order);
+                    return myDAL.addOrder(order);
             }
             catch (Exception e)
             {
                 throw new ExceptionBL(e.Message);
             }
+            return 0;
         }
 
         public List<Order> GetOrdersList()

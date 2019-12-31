@@ -38,7 +38,7 @@ namespace DAL
             return DS.DataSource.hostingUnitsCollection.Select(item => (HostingUnit)item.Clone()).ToList();
         }
 
-        public void addHostingUnit(HostingUnit hostingUnit)
+        public int addHostingUnit(HostingUnit hostingUnit)
         {
             try
             {
@@ -54,7 +54,8 @@ namespace DAL
                 }
                 hostingUnit.HostingUnitKey = Configuration.HostingUnitKey;
                 Configuration.HostingUnitKey++;
-                hostingUnitsCollection.Add(hostingUnit);  
+                hostingUnitsCollection.Add(hostingUnit);
+                return hostingUnit.HostingUnitKey;
             }
             catch (DataException c)
             {
@@ -134,7 +135,7 @@ namespace DAL
             }
         }
 
-        public void addGuestRequest(GuestRequest guest)
+        public int addGuestRequest(GuestRequest guest)
         {
             try
             {
@@ -145,6 +146,7 @@ namespace DAL
                 guest.Status = Enums.GuestRequestStatus.Active;
                 guest.RegistrationDate = DateTime.Now;
                 guestRequestsCollection.Add(guest);
+                return guest.GuestRequestKey;
             }
             catch (DataException c)
             {

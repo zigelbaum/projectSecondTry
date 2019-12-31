@@ -10,7 +10,7 @@ namespace DAL
     public interface IDAL
     {
         #region HostingUnit        
-        void addHostingUnit(HostingUnit hostingUnit);//Add a hosting unit
+        int addHostingUnit(HostingUnit hostingUnit);//Add a hosting unit
         void DeleteHostingUnit(HostingUnit hostingUnit);//Removes hosting unit
         void SetHostingUnit(HostingUnit hostingUnit);//Updating hosting unit
         bool UnitExist(HostingUnit unit);//Checks if the hosting unit exists
@@ -20,7 +20,7 @@ namespace DAL
 
         #region GuestRequest
         void SetGuestRequest(GuestRequest guest);//Updating customer status
-        void addGuestRequest(GuestRequest guest);//Add a customer requirement
+        int addGuestRequest(GuestRequest guest);//Add a customer requirement
         List<GuestRequest> GetGuestRequestsList();//Returns a list of all customer requirements
         List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate);//Returns a list of customer requirements that meet a specific condition
         bool RequestExist(GuestRequest request);//Checks whether the customer requirement exists in the system
