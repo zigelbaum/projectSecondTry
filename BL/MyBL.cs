@@ -454,7 +454,7 @@ namespace BL
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
-            var groupToReturn = from unit in listHostingUnits
+            IEnumerable<IGrouping<Host, HostingUnit>> groupToReturn = from unit in listHostingUnits
                                 group unit by unit.Owner into newGroup
                                 //orderby newGroup.Key
                                 select newGroup;

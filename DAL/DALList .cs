@@ -42,14 +42,16 @@ namespace DAL
         {
             try
             {
-                if (hostingUnitsCollection.Any(h => h== hostingUnit))
+                IDAL dal = DAL.factoryDAL.getDAL("List");
+                IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
+                foreach (HostingUnit host in listHostingUnits)
                 {
-                    hostingUnit.HostingUnitKey = Configuration.HostingUnitKey;
-                    Configuration.HostingUnitKey++;
-                    hostingUnitsCollection.Add(hostingUnit);
+                    if (hostingUnit.CompareTo(host) == 0)
+                        throw new NotImplementedException();
                 }
-                else
-                    throw new NotImplementedException();
+                hostingUnit.HostingUnitKey = Configuration.HostingUnitKey;
+                Configuration.HostingUnitKey++;
+                hostingUnitsCollection.Add(hostingUnit);  
             }
             catch (NotImplementedException c)
             {
