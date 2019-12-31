@@ -508,6 +508,30 @@ namespace BL
             { GuestRequestKey = guestRequestKey, HostingUnitKey = hostingUnitkey, OrderStatus = Enums.OrderStatus.Active, CreateDate = DateTime.Now };
             return ord;
         }
+
+        public Order FindOrder(Int32 ordKey)
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            List<Order> orders = dal.GetOrdersList();
+            foreach(Order order in orders)
+            {
+                if(order.OrderKey == ordKey)
+                    return order;
+            }
+            return null;
+        }
+
+        public GuestRequest FindGuestRequest(Int32 requestKey)
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            List<GuestRequest> guests = dal.GetGuestRequestsList();
+            foreach(GuestRequest item in guests)
+            {
+                if(item.GuestRequestKey == requestKey)
+                    return item;
+            }
+            return null;
+        }
         #endregion
 
         #region grouping
