@@ -53,7 +53,7 @@ namespace BL
         #endregion
 
         #region functions
-        bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays);//Checks whether the requested vacation time in a particular unit is free
+        bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, DateTime release);//Checks whether the requested vacation time in a particular unit is free
         List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays);//Returns the list of all available accommodation units on this date
         Int32 NumDays(DateTime start, DateTime end);//Returns the number of days passed from the first date to the second
         Int32 NumDays(DateTime start);//Returns the number of days that have passed from the given date to the present
