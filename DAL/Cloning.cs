@@ -68,6 +68,16 @@ namespace DAL
             target.HostingUnitName = original.HostingUnitName;
             target.HostingUnitType = original.HostingUnitType;
             target.Owner = original.Owner;
+            target.Adults = original.Adults;
+            target.Area = original.Area;
+            target.ChildrenAttraction = original.ChildrenAttraction;
+            target.Garden = original.Garden;
+            target.Jaccuzi = original.Jaccuzi;
+            target.Kids = original.Kids;
+            target.Meals = original.Meals;
+            target.Pool = original.Pool;
+            target.Stars = original.Stars;
+            target.SubArea = original.SubArea;   
             return target;
         }
         #endregion
