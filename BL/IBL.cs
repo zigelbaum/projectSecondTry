@@ -63,6 +63,7 @@ namespace BL
         Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit);//Returns the number of orders sent / number of successfully closed orders for a unit through the site
         Predicate<GuestRequest> BuildPredicate(HostingUnit hosting);//Builds a predicate that filters the hosting units according to the client's requirements
         Order NewOrder(int hostingUnitkey, int guestRequestKey);//Creating order
+        Order FindOrder(Int32 ordKey);//Returns this order from the system
         #endregion
 
         #region grouping
