@@ -42,18 +42,21 @@ namespace DAL
         {
             try
             {
+                if (hostingUnit == null)
+                    throw new DataException("No hosting unit");
+
                 IDAL dal = DAL.factoryDAL.getDAL("List");
                 IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
                 foreach (HostingUnit host in listHostingUnits)
                 {
                     if (hostingUnit.CompareTo(host) == 0)
-                        throw new NotImplementedException();
+                        throw  new DataException("This host already exists"); ;
                 }
                 hostingUnit.HostingUnitKey = Configuration.HostingUnitKey;
                 Configuration.HostingUnitKey++;
                 hostingUnitsCollection.Add(hostingUnit);  
             }
-            catch (NotImplementedException c)
+            catch (DataException c)
             {
                 throw c;
             }
@@ -64,11 +67,11 @@ namespace DAL
             try
             {
                 if(!UnitExist(hostingUnit))
-                    throw new NotImplementedException();
+                    throw new DataException("The hosting unit not exist");
                 else
                     hostingUnitsCollection.Remove(hostingUnit);
             }
-            catch (NotImplementedException c)
+            catch (DataException c)
             {
                 throw c;
             }
@@ -79,8 +82,7 @@ namespace DAL
             try
             {
                 if(!UnitExist(hostingUnit))
-                    throw new NotImplementedException();
-                    //throw new NotExist("The hosting unit is not exist");
+                    throw new DataException("The hosting unit is not exist");
                 else
                 {
                     HostingUnit unit = hostingUnit.Clone();
@@ -88,7 +90,7 @@ namespace DAL
                 }
                 hostingUnitsCollection.Add(hostingUnit);
             }
-            catch (NotImplementedException c)
+            catch (DataException c)
             {
                 throw c;
             }
@@ -118,8 +120,7 @@ namespace DAL
             try
             {
                 if(!RequestExist(guest))
-                    throw new NotImplementedException();
-                    //throw new NotExist("The request is not exist");
+                    throw new DataException("The request is not exist");
                 else
                 {
                     GuestRequest request = guest.Clone();
@@ -127,7 +128,7 @@ namespace DAL
                 }
                 guestRequestsCollection.Add(guest);
             }
-            catch (NotImplementedException c)
+            catch (DataException c)
             {
                 throw c;
             }
@@ -137,16 +138,13 @@ namespace DAL
         {
             try
             {
-                if(!RequestExist(guest))
-                {
-                    guest.GuestRequestKey = Configuration.GuestRequestKey;
-                    Configuration.GuestRequestKey++;
-                    guestRequestsCollection.Add(guest);
-                }
-                else
-                    throw new NotImplementedException();
+                if (guest == null)
+                    throw new DataException("No request");
+                guest.GuestRequestKey = Configuration.GuestRequestKey;
+                Configuration.GuestRequestKey++;
+                guestRequestsCollection.Add(guest);
             }
-            catch (NotImplementedException c)
+            catch (DataException c)
             {
                 throw c;
             }
@@ -183,9 +181,9 @@ namespace DAL
                 if(!OrderExist(order))
                      ordersCollection.Add(order);
                 else
-                    throw new NotImplementedException();
+                    throw new DataException("This order already exist");
             }
-            catch (NotImplementedException c)
+            catch (DataException c)
             {
                 throw c;
             }
@@ -196,8 +194,7 @@ namespace DAL
             try
             {
                 if(!OrderExist(order))
-                    throw new NotImplementedException();
-                    //throw new NotExist("The order is not exist");
+                    throw new DataException("The order is not exist");
                 else
                 {
                     Order ord = order.Clone();
@@ -205,7 +202,7 @@ namespace DAL
                 }
                 ordersCollection.Add(order);
             }
-            catch (NotImplementedException c)
+            catch (DataException c)
             {
                 throw c;
             }
