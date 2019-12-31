@@ -12,8 +12,8 @@ namespace BL
 {
     public class MyBL : IBL
     {
-         static IDAL myDAL;
-        
+        static IDAL myDAL;
+
 
         #region Singleton
         private static readonly MyBL instance = new MyBL();
@@ -38,8 +38,8 @@ namespace BL
         {
             TimeSpan vacationDays = guestRequest.ReleaseDate - guestRequest.EnteryDate;
             if (vacationDays.Days < 1)
-                throw new ArgumentException("The vacation less one day");         
-                // return false;
+                throw new ArgumentException("The vacation less one day");
+            // return false;
             return true;
         }
 
@@ -52,7 +52,7 @@ namespace BL
         public bool HostingUnitAvability(Order order)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
-            List<HostingUnit> hostingUnits = dal.getHostingUnits(x => x.HostingUnitKey==order.HostingUnitKey);
+            List<HostingUnit> hostingUnits = dal.getHostingUnits(x => x.HostingUnitKey == order.HostingUnitKey);
             bool[,] diary = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey).Diary;
             List<GuestRequest> guestRequests = dal.getGuestRequests(x => order.GuestRequestKey == x.GuestRequestKey);
             GuestRequest guest = guestRequests.Find(x => order.GuestRequestKey == x.GuestRequestKey);
@@ -114,7 +114,7 @@ namespace BL
         public bool AbleToChangeOrderStatus(Order order)
         {
             if (order.OrderStatus == Enums.OrderStatus.Closed)
-                return false;
+                throw new ExceptionBL("The order is already closed");
             return true;
         }
 
@@ -182,11 +182,11 @@ namespace BL
             try
             {
                 if (TheHostingUnitHasAnOpenOrder(hostingUnit) == false)
-                   dal.DeleteHostingUnit(hostingUnit);
+                    dal.DeleteHostingUnit(hostingUnit);
             }
             catch (Exception e)
             {
-                throw new ExceptionBL(e.Message); 
+                throw new ExceptionBL(e.Message);
             }
         }
 
@@ -197,7 +197,7 @@ namespace BL
             {
                 dal.SetHostingUnit(hostingUnit);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ExceptionBL(e.Message);
             }
@@ -259,31 +259,34 @@ namespace BL
         #endregion
 
         #region Order
-        
+
         public void setOrder(Order order)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             try
             {
-                if (order.OrderStatus == Enums.OrderStatus.Closed)
+                List<Order> orders = getOrders(x => x.OrderKey == order.OrderKey);
+                Order ord = orders.Find(x => x.OrderKey == order.OrderKey);
+                if (AbleToChangeOrderStatus(ord) == true)
                 {
-                    dal.setOrder(order);
-                    UpdateDiary(order);
-                    TotalFee(order);//what to do with returned value?
-                    UpdateInfoAfterOrderClosed(order);
-                }
-                else
-                {
-                    List<Order> orders = getOrders(x => x.OrderKey == order.OrderKey);
-                    Order ord = orders.Find(x => x.OrderKey == order.OrderKey);
-                    if (AbleToChangeOrderStatus(ord) == true)
+                    if (order.OrderStatus == Enums.OrderStatus.Closed)
                     {
+                        dal.setOrder(order);
+                        UpdateDiary(order);
+                        TotalFee(order);//what to do with returned value?
+                        UpdateInfoAfterOrderClosed(order);
+                    }
+                    else
+                    {
+
                         if (order.OrderStatus == Enums.OrderStatus.SentEmail)
                         {
                             List<HostingUnit> hostingUnits = getHostingUnits(x => order.HostingUnitKey == x.HostingUnitKey);
                             HostingUnit unit = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
                             if (BankAccountDebitAuthorization(unit.Owner) == true)
                                 dal.setOrder(order);
+                            else
+                                throw new ExceptionBL("Has not banck account permission");
                         }
                         else
                             dal.setOrder(order);
@@ -291,13 +294,13 @@ namespace BL
 
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ExceptionBL(e.Message);
             }
-            
+
         }
-        
+
         public int AddOrder(Order order)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
@@ -338,20 +341,20 @@ namespace BL
 
         public bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays)
         {
-             bool[,] diary=hostingUnit.Diary;
-             int i=entry.Month-1;
-             int j=entry.Day-1; 
-             for(int k=0; k<vactiondays; k++)
-             {
-                if(diary[i,j])
+            bool[,] diary = hostingUnit.Diary;
+            int i = entry.Month - 1;
+            int j = entry.Day - 1;
+            for (int k = 0; k < vactiondays; k++)
+            {
+                if (diary[i, j])
                     return false;
-                if(j==30)
+                if (j == 30)
                 {
-                    j=0;
+                    j = 0;
                     i++;
                 }
-             }
-             return true;
+            }
+            return true;
         }
 
         public List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays)
@@ -369,7 +372,7 @@ namespace BL
 
         public Int32 NumDays(DateTime start, DateTime end)
         {
-            return (end-start).Days;
+            return (end - start).Days;
         }
 
         public Int32 NumDays(DateTime start)
@@ -397,11 +400,11 @@ namespace BL
             List<Order> listToReturn = null;
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<Order> listOrders = dal.GetOrdersList();
-            foreach(Order ord in listOrders)
+            foreach (Order ord in listOrders)
             {
                 Int32 create = (DateTime.Now - ord.CreateDate).Days;
                 Int32 sent = (DateTime.Now - ord.OrderDate).Days;
-                if((days < create) || (days < sent))
+                if ((days < create) || (days < sent))
                     listToReturn.Add(ord);
             }
             return listToReturn;
@@ -409,7 +412,7 @@ namespace BL
 
         public List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic)
         {
-            
+
             List<GuestRequest> listToReturn = new List<GuestRequest>();
             IDAL dal = DAL.factoryDAL.getDAL("List");
             List<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
@@ -433,10 +436,10 @@ namespace BL
 
         public Int32 NumOfInvetations(GuestRequest costumer)
         {
-            List<Order> temp = null; ;            
+            List<Order> temp = null; ;
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<Order> listOrders = dal.GetOrdersList();
-            foreach(Order ord in listOrders)
+            foreach (Order ord in listOrders)
             {
                 if (ord.GuestRequestKey == costumer.GuestRequestKey)
                     temp.Add(ord.Clone());
@@ -446,12 +449,12 @@ namespace BL
 
         public Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit)
         {
-            int i=0;            
+            int i = 0;
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<Order> listOrders = dal.GetOrdersList();
-            foreach(Order ord in listOrders)
+            foreach (Order ord in listOrders)
             {
-                if(ord.HostingUnitKey == hostingunit.HostingUnitKey)
+                if (ord.HostingUnitKey == hostingunit.HostingUnitKey)
                     i++;
             }
             return i;
@@ -470,13 +473,13 @@ namespace BL
             bool RGNoGarden(GuestRequest request) { return request.Garden == Enums.intrested.NoThanks || request.Garden == Enums.intrested.Possible; }
             bool RGChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == Enums.intrested.Necessary || request.ChildrenAttraction == Enums.intrested.Possible; }
             bool RGNoChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == Enums.intrested.NoThanks || request.ChildrenAttraction == Enums.intrested.Possible; }
-            bool RGMeals(GuestRequest request) { return request.Meals == Enums.intrested.Necessary || request.Meals == Enums.intrested.Possible;}
-            bool RGNoMeals(GuestRequest request) { return request.Meals == Enums.intrested.NoThanks || request.Meals == Enums.intrested.Possible;}
-            bool RGStars(GuestRequest request) {return request.Stars <= hosting.Stars; }
+            bool RGMeals(GuestRequest request) { return request.Meals == Enums.intrested.Necessary || request.Meals == Enums.intrested.Possible; }
+            bool RGNoMeals(GuestRequest request) { return request.Meals == Enums.intrested.NoThanks || request.Meals == Enums.intrested.Possible; }
+            bool RGStars(GuestRequest request) { return request.Stars <= hosting.Stars; }
             bool RGArea(GuestRequest request) { return request.Area == hosting.Area; }
             bool RGSubArea(GuestRequest request) { return request.SubArea == hosting.SubArea; }
-            bool RGType(GuestRequest request) { return request.Type == hosting.HostingUnitType; }           
-            
+            bool RGType(GuestRequest request) { return request.Type == hosting.HostingUnitType; }
+
             if (hosting.Pool)
                 pred += RGPool;
             else pred += RGNoPool;
@@ -488,8 +491,8 @@ namespace BL
             else pred += RGNoGarden;
             if (hosting.ChildrenAttraction)
                 pred += RGChildrenAttraction;
-            else pred += RGNoChildrenAttraction; 
-            if(hosting.Meals)
+            else pred += RGNoChildrenAttraction;
+            if (hosting.Meals)
                 pred += RGMeals;
             else pred += RGNoMeals;
             pred += RGArea;
@@ -508,7 +511,7 @@ namespace BL
         #endregion
 
         #region grouping
-        public IEnumerable<IGrouping<Enums.Area , GuestRequest>> GroupGRByArea()
+        public IEnumerable<IGrouping<Enums.Area, GuestRequest>> GroupGRByArea()
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
@@ -531,7 +534,7 @@ namespace BL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
             IEnumerable<IGrouping<Host, HostingUnit>> groupToReturn = from unit in listHostingUnits
-                                                                      group unit by unit.Owner;                               
+                                                                      group unit by unit.Owner;
             return groupToReturn;
         }
 
