@@ -37,7 +37,8 @@ namespace BL
         {
             TimeSpan vacationDays = guestRequest.ReleaseDate - guestRequest.EnteryDate;
             if (vacationDays.Days < 1)
-                return false;
+                throw new ArgumentException("The vacation less one day");         
+                // return false;
             return true;
         }
 
@@ -65,7 +66,7 @@ namespace BL
                 }
                 if (diary[i, j] == true)
                 {
-                    return false;
+                    throw new ArgumentException("This hosting unit full in this date");
                 }
                 j++;
             }
@@ -152,7 +153,7 @@ namespace BL
         {
             DateTime nowDate = new DateTime(2004, 01, 01);
             if (nowDate > guest.EnteryDate)
-                return false;
+                throw new ArgumentException("The entry date pass");
             return true;
         }
         #endregion
@@ -162,19 +163,40 @@ namespace BL
         #region HostingUnit
         public void addHostingUnit(HostingUnit hostingUnit)
         {
-            IDAL dal = DAL.factoryDAL.getDAL("List");
+            try
+            {
+                IDAL dal = DAL.factoryDAL.getDAL("List");
                 dal.addHostingUnit(hostingUnit);
+            }
+            catch (Exception e)
+            {
+                throw new ExceptionBL(e.Message);
+            }
         }
 
         public void DeleteHostingUnit(HostingUnit hostingUnit)
         {
-            if (TheHostingUnitHasAnOpenOrder(hostingUnit) == false)
-                myDAL.DeleteHostingUnit(hostingUnit);
+            try
+            {
+                if (TheHostingUnitHasAnOpenOrder(hostingUnit) == false)
+                    myDAL.DeleteHostingUnit(hostingUnit);
+            }
+            catch (Exception e)
+            {
+                throw new ExceptionBL(e.Message); 
+            }
         }
 
         public void SetHostingUnit(HostingUnit hostingUnit)
         {
-            myDAL.SetHostingUnit(hostingUnit);
+            try
+            {
+                myDAL.SetHostingUnit(hostingUnit);
+            }
+            catch(Exception e)
+            {
+                throw new ExceptionBL(e.Message);
+            }
         }
 
         public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate)
@@ -191,7 +213,14 @@ namespace BL
         #region GuestRequest
         public void SetGuestRequest(GuestRequest guestRequest)
         {
-            myDAL.SetGuestRequest(guestRequest);
+            try
+            {
+                myDAL.SetGuestRequest(guestRequest);
+            }
+            catch (Exception e)
+            {
+                throw new ExceptionBL(e.Message);
+            }
         }
 
         public List<GuestRequest> GetGuestRequestsList()
@@ -206,11 +235,16 @@ namespace BL
 
         public void addGuestRequest(GuestRequest guestRequest)
         {
-            IDAL dal = DAL.factoryDAL.getDAL("List");
-            if ((OverNightVacation(guestRequest)) && (validDate(guestRequest)))
-                dal.addGuestRequest(guestRequest);
-            else
-                throw new ArgumentException("wrong date");
+            try
+            {
+                IDAL dal = DAL.factoryDAL.getDAL("List");
+                if ((OverNightVacation(guestRequest)) && (validDate(guestRequest)))
+                    dal.addGuestRequest(guestRequest);
+            }
+            catch (Exception e)
+            {
+                throw new ExceptionBL(e.Message);
+            }
         }
         #endregion
 
@@ -218,42 +252,52 @@ namespace BL
         
         public void setOrder(Order order)
         {
-            if (order.OrderStatus == Enums.OrderStatus.Closed)
+            try
             {
-                myDAL.setOrder(order);
-                UpdateDiary(order);
-                TotalFee(order);//what to do with returned value?
-                UpdateInfoAfterOrderClosed(order);
-            }
-            else
-            {
-                List<Order> orders = getOrders(x => x.OrderKey == order.OrderKey);
-                Order ord = orders.Find(x => x.OrderKey == order.OrderKey);
-                if (AbleToChangeOrderStatus(ord) == true)
+                if (order.OrderStatus == Enums.OrderStatus.Closed)
                 {
-                    if (order.OrderStatus == Enums.OrderStatus.SentEmail)
-                    {
-                        List<HostingUnit> hostingUnits = getHostingUnits(x => order.HostingUnitKey == x.HostingUnitKey);
-                        HostingUnit unit = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
-                        if (BankAccountDebitAuthorization(unit.Owner) == true)
-                        {
-                            order.OrderDate = DateTime.Now;
-                            myDAL.setOrder(order);
-                        }
-                    }
-                    else
-                        myDAL.setOrder(order);
+                    myDAL.setOrder(order);
+                    UpdateDiary(order);
+                    TotalFee(order);//what to do with returned value?
+                    UpdateInfoAfterOrderClosed(order);
                 }
+                else
+                {
+                    List<Order> orders = getOrders(x => x.OrderKey == order.OrderKey);
+                    Order ord = orders.Find(x => x.OrderKey == order.OrderKey);
+                    if (AbleToChangeOrderStatus(ord) == true)
+                    {
+                        if (order.OrderStatus == Enums.OrderStatus.SentEmail)
+                        {
+                            List<HostingUnit> hostingUnits = getHostingUnits(x => order.HostingUnitKey == x.HostingUnitKey);
+                            HostingUnit unit = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
+                            if (BankAccountDebitAuthorization(unit.Owner) == true)
+                                myDAL.setOrder(order);
+                        }
+                        else
+                            myDAL.setOrder(order);
+                    }
 
+                }
             }
-            
+            catch(Exception e)
+            {
+                throw new ExceptionBL(e.Message);
+            }
             
         }
         
         public int AddOrder(Order order)
         {
-            if (HostingUnitAvability(order)==true)
-             return myDAL.addOrder(order);
+            try
+            {
+                if (HostingUnitAvability(order))
+                    myDAL.addOrder(order);
+            }
+            catch (Exception e)
+            {
+                throw new ExceptionBL(e.Message);
+            }
         }
 
         public List<Order> GetOrdersList()
