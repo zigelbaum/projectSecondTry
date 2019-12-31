@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BE;
-using DS;
-
+using static DS.DataSource;
 namespace DAL
 {
     internal class DALList :IDAL
@@ -43,11 +42,11 @@ namespace DAL
         {
             try
             {
-                if (DataSource.hostingUnitsCollection.Any(h => h.HostingUnitKey == hostingUnit.HostingUnitKey))
+                if (hostingUnitsCollection.Any(h => h.HostingUnitKey == hostingUnit.HostingUnitKey))
                 {
                     hostingUnit.HostingUnitKey = Configuration.HostingUnitKey;
                     Configuration.HostingUnitKey++;
-                    DataSource.hostingUnitsCollection.Add(hostingUnit);
+                    hostingUnitsCollection.Add(hostingUnit);
                 }
                 else
                     throw new NotImplementedException();
@@ -65,7 +64,7 @@ namespace DAL
                 if(!UnitExist(hostingUnit))
                     throw new NotImplementedException();
                 else
-                    DataSource.hostingUnitsCollection.Remove(hostingUnit);
+                    hostingUnitsCollection.Remove(hostingUnit);
             }
             catch (NotImplementedException c)
             {
@@ -83,9 +82,9 @@ namespace DAL
                 else
                 {
                     HostingUnit unit = hostingUnit.Clone();
-                    DataSource.hostingUnitsCollection.Remove(unit);
+                    hostingUnitsCollection.Remove(unit);
                 }
-                DataSource.hostingUnitsCollection.Add(hostingUnit);
+                hostingUnitsCollection.Add(hostingUnit);
             }
             catch (NotImplementedException c)
             {
@@ -95,7 +94,7 @@ namespace DAL
 
         public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate )
         {
-            return DataSource.hostingUnitsCollection.Where(predicate).Select(hu => (HostingUnit)hu.Clone()).ToList();
+            return hostingUnitsCollection.Where(predicate).Select(hu => (HostingUnit)hu.Clone()).ToList();
         }
         #endregion
 
@@ -103,7 +102,7 @@ namespace DAL
         public bool RequestExist(GuestRequest request)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
-            IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
+            List<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
             foreach(GuestRequest guest in listGuestRequests)
             {
                 if(request.GuestRequestKey == guest.GuestRequestKey)
@@ -122,9 +121,9 @@ namespace DAL
                 else
                 {
                     GuestRequest request = guest.Clone();
-                    DataSource.guestRequestsCollection.Remove(request);
+                    guestRequestsCollection.Remove(request);
                 }
-                DataSource.guestRequestsCollection.Add(guest);
+                guestRequestsCollection.Add(guest);
             }
             catch (NotImplementedException c)
             {
@@ -140,7 +139,7 @@ namespace DAL
                 {
                     guest.GuestRequestKey = Configuration.GuestRequestKey;
                     Configuration.GuestRequestKey++;
-                    DataSource.guestRequestsCollection.Add(guest);
+                    guestRequestsCollection.Add(guest);
                 }
                 else
                     throw new NotImplementedException();
@@ -152,13 +151,20 @@ namespace DAL
         }
 
         public List<GuestRequest> GetGuestRequestsList()
-        { 
-                return DS.DataSource.guestRequestsCollection.Select(item => (GuestRequest)item.Clone()).ToList();
+        {
+            /*List<GuestRequest> listToReturn = null;
+            List<GuestRequest> myListGuestRequest = guestRequestsCollection;
+            foreach(GuestRequest request in myListGuestRequest)
+            {
+                listToReturn.Add(request.Clone());
+            }
+            return listToReturn;   */
+            return DS.DataSource.guestRequestsCollection;
         }
 
         public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)
         {
-            return DataSource.guestRequestsCollection.Where(predicate).Select(hu => (GuestRequest)hu.Clone()).ToList();
+            return guestRequestsCollection.Where(predicate).Select(hu => (GuestRequest)hu.Clone()).ToList();
         }
         #endregion
 
@@ -180,7 +186,7 @@ namespace DAL
             try
             {
                 if(!OrderExist(order))
-                     DataSource.ordersCollection.Add(order);
+                     ordersCollection.Add(order);
                 else
                     throw new NotImplementedException();
             }
@@ -200,9 +206,9 @@ namespace DAL
                 else
                 {
                     Order ord = order.Clone();
-                    DataSource.ordersCollection.Remove(ord);
+                    ordersCollection.Remove(ord);
                 }
-                DataSource.ordersCollection.Add(order);
+                ordersCollection.Add(order);
             }
             catch (NotImplementedException c)
             {
@@ -212,7 +218,7 @@ namespace DAL
 
         public List<Order> getOrders(Func<Order, bool> predicate)
         {
-           return DataSource.ordersCollection.Where(predicate).Select(hu => (Order)hu.Clone()).ToList();
+           return ordersCollection.Where(predicate).Select(hu => (Order)hu.Clone()).ToList();
         }
 
         public List<Order> GetOrdersList()

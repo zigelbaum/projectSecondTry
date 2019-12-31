@@ -10,7 +10,7 @@ using System.Net.Mail;
 
 namespace BL
 {
-    public class MyBL: IBL
+    public class MyBL : IBL
     {
         static IDAL myDAL;
 
@@ -64,7 +64,7 @@ namespace BL
                     i++;
                 }
                 if (diary[i, j] == true)
-                { 
+                {
                     return false;
                 }
                 j++;
@@ -76,7 +76,7 @@ namespace BL
         public void UpdateDiary(Order order)
         {
             List<HostingUnit> hostingUnits = getHostingUnits(x => order.HostingUnitKey == x.HostingUnitKey);
-            HostingUnit unit=hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
+            HostingUnit unit = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
             bool[,] diary = unit.Diary;
             List<GuestRequest> guestRequests = getGuestRequests(x => order.GuestRequestKey == x.GuestRequestKey);
             GuestRequest guest = guestRequests.Find(x => order.GuestRequestKey == x.GuestRequestKey);
@@ -110,15 +110,15 @@ namespace BL
 
         public bool AbleToChangeOrderStatus(Order order)
         {
-            if (order.OrderStatus == Enums.OrderStatus.Closed) 
-            return false;
-                return true;
+            if (order.OrderStatus == Enums.OrderStatus.Closed)
+                return false;
+            return true;
         }
 
         public double TotalFee(Order order)
         {
             List<GuestRequest> guestRequest = getGuestRequests(x => x.GuestRequestKey == order.GuestRequestKey);
-            GuestRequest request= guestRequest.Find(x => x.GuestRequestKey == order.GuestRequestKey);
+            GuestRequest request = guestRequest.Find(x => x.GuestRequestKey == order.GuestRequestKey);
             return Configuration.Fee * (double)NumDays(request.EnteryDate, request.ReleaseDate);
         }
 
@@ -141,8 +141,8 @@ namespace BL
 
         public void DeleteHostingUnit(HostingUnit hostingUnit)
         {
-            if (TheHostingUnitHasAnOpenOrder (hostingUnit)==false)
-            myDAL.DeleteHostingUnit(hostingUnit);
+            if (TheHostingUnitHasAnOpenOrder(hostingUnit) == false)
+                myDAL.DeleteHostingUnit(hostingUnit);
         }
 
         public void SetHostingUnit(HostingUnit hostingUnit)
@@ -177,12 +177,21 @@ namespace BL
             return myDAL.getGuestRequests(predicate);
         }
 
+        public bool validDate(GuestRequest guest)
+        {
+            DateTime nowDate = new DateTime(2004, 01, 01);
+            if(nowDate>guest.EnteryDate)
+                return false;
+            return true;
+        }
+
         public void addGuestRequest(GuestRequest guestRequest)
         {
-            if (OverNightVacation(guestRequest)==true)
-            myDAL.addGuestRequest(guestRequest);
-            //else 
-                //throw "not over night vacation"
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            if ((OverNightVacation(guestRequest)) && (validDate(guestRequest)))
+                dal.addGuestRequest(guestRequest);
+            else
+                throw new ArgumentException("wrong date");
         }
         #endregion
 

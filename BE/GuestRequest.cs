@@ -65,7 +65,6 @@ namespace BE
             request = request.Replace("@", System.Environment.NewLine);
             return request.ToString();
         }
-
         #endregion
 
     }

@@ -22,6 +22,7 @@ namespace BL
         #endregion
 
         #region GuestRequest
+        bool validDate(GuestRequest guest);//Checks that the vacation start date has not passed
         void addGuestRequest(GuestRequest guestRequest);//Add a customer requirement
         void SetGuestRequest(GuestRequest guestRequest);//Customer Requirement Status Update
         List<GuestRequest> GetGuestRequestsList();//Returns a list of all existing client requirements in the system
