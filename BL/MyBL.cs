@@ -129,6 +129,24 @@ namespace BL
                 return false;
             return true;
         }
+
+        public bool RevocationPermission(Host host)
+        {
+            List<Order> openOrders = getOrders(x => x.OrderStatus == Enums.OrderStatus.Active);
+            List<HostingUnit> hostingUnits = null;
+            foreach (var order in openOrders)
+                hostingUnits.Add(FindHostingUnit(order.HostingUnitKey));
+            foreach (var unit in hostingUnits)
+                if (unit.Owner.HostKey == host.HostKey)
+
+                    return false;
+            return true;
+        }
+
+        public void SendEmail(Order ord)
+        {
+            Console.WriteLine("email was sent");
+        }
         #endregion
 
         #region Dalfunctions
@@ -247,25 +265,7 @@ namespace BL
 
         #endregion
 
-        #region change now
-        public bool RevocationPermission(Host host)
-        {
-            List<Order> openOrders = getOrders(x =>  x.OrderStatus == Enums.OrderStatus.Active);
-            List<HostingUnit> hostingUnits=null;
-            foreach (var order in openOrders)
-                hostingUnits.Add(FindHostingUnit(order.HostingUnitKey));
-            foreach(var unit in hostingUnits)
-                if (unit.Owner.HostKey==host.HostKey)
-            
-                return false;
-            return true;
-        }
-
-        public void SendEmail(Order ord)
-        {
-            Console.WriteLine("email was sent");
-        }
-
+        #region functions
         public bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays)
         {
              bool[,] diary=hostingUnit.Diary;

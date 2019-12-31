@@ -13,6 +13,7 @@ namespace BL
 {
     public interface IBL
     {
+        #region Dalfunctions
         #region HostingUnit
         void addHostingUnit(HostingUnit hostingUnit);//Add a hosting unit
         void DeleteHostingUnit(HostingUnit hostingUnit);//Removing a hosting unit
@@ -35,10 +36,22 @@ namespace BL
         List<Order> GetOrdersList();//Returns a list of existing orders in the system
         List<Order> getOrders(Func<Order, bool> predicate);//Returns a list of orders that fulfill a particular condition
         #endregion
+        #endregion
 
-        #region change now
+        #region enforcements
+        bool OverNightVacation(GuestRequest guestRequest);
+        bool BankAccountDebitAuthorization(Host host);
+        bool HostingUnitAvability(Order order);
+        void UpdateDiary(Order order);
+        void UpdateInfoAfterOrderClosed(Order order);
+        bool AbleToChangeOrderStatus(Order order);
+        double TotalFee(Order order);
+        bool TheHostingUnitHasAnOpenOrder(HostingUnit hostingUnit);
         bool RevocationPermission(Host host);//Checks whether account debit authorization can be revoked
         void SendEmail(Order ord);//Sends a customer to the customer with the order details
+        #endregion
+
+        #region functions
         bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, Int32 vactiondays);//Checks whether the requested vacation time in a particular unit is free
         List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays);//Returns the list of all available accommodation units on this date
         Int32 NumDays(DateTime start, DateTime end);//Returns the number of days passed from the first date to the second
