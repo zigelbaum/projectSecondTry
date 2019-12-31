@@ -12,7 +12,8 @@ namespace BL
 {
     public class MyBL : IBL
     {
-        static IDAL myDAL;
+         static IDAL myDAL;
+        
 
         #region Singleton
         private static readonly MyBL instance = new MyBL();
@@ -50,9 +51,10 @@ namespace BL
 
         public bool HostingUnitAvability(Order order)
         {
-            List<HostingUnit> hostingUnits = getHostingUnits(x => order.HostingUnitKey == x.HostingUnitKey);
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            List<HostingUnit> hostingUnits = dal.getHostingUnits(x => x.HostingUnitKey==order.HostingUnitKey);
             bool[,] diary = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey).Diary;
-            List<GuestRequest> guestRequests = getGuestRequests(x => order.GuestRequestKey == x.GuestRequestKey);
+            List<GuestRequest> guestRequests = dal.getGuestRequests(x => order.GuestRequestKey == x.GuestRequestKey);
             GuestRequest guest = guestRequests.Find(x => order.GuestRequestKey == x.GuestRequestKey);
             TimeSpan d = guest.ReleaseDate - guest.EnteryDate;
             Int32 i = guest.EnteryDate.Month - 1;
@@ -176,10 +178,11 @@ namespace BL
 
         public void DeleteHostingUnit(HostingUnit hostingUnit)
         {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
             try
             {
                 if (TheHostingUnitHasAnOpenOrder(hostingUnit) == false)
-                    myDAL.DeleteHostingUnit(hostingUnit);
+                   dal.DeleteHostingUnit(hostingUnit);
             }
             catch (Exception e)
             {
@@ -189,9 +192,10 @@ namespace BL
 
         public void SetHostingUnit(HostingUnit hostingUnit)
         {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
             try
             {
-                myDAL.SetHostingUnit(hostingUnit);
+                dal.SetHostingUnit(hostingUnit);
             }
             catch(Exception e)
             {
@@ -201,21 +205,24 @@ namespace BL
 
         public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate)
         {
-            return myDAL.getHostingUnits(predicate);
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            return dal.getHostingUnits(predicate);
         }
 
         public List<HostingUnit> getHostingUnitsList()
         {
-            return myDAL.getHostingUnitsList();
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            return dal.getHostingUnitsList();
         }
         #endregion
 
         #region GuestRequest
         public void SetGuestRequest(GuestRequest guestRequest)
         {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
             try
             {
-                myDAL.SetGuestRequest(guestRequest);
+                dal.SetGuestRequest(guestRequest);
             }
             catch (Exception e)
             {
@@ -225,12 +232,14 @@ namespace BL
 
         public List<GuestRequest> GetGuestRequestsList()
         {
-            return myDAL.GetGuestRequestsList();
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            return dal.GetGuestRequestsList();
         }
 
         public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)
         {
-            return myDAL.getGuestRequests(predicate);
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            return dal.getGuestRequests(predicate);
         }
 
         public int addGuestRequest(GuestRequest guestRequest)
@@ -253,11 +262,12 @@ namespace BL
         
         public void setOrder(Order order)
         {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
             try
             {
                 if (order.OrderStatus == Enums.OrderStatus.Closed)
                 {
-                    myDAL.setOrder(order);
+                    dal.setOrder(order);
                     UpdateDiary(order);
                     TotalFee(order);//what to do with returned value?
                     UpdateInfoAfterOrderClosed(order);
@@ -273,10 +283,10 @@ namespace BL
                             List<HostingUnit> hostingUnits = getHostingUnits(x => order.HostingUnitKey == x.HostingUnitKey);
                             HostingUnit unit = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
                             if (BankAccountDebitAuthorization(unit.Owner) == true)
-                                myDAL.setOrder(order);
+                                dal.setOrder(order);
                         }
                         else
-                            myDAL.setOrder(order);
+                            dal.setOrder(order);
                     }
 
                 }
@@ -290,10 +300,11 @@ namespace BL
         
         public int AddOrder(Order order)
         {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
             try
             {
                 if (HostingUnitAvability(order))
-                    return myDAL.addOrder(order);
+                    return dal.addOrder(order);
             }
             catch (Exception e)
             {
@@ -304,17 +315,20 @@ namespace BL
 
         public List<Order> GetOrdersList()
         {
-           return myDAL.GetOrdersList();
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            return dal.GetOrdersList();
         }
 
         public List<Order> getOrders(Func<Order, bool> predicate)
         {
-            return myDAL.getOrders(predicate);
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            return dal.getOrders(predicate);
         }
 
         public bool OrderExist(Order order)
         {
-            return myDAL.OrderExist(order);
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            return dal.OrderExist(order);
         }
         #endregion
 
@@ -485,7 +499,7 @@ namespace BL
             return pred;
         }
 
-        public Order NewOrder(int guestRequestKey, int hostingUnitkey)
+        public Order NewOrder(int hostingUnitkey, int guestRequestKey)
         {
             Order ord = new Order
             { GuestRequestKey = guestRequestKey, HostingUnitKey = hostingUnitkey, OrderStatus = Enums.OrderStatus.Active, CreateDate = DateTime.Now };

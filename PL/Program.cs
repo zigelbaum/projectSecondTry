@@ -36,7 +36,7 @@ namespace PL
                 BankAccountNumber = 22222,
                 CollectionClearance = false
             };
-
+            
             IBL my_bl1 = FactoryBL.getBL("List");
 
             GuestRequest guest1 = new GuestRequest
@@ -135,6 +135,19 @@ namespace PL
                 my_bl1.addHostingUnit(unit1);
                 my_bl1.addHostingUnit(unit2);
                 my_bl1.addHostingUnit(unit3);
+                IEnumerable<HostingUnit> bla = my_bl1.getHostingUnitsList();
+                foreach (var vvv in bla)
+                {
+                    Console.WriteLine(vvv.ToString());
+                    Console.WriteLine();
+                }
+                my_bl1.DeleteHostingUnit(unit3);
+                bla = my_bl1.getHostingUnitsList();
+                foreach (var vvv in bla)
+                {
+                    Console.WriteLine(vvv.ToString());
+                    Console.WriteLine();
+                }
 
             }
             catch (Exception a)
@@ -143,6 +156,7 @@ namespace PL
             }
 
             //match requests to units
+            //List<GuestRequest> guestRequests=my_bl1.getGuestRequests(x=>)
             List<GuestRequest> matchRequests;
             IEnumerable<IGrouping<Host, HostingUnit>> my_units = my_bl1.GroupHostByHostingUnit();
             foreach (IGrouping<Host, HostingUnit> hosting in my_units)
@@ -154,7 +168,7 @@ namespace PL
                     {
                         int orderKey;
                         orderKey = my_bl1.AddOrder(my_bl1.NewOrder(unit1.HostingUnitKey, guest.GuestRequestKey));
-                        my_bl1.getOrders(x => x.OrderKey == orderKey).Find(x => x.OrderKey == orderKey).ToString();
+                        Console.WriteLine(my_bl1.getOrders(x => x.OrderKey == orderKey).Find(x => x.OrderKey == orderKey).ToString());
                     }
                 }
             }
