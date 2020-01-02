@@ -179,7 +179,57 @@ namespace PL
                 Console.WriteLine();
                 Console.WriteLine(ord.ToString());
             }
-
+            List<GuestRequest> guestRequests = my_bl1.GetGuestRequestsList();
+            foreach (GuestRequest request in guestRequests)
+            {
+                Console.WriteLine();
+                Console.WriteLine(request.ToString());
+            }
+            my_bl1.SetGuestRequest(new GuestRequest
+            {GuestRequestKey=10000000, PrivateName = "customer1",FamilyName = "Levi", MailAddress = "customer1@gmail.com",
+                EnteryDate = new DateTime(2019, 11, 28),
+                ReleaseDate = new DateTime(2019, 11, 30),
+                Area = Enums.Area.North,
+                SubArea = "golan",
+                Status = Enums.GuestRequestStatus.ClosedOnTheWeb,
+                Type = Enums.HostingUnitType.Camping,
+                Adults = 2,
+                Children = 7,
+                Pool = Enums.intrested.Possible,
+                Jacuzzi = Enums.intrested.NoThanks,
+                Garden = Enums.intrested.Possible,
+                ChildrenAttraction = Enums.intrested.Possible,
+                Stars = 0,
+                Meals = Enums.intrested.Possible
+            });
+            List<GuestRequest> lists = my_bl1.GetGuestRequestsList();
+            foreach(GuestRequest request in lists)
+            {
+                Console.WriteLine();
+                Console.WriteLine(request.ToString());
+            }
+            List<HostingUnit> myUnits = my_bl1.getHostingUnitsList();
+            foreach (HostingUnit unit in myUnits)
+            {
+                Console.WriteLine();
+                Console.WriteLine(unit.ToString());
+            }
+            my_bl1.SetHostingUnit(new HostingUnit
+            {
+                HostingUnitKey = 10000002,
+                Owner = host2,
+                HostingUnitName = "new name",
+                HostingUnitType = Enums.HostingUnitType.Zimmer,
+                Area = Enums.Area.North,
+                Stars = 3,
+                Meals = true
+            });
+            List<HostingUnit> units = my_bl1.getHostingUnitsList();
+            foreach(HostingUnit unit in units)
+            {
+                Console.WriteLine();
+                Console.WriteLine(unit.ToString());
+            }
         }  
     }
 }
