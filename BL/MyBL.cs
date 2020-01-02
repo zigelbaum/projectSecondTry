@@ -14,7 +14,6 @@ namespace BL
     {
         static IDAL myDAL;
 
-
         #region Singleton
         private static readonly MyBL instance = new MyBL();
 
@@ -324,14 +323,7 @@ namespace BL
 
         public Order FindOrder(Int32 ordKey)
         {
-            IDAL dal = DAL.factoryDAL.getDAL("List");
-            /*List<Order> orders = dal.GetOrdersList();
-            foreach (Order order in orders)
-            {
-                if (order.OrderKey == ordKey)
-                    return order;
-            }
-            return null;*/
+            IDAL dal = DAL.factoryDAL.getDAL("List");         
             return dal.FindOrder(ordKey);
         }
         #endregion
@@ -390,9 +382,7 @@ namespace BL
             foreach (HostingUnit unit in listHostingUnit)
             {
                 if (unit.HostingUnitKey == unitKey)
-                    return unit;
-                //List<HostingUnit> hostingUnits = myDAL.getHostingUnits(x => x.HostingUnitKey == unitKey);
-                //throw new InvalidException("unit not found") : unit;
+                    return unit;               
             }
             return null;
         }
