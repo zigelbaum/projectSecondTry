@@ -130,84 +130,129 @@ namespace PL
             #endregion
 
             bool flag = false;
-
+            string choice;         
             do
             {
+                Console.WriteLine("Entr your choice:");
+                Console.WriteLine("1: add guestRequest guest1");
+                Console.WriteLine("2: add guestRequest guest2");
+                Console.WriteLine("3: add guestRequest guest3");
+                Console.WriteLine("4: add guestRequests guest1 and guest2");
+                Console.WriteLine("5: add hosting unit unit1");
+                Console.WriteLine("6: add hosting unit unit2");
+                Console.WriteLine("7: add hosting unit unit3");
+                Console.WriteLine("8: add hosting units unit1 unit2 unit3");
+                Console.WriteLine("9:print all units and delete hosting unit unit3");
+                choice = Console.ReadLine();
                 try
                 {
-                    if (!flag)
+                  if (flag)
                     {
-                        #region add
-                        #region add to guestRequest
-                        my_bl1.addGuestRequest(guest1);
-                        my_bl1.addGuestRequest(guest2);                       
-                        #endregion
-                        #region add to hostingUnit
-                        my_bl1.addHostingUnit(unit1);
-                        my_bl1.addHostingUnit(unit2);
-                        my_bl1.addHostingUnit(unit3);
-                        #endregion
-                        #endregion 
-                        #region delete hostingUnit   
-                        IEnumerable<HostingUnit> bla = my_bl1.getHostingUnitsList();
-                        foreach (var vvv in bla)
+                        Console.WriteLine("you need to entry new data");
+                        flag = false;
+                    }
+                        switch (choice)
                         {
-                            Console.WriteLine(vvv.ToString());
-                            Console.WriteLine();
+                            case "1":
+                                my_bl1.addGuestRequest(guest1);
+                                break;
+                            case "2":
+                                my_bl1.addGuestRequest(guest2);
+                                break;
+                            case "3":
+                                my_bl1.addGuestRequest(guest3);
+                                break;
+                            case "4":
+                                my_bl1.addGuestRequest(guest1);
+                                my_bl1.addGuestRequest(guest2);
+                                break;
+                            case "5":
+                                my_bl1.addHostingUnit(unit1);
+                                break;
+                            case "6":
+                                my_bl1.addHostingUnit(unit2);
+                                break;
+                            case "7":
+                                my_bl1.addHostingUnit(unit3);
+                                break;
+                            case "8":
+                                my_bl1.addHostingUnit(unit1);
+                                my_bl1.addHostingUnit(unit2);
+                                my_bl1.addHostingUnit(unit3);
+                                break;
+                            case "9":
+                                IEnumerable<HostingUnit> bla = my_bl1.getHostingUnitsList();
+                                foreach (var vvv in bla)
+                                {
+                                    Console.WriteLine(vvv.ToString());
+                                    Console.WriteLine();
+                                }
+                                my_bl1.DeleteHostingUnit(unit3);
+                                bla = my_bl1.getHostingUnitsList();
+                                foreach (var vvv in bla)
+                                {
+                                    Console.WriteLine(vvv.ToString());
+                                    Console.WriteLine();
+                                }
+                                break;
                         }
-                        my_bl1.DeleteHostingUnit(unit3);
-                        bla = my_bl1.getHostingUnitsList();
-                        foreach (var vvv in bla)
-                        {
-                            Console.WriteLine(vvv.ToString());
-                            Console.WriteLine();
-                        }
-                        #endregion
+
                         #region  use grouping
                         List<GuestRequest> matchRequests;
-                        IEnumerable<IGrouping<Host, HostingUnit>> my_units = my_bl1.GroupHostByHostingUnit();
-                        foreach (IGrouping<Host, HostingUnit> hosting in my_units)
+                        if (choice != "1")
                         {
-                            foreach (HostingUnit unit in hosting)
+                            IEnumerable<IGrouping<Host, HostingUnit>> my_units = my_bl1.GroupHostByHostingUnit();
+                            foreach (IGrouping<Host, HostingUnit> hosting in my_units)
                             {
-                                matchRequests = my_bl1.RequestMatchToStipulation(my_bl1.BuildPredicate(unit));
-                                foreach (GuestRequest guest in matchRequests)
+                                foreach (HostingUnit unit in hosting)
                                 {
-                                    int orderKey;
-                                    orderKey = my_bl1.AddOrder(my_bl1.NewOrder(unit1.HostingUnitKey, guest.GuestRequestKey));
-                                    Console.WriteLine(my_bl1.getOrders(x => x.OrderKey == orderKey).Find(x => x.OrderKey == orderKey).ToString());
+                                    matchRequests = my_bl1.RequestMatchToStipulation(my_bl1.BuildPredicate(unit));
+                                    foreach (GuestRequest guest in matchRequests)
+                                    {
+                                        int orderKey;
+                                        orderKey = my_bl1.AddOrder(my_bl1.NewOrder(unit1.HostingUnitKey, guest.GuestRequestKey));
+                                        Console.WriteLine(my_bl1.getOrders(x => x.OrderKey == orderKey).Find(x => x.OrderKey == orderKey).ToString());
+                                    }
                                 }
                             }
                         }
                         IEnumerable<IGrouping<Enums.Area, GuestRequest>> guests_by_area = my_bl1.GroupGRByArea();
-                        foreach(IGrouping<Enums.Area, GuestRequest> requests in guests_by_area)
+                        foreach (IGrouping<Enums.Area, GuestRequest> requests in guests_by_area)
                         {
-                            foreach(GuestRequest request in requests)
+                            foreach (GuestRequest request in requests)
                             {
                                 Console.WriteLine();
                                 Console.WriteLine(request.ToString());
                             }
                         }
                         IEnumerable<IGrouping<int, GuestRequest>> num_vaca = my_bl1.GroupGRByVacationers();
-                        foreach(IGrouping<int, GuestRequest> gu in num_vaca)
+                        foreach (IGrouping<int, GuestRequest> gu in num_vaca)
                         {
-                            foreach(GuestRequest item in gu)
+                            foreach (GuestRequest item in gu)
                             {
                                 Console.WriteLine();
                                 Console.WriteLine(item.ToString());
                             }
                         }
                         IEnumerable<IGrouping<Enums.Area, HostingUnit>> hosting_by_area = my_bl1.GroupHostingUnitByArea();
-                        foreach(IGrouping < Enums.Area, HostingUnit> hostings in hosting_by_area)
+                        foreach (IGrouping<Enums.Area, HostingUnit> hostings in hosting_by_area)
                         {
-                            foreach(HostingUnit unit in hostings)
+                            foreach (HostingUnit unit in hostings)
                             {
                                 Console.WriteLine();
                                 Console.WriteLine(unit.ToString());
                             }
                         }
                         #endregion
-                        #region upload
+
+                        Console.WriteLine("Entr your choice:");
+                        Console.WriteLine("1: upload order to 'sent mail'");
+                        Console.WriteLine("2: upload guestRequest");
+                        Console.WriteLine("3: upload hosting unit unit2");
+                        string choice1 = Console.ReadLine();
+                        switch (choice1)
+                        {
+                            case "1": 
                         #region set order
                         my_bl1.setOrder(new Order() { HostingUnitKey = 10040002, GuestRequestKey = 10000012, OrderKey = 10000211, OrderStatus = Enums.OrderStatus.SentEmail, CreateDate = new DateTime(2005, 04, 16), OrderDate = new DateTime(2005, 04, 19) });
                         List<Order> orders = my_bl1.GetOrdersList();
@@ -216,7 +261,9 @@ namespace PL
                             Console.WriteLine();
                             Console.WriteLine(ord.ToString());
                         }
-                        #endregion
+                                #endregion
+                                break;
+                            case "2":
                         #region set guestRequest
                         List<GuestRequest> guestRequests = my_bl1.GetGuestRequestsList();
                         foreach (GuestRequest request in guestRequests)
@@ -251,39 +298,37 @@ namespace PL
                             Console.WriteLine();
                             Console.WriteLine(request.ToString());
                         }
-                        #endregion
-                        #region set hostingUnit
-                        List<HostingUnit> myUnits = my_bl1.getHostingUnitsList();
-                        foreach (HostingUnit unit in myUnits)
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine(unit.ToString());
+                                #endregion
+                                break;
+                            case "3":
+                               
+                              #region set hostingUnit
+                                    List<HostingUnit> myUnits = my_bl1.getHostingUnitsList();
+                                    foreach (HostingUnit unit in myUnits)
+                                    {
+                                        Console.WriteLine();
+                                        Console.WriteLine(unit.ToString());
+                                    }
+                                    my_bl1.SetHostingUnit(new HostingUnit
+                                    {
+                                        HostingUnitKey = 10000001,
+                                        Owner = host2,
+                                        HostingUnitName = "new name",
+                                        HostingUnitType = Enums.HostingUnitType.Zimmer,
+                                        Area = Enums.Area.North,
+                                        Stars = 3,
+                                        Meals = true
+                                    });
+                                    List<HostingUnit> units = my_bl1.getHostingUnitsList();
+                                    foreach (HostingUnit unit in units)
+                                    {
+                                        Console.WriteLine();
+                                        Console.WriteLine(unit.ToString());
+                                    }
+                                    #endregion                   
+                                break;
                         }
-                        my_bl1.SetHostingUnit(new HostingUnit
-                        {
-                            HostingUnitKey = 10000001,
-                            Owner = host2,
-                            HostingUnitName = "new name",
-                            HostingUnitType = Enums.HostingUnitType.Zimmer,
-                            Area = Enums.Area.North,
-                            Stars = 3,
-                            Meals = true
-                        });
-                        List<HostingUnit> units = my_bl1.getHostingUnitsList();
-                        foreach (HostingUnit unit in units)
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine(unit.ToString());
-                        }
-                        #endregion
-                        #endregion
-                        my_bl1.addGuestRequest(guest3);
-                    }
-                    else
-                    {
-                        Console.WriteLine("you need to entry new data");
-                        flag = false;
-                    }
+                    flag = false;
                 }
                 catch (Exception a)
                 {
@@ -291,6 +336,7 @@ namespace PL
                     flag = true;
                 }
             } while (flag);
-        }  
+            Console.WriteLine("out");
+        }
     }
 }
