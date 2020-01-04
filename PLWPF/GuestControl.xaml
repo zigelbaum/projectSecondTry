@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="PLWPF.GuestControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLWPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="GuestRequestControl">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="119*"/>
+            <RowDefinition Height="331*"/>
+        </Grid.RowDefinitions>
+        <Label Content="costumer details:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="40" Width="182"/>
+        <Label Content="private name" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
+        <TextBox HorizontalAlignment="Left"  Margin="128,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label Content="lat name" HorizontalAlignment="Left" Height="26" Margin="275,55,0,0" VerticalAlignment="Top" Width="56"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="359,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="mail address" HorizontalAlignment="Left" Margin="504,55,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="630,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="request requirements:" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="182"/>
+        <ComboBox HorizontalAlignment="Left" Margin="128,57,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120"/>
+        <Label Content="area:" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+        <Label Content="sub area:" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left"  Margin="128,98,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1"/>
+        <Label Content="vacation type:" HorizontalAlignment="Left" Margin="10,149,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+        <ComboBox HorizontalAlignment="Left" Margin="128,149,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120"/>
+        <Label Content="adults:" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left"  Margin="128,195,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1"/>
+        <Label Content="kids:" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left"  Margin="128,245,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1"/>
+        <CheckBox Content="pool" HorizontalAlignment="Left" Margin="333,53,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="80"/>
+        <CheckBox Content="jacuzzi" HorizontalAlignment="Left" Margin="333,98,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="80"/>
+        <CheckBox Content="garden" HorizontalAlignment="Left" Margin="333,124,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="80"/>
+        <CheckBox Content="children attraction" HorizontalAlignment="Left" Margin="333,150,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="122"/>
+        <CheckBox Content="meals" HorizontalAlignment="Left" Margin="333,176,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="122"/>
+        <Label Content="stars:" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left"  Margin="128,295,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1"/>
+        <Viewbox Name="vbCalendar" HorizontalAlignment="Left" Height="146" Margin="533,84,0,0" Grid.Row="1" VerticalAlignment="Top" Width="217"/>
+        <Label Content="choose dates:" HorizontalAlignment="Left" Margin="533,53,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+
+    </Grid>
+</UserControl>
