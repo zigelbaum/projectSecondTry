@@ -148,7 +148,7 @@ namespace PL
                 {
                   if (flag)
                     {
-                        Console.WriteLine("you need to entry new data");
+                        //Console.WriteLine("you need to entry new data");
                         flag = false;
                     }
                         switch (choice)
@@ -199,7 +199,7 @@ namespace PL
 
                         #region  use grouping
                         List<GuestRequest> matchRequests;
-                        if (choice != "1")
+                        if (choice == "5")
                         {
                             IEnumerable<IGrouping<Host, HostingUnit>> my_units = my_bl1.GroupHostByHostingUnit();
                             foreach (IGrouping<Host, HostingUnit> hosting in my_units)
@@ -311,7 +311,7 @@ namespace PL
                                     }
                                     my_bl1.SetHostingUnit(new HostingUnit
                                     {
-                                        HostingUnitKey = 10000001,
+                                        HostingUnitKey = 10000000,
                                         Owner = host2,
                                         HostingUnitName = "new name",
                                         HostingUnitType = Enums.HostingUnitType.Zimmer,
