@@ -14,31 +14,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for OrderWindow.xaml
+    /// Interaction logic for UploadOrderWindow.xaml
     /// </summary>
-    public partial class OrderWindow : Window
+    public partial class UploadOrderWindow : Window
     {
         IBL myBl = BL.FactoryBL.getBL("XML");
         HostingUnit host; // לעשות שהוא יבין לבד לאיזו יחידה לבדוק התאמה
         public List<Order> listOrders;
-        public OrderWindow()
-        {          
+        public UploadOrderWindow()
+        {            
             listOrders = myBl.getOrders(u => u.HostingUnitKey == host.HostingUnitKey);
             InitializeComponent();
-        }
-        private void UploadOrderButton_Click(object sender, RoutedEventArgs e)
-        {
-            UploadOrderWindow upload_ord_Window = new UploadOrderWindow();
-            upload_ord_Window.ShowDialog();
-        }
-        private void CreateOrderButton_Click(object sender, RoutedEventArgs e)
-        {
-            CreateOrderWindow new_ord_Window = new CreateOrderWindow();
-            new_ord_Window.ShowDialog();
         }
     }
 }
