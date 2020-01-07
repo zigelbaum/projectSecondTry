@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="OrderWindow" Height="450" Width="800">
     <Grid>
-        
+        <ComboBox Name="OrderstList"  VerticalAlignment="Stretch" SelectionChanged="cbRequestList_SelectionChanged" Text="{Binding Path=listOrders}" Margin="37,28,0,330.667" FontSize="36" Width="723"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5"/>
+        <Button Name="UploadOrderButton" Content="Upload Order"  HorizontalAlignment="Left" Margin="37,241,0,0" VerticalAlignment="Top" Width="307" Height="74" Click="UploadOrderButton_Click"/>
+        <Button Name="CreateOrderButton" Content="Create a new Order"  HorizontalAlignment="Right" Margin="0,241,33.333,0" VerticalAlignment="Top" Width="307" Height="74" Click="CreateOrderButton_Click"/>
     </Grid>
 </Window>
