@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace PLWPF
 {
@@ -20,37 +21,27 @@ namespace PLWPF
     /// </summary>
     public partial class GuestControl : UserControl
     {
-        private Calendar MyCalendar;
-        private Calendar CreateCalendar()
-        {
-            Calendar MonthlyCalendar = new Calendar();
-            MonthlyCalendar.Name = "MonthlyCalendar";
-            MonthlyCalendar.DisplayMode = CalendarMode.Month;
-            MonthlyCalendar.SelectionMode = CalendarSelectionMode.SingleRange;
-            MonthlyCalendar.IsTodayHighlighted = true;
-            return MonthlyCalendar;
-        }
 
-        private void SetBlackOutDates()
-        {
-            foreach (DateTime date in CurrentHostingUnit.AllOrders)
-            {
-                MyCalendar.BlackoutDates.Add(new CalendarDateRange(date));
-            }
-        }
+        OpenFileDialog op; 
+        bool isImageChanged = false;
 
         public GuestControl()
         {
-            MyCalendar = CreateCalendar();
-            vbCalendar.Child = null;
-            vbCalendar.Child = MyCalendar;
-            SetBlackOutDates();
-
-
-            InitializeComponent();
+           
         }
 
-
-
+        private void costumerPro_Click(object sender, RoutedEventArgs e)
+        {
+            op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                isImageChanged = true;
+                TesterImage.Source = new BitmapImage(new Uri(op.FileName));
+            }
+        }
     }
 }

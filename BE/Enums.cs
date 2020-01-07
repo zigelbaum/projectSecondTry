@@ -4,36 +4,36 @@
     {
         public enum HostingUnitType
         {
-            Zimmer,
+            Zimmer=1,
             Hotel,
             Camping
         }
 
         public enum DataSourseType
         {
-            List,
+            List=1,
             XML
         } 
 
         public enum OrderStatus
         {
-            SentEmail, NoAnswer, NotAddressedYet, Closed, Active,NotRelevent
+            SentEmail=1, NoAnswer, NotAddressedYet, Closed, Active,NotRelevent
         }
 
         public enum GuestRequestStatus
         { 
-            Active, 
+            Active=1, 
             ClosedOnTheWeb,
             RequestExpired
         }
 
         public enum Area
         { 
-            All, North, South, Center, Jerusalem
+            All=1, North, South, Center, Jerusalem
         }
 
         public enum intrested
-        { Necessary, Possible, NoThanks }
+        { Necessary=1, Possible, NoThanks }
     }
 
 

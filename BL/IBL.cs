@@ -65,6 +65,8 @@ namespace BL
         Predicate<GuestRequest> BuildPredicate(HostingUnit hosting);//Builds a predicate that filters the hosting units according to the client's requirements
         Order NewOrder(int hostingUnitkey, int guestRequestKey);//Creating order  
         GuestRequest FindGuestRequest(Int32 requestKey);//find the request with this key
+        string GetCostumerImagePath(int requestKey);
+        void AddCostumerImage(string id, string newImagePath);
         #endregion
 
         #region grouping

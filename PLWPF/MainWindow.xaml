@@ -20,5 +20,13 @@
         <Button x:Name="HostinGUnitButton" Content="Hosting Unit" HorizontalAlignment="Center" Margin="10,72,28,61" Grid.Column="0" VerticalAlignment="Center" Width="226" Height="114" Click="HostinGUnitButton_Click" Grid.Row="1"/>
         <Button Name="GuestRequestButton" Content="Guest Request" Grid.Column="1" HorizontalAlignment="Center" Margin="10,72,28,0" Grid.Row="1" VerticalAlignment="Top" Width="226" Height="114" Click="GuestRequestButton_Click" />
         <Button Name="OrderButton" Content="Order" Grid.Column="2" HorizontalAlignment="Left" Margin="10,72,0,0" Grid.Row="1" VerticalAlignment="Top" Width="226" Height="114" Click="OrderButton_Click"/>
+        <TabControl HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100">
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
