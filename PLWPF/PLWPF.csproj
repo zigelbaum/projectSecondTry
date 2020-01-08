@@ -71,6 +71,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GuestPresentation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GuestRequestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -89,6 +93,9 @@
     </Compile>
     <Compile Include="GuestControl.xaml.cs">
       <DependentUpon>GuestControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuestPresentation.xaml.cs">
+      <DependentUpon>GuestPresentation.xaml</DependentUpon>
     </Compile>
     <Compile Include="GuestRequestWindow.xaml.cs">
       <DependentUpon>GuestRequestWindow.xaml</DependentUpon>

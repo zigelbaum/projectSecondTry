@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using System.IO;
 
 namespace BL
 {
@@ -511,6 +512,20 @@ namespace BL
                     return item;
             }
             return null;
+        }
+
+        public string GetCostumerImagePath(int requestKey)
+        {
+            string tempSource = System.IO.Path.GetTempFileName();
+            File.Copy(@"..\..\..\CostumersImages\" + requestKey + @".jpg", tempSource, true);
+            return tempSource;
+        }
+
+        public void AddCostumerImage(string id, string newImagePath)
+        {
+            string photoPath = @"..\..\..\TestersImages\" + id + @".jpg";
+            (File.Create(photoPath)).Close();
+            System.IO.File.Copy(newImagePath, photoPath, true);
         }
         #endregion
 

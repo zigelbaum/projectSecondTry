@@ -1,0 +1,77 @@
+﻿<Window x:Class="PLWPF.GuestPresentation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="add guest request"
+        Height="600" Width="800">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+        </Style>
+    </Window.Resources>
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="63*"/>
+            <RowDefinition Height="431*"/>
+        </Grid.RowDefinitions>
+        <Label Content="costumer details:" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="182"/>
+        <Label Content="first name" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+        <TextBox Name="tbFirstName" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="{Binding Path=PrivateName,Mode=OneWay}" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Margin="128,25,0,0"/>
+        <Label Content="last name" HorizontalAlignment="Left" Height="26" Margin="268,25,0,0" VerticalAlignment="Top" Width="79" Grid.Row="1"/>
+        <TextBox Name="tbLastName" HorizontalAlignment="Left" Height="26" Margin="359,25,0,0" TextWrapping="Wrap" Text="{Binding Path=FamilyName,Mode=OneWay}" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <Label Content="mail address" HorizontalAlignment="Left" Margin="504,25,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+        <TextBox Name="tbMail" HorizontalAlignment="Left" Height="26" Margin="630,25,0,0" TextWrapping="Wrap" Text="{Binding Path=MailAddress,Mode=OneWay}" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <Grid Name="requestrequires" HorizontalAlignment="Stretch" Height="auto" Margin="0" Grid.Row="2" VerticalAlignment="Stretch" Width="auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35*"/>
+                <RowDefinition Height="325*"/>
+                <RowDefinition Height="71*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="293*"/>
+                <ColumnDefinition Width="195*"/>
+                <ColumnDefinition Width="312*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="request requirements:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="182" Height="26"/>
+            <ComboBox Name="cbbArea" IsEditable="True" HorizontalAlignment="Left" Margin="128,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Area,Mode=OneWay}" Height="22"/>
+            <Label Content="area:" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+            <Label Content="sub area:" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+            <TextBox Name="tbSubArea" HorizontalAlignment="Left"  Margin="128,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=SubArea,Mode=OneWay}"/>
+            <Label Content="vacation type:" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="98" Height="26" Grid.Row="1"/>
+            <ComboBox Name="cbbVacationType" IsEditable="True" HorizontalAlignment="Left" Margin="128,107,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Type,Mode=OneWay}" Height="22" />
+            <Label Content="adults:" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+            <TextBox Name="tbAdults" HorizontalAlignment="Left"  Margin="128,153,0,0" TextWrapping="Wrap" Text="{Binding Path=Adults, Mode=OneWay}" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1"/>
+            <Label Content="kids:" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+            <TextBox Name="tbKids" HorizontalAlignment="Left"  Margin="128,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=Children,Mode=OneWay}" />
+            <Label Content="stars:" HorizontalAlignment="Left" Margin="10,253,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
+            <TextBox Name="tbStars" HorizontalAlignment="Left"  Margin="128,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=Children,Mode=OneWay}"/>
+            <CheckBox Name="ckbPool" Content="pool" IsChecked="{Binding Path=Pool,Mode=OneWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,15,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
+            <CheckBox Name="cbkJacuzzi" Content="jacuzzi" IsChecked="{Binding Path=Jacuzzi,Mode=OneWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,41,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
+            <CheckBox Name="ckbGarden" Content="Garden" IsChecked="{Binding Path=Garden,Mode=OneWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,67,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
+            <CheckBox Name="ckbAttractions" Content="child attractions" IsChecked="{Binding Path=ChildrenAttraction,Mode=OneWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,93,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
+            <CheckBox Name="ckbMeals" IsChecked="{Binding Path=Meals,Mode=OneWay}" Content="meals"  Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Grid.Column="1" Margin="58,117,0,0" Grid.Row="1"/>
+            <Label Content="choose dates:" HorizontalAlignment="Left" Margin="10,144,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Height="26" Width="82"/>
+            <Label Content="entry Date:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,170,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="68"/>
+            <DatePicker Name="dpEntryDate" SelectedDate="{Binding Path=EnteryDate,Mode=OneWay}" DisplayDate="{Binding Path=EnteryDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,196,0,0" Grid.Row="1" VerticalAlignment="Top" Width="137" Height="24"/>
+            <Label Content="Release Date:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,225,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="81"/>
+            <DatePicker x:Name="dpRealeseDate" SelectedDate="{Binding ReleaseDate, Mode=OneWay}" DisplayDate="{Binding ReleaseDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,251,0,0" Grid.Row="1" VerticalAlignment="Top" Width="137" Height="24"/>
+            <Border x:Name="ImageBorder"  BorderThickness="2" BorderBrush="Black" Margin="40,10,44,74" Grid.Column="2" Grid.Row="1">
+                <Image x:Name="CostumerImage" Source="Icons/user_icon.jpg" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2" Margin="8" Grid.Row="1"/>
+            </Border>
+            <Button Name="costumerPro" Content="add picture" Grid.Column="2" HorizontalAlignment="Left" Margin="79,279,0,0" Grid.Row="1" VerticalAlignment="Top" Width="142" Click="costumerPro_Click" Height="20" />
+            <Button Name="addReqButton" Content="add" Grid.Column="2" HorizontalAlignment="Left" Margin="163,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="102" Click="addReqButton_Click" Height="34"/>
+            <Button x:Name="cancelreqButton" Content="cancel" Grid.Column="2" HorizontalAlignment="Left" Margin="40,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="88" Click="cancelreqButton_Click" Height="34"/>
+        </Grid>
+        <Label Name="requestDetails" Content="request details:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="30" Width="182"/>
+        <Label Name="requestID" Content="request id" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
+        <TextBox x:Name="tbRquestId" HorizontalAlignment="Left"  Margin="128,35,0,0" TextWrapping="Wrap" Text="{Binding Path=GuestRequestKey, Mode=OneWay}" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label Name="requestStatus" Content="request status" HorizontalAlignment="Left" Height="26" Margin="268,35,0,0" VerticalAlignment="Top" Width="86"/>
+        <TextBox x:Name="tbRequStatus" HorizontalAlignment="Left" Height="26" Margin="359,35,0,0" TextWrapping="Wrap" Text="{Binding Path=Status, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+        <Label Name="regDate" Content="registration date" HorizontalAlignment="Left" Margin="504,35,0,0" VerticalAlignment="Top" Width="111" Height="26"/>
+        <TextBox x:Name="tbRegDate" HorizontalAlignment="Left" Height="26" Margin="630,35,0,0" TextWrapping="Wrap" Text="{Binding Path=RegistrationDate, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>

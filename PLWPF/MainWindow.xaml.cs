@@ -22,11 +22,10 @@ namespace PLWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IBL myBL;
+        public static IBL myBL= FactoryBL.getBL("List");
         public MainWindow()
         {
             InitializeComponent();
-            myBL = FactoryBL.getBL("List");
         }
 
         private void HostinGUnitButton_Click(object sender, RoutedEventArgs e)
