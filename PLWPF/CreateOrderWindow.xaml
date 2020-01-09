@@ -23,7 +23,7 @@
         <TextBox Name="hostingUnitKey"  HorizontalAlignment="Left" Margin="144,37,0,0" TextWrapping="Wrap" Text="{Binding Path=myorder.HostingUnitKey}" VerticalAlignment="Top" Height="28" Width="114"/>
         <TextBox Name="hostingUnitKeyString"  HorizontalAlignment="Left" Margin="46,38,0,0" TextWrapping="Wrap" Text="Hosting Unit Key:" VerticalAlignment="Top" Height="28" Width="99"/>
 
-        <TextBox Name="GuestRequestKey"  HorizontalAlignment="Center" Margin="645,39,34.333,0" TextWrapping="Wrap" Text="{Binding Path=}" VerticalAlignment="Top" Height="28" Width="114" Grid.RowSpan="1"/>
+        <TextBox Name="GuestRequestKey"  HorizontalAlignment="Center" Margin="645,39,34.333,0" TextWrapping="Wrap" Text="{Binding Path=OrderKey,Mode=OneWay}" VerticalAlignment="Top" Height="28" Width="114" Grid.RowSpan="1"/>
         <TextBox Name="GuestRequestKeyString"  HorizontalAlignment="Center" Margin="313,39,371.333,0" TextWrapping="Wrap" Text="Guest Request Key:" VerticalAlignment="Top" Height="28" Width="109" Grid.RowSpan="1"/>
 
         <TextBox Name="OrderKey"  HorizontalAlignment="Right" Margin="0,39,258.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.OrderKey}" VerticalAlignment="Top" Height="28" Width="114"/>
@@ -33,7 +33,7 @@
         <TextBox Name="StatusOrderString"  HorizontalAlignment="Right" Margin="0,0.333,684.333,0" TextWrapping="Wrap" Text="status:" VerticalAlignment="Top" Height="22" Width="62" RenderTransformOrigin="1.405,0.447" Grid.Row="1"/>
 
         <TextBox Name="CreateDate"  HorizontalAlignment="Right" Margin="0,0.333,258.333,0" TextWrapping="Wrap" Text="{Binding Path=}" VerticalAlignment="Top" Height="22" Width="114" RenderTransformOrigin="1.405,0.447" Grid.Row="1"/>
-        <TextBox Name="CreateDateString"  HorizontalAlignment="Right" Margin="0,0.333,371.333,0" TextWrapping="Wrap" Text="create date:" VerticalAlignment="Top" Height="22" Width="77" RenderTransformOrigin="1.405,0.447" Grid.Row="1"/>
+        <TextBox Name="CreateDateString"  HorizontalAlignment="Right" Margin="0,0,402,0" TextWrapping="Wrap" Text="create date:" VerticalAlignment="Top" Height="22" Width="77" RenderTransformOrigin="1.405,0.447" Grid.Row="1"/>
 
         <TextBox Name="OrderDate"  HorizontalAlignment="Right" Margin="0,0.333,34.333,0" TextWrapping="Wrap" Text="{Binding Path=}" VerticalAlignment="Top" Height="22" Width="108" RenderTransformOrigin="1.405,0.447" Grid.Row="1"/>
         <TextBox Name="OrderDateString"  HorizontalAlignment="Right" Margin="0,144,139.333,0" TextWrapping="Wrap" Text="order date:" VerticalAlignment="Top" Height="23" Width="77" RenderTransformOrigin="1.405,0.447" Grid.RowSpan="2"/>

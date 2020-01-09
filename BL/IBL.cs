@@ -66,7 +66,8 @@ namespace BL
         Order NewOrder(int hostingUnitkey, int guestRequestKey);//Creating order  
         GuestRequest FindGuestRequest(Int32 requestKey);//find the request with this key
         string GetCostumerImagePath(int requestKey);
-        void AddCostumerImage(string id, string newImagePath);
+        void AddCostumerImage(int key, string newImagePath);
+        void ChangeCostuerImage(int requestKey, string newImagePath);
         #endregion
 
         #region grouping

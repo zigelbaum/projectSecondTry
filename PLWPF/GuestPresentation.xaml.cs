@@ -129,7 +129,24 @@ namespace PLWPF
 
         private void cancelreqButton_Click(object sender, RoutedEventArgs e)
         {
-
+            switch (operation)
+            {
+                case "Add":
+                    var result = MessageBox.Show("are you sure you want to exit?\n any changes will not be saved.", "cancaling", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                    if (result == MessageBoxResult.OK)
+                        Close();
+                    break;
+                case "Update":
+                    var result2 = MessageBox.Show("are you sure you want to exit?\n any changes will not be saved.", "cancaling", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                    if (result2 == MessageBoxResult.OK)
+                        Close();
+                    break;
+                case "View":
+                    var result3 = MessageBox.Show("are you sure you want to exit?", "exit", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                    if (result3 == MessageBoxResult.OK)
+                        Close();
+                    break;
+            }
         }
 
         private void addReqButton_Click(object sender, RoutedEventArgs e)
@@ -162,11 +179,11 @@ namespace PLWPF
             switch (operation)
             {
                 case "Add":
-                    GuestRequest guest = guestRequest;
+                    GuestRequest guest =guestRequest;//יכול להיות שלא יעבוד כי אין בנאי העתקה
                     try { MainWindow.myBL.addGuestRequest(guest); }
                     catch (Exception a)
                     {
-                        MessageBox.Show(a.Message+". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                        var result = MessageBox.Show(a.Message+". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                         if (MessageBoxResult.No == result)
                         {
                             Close();
@@ -180,17 +197,48 @@ namespace PLWPF
                     {
                         try
                         {
-                            MainWindow.myBL.AddCostumerImage(testerToAdd.Id, op.FileName);
+                            MainWindow.myBL.AddCostumerImage(guest.GuestRequestKey, op.FileName);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("המערכת לא הצליחה להוסיף את תמונת הבוחן. " + ex.Message, "סטטוס עידכון", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                            MessageBox.Show("failed uploading profile picture" + ex.Message,"action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                         }
                     }
-                    MessageBox.Show("הבוחן התווסף בהצלחה למערכת!", "סטטוס הוספה", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                    MessageBox.Show("the requet has been added successfully", "adding request", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                     break;
+                    case "Update":
+                    try
+                    {
+                        MainWindow.myBL.SetGuestRequest(guestRequest);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "internal error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                        return;
+                    }
+                    Close();
+                    CostumerImage.Source = null;
+                    if (isImageChanged)
+                    {
+                        try
+                        {
+                            MainWindow.myBL.ChangeCostuerImage(guestRequest.GuestRequestKey, op.FileName);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("failed adding ptofile photo" + ex.Message, "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                        }
+                    }
+                    MessageBox.Show("the request details have bee changed successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+
                     break;
             }
+
+            //private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+            //{
+            //    if (e.ChangedButton == MouseButton.Left)
+            //        this.DragMove();
+            //}
         }
     }
 

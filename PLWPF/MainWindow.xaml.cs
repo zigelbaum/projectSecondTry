@@ -36,7 +36,7 @@ namespace PLWPF
 
         private void GuestRequestButton_Click(object sender, RoutedEventArgs e)
         {
-            GuestRequestWindow requestWindow = new GuestRequestWindow();
+            GuestPresentation requestWindow = new GuestPresentation();
             requestWindow.ShowDialog();
         }
 

@@ -521,11 +521,23 @@ namespace BL
             return tempSource;
         }
 
-        public void AddCostumerImage(string id, string newImagePath)
+        public void AddCostumerImage(int key, string newImagePath)
         {
-            string photoPath = @"..\..\..\TestersImages\" + id + @".jpg";
+            string photoPath = @"..\..\..\TestersImages\" + key + @".jpg";
             (File.Create(photoPath)).Close();
             System.IO.File.Copy(newImagePath, photoPath, true);
+        }
+
+        public void ChangeCostuerImage(int requestKey, string newImagePath)
+        {
+            string destination = @"..\..\..\TestersImages\" + requestKey + @".jpg";
+            try
+            {
+                File.Delete(destination);
+                (File.Create(destination)).Close();
+                System.IO.File.Copy(newImagePath, destination, true);
+            }
+            catch { throw; }
         }
         #endregion
 

@@ -23,5 +23,11 @@ namespace PLWPF
         {
             InitializeComponent();
         }
+
+        private void addRequestButton_Click(object sender, RoutedEventArgs e)
+        { 
+            GuestPresentation guestPresentationWindow = new GuestPresentation();
+            guestPresentationWindow.ShowDialog();
+        }
     }
 }
