@@ -21,13 +21,45 @@ namespace PLWPF
     /// </summary>
     public partial class UploadOrderWindow : Window
     {
-        IBL myBl = BL.FactoryBL.getBL("XML");
-        HostingUnit host; // לעשות שהוא יבין לבד לאיזו יחידה לבדוק התאמה
-        public List<Order> listOrders;
+        IBL myBl = BL.FactoryBL.getBL("XML");      
+        HostingUnit host;
+        List<Order> listOrders;
+        Order myorder;
+
         public UploadOrderWindow()
-        {            
-            listOrders = myBl.getOrders(u => u.HostingUnitKey == host.HostingUnitKey);
+        {
+            string unitName = hostingUnitName.Text;
+            List<HostingUnit> hostList = myBl.getHostingUnits(h => h.HostingUnitName == unitName);
+            host = hostList[0];
+            //מראה את ההזמנות המתאימות
+            OrderstList.Visibility = Visibility;
+       
             InitializeComponent();
+        }
+
+        public void cbOrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //למלאות את הפרטים כאשר לוחצים על הזמנה מסוימת
+            StatusOrder.Visibility = Visibility;
+            StatusOrderString.Visibility = Visibility;
+
+            CreateDate.Visibility = Visibility;
+            CreateDateString.Visibility = Visibility;
+
+            Int32 index = OrderstList.SelectedIndex;
+            myorder = listOrders[index];
+
+            if(myorder.OrderDate != null)
+            {
+                OrderDate.Visibility = Visibility;
+                OrderDateString.Visibility = Visibility;
+            }
+        }
+
+        public void cbOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //לעדכן סטטוס כשבוחרים סטטוס חדש
+            myBl.setOrder();
         }
     }
 }
