@@ -514,6 +514,30 @@ namespace BL
             return null;
         }
 
+        public HostingUnit FindUnit(Int32 unitKey)
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            List<HostingUnit> units = dal.getHostingUnitsList();
+            foreach (HostingUnit item in units)
+            {
+                if (item.HostingUnitKey == unitKey)
+                    return item;
+            }
+            return null;
+        }
+
+        //public Order FindOrder(Int32 orderKey)
+        //{
+        //    IDAL dal = DAL.factoryDAL.getDAL("List");
+        //    List<Order> orders = dal.GetOrdersList();
+        //    foreach (Order item in orders)
+        //    {
+        //        if (item.HostingUnitKey == orderKey)
+        //            return item;
+        //    }
+        //    return null;
+        //}
+
         public string GetCostumerImagePath(int requestKey)
         {
             string tempSource = System.IO.Path.GetTempFileName();

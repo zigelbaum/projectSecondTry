@@ -60,10 +60,17 @@
     <Compile Include="CreateOrderWindow.xaml.cs">
       <DependentUpon>CreateOrderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GetKey.xaml.cs">
+      <DependentUpon>GetKey.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UploadOrderWindow.xaml.cs">
       <DependentUpon>UploadOrderWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="CreateOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GetKey.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
