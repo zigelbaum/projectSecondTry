@@ -25,15 +25,22 @@ namespace PLWPF
         #region variable
         IBL myBl = BL.FactoryBL.getBL("XML");
         public List<Order> listOrders;
-        HostingUnit host;
+        HostingUnit unit;
         #endregion
 
         public OrderWindow()
         {
             InitializeComponent();
-            cbOrderstList.Visibility = Visibility.Hidden;
             UploadOrderButton.Visibility = Visibility.Hidden;
             CreateOrderButton.Visibility = Visibility.Hidden;
+            //Host host;
+            GetKey getKey = new GetKey("Host");
+            getKey.ShowDialog();
+            if (getKey.numVal != 0)
+            {
+                //...
+                getOrderList(getKey.numVal);
+            }
         }
 
         private void UploadOrderButton_Click(object sender, RoutedEventArgs e)
@@ -48,35 +55,19 @@ namespace PLWPF
             new_ord_Window.ShowDialog();
         }
 
-        private void ContinueButton_Click(object sender, RoutedEventArgs e)
+        private void getOrderList(Int32 hostID)
         {
-            try
-            {
-                Int32 hostID = Int32.Parse(tbhostID.Text);
-                List<HostingUnit> hostList = myBl.getHostingUnits(h => h.Owner.ID == hostID);
-                host = hostList[0];
-                listOrders = myBl.getOrders(o => o.HostingUnitKey == host.HostingUnitKey);
-                cbOrderstList.Visibility = Visibility.Visible;
-                UploadOrderButton.Visibility = Visibility.Visible;
-                CreateOrderButton.Visibility = Visibility.Visible;
-                ConButton.Visibility = Visibility.Hidden;
-            }
-            catch(Exception ex)
-            {
-                var result = MessageBox.Show(ex.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                if (MessageBoxResult.No == result)
-                {
-                    Close();
-                    return;
-                }
-                else
-                    return;
-            }
+            List<HostingUnit> hostList = myBl.getHostingUnits(h => h.Owner.ID == hostID);
+            unit = hostList[0];
+            listOrders = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);
+            cbOrderstList.Visibility = Visibility.Visible;
+            UploadOrderButton.Visibility = Visibility.Visible;
+            CreateOrderButton.Visibility = Visibility.Visible;
         }
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
-            
+         //????   
         }
 
         private void cbOrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)

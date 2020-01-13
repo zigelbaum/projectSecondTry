@@ -235,6 +235,7 @@ namespace DAL
             return DS.DataSource.ordersCollection.Select(item => (Order)item.Clone()).ToList();
         }
         #endregion
+      
 
         #region BanckBranch
         public List<BankBranch> GetBankBranchesList()

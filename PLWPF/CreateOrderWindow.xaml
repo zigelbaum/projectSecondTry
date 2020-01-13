@@ -11,7 +11,7 @@
             <RowDefinition Height="145*"/>
             <RowDefinition Height="276*"/>
         </Grid.RowDefinitions>
-        <ComboBox Name="GuestRequestList"  VerticalAlignment="Stretch" Grid.Column="0" SelectionChanged="cbRequestList_SelectionChanged"  Text="{Binding Path=matchRequests}" Margin="35,65,0,17.667" FontSize="36" Width="703"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
+        <ComboBox Name="GuestRequestList"  VerticalAlignment="Stretch" Grid.Column="0" SelectionChanged="cbRequestList_SelectionChanged"  Text="{Binding Path=matchRequests}" Margin="44,57,0,25.667" FontSize="36" Width="703"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
             <ComboBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -20,8 +20,6 @@
                 </TransformGroup>
             </ComboBox.RenderTransform>
         </ComboBox>
-        <TextBox Name="tbhostID"  HorizontalAlignment="Left" Margin="83,10,0,0" TextWrapping="Wrap" Text="{Binding Path=myorder.HostingUnitKey}" VerticalAlignment="Top" Height="28" Width="195"/>
-        <Label Name="hostID"  HorizontalAlignment="Left" Margin="10,10,0,0" Content="Enter ID:" VerticalAlignment="Top" Height="28" Width="93" FontSize="16" FontWeight="Bold"/>
 
         <TextBox Name="GuestRequestKey"  HorizontalAlignment="Center" Margin="626,10.333,53,0" TextWrapping="Wrap" Text="{Binding Path=my_request_key}" VerticalAlignment="Top" Height="28" Width="114" Grid.RowSpan="1" Grid.Row="1"/>
         <Label Name="GuestRequestKeyString"  HorizontalAlignment="Center" Margin="41,0.333,603,0" Content="Guest Request Key:" VerticalAlignment="Top" Height="38" Width="149" Grid.RowSpan="1" Grid.Row="1"/>
@@ -34,6 +32,7 @@
 
         <TextBox Name="CreateDate"  HorizontalAlignment="Right" Margin="0,137.333,53,0" TextWrapping="Wrap" Text="{Binding Path=myorder.CreateDate}" VerticalAlignment="Top" Height="22" Width="114" RenderTransformOrigin="1.405,0.447" Grid.Row="1"/>
         <Label Name="CreateDateString"  HorizontalAlignment="Right" Margin="0,133.333,168,0" Content="create date:" VerticalAlignment="Top" Height="56" Width="77" RenderTransformOrigin="1.405,0.447" Grid.Row="1"/>
+        <Button x:Name="AddOrderButton" Content="Add" Click="AddOrderButton_Click" HorizontalAlignment="Left" Margin="316,212.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.673,2.451" Height="36" FontSize="18" FontWeight="Bold" Background="#FFFEFEFE"/>
 
     </Grid>
 </Window>
