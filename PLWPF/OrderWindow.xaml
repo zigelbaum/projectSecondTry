@@ -7,8 +7,22 @@
         mc:Ignorable="d"
         Title="OrderWindow" Height="450" Width="800">
     <Grid>
-        <ComboBox Name="OrderstList"  VerticalAlignment="Stretch" SelectionChanged="cbRequestList_SelectionChanged" Text="{Binding Path=listOrders}" Margin="37,28,0,330.667" FontSize="36" Width="723"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5"/>
-        <Button Name="UploadOrderButton" Content="Upload Order"  HorizontalAlignment="Left" Margin="37,241,0,0" VerticalAlignment="Top" Width="307" Height="74" Click="UploadOrderButton_Click"/>
-        <Button Name="CreateOrderButton" Content="Create a new Order"  HorizontalAlignment="Right" Margin="0,241,33.333,0" VerticalAlignment="Top" Width="307" Height="74" Click="CreateOrderButton_Click"/>
+      <Grid.Background>
+      <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+        <GradientStop Color="Black" Offset="1"/>
+        <GradientStop Color="#FF74A5CE"/>
+      </LinearGradientBrush>
+      </Grid.Background>
+
+      <Button Name="ConButton" Content="Continue" Margin="557,10,53.333,373.667" Background="#FFCBCDE0" FontSize="16" FontWeight="Bold" Click="ContinueButton_Click" RenderTransformOrigin="0.472,0.128"/>
+
+      <TextBox Name="tbhostID"  HorizontalAlignment="Left" Margin="114,10,0,0" TextWrapping="Wrap" Text="{Binding Path=IDhosts}" VerticalAlignment="Top" Height="28" Width="183" Background="#FFD1D3E5" FontSize="14"/>
+      <Label Name="hostID"  HorizontalAlignment="Left" Margin="37,10,0,0" Content="Enter ID:" VerticalAlignment="Top" Height="28" Width="72" FontSize="14" FontWeight="Bold"/>
+
+
+      <ComboBox Name="cbOrderstList"  VerticalAlignment="Stretch" SelectionChanged="cbOrderList_SelectionChanged" Text="{Binding Path=listOrders}" Margin="37,103,0,255.667" FontSize="36" Width="723"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Background="#FF797BA6"/>
+      <Button Name="UploadOrderButton" Content="Upload Order"  HorizontalAlignment="Left" Margin="37,241,0,0" VerticalAlignment="Top" Width="307" Height="74" Click="UploadOrderButton_Click" FontSize="24" Background="#FFBBBCBF" FontWeight="Bold"/>
+      <Button Name="CreateOrderButton" Content="Create a new Order"  HorizontalAlignment="Right" Margin="0,241,33.333,0" VerticalAlignment="Top" Width="307" Height="74" Click="CreateOrderButton_Click" FontSize="24" Background="#FFC2C2C6" FontWeight="Bold"/>
+      <Button x:Name="returnButton" Content="Back" Margin="37,349,636.333,31.667" Width="120" Height="40" Background="#FFB8B8B8" FontWeight="Bold" FontSize="18" Click="ReturnButton_Click"/>
     </Grid>
 </Window>

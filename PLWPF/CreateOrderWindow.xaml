@@ -11,7 +11,7 @@
             <RowDefinition Height="145*"/>
             <RowDefinition Height="276*"/>
         </Grid.RowDefinitions>
-        <ComboBox Name="GuestRequestList" Visibility="Hidden" VerticalAlignment="Stretch" Grid.Column="0" SelectionChanged="cbRequestList_SelectionChanged"  Text="{Binding Path=matchRequests}" Margin="35,65,0,17.667" FontSize="36" Width="703"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
+        <ComboBox Name="GuestRequestList"  VerticalAlignment="Stretch" Grid.Column="0" SelectionChanged="cbRequestList_SelectionChanged"  Text="{Binding Path=matchRequests}" Margin="35,65,0,17.667" FontSize="36" Width="703"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
             <ComboBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -20,13 +20,13 @@
                 </TransformGroup>
             </ComboBox.RenderTransform>
         </ComboBox>
-        <TextBox Name="hostingUnitName"  HorizontalAlignment="Left" Margin="186,9,0,0" TextWrapping="Wrap" Text="{Binding Path=myorder.HostingUnitKey}" VerticalAlignment="Top" Height="28" Width="195"/>
-        <Label Name="hostingUnitNameString"  HorizontalAlignment="Left" Margin="10,10,0,0" Content="Enter yuor Hosting Unit Name:" VerticalAlignment="Top" Height="28" Width="180"/>
+        <TextBox Name="tbhostID"  HorizontalAlignment="Left" Margin="83,10,0,0" TextWrapping="Wrap" Text="{Binding Path=myorder.HostingUnitKey}" VerticalAlignment="Top" Height="28" Width="195"/>
+        <Label Name="hostID"  HorizontalAlignment="Left" Margin="10,10,0,0" Content="Enter ID:" VerticalAlignment="Top" Height="28" Width="93" FontSize="16" FontWeight="Bold"/>
 
         <TextBox Name="GuestRequestKey"  HorizontalAlignment="Center" Margin="626,10.333,53,0" TextWrapping="Wrap" Text="{Binding Path=my_request_key}" VerticalAlignment="Top" Height="28" Width="114" Grid.RowSpan="1" Grid.Row="1"/>
         <Label Name="GuestRequestKeyString"  HorizontalAlignment="Center" Margin="41,0.333,603,0" Content="Guest Request Key:" VerticalAlignment="Top" Height="38" Width="149" Grid.RowSpan="1" Grid.Row="1"/>
 
-        <TextBox Name="OrderKey"  HorizontalAlignment="Right" Margin="0,0.333,453,0" TextWrapping="Wrap" Text="{Binding Path=myorder.OrderKey}" VerticalAlignment="Top" Height="38" Width="148" RenderTransformOrigin="1.082,10.31" Grid.Row="1"/>
+        <TextBox Name="OrderKey"  HorizontalAlignment="Right" Margin="0,144,492,0" TextWrapping="Wrap" Text="{Binding Path=myorder.OrderKey}" VerticalAlignment="Top" Height="28" Width="141" RenderTransformOrigin="1.082,10.31" Grid.RowSpan="2"/>
         <Label Name="OrderKeyString"  HorizontalAlignment="Right" Margin="0,10.333,167,0" Content="Order Key:" VerticalAlignment="Top" Height="28" Width="78" RenderTransformOrigin="1.405,0.447" Grid.Row="1"/>
 
         <ComboBox Name="StatusOrder"  HorizontalAlignment="Left" Margin="108,137.333,0,0" Grid.Row="1"  Text="{Binding Path=myorder.OrderStatus}" VerticalAlignment="Top" Width="120"/>
