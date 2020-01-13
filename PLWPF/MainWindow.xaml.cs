@@ -23,6 +23,7 @@ namespace PLWPF
     public partial class MainWindow : Window
     {
         public static IBL myBL= FactoryBL.getBL("List");
+
         public MainWindow()
         {
             InitializeComponent();
