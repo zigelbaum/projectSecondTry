@@ -21,8 +21,8 @@ namespace PLWPF
     public partial class GetKey : Window
     {
         string entity;
-        bool retriveSuccess;
-        int numVal;
+        public bool retriveSuccess;
+        public int numVal=0;
         public GetKey(string entity = "")
         {
             this.entity = entity;
