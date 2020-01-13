@@ -21,23 +21,37 @@ namespace PLWPF
     /// </summary>
     public partial class UploadOrderWindow : Window
     {
-        IBL myBl = BL.FactoryBL.getBL("XML");      
+        #region variable
+        IBL myBl = BL.FactoryBL.getBL("XML");
         HostingUnit host;
         List<Order> listOrders;
         Order myorder;
+        #endregion
 
         public UploadOrderWindow()
         {
-            string unitName = hostingUnitName.Text;
-            List<HostingUnit> hostList = myBl.getHostingUnits(h => h.HostingUnitName == unitName);
-            host = hostList[0];
-            //מראה את ההזמנות המתאימות
-            OrderstList.Visibility = Visibility;
-       
             InitializeComponent();
+            ConButton.Visibility = Visibility.Visible;
+            OrderstList.Visibility = Visibility.Hidden;
+            StatusOrder.Visibility = Visibility.Hidden;
+            StatusOrderString.Visibility = Visibility.Hidden;
+            CreateDate.Visibility = Visibility.Hidden;
+            CreateDateString.Visibility = Visibility.Hidden;
+            OrderDate.Visibility = Visibility.Hidden;
+            OrderDateString.Visibility = Visibility.Hidden;
         }
 
-        public void cbOrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ContinueButton_Click(object sender, SelectionChangedEventArgs e)
+        {
+            string unitName = hostingUnitName.Text;
+            List<HostingUnit> hostList = myBl.getHostingUnits(h => h.HostingUnitName == unitName);
+            ConButton.Visibility = Visibility.Hidden;
+            host = hostList[0];
+            //מראה את ההזמנות המתאימות
+            OrderstList.Visibility = Visibility.Visible;
+        }
+
+        private void cbOrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //למלאות את הפרטים כאשר לוחצים על הזמנה מסוימת
             StatusOrder.Visibility = Visibility;
@@ -49,17 +63,24 @@ namespace PLWPF
             Int32 index = OrderstList.SelectedIndex;
             myorder = listOrders[index];
 
-            if(myorder.OrderDate != null)
+            if (myorder.OrderDate != null)
             {
                 OrderDate.Visibility = Visibility;
                 OrderDateString.Visibility = Visibility;
             }
         }
 
-        public void cbOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //לעדכן סטטוס כשבוחרים סטטוס חדש
-            myBl.setOrder();
+            Int32 index = StatusOrder.SelectedIndex;
+            Enums.OrderStatus myStatus = (Enums.OrderStatus)index;
+            Int32 orderKey = myorder.OrderKey;
+            Order ord = myBl.getOrders(o => o.OrderKey == orderKey)[0];
+            ord.OrderStatus = myStatus;
+            myBl.setOrder(ord);
+            //יראה את ההזמנה המעודדכנת
+            myorder = myBl.FindOrder(myorder.OrderKey);
         }
     }
 }

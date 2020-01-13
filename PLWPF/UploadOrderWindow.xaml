@@ -7,19 +7,29 @@
         mc:Ignorable="d"
         Title="UploadOrderWindow" Height="450" Width="800">
     <Grid>
-        <ComboBox Name="OrderstList"  Visibility="Hidden"  VerticalAlignment="Stretch" SelectionChanged="cbOrderList_SelectionChanged" Text="{Binding Path=listOrders}" Margin="70,93,0,265.667" FontSize="36" Width="660"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5"/>
+
+        <ComboBox Name="OrderstList" VerticalAlignment="Stretch" SelectionChanged="cbOrderList_SelectionChanged" Text="{Binding Path=listOrders}" Margin="77,122,0,236.667" FontSize="36" Width="660"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" BorderBrush="#FFFBFBFB"/>
 
         <TextBox Name="hostingUnitName"  HorizontalAlignment="Left" Margin="186,9,0,0" TextWrapping="Wrap" Text="{Binding Path=myorder.HostingUnitKey}" VerticalAlignment="Top" Height="28" Width="244"/>
         <Label Name="hostingUnitNameString"  HorizontalAlignment="Left" Margin="10,10,0,0" Content="Enter yuor Hosting Unit Name:" VerticalAlignment="Top" Height="28" Width="180"/>
 
-        <ComboBox Name="StatusOrder"  Visibility="Hidden" HorizontalAlignment="Left" Margin="106,191,0,0" SelectionChanged="cbOrderStatus_SelectionChanged"  Text="{Binding Path=myorder.OrderStatus}" VerticalAlignment="Top" Width="120"/>
-        <Label Name="StatusOrderString" Visibility="Hidden" HorizontalAlignment="Right" Margin="0,191,692.333,0" Content="status:" VerticalAlignment="Top" Height="39" Width="62" RenderTransformOrigin="1.405,0.447"/>
+        <ComboBox Name="StatusOrder"  HorizontalAlignment="Left" Margin="99,334,0,0" SelectionChanged="cbOrderStatus_SelectionChanged"  Text="{Binding Path=myorder.OrderStatus}" VerticalAlignment="Top" Width="120" BorderBrush="#FFFBFAFA" OpacityMask="White">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
+        <Label Name="StatusOrderString"  HorizontalAlignment="Right" Margin="0,334,699.333,0" Content="status:" VerticalAlignment="Top" Height="39" Width="62" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
 
-        <TextBox Name="CreateDate" Visibility="Hidden" HorizontalAlignment="Right" Margin="0,191,303.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.CreateDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447"/>
-        <Label Name="CreateDateString" Visibility="Hidden" HorizontalAlignment="Right" Margin="0,191,416.333,0" Content="create date:" VerticalAlignment="Top" Height="56" Width="77" RenderTransformOrigin="1.405,0.447"/>
+        <TextBox Name="CreateDate" HorizontalAlignment="Right" Margin="0,334,318.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.CreateDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447"/>
+        <Label Name="CreateDateString" HorizontalAlignment="Right" Margin="0,334,437.333,0" Content="create date:" VerticalAlignment="Top" Height="39" Width="102" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
 
-        <TextBox Name="OrderDate" Visibility="Hidden" HorizontalAlignment="Right" Margin="0,191,36.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.OrderDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447"/>
-        <Label Name="OrderDateString" Visibility="Hidden" HorizontalAlignment="Right" Margin="0,191,150.333,0" Content="order date:" VerticalAlignment="Top" Height="56" Width="77" RenderTransformOrigin="1.405,0.447"/>
+        <TextBox Name="OrderDate" HorizontalAlignment="Right" Margin="0,334,56.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.OrderDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447"/>
+        <Label Name="OrderDateString" HorizontalAlignment="Right" Margin="0,334,175.333,0" Content="order date:" VerticalAlignment="Top" Height="56" Width="94" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
+
+        <Button  Name="ConButton" Content="continue" HorizontalAlignment="Left" Click="ContinueButton_Click" Margin="557,9,0,0" VerticalAlignment="Top" Width="180" Height="38"  Background="#FFFFFFFF"/>
 
     </Grid>
 </Window>
