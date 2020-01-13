@@ -21,11 +21,25 @@ namespace PLWPF
     public partial class GetKey : Window
     {
         string entity;
+        bool retriveSuccess;
         int numVal;
         public GetKey(string entity = "")
         {
             this.entity = entity;
+            retriveSuccess = false;
             InitializeComponent();
+            switch(entity)
+            {
+                case "HostingUnit":
+                    idLabel.Content = "Please enter hosting unit key:";
+                    break;
+                case "Order":
+                    idLabel.Content = "Please enter order key:";
+                    break;
+                case "Host":
+                    idLabel.Content = "Please enter your ID:";
+                    break;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -39,18 +53,25 @@ namespace PLWPF
                             GuestRequest guestRequest = MainWindow.myBL.FindGuestRequest(numVal);
                         if (guestRequest == null)
                             throw new Exception("The guest request you looked for doestn exists in the system");
+                        else
+                            retriveSuccess = true;
                     break;
                     case "HostingUnit":
                         HostingUnit hostingUnit = MainWindow.myBL.FindUnit(numVal);
                         if(hostingUnit==null)
                             throw new Exception("The hosting unit you looked for doestn exists in the system");
+                        else
+                            retriveSuccess = true;
                         break;
                     case "Order":
                         Order order = MainWindow.myBL.FindOrder(numVal);
                         if (order == null)
                             throw new Exception("The order you looked for doestn exists in the system");
+                        else
+                            retriveSuccess = true;
                         break;
-
+                    case "Host":
+                        break;
                 }
             }
             catch(FormatException ex)
@@ -65,6 +86,11 @@ namespace PLWPF
             
 
             
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

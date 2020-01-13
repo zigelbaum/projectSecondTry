@@ -20,8 +20,7 @@
             <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
         <Button x:Name="returnButton" Content="Back" Margin="29,20,0,0" Width="120" Height="40" Grid.Row="1"/>
-        <Button x:Name="updateRequestButton" Content="Update" Margin="504,20,0,0" Width="120" Height="40" Grid.Row="1"/>
+        <Button x:Name="updateRequestButton" Content="Update" Margin="504,20,0,0" Width="120" Height="40" Grid.Row="1" Click="updateRequestButton_Click"/>
         <Button x:Name="addRequestButton" Content="Add" Margin="649,20,0,0" Width="120" Height="40" Grid.Row="1" Click="addRequestButton_Click"/>
-
     </Grid>
 </Window>

@@ -29,5 +29,11 @@ namespace PLWPF
             GuestPresentation guestPresentationWindow = new GuestPresentation();
             guestPresentationWindow.ShowDialog();
         }
+
+        private void updateRequestButton_Click(object sender, RoutedEventArgs e)
+        {
+            GetKey getKey = new GetKey("GuestRequest");
+            getKey.ShowDialog();
+        }
     }
 }
