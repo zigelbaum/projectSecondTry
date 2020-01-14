@@ -70,8 +70,8 @@
         <Label Name="requestID" Content="request id" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
         <TextBox x:Name="tbRquestId" HorizontalAlignment="Left"  Margin="128,35,0,0" TextWrapping="Wrap" Text="{Binding Path=GuestRequestKey, Mode=OneWay}" VerticalAlignment="Top" Width="120" Height="26"/>
         <Label Name="requestStatus" Content="request status" HorizontalAlignment="Left" Height="26" Margin="268,35,0,0" VerticalAlignment="Top" Width="86"/>
-        <TextBox x:Name="tbRequStatus" HorizontalAlignment="Left" Height="26" Margin="359,35,0,0" TextWrapping="Wrap" Text="{Binding Path=Status, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
         <Label Name="regDate" Content="registration date" HorizontalAlignment="Left" Margin="504,35,0,0" VerticalAlignment="Top" Width="111" Height="26"/>
         <TextBox x:Name="tbRegDate" HorizontalAlignment="Left" Height="26" Margin="630,35,0,0" TextWrapping="Wrap" Text="{Binding Path=RegistrationDate, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="cbbStatus" IsEditable="True" HorizontalAlignment="Left" Margin="359,39,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Status,Mode=OneWay}"/>
     </Grid>
 </Window>

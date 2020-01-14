@@ -49,28 +49,41 @@ namespace PLWPF
                 Int32 numVal = Int32.Parse(tbID.Text);
                 switch (this.entity)
                 {
-                    case "GuestRequest":                       
-                            GuestRequest guestRequest = MainWindow.myBL.FindGuestRequest(numVal);
+                    case "GuestRequest":
+                        GuestRequest guestRequest = MainWindow.myBL.FindGuestRequest(numVal);
                         if (guestRequest == null)
+                        {
+                            numVal = 0;
                             throw new Exception("The guest request you looked for doestn exists in the system");
+                        }
                         else
                             retriveSuccess = true;
-                    break;
+                        Close();
+                        break;
                     case "HostingUnit":
                         HostingUnit hostingUnit = MainWindow.myBL.FindUnit(numVal);
-                        if(hostingUnit==null)
+                        if (hostingUnit == null)
+                        {
+                            numVal = 0;
                             throw new Exception("The hosting unit you looked for doestn exists in the system");
+                        }
                         else
                             retriveSuccess = true;
+                        Close();
                         break;
                     case "Order":
                         Order order = MainWindow.myBL.FindOrder(numVal);
                         if (order == null)
+                        {
+                            numVal = 0;
                             throw new Exception("The order you looked for doestn exists in the system");
+                        }
                         else
                             retriveSuccess = true;
+                        Close();
                         break;
                     case "Host":
+                        Close();
                         break;
                 }
             }
