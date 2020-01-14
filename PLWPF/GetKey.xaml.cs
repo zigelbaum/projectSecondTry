@@ -73,10 +73,10 @@ namespace PLWPF
                         break;                    
                     case "Host":
                         List<HostingUnit> hostList = MainWindow.myBL.getHostingUnits(h => h.Owner.ID == numVal);
-                        if (hostList == null)
+                        if (hostList.Count() == 0)
                         {
                             numVal = 0;
-                            throw new Exception("The order you looked for doestn exists in the system");
+                            throw new Exception("The ID you looked for doestn exists in the system");
                         }
                         else
                             retriveSuccess = true;

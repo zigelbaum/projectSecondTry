@@ -43,8 +43,16 @@ namespace PLWPF
 
         private void OrderButton_Click(object sender, RoutedEventArgs e)
         {
-            OrderWindow orderWindow = new OrderWindow();
-            orderWindow.ShowDialog();
+            OrderWindow orderWindow;
+            GetKey getKey = new GetKey("Host");
+            getKey.ShowDialog();
+            if (getKey.numVal != 0)
+            {                  
+                orderWindow = new OrderWindow(getKey.numVal);
+                orderWindow.ShowDialog();
+            }
+
+            
         }
     }
 }

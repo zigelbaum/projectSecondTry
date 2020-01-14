@@ -24,48 +24,34 @@ namespace PLWPF
 
         #region variable
         IBL myBl = BL.FactoryBL.getBL("XML");
-        HostingUnit host;
+        HostingUnit unit;
         Int32 my_request_key;
         List<GuestRequest> matchRequests;
-        Order myorder;
         #endregion
 
-        public CreateOrderWindow()
+        public CreateOrderWindow(Int32 hostID, HostingUnit my_unit)
         {
             InitializeComponent();
 
-            #region visibility
-            GuestRequestList.Visibility = Visibility.Hidden;
-            #endregion
+            unit = my_unit;
 
-            GetKey getKey = new GetKey("HostingUnit");
-            getKey.ShowDialog();
-            if (getKey.numVal != 0)
-            {
-                //...
-                getGuestRequestList(getKey.numVal);
-            }
+            getGuestRequestList();           
         }
 
-        private void getGuestRequestList(Int32 unitKey)
-        {
-            host  = myBl.FindUnit(unitKey);
-            if (host == null)
-            {
-                //זה אומר שהקלט לא תקין צריך לטפל
-            }
-            //אם הפלט תקין
+        private void getGuestRequestList()
+        {            
             //אמור להביא את רשימת הדרישות המתאימות ליחידת אירוח
             IEnumerable<IGrouping<Host, HostingUnit>> my_units = myBl.GroupHostByHostingUnit();
-            foreach (IGrouping<Host, HostingUnit> hosting in my_units)
+            foreach (IGrouping<Host, HostingUnit> hostings in my_units)
             {
-                foreach (HostingUnit unit in hosting)
+                foreach (HostingUnit hosting in hostings)
                 {
-                    matchRequests = myBl.RequestMatchToStipulation(myBl.BuildPredicate(unit));
+                    if (hosting == unit)
+                    {
+                        matchRequests = myBl.RequestMatchToStipulation(myBl.BuildPredicate(hosting));
+                    }
                 }
             }
-            //מראה את הדרישות המתאימות
-            GuestRequestList.Visibility = Visibility.Visible;
         }
 
         public void cbRequestList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -74,21 +60,13 @@ namespace PLWPF
             Int32 index = GuestRequestList.SelectedIndex;
 
             my_request_key = matchRequests[index].GuestRequestKey;
-
-            #region definition order
-            myorder.GuestRequestKey = my_request_key;
-            myorder.HostingUnitKey = host.HostingUnitKey;
-            myorder.HostingUnitKey = host.HostingUnitKey;
-            #endregion
-
-            myBl.AddOrder(myorder);
         }
 
         private void AddOrderButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Order ord = myBl.NewOrder(host.HostingUnitKey, my_request_key);
+                Order ord = myBl.NewOrder(unit.HostingUnitKey, my_request_key);
                 myBl.AddOrder(ord);
             }
             catch (Exception ex)

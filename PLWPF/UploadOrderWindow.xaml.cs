@@ -23,13 +23,11 @@ namespace PLWPF
     {
         #region variable
         IBL myBl = BL.FactoryBL.getBL("XML");
-        HostingUnit host;
-        List<Order> listOrder;
+        List<Order> listOrders = null;
         Order myorder;
-        OrderWindow orderWin;
         #endregion
 
-        public UploadOrderWindow()
+        public UploadOrderWindow(Int32 hostID)
         {
             InitializeComponent();
 
@@ -43,7 +41,7 @@ namespace PLWPF
             OrderDateString.Visibility = Visibility.Hidden;
             #endregion
 
-            getOrderList(orderWin.hostID);
+            getOrderList(hostID);
         }
 
         private void getOrderList(Int32 hostID)
@@ -56,7 +54,7 @@ namespace PLWPF
                 foreach(Order ord in tempOrder)
                 {
                     if(ord != null)
-                    listOrder.Add(ord);
+                    listOrders.Add(ord);
                 }
             }
             OrderstList.Visibility = Visibility.Visible;
@@ -83,7 +81,7 @@ namespace PLWPF
         private void cbOrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Int32 index = OrderstList.SelectedIndex;
-            myorder = listOrder[index];
+            myorder = listOrders[index];
 
             //למלאות את הפרטים כאשר לוחצים על הזמנה מסוימת
             StatusOrder.Visibility = Visibility;

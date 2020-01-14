@@ -27,7 +27,7 @@ namespace DS
 
         internal static List<Host> My_Host = new List<Host>
         {
-            new Host(){HostKey=11111111, PrivateName="Yael", FamilyName="Shilo", PhoneNumber="0587100429", MailAddress="YSH1234@gmail.com", CollectionClearance=true, BankBranchDetails=BB1, BankAccountNumber=13579246},
+            new Host(){HostKey=11111111, ID=31210005, PrivateName="Yael", FamilyName="Shilo", PhoneNumber="0587100429", MailAddress="YSH1234@gmail.com", CollectionClearance=true, BankBranchDetails=BB1, BankAccountNumber=13579246},
             new Host(){HostKey=12121212, PrivateName="Abigail", FamilyName="Cohen", PhoneNumber="0508456123", MailAddress="abigail12@gmail.com", CollectionClearance=true, BankBranchDetails=BB2, BankAccountNumber=24680135},
             new Host(){HostKey=12222222, PrivateName="Rebeka", FamilyName="Levi", PhoneNumber="0503681400", MailAddress="Levi400@gmail.com", CollectionClearance=false, BankBranchDetails=BB3, BankAccountNumber=1000034}
         };
