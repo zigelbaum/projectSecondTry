@@ -21,6 +21,7 @@ namespace PLWPF
     /// </summary>
     public partial class CreateOrderWindow : Window
     {
+
         #region variable
         IBL myBl = BL.FactoryBL.getBL("XML");
         HostingUnit host;
@@ -36,9 +37,6 @@ namespace PLWPF
             #region visibility
             GuestRequestList.Visibility = Visibility.Hidden;
 
-            tbhostID.Visibility = Visibility.Visible;
-            hostID.Visibility = Visibility.Visible;
-
             GuestRequestKey.Visibility = Visibility.Hidden;
             GuestRequestKeyString.Visibility = Visibility.Hidden;
 
@@ -46,12 +44,18 @@ namespace PLWPF
             OrderKeyString.Visibility = Visibility.Hidden;
             #endregion
 
+            GetKey getKey = new GetKey("HostingUnit");
+            getKey.ShowDialog();
+            if (getKey.numVal != 0)
+            {
+                //...
+                getGuestRequestList(getKey.numVal);
+            }
         }
-        private void Enter_Click()
+
+        private void getGuestRequestList(Int32 unitKey)
         {
-            string unitName = tbhostID.Text;
-            List<HostingUnit> hostList = myBl.getHostingUnits(h => h.HostingUnitName == unitName);
-            host = hostList[0];
+            host  = myBl.FindUnit(unitKey);
             if (host == null)
             {
                 //זה אומר שהקלט לא תקין צריך לטפל
@@ -89,5 +93,24 @@ namespace PLWPF
             myBl.AddOrder(myorder);
         }
 
+        private void AddOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Order ord = myBl.NewOrder(host.HostingUnitKey, my_request_key);
+                myBl.AddOrder(ord);
+            }
+            catch (Exception ex)
+            {
+                var result = MessageBox.Show(ex.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                if (MessageBoxResult.No == result)
+                {
+                    Close();
+                    return;
+                }
+                else
+                    return;
+            }
+        }
     }
 }

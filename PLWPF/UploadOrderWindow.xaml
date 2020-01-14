@@ -10,9 +10,6 @@
 
         <ComboBox Name="OrderstList" VerticalAlignment="Stretch" SelectionChanged="cbOrderList_SelectionChanged" Text="{Binding Path=listOrders}" Margin="77,122,0,236.667" FontSize="36" Width="660"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" BorderBrush="#FFFBFBFB"/>
 
-        <TextBox Name="hostingUnitName"  HorizontalAlignment="Left" Margin="186,9,0,0" TextWrapping="Wrap" Text="{Binding Path=myorder.HostingUnitKey}" VerticalAlignment="Top" Height="28" Width="244"/>
-        <Label Name="hostingUnitNameString"  HorizontalAlignment="Left" Margin="10,10,0,0" Content="Enter yuor Hosting Unit Name:" VerticalAlignment="Top" Height="28" Width="180"/>
-
         <ComboBox Name="StatusOrder"  HorizontalAlignment="Left" Margin="99,334,0,0" SelectionChanged="cbOrderStatus_SelectionChanged"  Text="{Binding Path=myorder.OrderStatus}" VerticalAlignment="Top" Width="120" BorderBrush="#FFFBFAFA" OpacityMask="White">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -28,8 +25,6 @@
 
         <TextBox Name="OrderDate" HorizontalAlignment="Right" Margin="0,334,56.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.OrderDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447"/>
         <Label Name="OrderDateString" HorizontalAlignment="Right" Margin="0,334,175.333,0" Content="order date:" VerticalAlignment="Top" Height="56" Width="94" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
-
-        <Button  Name="ConButton" Content="continue" HorizontalAlignment="Left" Click="ContinueButton_Click" Margin="557,9,0,0" VerticalAlignment="Top" Width="180" Height="38"  Background="#FFFFFFFF"/>
 
     </Grid>
 </Window>

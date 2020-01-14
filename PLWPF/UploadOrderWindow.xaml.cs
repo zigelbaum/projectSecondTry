@@ -24,14 +24,13 @@ namespace PLWPF
         #region variable
         IBL myBl = BL.FactoryBL.getBL("XML");
         HostingUnit host;
-        List<Order> listOrders;
+        List<Order> listOrder;
         Order myorder;
         #endregion
 
         public UploadOrderWindow()
         {
             InitializeComponent();
-            ConButton.Visibility = Visibility.Visible;
             OrderstList.Visibility = Visibility.Hidden;
             StatusOrder.Visibility = Visibility.Hidden;
             StatusOrderString.Visibility = Visibility.Hidden;
@@ -39,13 +38,32 @@ namespace PLWPF
             CreateDateString.Visibility = Visibility.Hidden;
             OrderDate.Visibility = Visibility.Hidden;
             OrderDateString.Visibility = Visibility.Hidden;
+            GetKey getKey = new GetKey("Host");
+            getKey.ShowDialog();
+            if(getKey.numVal != 0)
+            {
+                //...
+                getOrderList(getKey.numVal);
+            }
         }
 
-        private void ContinueButton_Click(object sender, SelectionChangedEventArgs e)
+        private void getOrderList(Int32 hostKey)
         {
-            string unitName = hostingUnitName.Text;
-            List<HostingUnit> hostList = myBl.getHostingUnits(h => h.HostingUnitName == unitName);
-            ConButton.Visibility = Visibility.Hidden;
+            //לעשות רשימה שתחזיר את כל ההזמנות של מארח מסוים
+            IEnumerable<IGrouping<Host, HostingUnit>> my_units = myBl.GroupHostByHostingUnit();
+            foreach (IGrouping<Host, HostingUnit> hosting in my_units)
+            {
+                foreach (HostingUnit unit in hosting)//הקוד לא יעיל להבין איך עובד הגרופינג ואז לתקן
+                {
+                    if(unit.Owner.HostKey == hostKey)
+                    {
+                        List<Order> temp = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);
+                        int num = temp.Count()
+                    }
+                }
+            }
+
+                List<HostingUnit> hostList = myBl.getHostingUnits(h => h.Owner.HostKey == hostKey);
             host = hostList[0];
             //מראה את ההזמנות המתאימות
             OrderstList.Visibility = Visibility.Visible;
@@ -61,7 +79,7 @@ namespace PLWPF
             CreateDateString.Visibility = Visibility;
 
             Int32 index = OrderstList.SelectedIndex;
-            myorder = listOrders[index];
+            myorder = listOrder[index];
 
             if (myorder.OrderDate != null)
             {
@@ -72,15 +90,29 @@ namespace PLWPF
 
         private void cbOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //לעדכן סטטוס כשבוחרים סטטוס חדש
-            Int32 index = StatusOrder.SelectedIndex;
-            Enums.OrderStatus myStatus = (Enums.OrderStatus)index;
-            Int32 orderKey = myorder.OrderKey;
-            Order ord = myBl.getOrders(o => o.OrderKey == orderKey)[0];
-            ord.OrderStatus = myStatus;
-            myBl.setOrder(ord);
-            //יראה את ההזמנה המעודדכנת
-            myorder = myBl.FindOrder(myorder.OrderKey);
+            try
+            {
+                //לעדכן סטטוס כשבוחרים סטטוס חדש
+                Int32 index = StatusOrder.SelectedIndex;
+                Enums.OrderStatus myStatus = (Enums.OrderStatus)index;
+                Int32 orderKey = myorder.OrderKey;
+                Order ord = myBl.getOrders(o => o.OrderKey == orderKey)[0];
+                ord.OrderStatus = myStatus;
+                myBl.setOrder(ord);
+                //יראה את ההזמנה המעודדכנת
+                myorder = myBl.FindOrder(myorder.OrderKey);
+            }
+            catch (Exception ex)
+            {
+                var result = MessageBox.Show(ex.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                if (MessageBoxResult.No == result)
+                {
+                    Close();
+                    return;
+                }
+                else
+                    return;
+            }
         }
     }
 }
