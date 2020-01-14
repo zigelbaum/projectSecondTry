@@ -15,6 +15,9 @@
         </Style>
     </Window.Resources>
     <Grid Name="mainGrid">
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="351*"/>
             <RowDefinition Height="70*"/>
