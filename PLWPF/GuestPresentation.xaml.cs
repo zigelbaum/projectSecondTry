@@ -41,7 +41,7 @@ namespace PLWPF
             requestID.Visibility = Visibility.Hidden;
             tbRquestId.Visibility = Visibility.Hidden;
             requestStatus.Visibility = Visibility.Hidden;
-            tbRequStatus.Visibility = Visibility.Hidden;
+            cbbStatus.Visibility = Visibility.Hidden;
             regDate.Visibility = Visibility.Hidden;
             tbRegDate.Visibility = Visibility.Hidden;
             cbbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
@@ -82,7 +82,7 @@ namespace PLWPF
                     tbRegDate.IsEnabled = false;
                     tbFirstName.IsEnabled = false;
                     tbLastName.IsEnabled = false;
-                    tbRequStatus.IsEnabled = false;
+                    cbbStatus.IsEnabled = false;
                     costumerPro.Content = "change profile";
                     addReqButton.Content = "save changes";
                     break;
@@ -91,7 +91,7 @@ namespace PLWPF
                     tbRegDate.IsEnabled = false;
                     tbFirstName.IsEnabled = false;
                     tbLastName.IsEnabled = false;
-                    tbRequStatus.IsEnabled = false;
+                    cbbStatus.IsEnabled = false;
                     tbMail.IsEnabled = false;
                     cbbArea.IsEnabled = false;
                     tbSubArea.IsEnabled = false;

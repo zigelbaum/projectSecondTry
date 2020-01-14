@@ -42,5 +42,10 @@ namespace PLWPF
                 GuestPresentation presentation = new GuestPresentation(request, "Update");
             }
         }
+
+        private void returnButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
