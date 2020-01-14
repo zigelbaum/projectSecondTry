@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="OrderWindow" Height="450" Width="800">
     <Window.Background>
-        <ImageBrush ImageSource="Icons/backGround.jpg" Opacity="0.8"/>
+        <ImageBrush/>
     </Window.Background>
     <Grid>
         <ComboBox Name="cbOrderstList"  VerticalAlignment="Stretch" SelectionChanged="cbOrderList_SelectionChanged" Text="{Binding Path=listOrders}" Margin="37,118,0,240.667" FontSize="36" Width="723"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Background="#FF797BA6"/>
-        <Button Name="UploadOrderButton" Content="Upload Order"  HorizontalAlignment="Left" Margin="360,349,0,0" VerticalAlignment="Top" Width="185" Height="40" Click="UploadOrderButton_Click" FontSize="18" Background="#FFBBBCBF" FontWeight="Bold"/>
+        <Button Name="UploadOrderButton" Content="Update Order"  HorizontalAlignment="Left" Margin="360,349,0,0" VerticalAlignment="Top" Width="185" Height="40" Click="UploadOrderButton_Click" FontSize="18" Background="#FFBBBCBF" FontWeight="Bold"/>
         <Button Name="CreateOrderButton" Content="Create a new Order"  HorizontalAlignment="Right" Margin="0,349,33.333,0" VerticalAlignment="Top" Width="185" Height="40" Click="CreateOrderButton_Click" FontSize="18" Background="#FFC2C2C6" FontWeight="Bold"/>
         <Button x:Name="returnButton" Content="Back" Margin="37,349,636.333,31.667" Width="120" Height="40" Background="#FFB8B8B8" FontWeight="Bold" FontSize="18" Click="ReturnButton_Click"/>
     </Grid>

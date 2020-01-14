@@ -26,6 +26,7 @@ namespace PLWPF
         IBL myBl = BL.FactoryBL.getBL("XML");
         public List<Order> listOrders;
         HostingUnit unit;
+        public Int32 hostID;
         #endregion
 
         public OrderWindow()
@@ -36,11 +37,9 @@ namespace PLWPF
             //Host host;
             GetKey getKey = new GetKey("Host");
             getKey.ShowDialog();
-            if (getKey.numVal != 0)
-            {
-                //...
-                getOrderList(getKey.numVal);
-            }
+            Int32 hostID = getKey.numVal;
+            if (hostID != 0)         
+               getOrderList();
         }
 
         private void UploadOrderButton_Click(object sender, RoutedEventArgs e)
@@ -55,7 +54,7 @@ namespace PLWPF
             new_ord_Window.ShowDialog();
         }
 
-        private void getOrderList(Int32 hostID)
+        private void getOrderList()
         {
             List<HostingUnit> hostList = myBl.getHostingUnits(h => h.Owner.ID == hostID);
             unit = hostList[0];
@@ -67,7 +66,7 @@ namespace PLWPF
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
-         //????   
+            Close();  
         }
 
         private void cbOrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -26,6 +26,7 @@ namespace PLWPF
         HostingUnit host;
         List<Order> listOrder;
         Order myorder;
+        OrderWindow orderWin;
         #endregion
 
         public UploadOrderWindow()
@@ -42,19 +43,13 @@ namespace PLWPF
             OrderDateString.Visibility = Visibility.Hidden;
             #endregion
 
-            GetKey getKey = new GetKey("Host");
-            getKey.ShowDialog();
-            if(getKey.numVal != 0)
-            {
-                //...
-                getOrderList(getKey.numVal);
-            }
+            getOrderList(orderWin.hostID);
         }
 
-        private void getOrderList(Int32 hostKey)
+        private void getOrderList(Int32 hostID)
         {
             //לעשות רשימה שתחזיר את כל ההזמנות של מארח מסוים
-            List<HostingUnit> unitsTemp = myBl.getHostingUnits(h => h.Owner.HostKey == hostKey);
+            List<HostingUnit> unitsTemp = myBl.getHostingUnits(h => h.Owner.ID == hostID);
             foreach(HostingUnit unit in unitsTemp)
             {
                 List<Order> tempOrder = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);

@@ -23,7 +23,7 @@ namespace PLWPF
         string entity;
         public bool retriveSuccess;
         public int numVal=0;
-        public GetKey(string entity = "")
+        public GetKey(string entity)
         {
             this.entity = entity;
             retriveSuccess = false;
@@ -70,19 +70,16 @@ namespace PLWPF
                         else
                             retriveSuccess = true;
                         Close();
-                        break;
-                    case "Order":
-                        Order order = MainWindow.myBL.FindOrder(numVal);
-                        if (order == null)
+                        break;                    
+                    case "Host":
+                        List<HostingUnit> hostList = MainWindow.myBL.getHostingUnits(h => h.Owner.ID == numVal);
+                        if (hostList == null)
                         {
                             numVal = 0;
                             throw new Exception("The order you looked for doestn exists in the system");
                         }
                         else
                             retriveSuccess = true;
-                        Close();
-                        break;
-                    case "Host":
                         Close();
                         break;
                 }
