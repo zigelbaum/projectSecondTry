@@ -36,12 +36,6 @@ namespace PLWPF
 
             #region visibility
             GuestRequestList.Visibility = Visibility.Hidden;
-
-            GuestRequestKey.Visibility = Visibility.Hidden;
-            GuestRequestKeyString.Visibility = Visibility.Hidden;
-
-            OrderKey.Visibility = Visibility.Hidden;
-            OrderKeyString.Visibility = Visibility.Hidden;
             #endregion
 
             GetKey getKey = new GetKey("HostingUnit");
@@ -78,9 +72,6 @@ namespace PLWPF
         {
             //למלאות את הפרטים כאשר לוחצים על דרישת אירוח
             Int32 index = GuestRequestList.SelectedIndex;
-
-            GuestRequestKey.Visibility = Visibility.Hidden;
-            GuestRequestKeyString.Visibility = Visibility.Hidden;
 
             my_request_key = matchRequests[index].GuestRequestKey;
 

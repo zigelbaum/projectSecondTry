@@ -31,6 +31,8 @@ namespace PLWPF
         public UploadOrderWindow()
         {
             InitializeComponent();
+
+            #region visibility
             OrderstList.Visibility = Visibility.Hidden;
             StatusOrder.Visibility = Visibility.Hidden;
             StatusOrderString.Visibility = Visibility.Hidden;
@@ -38,6 +40,8 @@ namespace PLWPF
             CreateDateString.Visibility = Visibility.Hidden;
             OrderDate.Visibility = Visibility.Hidden;
             OrderDateString.Visibility = Visibility.Hidden;
+            #endregion
+
             GetKey getKey = new GetKey("Host");
             getKey.ShowDialog();
             if(getKey.numVal != 0)
@@ -50,7 +54,19 @@ namespace PLWPF
         private void getOrderList(Int32 hostKey)
         {
             //לעשות רשימה שתחזיר את כל ההזמנות של מארח מסוים
-            IEnumerable<IGrouping<Host, HostingUnit>> my_units = myBl.GroupHostByHostingUnit();
+            List<HostingUnit> unitsTemp = myBl.getHostingUnits(h => h.Owner.HostKey == hostKey);
+            foreach(HostingUnit unit in unitsTemp)
+            {
+                List<Order> tempOrder = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);
+                foreach(Order ord in tempOrder)
+                {
+                    if(ord != null)
+                    listOrder.Add(ord);
+                }
+            }
+            OrderstList.Visibility = Visibility.Visible;
+
+           /* IEnumerable<IGrouping<Host, HostingUnit>> my_units = myBl.GroupHostByHostingUnit();
             foreach (IGrouping<Host, HostingUnit> hosting in my_units)
             {
                 foreach (HostingUnit unit in hosting)//הקוד לא יעיל להבין איך עובד הגרופינג ואז לתקן
@@ -58,7 +74,7 @@ namespace PLWPF
                     if(unit.Owner.HostKey == hostKey)
                     {
                         List<Order> temp = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);
-                        int num = temp.Count()
+                        int num = temp.Count();
                     }
                 }
             }
@@ -66,20 +82,20 @@ namespace PLWPF
                 List<HostingUnit> hostList = myBl.getHostingUnits(h => h.Owner.HostKey == hostKey);
             host = hostList[0];
             //מראה את ההזמנות המתאימות
-            OrderstList.Visibility = Visibility.Visible;
+            OrderstList.Visibility = Visibility.Visible;*/
         }
 
         private void cbOrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Int32 index = OrderstList.SelectedIndex;
+            myorder = listOrder[index];
+
             //למלאות את הפרטים כאשר לוחצים על הזמנה מסוימת
             StatusOrder.Visibility = Visibility;
             StatusOrderString.Visibility = Visibility;
 
             CreateDate.Visibility = Visibility;
-            CreateDateString.Visibility = Visibility;
-
-            Int32 index = OrderstList.SelectedIndex;
-            myorder = listOrder[index];
+            CreateDateString.Visibility = Visibility;           
 
             if (myorder.OrderDate != null)
             {

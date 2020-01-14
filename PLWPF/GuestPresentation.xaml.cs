@@ -48,6 +48,8 @@ namespace PLWPF
             cbbVacationType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
             cbbArea.SelectedItem = Enums.Area.All;
             cbbVacationType.SelectedItem = Enums.HostingUnitType.Zimmer;
+            dpEntryDate.SelectedDate = DateTime.Now;
+            dpRealeseDate.SelectedDate = DateTime.Now.AddDays(1);
         }
 
         ///<summery>

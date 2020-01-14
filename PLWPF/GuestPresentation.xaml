@@ -56,9 +56,9 @@
             <CheckBox Name="ckbMeals" IsChecked="{Binding Path=Meals,Mode=OneWay}" Content="meals"  Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Grid.Column="1" Margin="58,117,0,0" Grid.Row="1"/>
             <Label Content="choose dates:" HorizontalAlignment="Left" Margin="10,144,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Height="26" Width="82"/>
             <Label Content="entry Date:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,170,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="68"/>
-            <DatePicker Name="dpEntryDate" SelectedDate="{Binding Path=EnteryDate,Mode=OneWay}" DisplayDate="{Binding Path=EnteryDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,196,0,0" Grid.Row="1" VerticalAlignment="Top" Width="137" Height="24"/>
+            <DatePicker Name="dpEntryDate" SelectedDate="{Binding Path=EnteryDate,Mode=TwoWay}" DisplayDate="{Binding Path=EnteryDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,196,0,0" Grid.Row="1" VerticalAlignment="Top" Width="137" Height="24"/>
             <Label Content="Release Date:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,225,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="81"/>
-            <DatePicker x:Name="dpRealeseDate" SelectedDate="{Binding ReleaseDate, Mode=OneWay}" DisplayDate="{Binding ReleaseDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,251,0,0" Grid.Row="1" VerticalAlignment="Top" Width="137" Height="24"/>
+            <DatePicker x:Name="dpRealeseDate" SelectedDate="{Binding ReleaseDate, Mode=TwoWay}" DisplayDate="{Binding ReleaseDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,251,0,0" Grid.Row="1" VerticalAlignment="Top" Width="137" Height="24"/>
             <Border x:Name="ImageBorder"  BorderThickness="2" BorderBrush="Black" Margin="40,10,44,74" Grid.Column="2" Grid.Row="1">
                 <Image x:Name="CostumerImage" Source="Icons/user_icon.jpg" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2" Margin="8" Grid.Row="1"/>
             </Border>
