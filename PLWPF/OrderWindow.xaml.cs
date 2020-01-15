@@ -23,8 +23,8 @@ namespace PLWPF
     public partial class OrderWindow : Window
     {
         #region variable
-        IBL myBl = BL.FactoryBL.getBL("XML");
-        public List<Order> listOrders;
+        public static IBL myBl = BL.FactoryBL.getBL("XML");
+        public List<Order> listOrders = new List<Order>();
         public Int32 hostID;
         #endregion
 
@@ -34,7 +34,20 @@ namespace PLWPF
             UploadOrderButton.Visibility = Visibility.Hidden;
             CreateOrderButton.Visibility = Visibility.Hidden;            
             hostID = IDhost;
-            getOrderList();
+            //getOrderList();
+            List<HostingUnit> tempHostingList = myBl.getHostingUnits(h => h.Owner.Id == IDhost);
+            //List<HostingUnit> tempHostingList = myBl.getHostingUnits(u=>u.Owner.Id == IDhost);
+            foreach (HostingUnit my_unit in tempHostingList)
+            {
+                List<Order> tempOrderList = myBl.getOrders(o => o.HostingUnitKey == my_unit.HostingUnitKey);
+                foreach (Order ord in tempOrderList)
+                {
+                    listOrders.Add(ord);
+                }
+            }
+            cbOrderstList.Visibility = Visibility.Visible;
+            UploadOrderButton.Visibility = Visibility.Visible;
+            CreateOrderButton.Visibility = Visibility.Visible;
         }
 
         private void UploadOrderButton_Click(object sender, RoutedEventArgs e)
@@ -55,7 +68,7 @@ namespace PLWPF
             }                
         }
 
-        private void getOrderList()
+        /*private void getOrderList()
         {
             List<HostingUnit> hostList = myBl.getHostingUnits(h => h.Owner.ID == hostID);
             foreach(HostingUnit my_unit in hostList)
@@ -65,13 +78,13 @@ namespace PLWPF
                 {
                     listOrders.Add(ord);
                 }
-            }
+            }*/
             /*unit = hostList[0];
             listOrders = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);*/
-            cbOrderstList.Visibility = Visibility.Visible;
+            /*cbOrderstList.Visibility = Visibility.Visible;
             UploadOrderButton.Visibility = Visibility.Visible;
             CreateOrderButton.Visibility = Visibility.Visible;
-        }
+        }*/
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {

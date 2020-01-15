@@ -10,6 +10,9 @@
         <ImageBrush ImageSource="Icons/backGround.jpg" Opacity="0.8"/>
     </Window.Background>
     <Grid Name="MainGrid" Margin="-2,0,2.333,-0.333">
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="145*"/>
             <RowDefinition Height="276*"/>

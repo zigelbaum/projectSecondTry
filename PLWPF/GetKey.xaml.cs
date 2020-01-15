@@ -22,7 +22,7 @@ namespace PLWPF
     {
         string entity;
         public bool retriveSuccess;
-        public int numVal=0;
+        public Int32 numVal=0;
         public GetKey(string entity)
         {
             this.entity = entity;
@@ -33,9 +33,9 @@ namespace PLWPF
                 case "HostingUnit":
                     idLabel.Content = "Please enter hosting unit key:";
                     break;
-                case "Order":
+               /* case "Order":
                     idLabel.Content = "Please enter order key:";
-                    break;
+                    break;*/
                 case "Host":
                     idLabel.Content = "Please enter your ID:";
                     break;
@@ -46,7 +46,7 @@ namespace PLWPF
         {
             try
             {
-                Int32 numVal = Int32.Parse(tbID.Text);
+                numVal = Int32.Parse(tbID.Text);
                 switch (this.entity)
                 {
                     case "GuestRequest":
@@ -72,7 +72,7 @@ namespace PLWPF
                         Close();
                         break;                    
                     case "Host":
-                        List<HostingUnit> hostList = MainWindow.myBL.getHostingUnits(h => h.Owner.ID == numVal);
+                        List<HostingUnit> hostList = MainWindow.myBL.getHostingUnits(h => h.Owner.Id == numVal);
                         if (hostList.Count() == 0)
                         {
                             numVal = 0;

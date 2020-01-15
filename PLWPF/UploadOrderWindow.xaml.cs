@@ -23,7 +23,7 @@ namespace PLWPF
     {
         #region variable
         IBL myBl = BL.FactoryBL.getBL("XML");
-        List<Order> listOrders = null;
+        List<Order> listOrders = new List<Order>();
         Order myorder;
         #endregion
 
@@ -47,7 +47,7 @@ namespace PLWPF
         private void getOrderList(Int32 hostID)
         {
             //לעשות רשימה שתחזיר את כל ההזמנות של מארח מסוים
-            List<HostingUnit> unitsTemp = myBl.getHostingUnits(h => h.Owner.ID == hostID);
+            List<HostingUnit> unitsTemp = myBl.getHostingUnits(h => h.Owner.Id == hostID);
             foreach(HostingUnit unit in unitsTemp)
             {
                 List<Order> tempOrder = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);
