@@ -39,6 +39,8 @@ namespace PLWPF
             switch(unitKey)
             {
                 case 0:
+                    break;
+                default:
                     cbArea.IsEnabled = false;
                     cbUnitType.IsEnabled = false;
                     tbSubArea.IsEnabled = false;
@@ -85,45 +87,8 @@ namespace PLWPF
             }
             my_unit = new HostingUnit()
             { HostingUnitName = tbUnitName.Text, HostingUnitType = (Enums.HostingUnitType)cbUnitType.SelectedIndex, Area = (Enums.Area)cbArea.SelectedIndex, SubArea = tbSubArea.Text, Adults = Int32.Parse(tbAdults.Text), Kids = Int32.Parse(tbKids.Text), Stars = Int32.Parse(tbStars.Text), Pool = ckbPool.AllowDrop, Jaccuzi = cbkJacuzzi.AllowDrop, Garden = ckbGarden.AllowDrop, ChildrenAttraction = ckbAttractions.AllowDrop, Meals = ckbMeals.AllowDrop };
-            AddHostWindow addHostWindow = new AddHostWindow(my_unit);
-            addHostWindow.ShowDialog();            
-
-            switch (unitKey)
-            {
-                case 0:
-                   try
-                    {
-                        myBl.addHostingUnit(my_unit);
-                    }
-                    catch (Exception a)
-                    {
-                        var result = MessageBox.Show(a.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                        if (MessageBoxResult.No == result)
-                        {
-                            Close();
-                            return;
-                        }
-                        else
-                            return;
-                    }
-                    Close();
-                    MessageBox.Show("the hosting unit has been added successfully", "adding unit", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                    break;
-                default:
-                    try
-                    {
-                        my_unit.Owner = myBl.FindUnit(unitKey).Owner; 
-                        myBl.SetHostingUnit(my_unit);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "internal error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                        return;
-                    }
-                    Close();
-                    MessageBox.Show("the hosting unit details have bee changed successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                    break;
-            }
+            AddHostWindow addHostWindow = new AddHostWindow(my_unit, unitKey);
+            addHostWindow.ShowDialog();                       
         }
 
         public void cancelUnitButton_Click(object sender, RoutedEventArgs e)
