@@ -75,9 +75,12 @@ namespace BL
         #region grouping
         IEnumerable<IGrouping<Enums.Area, GuestRequest>> GroupGRByArea();
         IEnumerable<IGrouping<int, GuestRequest>> GroupGRByVacationers();
+        IEnumerable<IGrouping<Enums.HostingUnitType, GuestRequest>> GroupGRByType();
+        IEnumerable<IGrouping<int, GuestRequest>> GroupGRByStars();
+        IEnumerable<IGrouping<Enums.GuestRequestStatus, GuestRequest>> GroupGRByStatus();
         IEnumerable<IGrouping<Host, HostingUnit>> GroupHostByHostingUnit();
         IEnumerable<IGrouping<Enums.Area, HostingUnit>> GroupHostingUnitByArea();
         #endregion
-        
+
     }
 }

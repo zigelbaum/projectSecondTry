@@ -575,6 +575,33 @@ namespace BL
             return groupToReturn;
         }
 
+        public IEnumerable<IGrouping<Enums.GuestRequestStatus, GuestRequest>> GroupGRByStatus()
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
+            var groupToReturn = from request in listGuestRequests
+                                group request by request.Status;
+            return groupToReturn;
+        }
+
+        public IEnumerable<IGrouping<Enums.HostingUnitType, GuestRequest>> GroupGRByType()
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
+            var groupToReturn = from request in listGuestRequests
+                                group request by (request.Type);
+            return groupToReturn;
+        }
+
+        public IEnumerable<IGrouping<int, GuestRequest>> GroupGRByStars()
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            IEnumerable<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
+            var groupToReturn = from request in listGuestRequests
+                                group request by (request.Stars);
+            return groupToReturn;
+        }
+
         public IEnumerable<IGrouping<int, GuestRequest>> GroupGRByVacationers()
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
