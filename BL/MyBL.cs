@@ -138,8 +138,8 @@ namespace BL
 
         public bool validDate(GuestRequest guest)
         {
-            //DateTime nowDate = new DateTime(2004, 01, 01);
-            if (DateTime.Now > guest.EnteryDate)
+            //TimeSpan vacationDays = DateTime.Today - guest.EnteryDate;
+            if (DateTime.Today > guest.EnteryDate)
                 throw new ArgumentException("The entry date pass");
             return true;
         }

@@ -13,7 +13,7 @@ namespace BL
             switch (typeBL)
             {
                 case "List": return MyBL.Instance;
-                //  case "XML": return DAL_XML.Instance;
+                case "XML": return MyBL.Instance;
                 default: return null;
             }
         }

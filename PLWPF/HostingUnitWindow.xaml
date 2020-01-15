@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
-        Title="HostingUnitWindow" Height="450" Width="800">
+        Title="HostingUnitWindow" Height="450" Width="800" Background="#FFFEF9D8">
     <Grid>
-        
+        <Button Name="PersonalAreaButton" Content="Personal Area"  HorizontalAlignment="Left" Margin="302,322,0,0" VerticalAlignment="Top" Width="185" Height="40" Click="PersonalAreaButton_Click" FontSize="18" Background="#FFFFFFFF" FontWeight="Bold"/>
+        <Button Name="CreateUnitButton" Content="Create a new Hosting Unit"  HorizontalAlignment="Right" Margin="0,322,34.333,0" VerticalAlignment="Top" Width="236" Height="40" Click="CreateUnitButton_Click" FontSize="18" Background="#FFFFFFFF" FontWeight="Bold"/>
+        <Button x:Name="returnButton" Content="Back" Margin="36,322,637.333,58.667" Width="120" Height="40" Background="#FFFFFFFF" FontWeight="Bold" FontSize="18" Click="ReturnButton_Click"/>
+
     </Grid>
 </Window>

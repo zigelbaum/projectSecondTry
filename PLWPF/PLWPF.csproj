@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Iphotolibrary.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -60,16 +63,26 @@
     <Compile Include="CreateOrderWindow.xaml.cs">
       <DependentUpon>CreateOrderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreateUnitWindow.xaml.cs">
+      <DependentUpon>CreateUnitWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GetKey.xaml.cs">
       <DependentUpon>GetKey.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UnitPresentation.xaml.cs">
-      <DependentUpon>UnitPresentation.xaml</DependentUpon>
+    <Compile Include="PersonalAreaWindow.xaml.cs">
+      <DependentUpon>PersonalAreaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateUnitWindow.xaml.cs">
+      <DependentUpon>UpdateUnitWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UploadOrderWindow.xaml.cs">
       <DependentUpon>UploadOrderWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="CreateOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateUnitWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -114,7 +127,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UnitPresentation.xaml">
+    <Page Include="PersonalAreaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateUnitWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,19 +161,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Properties\DataSources\BE.BankBranch.datasource" />
-    <None Include="Properties\DataSources\BE.Configuration.datasource" />
-    <None Include="Properties\DataSources\BE.Enums+Area.datasource" />
-    <None Include="Properties\DataSources\BE.Enums+DataSourseType.datasource" />
-    <None Include="Properties\DataSources\BE.Enums+GuestRequestStatus.datasource" />
-    <None Include="Properties\DataSources\BE.Enums+HostingUnitType.datasource" />
-    <None Include="Properties\DataSources\BE.Enums+intrested.datasource" />
-    <None Include="Properties\DataSources\BE.Enums+OrderStatus.datasource" />
-    <None Include="Properties\DataSources\BE.Enums.datasource" />
-    <None Include="Properties\DataSources\BE.GuestRequest.datasource" />
-    <None Include="Properties\DataSources\BE.Host.datasource" />
-    <None Include="Properties\DataSources\BE.HostingUnit.datasource" />
-    <None Include="Properties\DataSources\BE.Order.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -174,6 +178,9 @@
       <Project>{2b968dd1-0f23-4c78-b2fb-745ba1fa07e4}</Project>
       <Name>BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Iphotolibrary.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

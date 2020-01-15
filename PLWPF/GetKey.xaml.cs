@@ -22,20 +22,20 @@ namespace PLWPF
     {
         string entity;
         public bool retriveSuccess;
-        public int numVal=0;
-        public GetKey(string entity )
+        public Int32 numVal=0;
+        public GetKey(string entity)
         {
             this.entity = entity;
             retriveSuccess = false;
             InitializeComponent();
             switch(entity)
-            { 
+            {
                 case "HostingUnit":
                     idLabel.Content = "Please enter hosting unit key:";
                     break;
-                case "Order":
+               /* case "Order":
                     idLabel.Content = "Please enter order key:";
-                    break;
+                    break;*/
                 case "Host":
                     idLabel.Content = "Please enter your ID:";
                     break;
@@ -46,7 +46,7 @@ namespace PLWPF
         {
             try
             {
-                Int32 numVal = Int32.Parse(tbID.Text);
+                numVal = Int32.Parse(tbID.Text);
                 switch (this.entity)
                 {
                     case "GuestRequest":
@@ -70,19 +70,16 @@ namespace PLWPF
                         else
                             retriveSuccess = true;
                         Close();
-                        break;
-                    case "Order":
-                        Order order = MainWindow.myBL.FindOrder(numVal);
-                        if (order == null)
+                        break;                    
+                    case "Host":
+                        List<HostingUnit> hostList = MainWindow.myBL.getHostingUnits(h => h.Owner.Id == numVal);
+                        if (hostList.Count() == 0)
                         {
                             numVal = 0;
-                            throw new Exception("The order you looked for doestn exists in the system");
+                            throw new Exception("The ID you looked for doestn exists in the system");
                         }
                         else
                             retriveSuccess = true;
-                        Close();
-                        break;
-                    case "Host":
                         Close();
                         break;
                 }

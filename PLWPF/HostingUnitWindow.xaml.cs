@@ -23,5 +23,28 @@ namespace PLWPF
         {
             InitializeComponent();
         }
+
+        public void PersonalAreaButton_Click(object sender, RoutedEventArgs e)
+        {
+            PersonalAreaWindow personalAreaWindow;
+            GetKey getKey = new GetKey("HostingUnit");
+            getKey.ShowDialog();
+            if (getKey.numVal != 0)
+            {
+                personalAreaWindow = new PersonalAreaWindow(getKey.numVal);
+                personalAreaWindow.ShowDialog();
+            }              
+        }
+
+        public void CreateUnitButton_Click(object sender, RoutedEventArgs e)
+        {
+            CreateUnitWindow createUnitWindow = new CreateUnitWindow();
+            createUnitWindow.ShowDialog();
+        }
+
+        public void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

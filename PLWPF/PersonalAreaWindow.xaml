@@ -1,0 +1,14 @@
+﻿<Window x:Class="PLWPF.PersonalAreaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        Title="PersonalAreaWindow" Height="450" Width="800">
+    <Grid>
+        <Button Name="UploadHostingUnitButton" Content="Update hosting unit"  HorizontalAlignment="Left" Margin="318,349,0,0" VerticalAlignment="Top" Width="185" Height="40" Click="UploadUnitButton_Click" FontSize="18" Background="#FFFFFFFF" FontWeight="Bold"/>
+        <Button Name="DeleteHostingUnitButton" Content="Remove hosting unit"  HorizontalAlignment="Right" Margin="0,349,33.333,0" VerticalAlignment="Top" Width="185" Height="40" Click="DeleteUnitButton_Click" FontSize="18" Background="#FFFFFFFF" FontWeight="Bold"/>
+        <Button x:Name="returnButton" Content="Back" Margin="49,349,624.333,31.667" Width="120" Height="40" Background="#FFFFFFFF" FontWeight="Bold" FontSize="18" Click="ReturnButton_Click"/>
+    </Grid>
+</Window>

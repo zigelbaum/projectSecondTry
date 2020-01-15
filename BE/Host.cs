@@ -17,11 +17,11 @@ namespace BE
         BankBranch bankBranchDetails;
         int bankAccountNumber;
         bool collectionClearance;
-        int id;
+        Int32 id;
         public BankBranch BankBranchDetails { get => bankBranchDetails; set => bankBranchDetails = value; }
         public int BankAccountNumber { get => bankAccountNumber; set => bankAccountNumber = value; }
         public bool CollectionClearance { get => collectionClearance; set => collectionClearance = value; }
-        public int ID { get => id; set => id = value; }
+        public Int32 Id { get => id; set => id = value; }
         #endregion
 
         #region functions

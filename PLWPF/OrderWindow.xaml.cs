@@ -23,51 +23,72 @@ namespace PLWPF
     public partial class OrderWindow : Window
     {
         #region variable
-        IBL myBl = BL.FactoryBL.getBL("XML");
-        public List<Order> listOrders;
-        HostingUnit unit;
+        public static IBL myBl = BL.FactoryBL.getBL("XML");
+        public List<Order> listOrders = new List<Order>();
+        public Int32 hostID;
         #endregion
 
-        public OrderWindow()
+        public OrderWindow(Int32 IDhost)
         {
             InitializeComponent();
             UploadOrderButton.Visibility = Visibility.Hidden;
-            CreateOrderButton.Visibility = Visibility.Hidden;
-            //Host host;
-            GetKey getKey = new GetKey("Host");
-            getKey.ShowDialog();
-            if (getKey.numVal != 0)
+            CreateOrderButton.Visibility = Visibility.Hidden;            
+            hostID = IDhost;
+            //getOrderList();
+            List<HostingUnit> tempHostingList = myBl.getHostingUnits(h => h.Owner.Id == IDhost);
+            //List<HostingUnit> tempHostingList = myBl.getHostingUnits(u=>u.Owner.Id == IDhost);
+            foreach (HostingUnit my_unit in tempHostingList)
             {
-                //...
-                getOrderList(getKey.numVal);
+                List<Order> tempOrderList = myBl.getOrders(o => o.HostingUnitKey == my_unit.HostingUnitKey);
+                foreach (Order ord in tempOrderList)
+                {
+                    listOrders.Add(ord);
+                }
             }
-        }
-
-        private void UploadOrderButton_Click(object sender, RoutedEventArgs e)
-        {
-            UploadOrderWindow upload_ord_Window = new UploadOrderWindow();
-            upload_ord_Window.ShowDialog();
-        }
-
-        private void CreateOrderButton_Click(object sender, RoutedEventArgs e)
-        {
-            CreateOrderWindow new_ord_Window = new CreateOrderWindow();
-            new_ord_Window.ShowDialog();
-        }
-
-        private void getOrderList(Int32 hostID)
-        {
-            List<HostingUnit> hostList = myBl.getHostingUnits(h => h.Owner.ID == hostID);
-            unit = hostList[0];
-            listOrders = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);
             cbOrderstList.Visibility = Visibility.Visible;
             UploadOrderButton.Visibility = Visibility.Visible;
             CreateOrderButton.Visibility = Visibility.Visible;
         }
 
+        private void UploadOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            UploadOrderWindow upload_ord_Window = new UploadOrderWindow(hostID);
+            upload_ord_Window.ShowDialog();
+        }
+
+        private void CreateOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            CreateOrderWindow new_ord_Window;
+            GetKey getKey = new GetKey("HostingUnit");
+            getKey.ShowDialog();
+            if (getKey.numVal != 0)
+            {
+                new_ord_Window = new CreateOrderWindow(hostID, myBl.FindUnit(getKey.numVal));
+                new_ord_Window.ShowDialog();
+            }                
+        }
+
+        /*private void getOrderList()
+        {
+            List<HostingUnit> hostList = myBl.getHostingUnits(h => h.Owner.ID == hostID);
+            foreach(HostingUnit my_unit in hostList)
+            {
+                List<Order> tempOrderList = myBl.getOrders(o => o.HostingUnitKey == my_unit.HostingUnitKey);
+                foreach(Order ord in tempOrderList)
+                {
+                    listOrders.Add(ord);
+                }
+            }*/
+            /*unit = hostList[0];
+            listOrders = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);*/
+            /*cbOrderstList.Visibility = Visibility.Visible;
+            UploadOrderButton.Visibility = Visibility.Visible;
+            CreateOrderButton.Visibility = Visibility.Visible;
+        }*/
+
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
-         //????   
+            Close();  
         }
 
         private void cbOrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
