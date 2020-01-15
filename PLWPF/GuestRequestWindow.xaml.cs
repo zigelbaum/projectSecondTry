@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using BE;
 
 namespace PLWPF
@@ -20,6 +22,9 @@ namespace PLWPF
     /// </summary>
     public partial class GuestRequestWindow : Window
     {
+        private ObservableCollection<GuestRequest> requestList;
+
+
         public GuestRequestWindow()
         {
             InitializeComponent();
@@ -40,12 +45,31 @@ namespace PLWPF
             {
                 request = MainWindow.myBL.FindGuestRequest(getKey.numVal);
                 GuestPresentation presentation = new GuestPresentation(request, "Update");
+                presentation.ShowDialog();
             }
         }
 
         private void returnButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void tbKey_SearchFilterChanged(object sender, TextChangedEventArgs e)
+        {           
+                if (requestList != null)
+                {
+                    ObservableCollection<GuestRequest> it = new ObservableCollection<GuestRequest>((from item in requestList
+                                                                                        where CheckIfStringsAreEqual(FirstName.Text, item.FirstName)
+                                                                                        select item
+                                                                                    into g
+                                                                                        where CheckIfStringsAreEqual(LestName.Text, g.LastName)
+                                                                                        select g
+                                                                                    into j
+                                                                                        where CheckIfStringsAreEqual(ID.Text, j.Id)
+                                                                                        select j).ToList());
+                    TestersList.ItemsSource = it;
+                    numOfTesters.Text = it.Count.ToString();
+                }            
         }
     }
 }

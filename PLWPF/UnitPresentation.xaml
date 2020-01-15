@@ -1,0 +1,34 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.UnitPresentation"
+        mc:Ignorable="d"
+        Title="UnitPresentation" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="hostingUnitViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:HostingUnit}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource hostingUnitViewSource}">
+
+        <DataGrid x:Name="hostingUnitDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="adultsColumn" Width="SizeToHeader" Header="Adults" Binding="{Binding Adults}"/>
+                <DataGridTextColumn x:Name="areaColumn" Width="SizeToHeader" Header="Area" Binding="{Binding Area}"/>
+                <DataGridCheckBoxColumn x:Name="childrenAttractionColumn" Width="SizeToHeader" Header="Children Attraction" Binding="{Binding ChildrenAttraction}"/>
+                <DataGridCheckBoxColumn x:Name="gardenColumn" Width="SizeToHeader" Header="Garden" Binding="{Binding Garden}"/>
+                <DataGridTextColumn x:Name="hostingUnitKeyColumn" Width="SizeToHeader" Header="Hosting Unit Key" Binding="{Binding HostingUnitKey}"/>
+                <DataGridTextColumn x:Name="hostingUnitNameColumn" Width="SizeToHeader" Header="Hosting Unit Name" Binding="{Binding HostingUnitName}"/>
+                <DataGridTextColumn x:Name="hostingUnitTypeColumn" Width="SizeToHeader" Header="Hosting Unit Type" Binding="{Binding HostingUnitType}"/>
+                <DataGridCheckBoxColumn x:Name="jaccuziColumn" Width="SizeToHeader" Header="Jaccuzi" Binding="{Binding Jaccuzi}"/>
+                <DataGridTextColumn x:Name="kidsColumn" Width="SizeToHeader" Header="Kids" Binding="{Binding Kids}"/>
+                <DataGridCheckBoxColumn x:Name="mealsColumn" Width="SizeToHeader" Header="Meals" Binding="{Binding Meals}"/>
+                <DataGridCheckBoxColumn x:Name="poolColumn" Width="SizeToHeader" Header="Pool" Binding="{Binding Pool}"/>
+                <DataGridTextColumn x:Name="starsColumn" Width="SizeToHeader" Header="Stars" Binding="{Binding Stars}"/>
+                <DataGridTextColumn x:Name="subAreaColumn" Width="SizeToHeader" Header="Sub Area" Binding="{Binding SubArea}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

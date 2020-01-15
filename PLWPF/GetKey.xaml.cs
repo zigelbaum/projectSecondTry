@@ -23,13 +23,13 @@ namespace PLWPF
         string entity;
         public bool retriveSuccess;
         public int numVal=0;
-        public GetKey(string entity = "")
+        public GetKey(string entity )
         {
             this.entity = entity;
             retriveSuccess = false;
             InitializeComponent();
             switch(entity)
-            {
+            { 
                 case "HostingUnit":
                     idLabel.Content = "Please enter hosting unit key:";
                     break;
