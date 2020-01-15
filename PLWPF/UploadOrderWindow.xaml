@@ -6,24 +6,20 @@
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
         Title="UploadOrderWindow" Height="450" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="file:///C:/Users/DELL/source/repos/projectSecondTry4/PLWPF/Icons/backGround.jpg" Opacity="0.8"/>
+    </Window.Background>
     <Grid>
 
         <ComboBox Name="OrderstList" VerticalAlignment="Stretch" SelectionChanged="cbOrderList_SelectionChanged" Text="{Binding Path=listOrders}" Margin="77,122,0,236.667" FontSize="36" Width="660"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" BorderBrush="#FFFBFBFB"/>
 
-        <ComboBox Name="StatusOrder"  HorizontalAlignment="Left" Margin="99,334,0,0" SelectionChanged="cbOrderStatus_SelectionChanged"  Text="{Binding Path=myorder.OrderStatus}" VerticalAlignment="Top" Width="120" BorderBrush="#FFFBFAFA" OpacityMask="White">
-            <ComboBox.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFFFFFFF" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </ComboBox.Background>
-        </ComboBox>
+        <ComboBox Name="StatusOrder"  HorizontalAlignment="Left" Margin="99,334,0,0" SelectionChanged="cbOrderStatus_SelectionChanged"  Text="{Binding Path=myorder.OrderStatus}" VerticalAlignment="Top" Width="120" BorderBrush="#FFFBFAFA" OpacityMask="White" Background="#FFB9B955"/>
         <Label Name="StatusOrderString"  HorizontalAlignment="Right" Margin="0,334,699.333,0" Content="status:" VerticalAlignment="Top" Height="39" Width="62" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
 
-        <TextBox Name="CreateDate" HorizontalAlignment="Right" Margin="0,334,318.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.CreateDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447"/>
+        <TextBox Name="CreateDate" HorizontalAlignment="Right" Margin="0,334,318.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.CreateDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447" Background="#FFFEFEF0"/>
         <Label Name="CreateDateString" HorizontalAlignment="Right" Margin="0,334,437.333,0" Content="create date:" VerticalAlignment="Top" Height="39" Width="102" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
 
-        <TextBox Name="OrderDate" HorizontalAlignment="Right" Margin="0,334,56.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.OrderDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447"/>
+        <TextBox Name="OrderDate" HorizontalAlignment="Right" Margin="0,334,56.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.OrderDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447" Background="#FFFFFFF8"/>
         <Label Name="OrderDateString" HorizontalAlignment="Right" Margin="0,334,175.333,0" Content="order date:" VerticalAlignment="Top" Height="56" Width="94" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
 
     </Grid>

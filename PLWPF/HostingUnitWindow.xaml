@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
-        Title="HostingUnitWindow" Height="450" Width="800" Background="#FFFEF9D8">
+        Title="HostingUnitWindow" Height="450" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="file:///C:/Users/DELL/source/repos/projectSecondTry4/PLWPF/Icons/backGround.jpg" Opacity="0.8"/>
+    </Window.Background>
     <Grid>
         <Button Name="PersonalAreaButton" Content="Personal Area"  HorizontalAlignment="Left" Margin="302,322,0,0" VerticalAlignment="Top" Width="185" Height="40" Click="PersonalAreaButton_Click" FontSize="18" Background="#FFFFFFFF" FontWeight="Bold"/>
         <Button Name="CreateUnitButton" Content="Create a new Hosting Unit"  HorizontalAlignment="Right" Margin="0,322,34.333,0" VerticalAlignment="Top" Width="236" Height="40" Click="CreateUnitButton_Click" FontSize="18" Background="#FFFFFFFF" FontWeight="Bold"/>
