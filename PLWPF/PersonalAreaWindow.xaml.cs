@@ -40,21 +40,25 @@ namespace PLWPF
 
         public void DeleteUnitButton_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var result = MessageBox.Show("are you sure you want to delete?", "cancaling", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+            if (result == MessageBoxResult.OK)
             {
-                HostingUnit unit = myBl.FindUnit(unitKey);
-                myBl.DeleteHostingUnit(unit);
-            }
-            catch (Exception ex)
-            {
-                var result = MessageBox.Show(ex.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                if (MessageBoxResult.No == result)
+                try
                 {
-                    Close();
-                    return;
+                    HostingUnit unit = myBl.FindUnit(unitKey);
+                    myBl.DeleteHostingUnit(unit);
                 }
-                else
-                    return;
+                catch (Exception ex)
+                {
+                    var results = MessageBox.Show(ex.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                    if (MessageBoxResult.No == results)
+                    {
+                        Close();
+                        return;
+                    }
+                    else
+                        return;
+                }
             }
         }
         
