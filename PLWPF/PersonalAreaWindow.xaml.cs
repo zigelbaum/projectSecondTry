@@ -34,8 +34,8 @@ namespace PLWPF
 
         public void UploadUnitButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateUnitWindow updateUnitWindow = new UpdateUnitWindow(unitKey);
-            updateUnitWindow.ShowDialog();
+            UnitPresentationWindow unitPresentationWindow = new UnitPresentationWindow(unitKey);
+            unitPresentationWindow.ShowDialog();
         }
 
         public void DeleteUnitButton_Click(object sender, RoutedEventArgs e)

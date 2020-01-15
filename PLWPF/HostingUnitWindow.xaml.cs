@@ -38,8 +38,8 @@ namespace PLWPF
 
         public void CreateUnitButton_Click(object sender, RoutedEventArgs e)
         {
-            CreateUnitWindow createUnitWindow = new CreateUnitWindow();
-            createUnitWindow.ShowDialog();
+            UnitPresentationWindow unitPresentationWindow = new UnitPresentationWindow(0);
+            unitPresentationWindow.ShowDialog();
         }
 
         public void ReturnButton_Click(object sender, RoutedEventArgs e)

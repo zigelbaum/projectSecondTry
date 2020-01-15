@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BE;
+using BL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +17,22 @@ using System.Windows.Shapes;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for UpdateUnitWindow.xaml
+    /// Interaction logic for AddHostWindow.xaml
     /// </summary>
-    public partial class UpdateUnitWindow : Window
+    public partial class AddHostWindow : Window
     {
-        public UpdateUnitWindow(Int32 hostingKey)
+        #region variable  
+        IBL myBl = BL.FactoryBL.getBL("XML");        
+        #endregion
+
+        public AddHostWindow(HostingUnit unit)
         {
             InitializeComponent();
+        }
+
+        public void addButton_Click()
+        {
+            
         }
     }
 }
