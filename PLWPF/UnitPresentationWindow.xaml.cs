@@ -41,9 +41,28 @@ namespace PLWPF
                 case 0:
                     break;
                 default:
+                    #region print
+                    my_unit = myBl.FindUnit(unitKey);
+                    tbUnitName.Text = my_unit.HostingUnitName;
+                    tbSubArea.Text = my_unit.SubArea;
+                    tbAdults.Text = my_unit.Adults.ToString();
+                    tbKids.Text = my_unit.Kids.ToString();
+                    tbStars.Text = my_unit.Stars.ToString();
+                    cbArea.SelectedItem = my_unit.Area;
+                    cbUnitType.SelectedItem = my_unit.HostingUnitType;
+                    ckbPool.IsChecked = my_unit.Pool;
+                    cbkJacuzzi.IsChecked = my_unit.Jaccuzi;
+                    ckbMeals.IsChecked = my_unit.Meals;
+                    ckbGarden.IsChecked = my_unit.Garden;
+                    ckbAttractions.IsChecked = my_unit.ChildrenAttraction;
+                    #endregion
+
+                    #region no change
                     cbArea.IsEnabled = false;
                     cbUnitType.IsEnabled = false;
                     tbSubArea.IsEnabled = false;
+                    #endregion
+
                     break;              
             }
         }

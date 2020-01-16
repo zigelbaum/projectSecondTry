@@ -182,5 +182,8 @@
   <ItemGroup>
     <Resource Include="Iphotolibrary.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

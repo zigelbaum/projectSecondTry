@@ -24,6 +24,7 @@ namespace PLWPF
         #region variable  
         IBL myBl = BL.FactoryBL.getBL("XML");
         HostingUnit hosting;
+        Host host;
         Int32 hostingKey;
         #endregion
 
@@ -37,7 +38,23 @@ namespace PLWPF
             {
                 case 0:
                     break;
-                default:                    
+                default:
+                    #region print
+                    host = myBl.FindUnit(unitKey).Owner;
+                    tbFirstName.Text = host.PrivateName;
+                    tbLastName.Text = host.FamilyName;
+                    tbID.Text = host.Id.ToString();
+                    tbPhon.Text = host.PhoneNumber.ToString();
+                    tbMail.Text = host.MailAddress;
+                    tbBname.Text = host.BankBranchDetails.BankName;
+                    tbBnumber.Text = host.BankBranchDetails.BankNumber.ToString();
+                    tbBrAdress.Text = host.BankBranchDetails.BranchAddress;
+                    tbBrCity.Text = host.BankBranchDetails.BranchCity;
+                    tbBrNumber.Text = host.BankBranchDetails.BranchNumber.ToString();
+                    tbAccountNumber.Text = host.BankAccountNumber.ToString();
+                    ckbcollectionClearance.IsChecked = host.CollectionClearance;
+                    #endregion
+
                     tbID.IsEnabled = false;
                     break;
             }
