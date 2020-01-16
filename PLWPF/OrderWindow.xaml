@@ -10,9 +10,24 @@
         <ImageBrush ImageSource="file:///C:/Users/DELL/source/repos/projectSecondTry4/PLWPF/Icons/backGround.jpg" Opacity="0.8"/>
     </Window.Background>
     <Grid>
-        <ComboBox Name="cbOrderstList" IsEditable="True" HorizontalAlignment="Left" Margin="37,118,0,0" VerticalAlignment="Top" Width="723" SelectedItem="{Binding Path=listOrders,Mode=OneWay}" Height="31"/>
         <Button Name="UploadOrderButton" Content="Update Order"  HorizontalAlignment="Left" Margin="360,349,0,0" VerticalAlignment="Top" Width="185" Height="40" Click="UploadOrderButton_Click" FontSize="18" Background="#FFF2F1E9" FontWeight="Bold"/>
         <Button Name="CreateOrderButton" Content="Create a new Order"  HorizontalAlignment="Right" Margin="0,349,33.333,0" VerticalAlignment="Top" Width="185" Height="40" Click="CreateOrderButton_Click" FontSize="18" FontWeight="Bold" Background="#FFEEEEE4"/>
         <Button x:Name="returnButton" Content="Back" Margin="37,349,636.333,31.667" Width="120" Height="40" Background="#FFF6F6F2" FontWeight="Bold" FontSize="18" Click="ReturnButton_Click"/>
+        <ListView Name="OrderView" HorizontalAlignment="Left" Height="300" Margin="10,10,0,0" VerticalAlignment="Top" Width="773" FontFamily="Segoe UI Light">
+            <ListView.Background>
+                <ImageBrush/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="order key" DisplayMemberBinding="{Binding GuestRequestKey}" Width="100"/>
+                    <GridViewColumn Header="hosting unit key" DisplayMemberBinding="{Binding HostingUnitKey}" Width="100"/>
+                    <GridViewColumn Header="guest request key" DisplayMemberBinding="{Binding GuestRequestKey}" Width="100"/>
+                    <GridViewColumn Header="status" DisplayMemberBinding="{Binding OrderStatus}" Width="95"/>
+                    <GridViewColumn Header="create date" DisplayMemberBinding="{Binding CreateDate}" Width="90"/>
+                    <GridViewColumn Header="order date" DisplayMemberBinding="{Binding OrderDate}" Width="90"/>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
