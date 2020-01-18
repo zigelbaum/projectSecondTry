@@ -70,7 +70,7 @@
             <Label Content="Click on request twice to view, once to choose." HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Stretch" Width="554"/>
             <Button Name="reset" Content="reset search" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Stretch" Width="92" Margin="659,0,0,0" Click="reset_Click"
                 />
-            <ListView x:Name="requestView"  HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" MouseDoubleClick="viewRequest" >
+            <ListView x:Name="requestView" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" MouseDoubleClick="MenuItem_Click_Info" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="request key" DisplayMemberBinding="{Binding GuestRequestKey}" Width="100"/>
@@ -82,6 +82,11 @@
                         <GridViewColumn Header="area" DisplayMemberBinding="{Binding Area}" Width="100"/>
                     </GridView>
                 </ListView.View>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                    <MenuItem Header="full information" Click="MenuItem_Click_Info" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
             </ListView>
         </Grid>
     </Border>

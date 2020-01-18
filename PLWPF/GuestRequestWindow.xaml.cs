@@ -43,6 +43,12 @@ namespace PLWPF
         {
             GuestPresentation guestPresentationWindow = new GuestPresentation();
             guestPresentationWindow.ShowDialog();
+            if (guestPresentationWindow.addedSuccessfuly==true)
+            {
+                requestsList = new ObservableCollection<GuestRequest>(MainWindow.myBL.GetGuestRequestsList());
+                listToFilter = requestsList;
+                requestView.ItemsSource = listToFilter;
+            }
         }
 
         private void updateRequestButton_Click(object sender, RoutedEventArgs e)
@@ -220,10 +226,15 @@ namespace PLWPF
             listToFilter = requestsList;
             requestView.ItemsSource = listToFilter;
         }
+        
 
-        private void viewRequest(object sender, MouseButtonEventArgs e)
+        private void MenuItem_Click_Info(object sender, RoutedEventArgs e)
         {
-
+            if (requestView.SelectedItem != null)
+            {
+                GuestPresentation presentation = new GuestPresentation(((GuestRequest)requestView.SelectedItem), "View");
+                presentation.ShowDialog();
+            }
         }
     }
 }

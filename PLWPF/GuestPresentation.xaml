@@ -20,11 +20,11 @@
         </Grid.RowDefinitions>
         <Label Content="costumer details:" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="182"/>
         <Label Content="first name" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
-        <TextBox Name="tbFirstName" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="{Binding Path=PrivateName,Mode=OneWay}" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Margin="128,25,0,0"/>
+        <TextBox Name="tbFirstName" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="{Binding Path=PrivateName,Mode=TwoWay}" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Margin="128,25,0,0"/>
         <Label Content="last name" HorizontalAlignment="Left" Height="26" Margin="268,25,0,0" VerticalAlignment="Top" Width="79" Grid.Row="1"/>
-        <TextBox Name="tbLastName" HorizontalAlignment="Left" Height="26" Margin="359,25,0,0" TextWrapping="Wrap" Text="{Binding Path=FamilyName,Mode=OneWay}" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <TextBox Name="tbLastName" HorizontalAlignment="Left" Height="26" Margin="359,25,0,0" TextWrapping="Wrap" Text="{Binding Path=FamilyName,Mode=TwoWay}" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
         <Label Content="mail address" HorizontalAlignment="Left" Margin="504,25,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
-        <TextBox Name="tbMail" HorizontalAlignment="Left" Height="26" Margin="630,25,0,0" TextWrapping="Wrap" Text="{Binding Path=MailAddress,Mode=OneWay}" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <TextBox Name="tbMail" HorizontalAlignment="Left" Height="26" Margin="630,25,0,0" TextWrapping="Wrap" Text="{Binding Path=MailAddress,Mode=TwoWay}" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
         <Grid Name="requestrequires" HorizontalAlignment="Stretch" Height="auto" Margin="0" Grid.Row="2" VerticalAlignment="Stretch" Width="auto">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35*"/>
@@ -37,23 +37,23 @@
                 <ColumnDefinition Width="312*"/>
             </Grid.ColumnDefinitions>
             <Label Content="request requirements:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="182" Height="26"/>
-            <ComboBox Name="cbbArea" IsEditable="True" HorizontalAlignment="Left" Margin="128,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Area,Mode=OneWay}" Height="22"/>
+            <ComboBox Name="cbbArea" IsEditable="True" HorizontalAlignment="Left" Margin="128,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Area,Mode=TwoWay}" Height="22"/>
             <Label Content="area:" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
             <Label Content="sub area:" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
-            <TextBox Name="tbSubArea" HorizontalAlignment="Left"  Margin="128,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=SubArea,Mode=OneWay}"/>
+            <TextBox Name="tbSubArea" HorizontalAlignment="Left"  Margin="128,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=SubArea,Mode=TwoWay}"/>
             <Label Content="vacation type:" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="98" Height="26" Grid.Row="1"/>
-            <ComboBox Name="cbbVacationType" IsEditable="True" HorizontalAlignment="Left" Margin="128,107,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Type,Mode=OneWay}" Height="22" />
+            <ComboBox Name="cbbVacationType" IsEditable="True" HorizontalAlignment="Left" Margin="128,107,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Type,Mode=TwoWay}" Height="22" />
             <Label Content="adults:" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
-            <TextBox Name="tbAdults" HorizontalAlignment="Left"  Margin="128,153,0,0" TextWrapping="Wrap" Text="{Binding Path=Adults, Mode=OneWay}" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1"/>
+            <TextBox Name="tbAdults" HorizontalAlignment="Left"  Margin="128,153,0,0" TextWrapping="Wrap" Text="{Binding Path=Adults, Mode=TwoWay}" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1"/>
             <Label Content="kids:" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
-            <TextBox Name="tbKids" HorizontalAlignment="Left"  Margin="128,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=Children,Mode=OneWay}" />
+            <TextBox Name="tbKids" HorizontalAlignment="Left"  Margin="128,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=Children,Mode=TwoWay}" />
             <Label Content="stars:" HorizontalAlignment="Left" Margin="10,253,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
-            <TextBox Name="tbStars" HorizontalAlignment="Left"  Margin="128,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=Children,Mode=OneWay}"/>
-            <CheckBox Name="ckbPool" Content="pool" IsChecked="{Binding Path=Pool,Mode=OneWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,15,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
-            <CheckBox Name="cbkJacuzzi" Content="jacuzzi" IsChecked="{Binding Path=Jacuzzi,Mode=OneWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,41,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
-            <CheckBox Name="ckbGarden" Content="Garden" IsChecked="{Binding Path=Garden,Mode=OneWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,67,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
-            <CheckBox Name="ckbAttractions" Content="child attractions" IsChecked="{Binding Path=ChildrenAttraction,Mode=OneWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,93,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
-            <CheckBox Name="ckbMeals" IsChecked="{Binding Path=Meals,Mode=OneWay}" Content="meals"  Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Grid.Column="1" Margin="58,117,0,0" Grid.Row="1"/>
+            <TextBox Name="tbStars" HorizontalAlignment="Left"  Margin="128,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=Children,Mode=TwoWay}"/>
+            <CheckBox Name="ckbPool" Content="pool" IsChecked="{Binding Path=Pool,Mode=TwoWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,15,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
+            <CheckBox Name="cbkJacuzzi" Content="jacuzzi" IsChecked="{Binding Path=Jacuzzi,Mode=TwoWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,41,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
+            <CheckBox Name="ckbGarden" Content="Garden" IsChecked="{Binding Path=Garden,Mode=TwoWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,67,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
+            <CheckBox Name="ckbAttractions" Content="child attractions" IsChecked="{Binding Path=ChildrenAttraction,Mode=TwoWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,93,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
+            <CheckBox Name="ckbMeals" IsChecked="{Binding Path=Meals,Mode=TwoWay}" Content="meals"  Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Grid.Column="1" Margin="58,117,0,0" Grid.Row="1"/>
             <Label Content="choose dates:" HorizontalAlignment="Left" Margin="10,144,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Height="26" Width="82"/>
             <Label Content="entry Date:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,170,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="68"/>
             <DatePicker Name="dpEntryDate" SelectedDate="{Binding Path=EnteryDate,Mode=TwoWay}" DisplayDate="{Binding Path=EnteryDate}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,196,0,0" Grid.Row="1" VerticalAlignment="Top" Width="137" Height="24"/>

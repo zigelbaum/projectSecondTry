@@ -27,7 +27,7 @@ namespace PLWPF
         public string operation = "Add";
         OpenFileDialog op;
         bool isImageChanged = false;
-
+        public bool addedSuccessfuly = false;
         ///<summery>
         ///default ctor for adding new request
         ///</summery>
@@ -46,8 +46,8 @@ namespace PLWPF
             tbRegDate.Visibility = Visibility.Hidden;
             cbbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbbVacationType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
-            cbbArea.SelectedItem = Enums.Area.All;
-            cbbVacationType.SelectedItem = Enums.HostingUnitType.Zimmer;
+            cbbArea.SelectedItem = null;
+            cbbVacationType.SelectedItem = null;
             dpEntryDate.SelectedDate = DateTime.Now;
             dpRealeseDate.SelectedDate = DateTime.Now.AddDays(1);
         }
@@ -65,8 +65,8 @@ namespace PLWPF
             InitializeComponent();
             cbbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbbVacationType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
-            cbbArea.SelectedItem = Enums.Area.All;
-            cbbVacationType.SelectedItem = Enums.HostingUnitType.Zimmer;
+            cbbArea.SelectedItem = null;
+            cbbVacationType.SelectedItem = null;
             try
             {
                 BitmapImage bitmap = new BitmapImage();
@@ -153,62 +153,94 @@ namespace PLWPF
 
         private void addReqButton_Click(object sender, RoutedEventArgs e)
         {
+            bool premitionToAdd = true;
             if (tbFirstName.Text.Any(char.IsDigit) || tbLastName.Text.Any(char.IsDigit))
             {
                 MessageBox.Show("please enter name without numbers", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                return;
+                premitionToAdd = false;
             }
             if (cbbArea.SelectedItem == null)
             {
                 MessageBox.Show("please choose your vacation area", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                premitionToAdd = false;
             }
             if (cbbVacationType.SelectedItem == null)
             {
                 MessageBox.Show("please choose your vacation area", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                premitionToAdd = false;
             }
             if (!tbAdults.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the adults input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                premitionToAdd = false;
             }
             if (!tbKids.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the kids input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                premitionToAdd = false;
             }
             if (!tbStars.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the stars input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                premitionToAdd = false;
             }
             switch (operation)
             {
                 case "Add":
-                    GuestRequest guest =guestRequest;//יכול להיות שלא יעבוד כי אין בנאי העתקה
-                    try { MainWindow.myBL.addGuestRequest(guest); }
-                    catch (Exception a)
+                    if (tbMail.SelectedText == null)
                     {
-                        var result = MessageBox.Show(a.Message+". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                        if (MessageBoxResult.No == result)
-                        {
-                            Close();
-                            return;
-                        }
-                        else
-                            return;
+                        premitionToAdd = false;
+                        tbMail.BorderBrush = Brushes.Red;
                     }
-                    Close();
-                    if (isImageChanged)
+                    if (tbAdults.SelectedText == null)
                     {
-                        try
-                        {
-                            MainWindow.myBL.AddCostumerImage(guest.GuestRequestKey, op.FileName);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("failed uploading profile picture" + ex.Message,"action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                        }
+                        premitionToAdd = false;
+                        tbMail.BorderBrush = Brushes.Red;
                     }
-                    MessageBox.Show("the requet has been added successfully", "adding request", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                    if (tbFirstName.SelectedText == null)
+                    {
+                        premitionToAdd = false;
+                        tbFirstName.BorderBrush = Brushes.Red;
+                    }
+                    if (tbLastName.SelectedText == null)
+                    {
+                        premitionToAdd = false;
+                        tbLastName.BorderBrush = Brushes.Red;
+                    }
+                    if (premitionToAdd == true)
+                    {
+                        GuestRequest guest = guestRequest;//יכול להיות שלא יעבוד כי אין בנאי העתקה
+                        try { MainWindow.myBL.addGuestRequest(guest); }
+                        catch (Exception a)
+                        {
+                            var result = MessageBox.Show(a.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                            if (MessageBoxResult.No == result)
+                            {
+                                Close();
+                                return;
+                            }
+                            else
+                                return;
+                        }
+                        Close();
+                        if (isImageChanged)
+                        {
+                            try
+                            {
+                                MainWindow.myBL.AddCostumerImage(guest.GuestRequestKey, op.FileName);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("failed uploading profile picture" + ex.Message, "action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                            }
+                        }
+                        MessageBox.Show("the requet has been added successfully", "adding request", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                        addedSuccessfuly = true;
+                    }
+                    else
+                        MessageBox.Show("Some details are missing or uncorrect. Please try again.", "action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                     break;
-                    case "Update":
+                case "Update":
                     try
                     {
                         MainWindow.myBL.SetGuestRequest(guestRequest);
