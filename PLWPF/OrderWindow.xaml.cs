@@ -1,6 +1,7 @@
 ﻿using BE;
 using BL;
 using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,7 @@ namespace PLWPF
         public static IBL myBl = BL.FactoryBL.getBL("XML");
         public List<Order> listOrders = new List<Order>();
         public Int32 hostID;
+        private ObservableCollection<Order> ordersList = new ObservableCollection<Order>(myBl.GetOrdersList());
         #endregion
 
         public OrderWindow(Int32 IDhost)
@@ -44,8 +46,8 @@ namespace PLWPF
                 {
                     listOrders.Add(ord);
                 }
-            }
-            cbOrderstList.Visibility = Visibility.Visible;
+            }         
+            OrderView.ItemsSource = listOrders;          
             UploadOrderButton.Visibility = Visibility.Visible;
             CreateOrderButton.Visibility = Visibility.Visible;
         }

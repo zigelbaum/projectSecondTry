@@ -12,6 +12,9 @@
             <Setter Property="FontStyle" Value="Normal"/>
         </Style>
     </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="file:///C:/Users/DELL/source/repos/projectSecondTry4/PLWPF/Icons/backGround.jpg" Opacity="0.8"/>
+    </Window.Background>
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="75*"/>
