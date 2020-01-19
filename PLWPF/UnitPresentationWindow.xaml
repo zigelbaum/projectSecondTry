@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
         Title="UnitPresentationWindow" Height="450" Width="800">
-    
+
     <Grid>
         <Label Content="hosting unit name:" HorizontalAlignment="Left" Margin="25,100,0,0" VerticalAlignment="Top"/>
         <TextBox Name="tbUnitName"  HorizontalAlignment="Left" Height="23" Margin="170,103,0,0" TextWrapping="Wrap" Text="{Binding Path=HostingUnitName,Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
@@ -41,6 +41,7 @@
         <Label Name="lblUnitKey" Content="hosting unit key:" HorizontalAlignment="Left" Margin="25,18,0,0" VerticalAlignment="Top"/>
         <Label Name="lblOwner" Content="hosting unit owner:" HorizontalAlignment="Left" Margin="25,61,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbOnwer"  HorizontalAlignment="Left" Height="23" Margin="170,61,0,0" TextWrapping="Wrap" Text="{Binding Path=Owner.HostKey, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+        <Viewbox Name="vbCalendar" HorizontalAlignment="Left" Height="192" Margin="545,61,0,0" VerticalAlignment="Top" Width="188"/>
 
     </Grid>
 </Window>

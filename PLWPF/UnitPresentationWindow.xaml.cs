@@ -25,14 +25,13 @@ namespace PLWPF
         IBL myBl = BL.FactoryBL.getBL("XML");
         public bool addedSuccessfully;
         string operation = "Add";
-        /*public*/ HostingUnit my_unit;
+        public HostingUnit my_unit;
         #endregion
 
         public UnitPresentationWindow()
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            my_unit = new HostingUnit();
-            this.DataContext = my_unit;
+            my_unit = new HostingUnit();        
             InitializeComponent();
             cbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbUnitType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
@@ -49,7 +48,8 @@ namespace PLWPF
             operation = oper;
             my_unit = hostingUnit;
             this.DataContext = my_unit;
-            InitializeComponent();
+
+        InitializeComponent();
             cbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbUnitType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
             switch (oper)
@@ -238,5 +238,6 @@ namespace PLWPF
                     break;
             }
         }
+
     }
 }

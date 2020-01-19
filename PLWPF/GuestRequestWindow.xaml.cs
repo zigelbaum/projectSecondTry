@@ -58,9 +58,23 @@ namespace PLWPF
             getKey.ShowDialog();
             if (getKey.numVal != 0)
             {
-                request = MainWindow.myBL.FindGuestRequest(getKey.numVal);
-                GuestPresentation presentation = new GuestPresentation(request, "Update");
-                presentation.ShowDialog();
+                try
+                {
+                    request = MainWindow.myBL.FindGuestRequest(getKey.numVal);
+                    if (request.Status != Enums.GuestRequestStatus.Active)
+                    {
+                        throw new Exception("You cant change the details of your request due to its status");
+                    }
+                    else
+                    {
+                        GuestPresentation presentation = new GuestPresentation(request, "Update");
+                        presentation.ShowDialog();
+                    }
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show("failed updating details" +a.Message, "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                }
             }
         }
 

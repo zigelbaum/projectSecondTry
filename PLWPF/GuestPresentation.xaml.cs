@@ -153,63 +153,72 @@ namespace PLWPF
         private void addReqButton_Click(object sender, RoutedEventArgs e)
         {
             bool premitionToAdd = true;
-            if (tbFirstName.Text.Any(char.IsDigit) || tbLastName.Text.Any(char.IsDigit))
+            if (String.IsNullOrEmpty(tbFirstName.Text) || String.IsNullOrEmpty(tbLastName.Text) || tbFirstName.Text.Any(char.IsDigit) || tbLastName.Text.Any(char.IsDigit))
             {
                 MessageBox.Show("please enter name without numbers", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbFirstName.Background = Brushes.IndianRed;
                 premitionToAdd = false;
             }
             if (cbbArea.SelectedItem == null)
             {
                 MessageBox.Show("please choose your vacation area", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                cbbArea.Background = Brushes.IndianRed;
                 premitionToAdd = false;
             }
             if (cbbVacationType.SelectedItem == null)
             {
                 MessageBox.Show("please choose your vacation area", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                cbbVacationType.Background = Brushes.IndianRed;
                 premitionToAdd = false;
             }
             if (!tbAdults.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the adults input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbAdults.Background = Brushes.IndianRed;
                 premitionToAdd = false;
             }
             if (!tbKids.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the kids input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbKids.Background = Brushes.IndianRed;
                 premitionToAdd = false;
             }
             if (!tbStars.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the stars input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbStars.Background = Brushes.IndianRed;
                 premitionToAdd = false;
             }
             switch (operation)
             {
                 case "Add":
-                    if (tbMail.SelectedText == null)
+                    if (String.IsNullOrEmpty(tbMail.Text))
                     {
                         premitionToAdd = false;
-                        tbMail.BorderBrush = Brushes.Red;
+                        tbMail.Background = Brushes.IndianRed;
                     }
-                    if (tbAdults.SelectedText == null)
+                    if (String.IsNullOrEmpty(tbAdults.Text))
                     {
                         premitionToAdd = false;
-                        tbMail.BorderBrush = Brushes.Red;
+                        tbMail.Background = Brushes.IndianRed;
                     }
                     else
                     {
                         if (int.Parse(tbAdults.Text) < 1)
+                        {
+                            tbAdults.Background = Brushes.IndianRed;
                             premitionToAdd = false;
+                        }
                     }
-                    if (tbFirstName.SelectedText == null)
+                    if (String.IsNullOrEmpty(tbFirstName.Text))
                     {
                         premitionToAdd = false;
-                        tbFirstName.BorderBrush = Brushes.Red;
+                        tbFirstName.Background = Brushes.IndianRed;
                     }
-                    if (tbLastName.SelectedText == null)
+                    if (String.IsNullOrEmpty(tbLastName.Text))
                     {
                         premitionToAdd = false;
-                        tbLastName.BorderBrush = Brushes.Red;
+                        tbLastName.Background = Brushes.IndianRed;
                     }
                     if (premitionToAdd == true)
                     {
@@ -246,15 +255,16 @@ namespace PLWPF
                         MessageBox.Show("Some details are missing or uncorrect. Please try again.", "action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                     break;
                 case "Update":
-                    try
-                    {
-                        MainWindow.myBL.SetGuestRequest(guestRequest);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "internal error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                        return;
-                    }
+                    if (premitionToAdd == true)
+                        try
+                        {
+                            MainWindow.myBL.SetGuestRequest(guestRequest);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "internal error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                            return;
+                        }
                     Close();
                     CostumerImage.Source = null;
                     if (isImageChanged)

@@ -52,6 +52,7 @@ namespace BE
         public Enums.intrested Meals { get => meals; set => meals = value; }
         public int Stars { get => _Stars; set => _Stars = value; }
 
+
         #endregion
 
         #region functions
