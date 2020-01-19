@@ -34,7 +34,7 @@ namespace PLWPF
         public GuestPresentation()
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            guestRequest = new BE.GuestRequest();
+            guestRequest = new GuestRequest();
             this.DataContext = guestRequest;
             InitializeComponent();
             requestDetails.Visibility = Visibility.Hidden;

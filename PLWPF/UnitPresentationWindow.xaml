@@ -10,35 +10,39 @@
         <ImageBrush ImageSource="file:///C:/Users/DELL/source/repos/projectSecondTry4/PLWPF/Icons/backGround.jpg" Opacity="0.8"/>
     </Window.Background>
     <Grid>
-        <Label Content="hosting unit name" HorizontalAlignment="Left" Margin="33,37,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tbUnitName" HorizontalAlignment="Left" Height="23" Margin="170,37,0,0" TextWrapping="Wrap" Text="{Binding Path=UnitName,Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="hosting unit name:" HorizontalAlignment="Left" Margin="25,100,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="tbUnitName"  HorizontalAlignment="Left" Height="23" Margin="170,103,0,0" TextWrapping="Wrap" Text="{Binding Path=HostingUnitName,Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
 
-        <ComboBox Name="cbArea" IsEditable="True" HorizontalAlignment="Left" Margin="170,153,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Area,Mode=OneWay}" Height="22"/>
-        <Label Content="area:" HorizontalAlignment="Left" Margin="33,153,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
+        <ComboBox Name="cbArea" IsEditable="True" HorizontalAlignment="Left" Margin="170,192,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Area,Mode=TwoWay}" Height="22"/>
+        <Label Content="area:" HorizontalAlignment="Left" Margin="25,192,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
 
-        <Label Content="unit type:" HorizontalAlignment="Left" Margin="33,89,0,0" VerticalAlignment="Top" Width="98" Height="26"/>
-        <ComboBox Name="cbUnitType" IsEditable="True" HorizontalAlignment="Left" Margin="170,93,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Type,Mode=OneWay}" Height="22" />
+        <Label Content="unit type:" HorizontalAlignment="Left" Margin="25,142,0,0" VerticalAlignment="Top" Width="98" Height="26"/>
+        <ComboBox Name="cbUnitType" IsEditable="True" HorizontalAlignment="Left" Margin="170,146,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=HostingUnitType,Mode=TwoWay}" Height="22" />
 
-        <Label Content="sub area" HorizontalAlignment="Left" Margin="33,212,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tbSubArea" HorizontalAlignment="Left" Height="23" Margin="170,212,0,0" TextWrapping="Wrap" Text="{Binding Path=SubArea,Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="sub area" HorizontalAlignment="Left" Margin="25,239,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="tbSubArea" HorizontalAlignment="Left" Height="23" Margin="170,239,0,0" TextWrapping="Wrap" Text="{Binding Path=SubArea,Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
 
-        <Label Content="adults:" HorizontalAlignment="Left" Margin="33,314,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
-        <TextBox Name="tbAdults" HorizontalAlignment="Left"  Margin="170,314,0,0" TextWrapping="Wrap" Text="{Binding Path=Adults, Mode=OneWay}" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label Content="adults:" HorizontalAlignment="Left" Margin="25,337,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
+        <TextBox Name="tbAdults" HorizontalAlignment="Left"  Margin="170,337,0,0" TextWrapping="Wrap" Text="{Binding Path=Adults, Mode=TwoWay}" VerticalAlignment="Top" Width="120" Height="23"/>
 
-        <Label Content="kids:" HorizontalAlignment="Left" Margin="33,358,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
-        <TextBox Name="tbKids" HorizontalAlignment="Left"  Margin="170,358,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Text="{Binding Path=Children,Mode=OneWay}" />
+        <Label Content="kids:" HorizontalAlignment="Left" Margin="25,381,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
+        <TextBox Name="tbKids" HorizontalAlignment="Left"  Margin="170,381,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="23" Text="{Binding Path=Kids,Mode=TwoWay}" />
 
-        <Label Content="stars:" HorizontalAlignment="Left" Margin="33,265,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
-        <TextBox Name="tbStars" HorizontalAlignment="Left"  Margin="170,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Text="{Binding Path=Children,Mode=OneWay}"/>
+        <Label Content="stars:" HorizontalAlignment="Left" Margin="25,288,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
+        <TextBox Name="tbStars" HorizontalAlignment="Left"  Margin="170,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="23" Text="{Binding Path=Stars,Mode=TwoWay}"/>
 
-        <CheckBox Name="ckbPool" Content="pool" IsChecked="{Binding Path=Pool,Mode=OneWay}" Height="26" HorizontalAlignment="Left" Margin="374,36,0,0" VerticalAlignment="Top" Width="113"/>
-        <CheckBox Name="cbkJacuzzi" Content="jacuzzi" IsChecked="{Binding Path=Jacuzzi,Mode=OneWay}" Height="26" HorizontalAlignment="Left" Margin="374,91,0,0" VerticalAlignment="Top" Width="113"/>
-        <CheckBox Name="ckbGarden" Content="Garden" IsChecked="{Binding Path=Garden,Mode=OneWay}" Height="26" HorizontalAlignment="Left" Margin="374,153,0,0" VerticalAlignment="Top" Width="113"/>
-        <CheckBox Name="ckbAttractions" Content="child attractions" IsChecked="{Binding Path=ChildrenAttraction,Mode=OneWay}" Height="26" HorizontalAlignment="Left" Margin="374,209,0,0" VerticalAlignment="Top" Width="113"/>
-        <CheckBox Name="ckbMeals" IsChecked="{Binding Path=Meals,Mode=OneWay}" Content="meals"  Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="374,265,0,0"/>
+        <CheckBox Name="ckbPool" Content="pool" IsChecked="{Binding Path=Pool,Mode=TwoWay}" Height="26" HorizontalAlignment="Left" Margin="374,36,0,0" VerticalAlignment="Top" Width="113"/>
+        <CheckBox Name="cbkJacuzzi" Content="jacuzzi" IsChecked="{Binding Path=Jacuzzi,Mode=TwoWay}" Height="26" HorizontalAlignment="Left" Margin="374,91,0,0" VerticalAlignment="Top" Width="113"/>
+        <CheckBox Name="ckbGarden" Content="Garden" IsChecked="{Binding Path=Garden,Mode=TwoWay}" Height="26" HorizontalAlignment="Left" Margin="374,153,0,0" VerticalAlignment="Top" Width="113"/>
+        <CheckBox Name="ckbAttractions" Content="child attractions" IsChecked="{Binding Path=ChildrenAttraction,Mode=TwoWay}" Height="26" HorizontalAlignment="Left" Margin="374,209,0,0" VerticalAlignment="Top" Width="113"/>
+        <CheckBox Name="ckbMeals" IsChecked="{Binding Path=Meals,Mode=TwoWay}" Content="meals"  Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="374,265,0,0"/>
 
-        <Button Name="addUnitButton" Content="continue" HorizontalAlignment="Left" Margin="654,350,0,0" VerticalAlignment="Top" Width="102" Click="addUnitButton_Click" Height="34"/>
+        <Button Name="addUnitButton" Content="add hosting unit" HorizontalAlignment="Left" Margin="654,350,0,0" VerticalAlignment="Top" Width="102" Click="addUnitButton_Click" Height="34"/>
         <Button x:Name="cancelUnitButton" Content="cancel" HorizontalAlignment="Left" Margin="516,350,0,0" VerticalAlignment="Top" Width="88" Click="cancelUnitButton_Click" Height="34"/>
-        
+        <TextBox x:Name="tbUnitKey" HorizontalAlignment="Left" Height="23" Margin="170,18,0,0" TextWrapping="Wrap" Text="{Binding Path=HostingUnitKey, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+        <Label Name="lblUnitKey" Content="hosting unit key:" HorizontalAlignment="Left" Margin="25,18,0,0" VerticalAlignment="Top"/>
+        <Label Name="lblOwner" Content="hosting unit owner:" HorizontalAlignment="Left" Margin="25,61,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbOnwer"  HorizontalAlignment="Left" Height="23" Margin="170,61,0,0" TextWrapping="Wrap" Text="{Binding Path=Owner.HostKey, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </Window>

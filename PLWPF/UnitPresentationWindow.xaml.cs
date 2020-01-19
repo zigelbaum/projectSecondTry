@@ -24,49 +24,49 @@ namespace PLWPF
         #region variable  
         IBL myBl = BL.FactoryBL.getBL("XML");
         Int32 unitKey;
+        string operation="Add";
         public HostingUnit my_unit;
         #endregion
 
-        public UnitPresentationWindow(Int32 unitKeyCTOR)
+        public UnitPresentationWindow()
         {
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;          
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            my_unit = new HostingUnit();
+            this.DataContext = my_unit;
             InitializeComponent();
             cbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbUnitType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
-            cbArea.SelectedItem = Enums.Area.All;
-            cbUnitType.SelectedItem = Enums.HostingUnitType.Zimmer;
-            unitKey = unitKeyCTOR;
-            switch(unitKey)
-            {
-                case 0:
-                    break;
-                default:
-                    #region print
-                    my_unit = myBl.FindUnit(unitKey);
-                    tbUnitName.Text = my_unit.HostingUnitName;
-                    tbSubArea.Text = my_unit.SubArea;
-                    tbAdults.Text = my_unit.Adults.ToString();
-                    tbKids.Text = my_unit.Kids.ToString();
-                    tbStars.Text = my_unit.Stars.ToString();
-                    cbArea.SelectedItem = my_unit.Area;
-                    cbUnitType.SelectedItem = my_unit.HostingUnitType;
-                    ckbPool.IsChecked = my_unit.Pool;
-                    cbkJacuzzi.IsChecked = my_unit.Jaccuzi;
-                    ckbMeals.IsChecked = my_unit.Meals;
-                    ckbGarden.IsChecked = my_unit.Garden;
-                    ckbAttractions.IsChecked = my_unit.ChildrenAttraction;
-                    #endregion
-
-                    #region no change
-                    cbArea.IsEnabled = false;
-                    cbUnitType.IsEnabled = false;
-                    tbSubArea.IsEnabled = false;
-                    #endregion
-
-                    break;              
-            }
+            cbArea.SelectedItem = null;
+            cbUnitType.SelectedItem = null;
+            lblUnitKey.Visibility = Visibility.Hidden;
+            tbUnitKey.Visibility = Visibility.Hidden;
+            tbOnwer.Visibility = Visibility.Hidden;
+            lblOwner.Visibility = Visibility.Hidden;
         }
 
+        public UnitPresentationWindow(HostingUnit hostingUnit,string oper)
+        {
+            operation = oper;
+            my_unit = hostingUnit;
+            this.DataContext = my_unit;
+            InitializeComponent();
+            cbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
+            cbUnitType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
+             switch(oper)
+            {
+                case "Update":
+                    cbArea.IsEnabled = false;
+                    cbUnitType.IsEnabled = false;
+                    tbOnwer.IsEnabled = false;
+                    tbUnitKey.IsEnabled = false;
+                    tbSubArea.IsEnabled = false;
+                    addUnitButton.Content = "save changes";
+                    break;
+                case "View":
+
+                    break;
+            }
+        }
         public void addUnitButton_Click(object sender, RoutedEventArgs e)
         {
             if (tbUnitName.Text.Any(char.IsDigit))
