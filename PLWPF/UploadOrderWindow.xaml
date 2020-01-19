@@ -11,6 +11,7 @@
     </Window.Background>
     <Grid>
 
+
         <ComboBox Name="OrderstList" VerticalAlignment="Stretch" SelectionChanged="cbOrderList_SelectionChanged" Text="{Binding Path=listOrders}" Margin="77,122,0,236.667" FontSize="36" Width="660"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" BorderBrush="#FFFBFBFB"/>
 
         <ComboBox Name="StatusOrder"  HorizontalAlignment="Left" Margin="99,334,0,0" SelectionChanged="cbOrderStatus_SelectionChanged"  Text="{Binding Path=myorder.OrderStatus}" VerticalAlignment="Top" Width="120" BorderBrush="#FFFBFAFA" OpacityMask="White" Background="#FFB9B955"/>
@@ -21,6 +22,22 @@
 
         <TextBox Name="OrderDate" HorizontalAlignment="Right" Margin="0,334,56.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.OrderDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447" Background="#FFFFFFF8"/>
         <Label Name="OrderDateString" HorizontalAlignment="Right" Margin="0,334,175.333,0" Content="order date:" VerticalAlignment="Top" Height="56" Width="94" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
+        <ListView Name="orderView" HorizontalAlignment="Left" Height="274" Margin="10,10,0,0" VerticalAlignment="Top" Width="773">
+            <ListView.Background>
+                <ImageBrush/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="order key" DisplayMemberBinding="{Binding GuestRequestKey}" Width="100"/>
+                    <GridViewColumn Header="hosting unit key" DisplayMemberBinding="{Binding HostingUnitKey}" Width="100"/>
+                    <GridViewColumn Header="guest request key" DisplayMemberBinding="{Binding GuestRequestKey}" Width="100"/>
+                    <GridViewColumn Header="status" DisplayMemberBinding="{Binding OrderStatus}" Width="95"/>
+                    <GridViewColumn Header="create date" DisplayMemberBinding="{Binding CreateDate}" Width="90"/>
+                    <GridViewColumn Header="order date" DisplayMemberBinding="{Binding OrderDate}" Width="90"/>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>

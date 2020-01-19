@@ -57,7 +57,8 @@ namespace PLWPF
                     listOrders.Add(ord);
                 }
             }
-            OrderstList.Visibility = Visibility.Visible;
+            orderView.ItemsSource = listOrders;
+            //OrderstList.Visibility = Visibility.Visible;
 
            /* IEnumerable<IGrouping<Host, HostingUnit>> my_units = myBl.GroupHostByHostingUnit();
             foreach (IGrouping<Host, HostingUnit> hosting in my_units)
@@ -85,14 +86,17 @@ namespace PLWPF
 
             //למלאות את הפרטים כאשר לוחצים על הזמנה מסוימת
             StatusOrder.Visibility = Visibility;
+            StatusOrder.SelectedItem = myorder.OrderStatus;
             StatusOrderString.Visibility = Visibility;
 
             CreateDate.Visibility = Visibility;
+            CreateDate.Text = myorder.CreateDate.ToString();
             CreateDateString.Visibility = Visibility;           
 
             if (myorder.OrderDate != null)
             {
                 OrderDate.Visibility = Visibility;
+                OrderDate.Text = myorder.OrderDate.ToString();
                 OrderDateString.Visibility = Visibility;
             }
         }

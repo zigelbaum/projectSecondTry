@@ -72,10 +72,10 @@
             </Grid>
             <Grid HorizontalAlignment="Left" Height="30" Grid.Row="1" VerticalAlignment="Top" Width="792">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200*"/>
-                    <ColumnDefinition Width="200*"/>
-                    <ColumnDefinition Width="200*"/>
-                    <ColumnDefinition Width="200*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="198"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="group requests by:" FontSize="12" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
                 <Label Content="show group:" FontSize="12" Grid.Column="2" VerticalAlignment="Stretch"/>
@@ -89,7 +89,7 @@
             <Label Content="Click on request twice to view, once to choose." HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Stretch" Width="554"/>
             <Button Name="reset" Content="reset search" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Stretch" Width="92" Margin="659,0,0,0" Click="reset_Click"
                 />
-            <ListView x:Name="requestView"  HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" MouseDoubleClick="viewRequest" >
+            <ListView x:Name="requestView"  HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" MouseDoubleClick="viewRequest">
                 <ListView.Background>
                     <ImageBrush/>
                 </ListView.Background>

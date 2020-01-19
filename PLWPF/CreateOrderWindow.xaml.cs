@@ -52,14 +52,7 @@ namespace PLWPF
                     }
                 }
             }
-        }
-
-        public void cbRequestList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //למלאות את הפרטים כאשר לוחצים על דרישת אירוח
-            Int32 index = GuestRequestList.SelectedIndex;
-
-            my_request_key = matchRequests[index].GuestRequestKey;
+            requestView.ItemsSource = matchRequests;
         }
 
         private void AddOrderButton_Click(object sender, RoutedEventArgs e)

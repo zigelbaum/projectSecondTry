@@ -27,18 +27,14 @@ namespace PLWPF
         public static IBL myBl = BL.FactoryBL.getBL("XML");
         public List<Order> listOrders = new List<Order>();
         public Int32 hostID;
-        private ObservableCollection<Order> ordersList = new ObservableCollection<Order>(myBl.GetOrdersList());
         #endregion
 
         public OrderWindow(Int32 IDhost)
         {
-            InitializeComponent();
-            UploadOrderButton.Visibility = Visibility.Hidden;
-            CreateOrderButton.Visibility = Visibility.Hidden;            
+            InitializeComponent();            
             hostID = IDhost;
-            //getOrderList();
-            List<HostingUnit> tempHostingList = myBl.getHostingUnits(h => h.Owner.Id == IDhost);
-            //List<HostingUnit> tempHostingList = myBl.getHostingUnits(u=>u.Owner.Id == IDhost);
+
+            List<HostingUnit> tempHostingList = myBl.getHostingUnits(h => h.Owner.Id == IDhost);            
             foreach (HostingUnit my_unit in tempHostingList)
             {
                 List<Order> tempOrderList = myBl.getOrders(o => o.HostingUnitKey == my_unit.HostingUnitKey);
@@ -46,14 +42,19 @@ namespace PLWPF
                 {
                     listOrders.Add(ord);
                 }
-            }         
-            OrderView.ItemsSource = listOrders;          
+            }             
+            OrderView.ItemsSource = listOrders; 
+            
             UploadOrderButton.Visibility = Visibility.Visible;
-            CreateOrderButton.Visibility = Visibility.Visible;
+            CreateOrderButton.Visibility = Visibility.Visible;         
+            cbbShowStatus.Visibility = Visibility.Visible;
+
+            cbbShowStatus.ItemsSource = Enum.GetValues(typeof(Enums.OrderStatus));
         }
 
         private void UploadOrderButton_Click(object sender, RoutedEventArgs e)
         {
+            Close();
             UploadOrderWindow upload_ord_Window = new UploadOrderWindow(hostID);
             upload_ord_Window.ShowDialog();
         }
@@ -65,9 +66,29 @@ namespace PLWPF
             getKey.ShowDialog();
             if (getKey.numVal != 0)
             {
+                Close();
                 new_ord_Window = new CreateOrderWindow(hostID, myBl.FindUnit(getKey.numVal));
                 new_ord_Window.ShowDialog();
             }                
+        }
+
+        private void tbUnitKey_SearchFilterChanged(object sender, TextChangedEventArgs e)
+        {
+            if(tbUnitKey != null)
+            {
+                string searchTxt = tbUnitKey.Text;
+                string upper = searchTxt.ToUpper();
+                string lower = searchTxt.ToLower();
+
+                var order = from item in listOrders
+                            let key = item.HostingUnitKey.ToString()
+                            where
+                              key.StartsWith(lower)
+                              || key.StartsWith(upper)
+                              || key.Contains(searchTxt)
+                            select item;
+                OrderView.ItemsSource = order;
+            }
         }
 
         /*private void getOrderList()
@@ -81,21 +102,29 @@ namespace PLWPF
                     listOrders.Add(ord);
                 }
             }*/
-            /*unit = hostList[0];
-            listOrders = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);*/
-            /*cbOrderstList.Visibility = Visibility.Visible;
-            UploadOrderButton.Visibility = Visibility.Visible;
-            CreateOrderButton.Visibility = Visibility.Visible;
-        }*/
+        /*unit = hostList[0];
+        listOrders = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);*/
+        /*cbOrderstList.Visibility = Visibility.Visible;
+        UploadOrderButton.Visibility = Visibility.Visible;
+        CreateOrderButton.Visibility = Visibility.Visible;
+    }*/
+
+        private void cbbShowStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Int32 index = cbbShowStatus.SelectedIndex;
+            List<Order> tempOrders = new List<Order>();
+            foreach(Order order in listOrders)
+            {
+                if (order.OrderStatus == (Enums.OrderStatus)(index+1))
+                    tempOrders.Add(order);
+            }
+            OrderView.ItemsSource = tempOrders;
+        }
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
             Close();  
         }
 
-        private void cbOrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //לא קורה כלום זו סתם תצוגה או שנעשה שזה יעבור להצגת ההזמנה?
-        }
     }
 }

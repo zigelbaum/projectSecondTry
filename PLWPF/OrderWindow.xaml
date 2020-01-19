@@ -13,7 +13,7 @@
         <Button Name="UploadOrderButton" Content="Update Order"  HorizontalAlignment="Left" Margin="360,349,0,0" VerticalAlignment="Top" Width="185" Height="40" Click="UploadOrderButton_Click" FontSize="18" Background="#FFF2F1E9" FontWeight="Bold"/>
         <Button Name="CreateOrderButton" Content="Create a new Order"  HorizontalAlignment="Right" Margin="0,349,33.333,0" VerticalAlignment="Top" Width="185" Height="40" Click="CreateOrderButton_Click" FontSize="18" FontWeight="Bold" Background="#FFEEEEE4"/>
         <Button x:Name="returnButton" Content="Back" Margin="37,349,636.333,31.667" Width="120" Height="40" Background="#FFF6F6F2" FontWeight="Bold" FontSize="18" Click="ReturnButton_Click"/>
-        <ListView Name="OrderView" HorizontalAlignment="Left" Height="300" Margin="10,10,0,0" VerticalAlignment="Top" Width="773" FontFamily="Segoe UI Light">
+        <ListView Name="OrderView" HorizontalAlignment="Left" Height="244" Margin="10,100,0,0" VerticalAlignment="Top" Width="773" FontFamily="Segoe UI Light">
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>
@@ -29,5 +29,18 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Label Content="Enter hosting unit key:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="35" Width="362" FontWeight="Bold"/>
+        <TextBox Name="tbUnitKey" HorizontalAlignment="Left" Height="35" Margin="377,0,0,0" TextWrapping="Wrap" Text="" TextChanged="tbUnitKey_SearchFilterChanged" VerticalAlignment="Top" Width="406" FontWeight="Bold" FontSize="14" RenderTransformOrigin="2.723,0.485">
+            <TextBox.Background>
+                <ImageBrush/>
+            </TextBox.Background>
+        </TextBox>
+        <Label Content="group order by status:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="147" Height="35" Margin="10,35,0,0" FontWeight="Bold"/>
+        <TextBox Name="tbUnitKe" HorizontalAlignment="Left" Height="35" Margin="377,0,0,0" TextWrapping="Wrap" Text="" TextChanged="tbUnitKey_SearchFilterChanged" VerticalAlignment="Top" Width="406" FontWeight="Bold" FontSize="14" RenderTransformOrigin="2.723,0.485">
+            <TextBox.Background>
+                <ImageBrush/>
+            </TextBox.Background>
+        </TextBox>
+        <ComboBox Name="cbbShowStatus" SelectionChanged="cbbShowStatus_SelectionChanged" SelectedItem="{Binding Path=Status,Mode=OneWay}"  HorizontalAlignment="Left" Margin="162,35,0,0" VerticalAlignment="Top" Width="215" Height="35"/>
     </Grid>
 </Window>

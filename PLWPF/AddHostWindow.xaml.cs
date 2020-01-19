@@ -191,7 +191,7 @@ namespace PLWPF
                 Close();
         }
 
-        private void addUnitButton_Click(object sender, RoutedEventArgs e)
+        /*private void addUnitButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -199,6 +199,6 @@ namespace PLWPF
         private void cancelUnitButton_Click(object sender, RoutedEventArgs e)
         {
 
-        }
+        }*/
     }
 }
