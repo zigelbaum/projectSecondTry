@@ -6,9 +6,6 @@
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
         Title="PersonalAreaWindow" Height="450" Width="800">
-    <Window.Background>
-        <ImageBrush ImageSource="file:///C:/Users/DELL/source/repos/projectSecondTry4/PLWPF/Icons/backGround.jpg" Opacity="0.8"/>
-    </Window.Background>
     <Grid>
         <Button Name="UploadHostingUnitButton" Content="Update hosting unit"  HorizontalAlignment="Left" Margin="318,349,0,0" VerticalAlignment="Top" Width="185" Height="40" Click="UploadUnitButton_Click" FontSize="18" Background="#FFFEFDF4" FontWeight="Bold"/>
         <Button Name="DeleteHostingUnitButton" Content="Remove hosting unit"  HorizontalAlignment="Right" Margin="0,349,33.333,0" VerticalAlignment="Top" Width="185" Height="40" Click="DeleteUnitButton_Click" FontSize="18" Background="#FFFFFEF7" FontWeight="Bold"/>

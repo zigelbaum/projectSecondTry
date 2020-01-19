@@ -235,6 +235,6 @@ namespace PLWPF
                 GuestPresentation presentation = new GuestPresentation(((GuestRequest)requestView.SelectedItem), "View");
                 presentation.ShowDialog();
             }
-        }
+        }    
     }
 }

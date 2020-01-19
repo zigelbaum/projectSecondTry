@@ -17,20 +17,8 @@
             <RowDefinition Height="248"/>
             <RowDefinition Height="248"/>
         </Grid.RowDefinitions>
-        <Button x:Name="HostinGUnitButton" Content="Hosting Unit" HorizontalAlignment="Center" Margin="10,72,28,61" Grid.Column="0" VerticalAlignment="Center" Width="226" Height="114" Click="HostinGUnitButton_Click" Grid.Row="1"/>
-        <Button Name="GuestRequestButton" Content="Guest Request" Grid.Column="1" HorizontalAlignment="Center" Margin="10,72,28,0" Grid.Row="1" VerticalAlignment="Top" Width="226" Height="114" Click="GuestRequestButton_Click" />
-        <Button Name="OrderButton" Content="Order" Grid.Column="2" HorizontalAlignment="Left" Margin="10,72,0,0" Grid.Row="1" VerticalAlignment="Top" Width="226" Height="114" Click="OrderButton_Click"/>
-        <TabControl HorizontalAlignment="Left" Height="300" Margin="0,196.333,-6.667,-0.333" VerticalAlignment="Top" Width="800" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2">
-            <TabItem Header="Order">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="GuestRequest">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="Hosting Unit">
-                <Grid Background="#FFE5E5E5" Margin="-924,-30,927,-123"/>
-            </TabItem>
-        </TabControl>
-
+        <Button x:Name="HostinGUnitButton" Content="Hosting Unit" Background="#FFFFFFFF" FontWeight="Bold" HorizontalAlignment="Center" Margin="28,63,10,71" Grid.Column="0" VerticalAlignment="Center" Width="226" Height="114" Click="HostinGUnitButton_Click" Grid.Row="2"/>
+        <Button Name="GuestRequestButton" Content="Guest Request" Background="#FFFFFFFF" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Center" Margin="10,125,28,0" Grid.Row="1" VerticalAlignment="Top" Width="226" Height="114" Click="GuestRequestButton_Click" />
+        <Button Name="OrderButton" Content="Order" Grid.Column="2" Background="#FFFFFFFF" FontWeight="Bold" HorizontalAlignment="Left" Margin="0,81,0,0" VerticalAlignment="Top" Width="226" Height="114" Click="OrderButton_Click" Grid.RowSpan="2"/>
     </Grid>
 </Window>

@@ -12,9 +12,6 @@
             <Setter Property="FontStyle" Value="Normal"/>
         </Style>
     </Window.Resources>
-    <Window.Background>
-        <ImageBrush ImageSource="file:///C:/Users/DELL/source/repos/projectSecondTry4/PLWPF/Icons/backGround.jpg" Opacity="0.8"/>
-    </Window.Background>
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="75*"/>
@@ -27,7 +24,7 @@
         <Label Content="last name" HorizontalAlignment="Left" Height="26" Margin="268,25,0,0" VerticalAlignment="Top" Width="79" Grid.Row="1"/>
         <TextBox Name="tbLastName" HorizontalAlignment="Left" Height="26" Margin="359,25,0,0" TextWrapping="Wrap" Text="{Binding Path=FamilyName,Mode=TwoWay}" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
         <Label Content="mail address" HorizontalAlignment="Left" Margin="504,25,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
-        <TextBox Name="tbMail" HorizontalAlignment="Left" Height="26" Margin="630,25,0,0" TextWrapping="Wrap" Text="{Binding Path=MailAddress,Mode=TwoWay}" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <TextBox Name="tbMail" HorizontalAlignment="Left" Height="26" Margin="611,25,0,0" TextWrapping="Wrap" Text="{Binding Path=MailAddress,Mode=TwoWay}" VerticalAlignment="Top" Width="139" Grid.Row="1"/>
         <Grid Name="requestrequires" HorizontalAlignment="Stretch" Height="auto" Margin="0" Grid.Row="2" VerticalAlignment="Stretch" Width="auto">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35*"/>
@@ -51,7 +48,7 @@
             <Label Content="kids:" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
             <TextBox Name="tbKids" HorizontalAlignment="Left"  Margin="128,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=Children,Mode=TwoWay}" />
             <Label Content="stars:" HorizontalAlignment="Left" Margin="10,253,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
-            <TextBox Name="tbStars" HorizontalAlignment="Left"  Margin="128,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=Children,Mode=TwoWay}"/>
+            <TextBox Name="tbStars" HorizontalAlignment="Left"  Margin="128,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=Stars,Mode=TwoWay}"/>
             <CheckBox Name="ckbPool" Content="pool" IsChecked="{Binding Path=Pool,Mode=TwoWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,15,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
             <CheckBox Name="cbkJacuzzi" Content="jacuzzi" IsChecked="{Binding Path=Jacuzzi,Mode=TwoWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,41,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
             <CheckBox Name="ckbGarden" Content="Garden" IsChecked="{Binding Path=Garden,Mode=TwoWay}" Height="26" Grid.Column="1" HorizontalAlignment="Left" Margin="58,67,0,0" VerticalAlignment="Top" Width="113" Grid.Row="1"/>
@@ -74,7 +71,7 @@
         <TextBox x:Name="tbRquestId" HorizontalAlignment="Left"  Margin="128,35,0,0" TextWrapping="Wrap" Text="{Binding Path=GuestRequestKey, Mode=OneWay}" VerticalAlignment="Top" Width="120" Height="26"/>
         <Label Name="requestStatus" Content="request status" HorizontalAlignment="Left" Height="26" Margin="268,35,0,0" VerticalAlignment="Top" Width="86"/>
         <Label Name="regDate" Content="registration date" HorizontalAlignment="Left" Margin="504,35,0,0" VerticalAlignment="Top" Width="111" Height="26"/>
-        <TextBox x:Name="tbRegDate" HorizontalAlignment="Left" Height="26" Margin="630,35,0,0" TextWrapping="Wrap" Text="{Binding Path=RegistrationDate, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbRegDate" HorizontalAlignment="Left" Height="26" Margin="611,35,0,0" TextWrapping="Wrap" Text="{Binding Path=RegistrationDate, Mode=OneWay}" VerticalAlignment="Top" Width="139"/>
         <ComboBox Name="cbbStatus" IsEditable="True" HorizontalAlignment="Left" Margin="359,39,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Status,Mode=OneWay}"/>
     </Grid>
 </Window>

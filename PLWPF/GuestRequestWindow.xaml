@@ -18,9 +18,6 @@
             <Setter Property="FontSize" Value="13"></Setter>
         </Style>
     </Window.Resources>
-    <Window.Background>
-        <ImageBrush ImageSource="file:///C:/Users/DELL/source/repos/projectSecondTry4/PLWPF/Icons/backGround.jpg" Opacity="0.8"/>
-    </Window.Background>
     <Border>
         <Grid Name="mainGrid">
             <Grid.RowDefinitions>
@@ -89,7 +86,7 @@
             <Label Content="Click on request twice to view, once to choose." HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Stretch" Width="554"/>
             <Button Name="reset" Content="reset search" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Stretch" Width="92" Margin="659,0,0,0" Click="reset_Click"
                 />
-            <ListView x:Name="requestView"  HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" MouseDoubleClick="viewRequest">
+            <ListView x:Name="requestView"  HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" MouseDoubleClick="MenuItem_Click_Info">
                 <ListView.Background>
                     <ImageBrush/>
                 </ListView.Background>

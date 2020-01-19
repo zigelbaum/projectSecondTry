@@ -63,10 +63,9 @@ namespace PLWPF
             guestRequest = request;
             this.DataContext = guestRequest;
             InitializeComponent();
+            cbbStatus.ItemsSource = Enum.GetValues(typeof(Enums.GuestRequestStatus));
             cbbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbbVacationType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
-            cbbArea.SelectedItem = null;
-            cbbVacationType.SelectedItem = null;
             try
             {
                 BitmapImage bitmap = new BitmapImage();
@@ -89,18 +88,18 @@ namespace PLWPF
                     addReqButton.Content = "save changes";
                     break;
                 case "View":
-                    tbRquestId.IsEnabled = false;
-                    tbRegDate.IsEnabled = false;
-                    tbFirstName.IsEnabled = false;
-                    tbLastName.IsEnabled = false;
+                    tbRquestId.IsReadOnly = true;
+                    tbRegDate.IsReadOnly = true;
+                    tbFirstName.IsReadOnly = true;
+                    tbLastName.IsReadOnly = true;
                     cbbStatus.IsEnabled = false;
-                    tbMail.IsEnabled = false;
+                    tbMail.IsReadOnly = true;
                     cbbArea.IsEnabled = false;
-                    tbSubArea.IsEnabled = false;
+                    tbSubArea.IsReadOnly = true;
                     cbbVacationType.IsEnabled = false;
-                    tbAdults.IsEnabled = false;
-                    tbKids.IsEnabled = false;
-                    tbStars.IsEnabled = false;
+                    tbAdults.IsReadOnly = true;
+                    tbKids.IsReadOnly = true;
+                    tbStars.IsReadOnly = true;
                     ckbPool.IsEnabled = false;
                     cbkJacuzzi.IsEnabled = false;
                     ckbGarden.IsEnabled = false;
@@ -197,6 +196,11 @@ namespace PLWPF
                         premitionToAdd = false;
                         tbMail.BorderBrush = Brushes.Red;
                     }
+                    else
+                    {
+                        if (int.Parse(tbAdults.Text) < 1)
+                            premitionToAdd = false;
+                    }
                     if (tbFirstName.SelectedText == null)
                     {
                         premitionToAdd = false;
@@ -222,7 +226,7 @@ namespace PLWPF
                             else
                                 return;
                         }
-                        Close();
+                        //Close();
                         if (isImageChanged)
                         {
                             try
@@ -234,6 +238,7 @@ namespace PLWPF
                                 MessageBox.Show("failed uploading profile picture" + ex.Message, "action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                             }
                         }
+                        Close();//might be in the wrong place
                         MessageBox.Show("the requet has been added successfully", "adding request", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                         addedSuccessfuly = true;
                     }

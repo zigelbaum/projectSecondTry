@@ -26,7 +26,7 @@ namespace BE
         Enums.intrested _Jacuzzi;
         Enums.intrested _Garden;
         Enums.intrested _ChildrenAttraction;
-        private int stars;
+        int _Stars;
         Enums.intrested meals;
         #endregion
 
@@ -48,9 +48,9 @@ namespace BE
         public Enums.intrested Pool { get => _pool; set => _pool = value; }
         public Enums.intrested Jacuzzi { get => _Jacuzzi; set => _Jacuzzi = value; }
         public Enums.intrested Garden { get => _Garden; set => _Garden = value; }
-        public Enums.intrested ChildrenAttraction { get => _ChildrenAttraction; set => _ChildrenAttraction = value; }
-        public int Stars { get => stars; set => stars = value; }
+        public Enums.intrested ChildrenAttraction { get => _ChildrenAttraction; set => _ChildrenAttraction = value; }      
         public Enums.intrested Meals { get => meals; set => meals = value; }
+        public int Stars { get => _Stars; set => _Stars = value; }
 
         #endregion
 

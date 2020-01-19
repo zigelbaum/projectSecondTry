@@ -620,6 +620,15 @@ namespace BL
             return groupToReturn;
         }
 
+        public IEnumerable<IGrouping<Enums.HostingUnitType, HostingUnit>> GroupHostingUnitByType()
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+            IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
+            IEnumerable<IGrouping<Enums.HostingUnitType, HostingUnit>> groupToReturn = from unit in listHostingUnits
+                                                                      group unit by unit.HostingUnitType;
+            return groupToReturn;
+        }
+
         public IEnumerable<IGrouping<Enums.Area, HostingUnit>> GroupHostingUnitByArea()
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");

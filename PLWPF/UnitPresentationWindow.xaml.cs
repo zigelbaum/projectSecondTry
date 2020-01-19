@@ -23,9 +23,9 @@ namespace PLWPF
     {
         #region variable  
         IBL myBl = BL.FactoryBL.getBL("XML");
-        Int32 unitKey;
-        string operation="Add";
-        public HostingUnit my_unit;
+        public bool addedSuccessfully;
+        string operation = "Add";
+        /*public*/ HostingUnit my_unit;
         #endregion
 
         public UnitPresentationWindow()
@@ -44,7 +44,7 @@ namespace PLWPF
             lblOwner.Visibility = Visibility.Hidden;
         }
 
-        public UnitPresentationWindow(HostingUnit hostingUnit,string oper)
+        public UnitPresentationWindow(HostingUnit hostingUnit, string oper)
         {
             operation = oper;
             my_unit = hostingUnit;
@@ -52,70 +52,191 @@ namespace PLWPF
             InitializeComponent();
             cbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbUnitType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
-             switch(oper)
+            switch (oper)
             {
                 case "Update":
                     cbArea.IsEnabled = false;
                     cbUnitType.IsEnabled = false;
-                    tbOnwer.IsEnabled = false;
-                    tbUnitKey.IsEnabled = false;
-                    tbSubArea.IsEnabled = false;
+                    tbOnwer.IsReadOnly = true;
+                    tbUnitKey.IsReadOnly = true;
+                    tbSubArea.IsReadOnly = true;
                     addUnitButton.Content = "save changes";
                     break;
                 case "View":
-
+                    cbArea.IsEnabled = false;
+                    cbUnitType.IsEnabled = false;
+                    tbOnwer.IsReadOnly = true;
+                    tbUnitKey.IsReadOnly = true;
+                    tbSubArea.IsReadOnly = true;
+                    tbUnitName.IsReadOnly = true;
+                    tbStars.IsReadOnly = true;
+                    tbAdults.IsReadOnly = true;
+                    tbKids.IsReadOnly = true;
+                    ckbPool.IsEnabled = false;
+                    cbkJacuzzi.IsEnabled = false;
+                    ckbGarden.IsEnabled = false;
+                    ckbAttractions.IsEnabled = false;
+                    ckbMeals.IsEnabled = false;
+                    addUnitButton.Visibility = Visibility.Hidden;
+                    cancelUnitButton.Content = "Close";
                     break;
             }
         }
         public void addUnitButton_Click(object sender, RoutedEventArgs e)
         {
-            if (tbUnitName.Text.Any(char.IsDigit))
+            bool premission = true;
+
+            #region required filleds
+            if (tbUnitName.IsLoaded == false)
             {
-                MessageBox.Show("please enter name without numbers", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                return;
-            }
-            if (tbUnitName.Text == null)
-            {
-                MessageBox.Show("please enter name this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                MessageBox.Show("please enter youe hosting unit name.", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                premission = false;
+                tbUnitName.BorderBrush = Brushes.Red;
                 return;
             }
             if (tbSubArea.Text.Any(char.IsDigit))
             {
-                MessageBox.Show("please enter sub area without numbers", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                MessageBox.Show("Please enter sub area without numbers", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbSubArea.BorderBrush = Brushes.Red;
+                premission = false;
                 return;
             }
-            if (!tbAdults.Text.All(char.IsDigit))
+            if (tbAdults.Text == null)
             {
-                MessageBox.Show("the adults input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                MessageBox.Show("Please fill the adults filed", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbAdults.BorderBrush = Brushes.Red;
+                premission = false;
                 return;
             }
+            else
+            {
+                if (!tbAdults.Text.All(char.IsDigit))
+                {
+                    MessageBox.Show("The adults input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                    tbAdults.BorderBrush = Brushes.Red;
+                    premission = false;
+                    return;
+                }
+            }            
             if (!tbKids.Text.All(char.IsDigit))
             {
-                MessageBox.Show("the kids input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                return;
-            }
-            if (!tbStars.Text.All(char.IsDigit))
-            {
-                MessageBox.Show("the stars input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                MessageBox.Show("The kids input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbKids.BorderBrush = Brushes.Red;
+                premission = false;
                 return;
             }
             if (tbStars.Text == null)
             {
                 MessageBox.Show("please enter number strars this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbStars.BorderBrush = Brushes.Red;
+                premission = false;
                 return;
             }
-            my_unit = new HostingUnit()
-            { HostingUnitName = tbUnitName.Text, HostingUnitType = (Enums.HostingUnitType)cbUnitType.SelectedIndex, Area = (Enums.Area)cbArea.SelectedIndex, SubArea = tbSubArea.Text, Adults = Int32.Parse(tbAdults.Text), Kids = Int32.Parse(tbKids.Text), Stars = Int32.Parse(tbStars.Text), Pool = ckbPool.AllowDrop, Jaccuzi = cbkJacuzzi.AllowDrop, Garden = ckbGarden.AllowDrop, ChildrenAttraction = ckbAttractions.AllowDrop, Meals = ckbMeals.AllowDrop };
-            AddHostWindow addHostWindow = new AddHostWindow(my_unit, unitKey);
-            addHostWindow.ShowDialog();                       
+            else
+              if (!tbStars.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("the stars input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbStars.BorderBrush = Brushes.Red;
+                premission = false;
+                return;
+            }
+            if (cbArea.SelectedItem == null)
+            {
+
+                MessageBox.Show("The area filed must be filled", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);               
+                premission = false;
+                return;
+            }
+            if (cbUnitType.SelectedItem == null)
+            {
+
+                MessageBox.Show("The type filed must be filled", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                premission = false;
+                return;
+            }
+            #endregion
+            switch (operation)
+            {
+                case "Add":
+                    if (premission == true)
+                    {
+                        var result = MessageBox.Show("Are you allready regisred?", "Adding unit", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            GetKey key = new GetKey("Host");
+                            key.ShowDialog();
+                            if (key.retriveSuccess == true)
+                            {
+                                List<HostingUnit> units = myBl.getHostingUnits(x => x.Owner.Id.ToString() == key.tbID.Text);
+                                my_unit.Owner = units.First().Owner;
+                            }
+                        }
+                        else
+                        {
+
+                            AddHostWindow addHostWindow = new AddHostWindow(my_unit/*, unitKey*/);
+                            addHostWindow.ShowDialog();
+                            my_unit.Owner = addHostWindow.host;
+                        }
+                        HostingUnit unit = my_unit;
+                        try
+                        {
+                            myBl.addHostingUnit(unit);
+                        }
+                        catch (Exception a)
+                        {
+                            var result2 = MessageBox.Show(a.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                            if (MessageBoxResult.No == result2)
+                            {
+                                Close();
+                                return;
+                            }
+                            else
+                                return;
+                        }
+                        addedSuccessfully = true;
+                        Close();
+                    }
+                    break;
+                case "Update":
+                    try
+                    {
+                        MainWindow.myBL.SetHostingUnit(my_unit);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "internal error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                        return;
+                    }
+                    Close();
+
+                    MessageBox.Show("the request details have been changed successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+
+                    break;
+            }
+            
         }
 
-        public void cancelUnitButton_Click(object sender, RoutedEventArgs e)
-        {           
-            var result = MessageBox.Show("are you sure you want to exit?\n any changes will not be saved.", "cancaling", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-            if (result == MessageBoxResult.OK)
-                Close();
+        private void cancelUnitButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch (operation)
+            {
+                case "Add":
+                    var result = MessageBox.Show("are you sure you want to exit?\n any changes will not be saved.", "cancaling", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                    if (result == MessageBoxResult.OK)
+                        Close();
+                    break;
+                case "Update":
+                    var result2 = MessageBox.Show("are you sure you want to exit?\n any changes will not be saved.", "cancaling", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                    if (result2 == MessageBoxResult.OK)
+                        Close();
+                    break;
+                case "View":
+                    var result3 = MessageBox.Show("are you sure you want to exit?", "exit", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                    if (result3 == MessageBoxResult.OK)
+                        Close();
+                    break;
+            }
         }
-
     }
 }
