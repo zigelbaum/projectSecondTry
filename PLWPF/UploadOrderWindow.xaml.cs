@@ -32,7 +32,6 @@ namespace PLWPF
             InitializeComponent();
 
             #region visibility
-            OrderstList.Visibility = Visibility.Hidden;
             StatusOrder.Visibility = Visibility.Hidden;
             StatusOrderString.Visibility = Visibility.Hidden;
             CreateDate.Visibility = Visibility.Hidden;
@@ -79,10 +78,29 @@ namespace PLWPF
             OrderstList.Visibility = Visibility.Visible;*/
         }
 
+        private void tbUnitKey_SearchFilterChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tbUnitKey != null)
+            {
+                string searchTxt = tbUnitKey.Text;
+                string upper = searchTxt.ToUpper();
+                string lower = searchTxt.ToLower();
+
+                var order = from item in listOrders
+                            let key = item.HostingUnitKey.ToString()
+                            where
+                              key.StartsWith(lower)
+                              || key.StartsWith(upper)
+                              || key.Contains(searchTxt)
+                            select item;
+                orderView.ItemsSource = order;
+            }
+        }
+
         private void cbOrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Int32 index = OrderstList.SelectedIndex;
-            myorder = listOrders[index];
+            /*Int32 index = OrderstList.SelectedIndex;
+            myorder = listOrders[index];*/
 
             //למלאות את הפרטים כאשר לוחצים על הזמנה מסוימת
             StatusOrder.Visibility = Visibility;
@@ -99,6 +117,18 @@ namespace PLWPF
                 OrderDate.Text = myorder.OrderDate.ToString();
                 OrderDateString.Visibility = Visibility;
             }
+        }
+
+        private void cbbShowStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Int32 index = cbbShowStatus.SelectedIndex;
+            List<Order> tempOrders = new List<Order>();
+            foreach (Order order in listOrders)
+            {
+                if (order.OrderStatus == (Enums.OrderStatus)(index + 1))
+                    tempOrders.Add(order);
+            }
+            orderView.ItemsSource = tempOrders;
         }
 
         private void cbOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)

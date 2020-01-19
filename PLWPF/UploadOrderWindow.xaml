@@ -8,9 +8,15 @@
         Title="UploadOrderWindow" Height="450" Width="800">
 
     <Grid>
+        <Label Content="Enter hosting unit key:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="35" Width="362" FontWeight="Bold"/>
+        <TextBox Name="tbUnitKey" HorizontalAlignment="Left" Height="35" Margin="377,0,0,0" TextWrapping="Wrap" Text="" TextChanged="tbUnitKey_SearchFilterChanged" VerticalAlignment="Top" Width="406" FontWeight="Bold" FontSize="14" RenderTransformOrigin="2.723,0.485">
+            <TextBox.Background>
+                <ImageBrush/>
+            </TextBox.Background>
+        </TextBox>
 
-
-        <ComboBox Name="OrderstList" VerticalAlignment="Stretch" SelectionChanged="cbOrderList_SelectionChanged" Text="{Binding Path=listOrders}" Margin="77,122,0,236.667" FontSize="36" Width="660"  HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" BorderBrush="#FFFBFBFB"/>
+        <Label Content="group order by status:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="147" Height="35" Margin="10,35,0,0" FontWeight="Bold"/>
+        <ComboBox Name="cbbShowStatus" SelectionChanged="cbbShowStatus_SelectionChanged" SelectedItem="{Binding Path=Status,Mode=OneWay}"  HorizontalAlignment="Left" Margin="162,35,0,0" VerticalAlignment="Top" Width="215" Height="35"/>
 
         <ComboBox Name="StatusOrder"  HorizontalAlignment="Left" Margin="99,334,0,0" SelectionChanged="cbOrderStatus_SelectionChanged"  Text="{Binding Path=myorder.OrderStatus}" VerticalAlignment="Top" Width="120" BorderBrush="#FFFBFAFA" OpacityMask="White" Background="#FFB9B955"/>
         <Label Name="StatusOrderString"  HorizontalAlignment="Right" Margin="0,334,699.333,0" Content="status:" VerticalAlignment="Top" Height="39" Width="62" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
@@ -20,7 +26,7 @@
 
         <TextBox Name="OrderDate" HorizontalAlignment="Right" Margin="0,334,56.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.OrderDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447" Background="#FFFFFFF8"/>
         <Label Name="OrderDateString" HorizontalAlignment="Right" Margin="0,334,175.333,0" Content="order date:" VerticalAlignment="Top" Height="56" Width="94" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
-        <ListView Name="orderView" HorizontalAlignment="Left" Height="274" Margin="10,10,0,0" VerticalAlignment="Top" Width="773">
+        <ListView Name="orderView" HorizontalAlignment="Left" Height="226" Margin="10,103,0,0" VerticalAlignment="Top" Width="783">
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>
