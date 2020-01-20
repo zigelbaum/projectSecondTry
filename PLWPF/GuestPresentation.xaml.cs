@@ -192,8 +192,6 @@ namespace PLWPF
                         Close();
                     break;
                 case "View":
-                    var result3 = MessageBox.Show("are you sure you want to exit?", "exit", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                    if (result3 == MessageBoxResult.OK)
                         Close();
                     break;
             }
@@ -323,6 +321,7 @@ namespace PLWPF
                             MessageBox.Show(ex.Message, "internal error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                             return;
                         }
+                    addedSuccessfuly = true;
                     Close();
                     CostumerImage.Source = null;
                     if (isImageChanged)

@@ -59,6 +59,12 @@ namespace PLWPF
                 unit = MainWindow.myBL.FindUnit(getKey.numVal);
                 UnitPresentationWindow presentation = new UnitPresentationWindow(unit, "Update");
                 presentation.ShowDialog();
+                if (presentation.addedSuccessfully == true)
+                {
+                    mainUnitsList = new ObservableCollection<HostingUnit>(MainWindow.myBL.getHostingUnitsList());
+                    listToFilter = mainUnitsList;
+                    unitsView.ItemsSource = listToFilter;
+                }
             }
         }
         public void ReturnButton_Click(object sender, RoutedEventArgs e)
@@ -215,25 +221,35 @@ namespace PLWPF
                 presentation.ShowDialog();
             }
         }
+
+        private void deleteRequestButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                GetKey key = new GetKey("HostingUnit");
+                key.ShowDialog();
+                HostingUnit hosting = MainWindow.myBL.FindUnit(key.numVal);
+                if (hosting == null)
+                {
+                    throw new Exception("The unit was not found in the system. Check if the unit id is right and try again.");
+                }
+                var result = MessageBox.Show("Are you sure you want to delete the unit?\n Every unclosed order for the unit will be unrelevent " +
+                    "and you want be able to restore the unit.", "delete unit", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                if (result == MessageBoxResult.No)
+                    return;
+                else
+                {
+                    MainWindow.myBL.DeleteHostingUnit(hosting);
+                    mainUnitsList = new ObservableCollection<HostingUnit>(MainWindow.myBL.getHostingUnitsList());
+                    listToFilter = mainUnitsList;
+                    unitsView.ItemsSource = listToFilter;
+                }
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message, "delete unit failed", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+            }
+        }
     }
-    //public void PersonalAreaButton_Click(object sender, RoutedEventArgs e)
-    //{
-    //    PersonalAreaWindow personalAreaWindow;
-    //    GetKey getKey = new GetKey("HostingUnit");
-    //    getKey.ShowDialog();
-    //    if (getKey.numVal != 0)
-    //    {
-    //        personalAreaWindow = new PersonalAreaWindow(getKey.numVal);
-    //        personalAreaWindow.ShowDialog();
-    //    }              
-    //}
-
-    //public void CreateUnitButton_Click(object sender, RoutedEventArgs e)
-    //{
-    //    UnitPresentationWindow unitPresentationWindow = new UnitPresentationWindow();
-    //    unitPresentationWindow.ShowDialog();
-    //}
-
-
 }
 

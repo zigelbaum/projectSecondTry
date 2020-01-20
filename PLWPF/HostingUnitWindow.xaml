@@ -84,6 +84,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            <Button x:Name="deleteRequestButton" Content="Delete unit" Background="#FFFFFFFF" FontWeight="Bold" Margin="313,10,0,0" Width="130" Height="30" Grid.Row="4" Click="deleteRequestButton_Click"/>
         </Grid>
     </Border>
 </Window>

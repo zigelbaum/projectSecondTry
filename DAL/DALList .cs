@@ -67,10 +67,10 @@ namespace DAL
         {
             try
             {
-                if(!UnitExist(hostingUnit))
+                if (!UnitExist(hostingUnit))
                     throw new DataException("The hosting unit not exist");
                 else
-                    hostingUnitsCollection.Remove(hostingUnit);
+                    hostingUnitsCollection.RemoveAll(x => x.HostingUnitKey == hostingUnit.HostingUnitKey);
             }
             catch (DataException c)
             {

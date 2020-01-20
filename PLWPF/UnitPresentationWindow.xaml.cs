@@ -25,14 +25,15 @@ namespace PLWPF
         IBL myBl = BL.FactoryBL.getBL("XML");
         public bool addedSuccessfully;
         string operation = "Add";
-        public HostingUnit my_unit;
+        HostingUnit my_unit;
         Brush yelf, yels, grayf, grays;
         #endregion
 
         public UnitPresentationWindow()
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            my_unit = new HostingUnit();        
+            my_unit = new HostingUnit();
+            this.DataContext = my_unit;
             InitializeComponent();
             cbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbUnitType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
@@ -42,7 +43,6 @@ namespace PLWPF
             tbUnitKey.Visibility = Visibility.Hidden;
             tbOnwer.Visibility = Visibility.Hidden;
             lblOwner.Visibility = Visibility.Hidden;
-
             tbStars.IsEnabled = false;
 
             #region stars
@@ -255,6 +255,7 @@ namespace PLWPF
                         MessageBox.Show(ex.Message, "internal error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                         return;
                     }
+                    addedSuccessfully = true;
                     Close();
 
                     MessageBox.Show("the request details have been changed successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
@@ -278,9 +279,7 @@ namespace PLWPF
                     if (result2 == MessageBoxResult.OK)
                         Close();
                     break;
-                case "View":
-                    var result3 = MessageBox.Show("are you sure you want to exit?", "exit", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                    if (result3 == MessageBoxResult.OK)
+                case "View":                   
                         Close();
                     break;
             }

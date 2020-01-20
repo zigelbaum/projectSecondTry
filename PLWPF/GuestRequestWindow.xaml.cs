@@ -22,7 +22,7 @@ namespace PLWPF
     /// </summary>
     public partial class GuestRequestWindow : Window
     {
-        enum filterRequest { everything , status, area, type, stars }
+        enum filterRequest { everything, status, area, type, stars }
         private ObservableCollection<GuestRequest> requestsList = new ObservableCollection<GuestRequest>(MainWindow.myBL.GetGuestRequestsList());
         ObservableCollection<IGrouping<Enums.GuestRequestStatus, GuestRequest>> groupedByStatus;
         ObservableCollection<IGrouping<Enums.Area, GuestRequest>> groupedByArea;
@@ -33,7 +33,7 @@ namespace PLWPF
         {
             InitializeComponent();
             listToFilter = requestsList;
-            requestView.ItemsSource =listToFilter ;
+            requestView.ItemsSource = listToFilter;
             cbbGroupBy.ItemsSource = Enum.GetValues(typeof(filterRequest));
             cbbGroupBy.SelectedIndex = 0;
             cbbShowGroup.IsEnabled = false;
@@ -43,7 +43,7 @@ namespace PLWPF
         {
             GuestPresentation guestPresentationWindow = new GuestPresentation();
             guestPresentationWindow.ShowDialog();
-            if (guestPresentationWindow.addedSuccessfuly==true)
+            if (guestPresentationWindow.addedSuccessfuly == true)
             {
                 requestsList = new ObservableCollection<GuestRequest>(MainWindow.myBL.GetGuestRequestsList());
                 listToFilter = requestsList;
@@ -67,13 +67,24 @@ namespace PLWPF
                     }
                     else
                     {
+                        List<Order> orders = MainWindow.myBL.getOrders(o => o.GuestRequestKey == getKey.numVal);
+                        if (orders.Any(x=>x.OrderStatus==Enums.OrderStatus.Closed))
+                            throw new Exception("You cannot change the details.\nThere is a closed order for this request");
+                        foreach (Order order in orders)
+                        { order.OrderStatus = Enums.OrderStatus.NotRelevent; }
                         GuestPresentation presentation = new GuestPresentation(request, "Update");
                         presentation.ShowDialog();
+                        if (presentation.addedSuccessfuly == true)
+                        {
+                            requestsList = new ObservableCollection<GuestRequest>(MainWindow.myBL.GetGuestRequestsList());
+                            listToFilter = requestsList;
+                            requestView.ItemsSource = listToFilter;
+                        }
                     }
                 }
                 catch (Exception a)
                 {
-                    MessageBox.Show("failed updating details" +a.Message, "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                    MessageBox.Show("failed updating details" + a.Message, "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 }
             }
         }
@@ -104,7 +115,7 @@ namespace PLWPF
 
         private void tbMail_SearchFilterChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbMail.Text!=null)
+            if (tbMail.Text != null)
             {
                 string searchTxt = tbMail.Text;
                 string upper = searchTxt.ToUpper();
@@ -124,10 +135,10 @@ namespace PLWPF
 
         private void tbLastName_SearchFilterChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbLastName.Text!=null)
+            if (tbLastName.Text != null)
             {
                 string searchTxt = tbLastName.Text;
-                string upper =searchTxt.ToUpper();
+                string upper = searchTxt.ToUpper();
                 string lower = searchTxt.ToLower();
 
                 var request = from item in listToFilter
@@ -196,7 +207,7 @@ namespace PLWPF
                 case 1:
                     foreach (var item in groupedByStatus)
                         //
-                        if (cbbShowGroup.SelectedItem != null && (int)item.Key ==(int)cbbShowGroup.SelectedItem)
+                        if (cbbShowGroup.SelectedItem != null && (int)item.Key == (int)cbbShowGroup.SelectedItem)
                         {
                             listToFilter = new ObservableCollection<GuestRequest>(item.ToList());
                             break;
@@ -234,13 +245,13 @@ namespace PLWPF
             if ((tbKey.Text.Length != 0 || tbMail.Text.Length != 0 || tbLastName.Text.Length != 0) && listToFilter != null)
                 tbKey_SearchFilterChanged(null, null);
         }
-       
+
         private void reset_Click(object sender, RoutedEventArgs e)
         {
             listToFilter = requestsList;
             requestView.ItemsSource = listToFilter;
         }
-        
+
 
         private void MenuItem_Click_Info(object sender, RoutedEventArgs e)
         {
@@ -249,6 +260,6 @@ namespace PLWPF
                 GuestPresentation presentation = new GuestPresentation(((GuestRequest)requestView.SelectedItem), "View");
                 presentation.ShowDialog();
             }
-        }    
+        }
     }
 }
