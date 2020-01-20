@@ -46,7 +46,7 @@ namespace PLWPF
             {
                 foreach (HostingUnit hosting in hostings)
                 {
-                    if (hosting == unit)
+                    if (hosting.HostingUnitKey == unit.HostingUnitKey)
                     {
                         matchRequests = myBl.RequestMatchToStipulation(myBl.BuildPredicate(hosting));
                     }
@@ -72,6 +72,17 @@ namespace PLWPF
                 }
                 else
                     return;
+            }
+        }
+
+        private void MenuItem_Click_Info(object sender, RoutedEventArgs e)
+        {
+            if (requestView.SelectedItem != null)
+            {
+                GuestRequest request = ((GuestRequest)requestView.SelectedItem);
+                my_request_key = request.GuestRequestKey;
+                GuestPresentation presentation = new GuestPresentation(request, "View");
+                presentation.ShowDialog();               
             }
         }
     }
