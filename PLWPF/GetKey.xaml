@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
         Title="Get Key" Height="200" Width="300">
+    <Window.Background>
+        <ImageBrush ImageSource="IconBackGround.ico" Opacity="0.9"/>
+    </Window.Background>
     <Grid Name="mainGrid">
         <Label Name="idLabel" Content="Please enter guest request key:" FontSize="16" HorizontalAlignment="Left" Margin="30,22,0,0" VerticalAlignment="Top" Height="37" Width="234"/>
         <TextBox Name="tbID" HorizontalAlignment="Left" FontSize="16" Height="36" Margin="30,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="234"/>

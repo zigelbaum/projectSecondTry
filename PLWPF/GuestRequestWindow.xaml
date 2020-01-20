@@ -18,6 +18,9 @@
             <Setter Property="FontSize" Value="13"></Setter>
         </Style>
     </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="IconBackGround.ico" Opacity="0.8"/>
+    </Window.Background>
     <Border>
         <Grid Name="mainGrid">
             <Grid.RowDefinitions>

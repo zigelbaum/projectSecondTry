@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="IconBackGround.ico" Opacity="0.8"/>
+    </Window.Background>
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="266*"/>
@@ -17,8 +20,20 @@
             <RowDefinition Height="248"/>
             <RowDefinition Height="248"/>
         </Grid.RowDefinitions>
-        <Button x:Name="HostinGUnitButton" Content="Hosting Unit" Background="#FFFFFFFF" FontWeight="Bold" HorizontalAlignment="Center" Margin="28,63,10,71" Grid.Column="0" VerticalAlignment="Center" Width="226" Height="114" Click="HostinGUnitButton_Click" Grid.Row="2"/>
-        <Button Name="GuestRequestButton" Content="Guest Request" Background="#FFFFFFFF" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Center" Margin="10,125,28,0" Grid.Row="1" VerticalAlignment="Top" Width="226" Height="114" Click="GuestRequestButton_Click" />
-        <Button Name="OrderButton" Content="Order" Grid.Column="2" Background="#FFFFFFFF" FontWeight="Bold" HorizontalAlignment="Left" Margin="0,81,0,0" VerticalAlignment="Top" Width="226" Height="114" Click="OrderButton_Click" Grid.RowSpan="2"/>
+        <Button x:Name="HostinGUnitButton" Content="Hosting Unit" FontWeight="Bold" HorizontalAlignment="Center" Margin="28,63,10,71" Grid.Column="0" VerticalAlignment="Center" Width="226" Height="114" Click="HostinGUnitButton_Click" Grid.Row="2">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <Button Name="GuestRequestButton" Content="Guest Request" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Center" Margin="10,125,28,0" Grid.Row="1" VerticalAlignment="Top" Width="226" Height="114" Click="GuestRequestButton_Click" >
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <Button Name="OrderButton" Content="Order" Grid.Column="2" FontWeight="Bold" HorizontalAlignment="Left" Margin="0,81,0,0" VerticalAlignment="Top" Width="226" Height="114" Click="OrderButton_Click" Grid.RowSpan="2">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>
