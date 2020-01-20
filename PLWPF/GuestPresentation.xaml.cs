@@ -144,6 +144,16 @@ namespace PLWPF
                     ckbGarden.IsEnabled = false;
                     ckbAttractions.IsEnabled = false;
                     ckbMeals.IsEnabled = false;
+                    bstar1.IsEnabled = false;
+                    bstar2.IsEnabled = false;
+                    bstar3.IsEnabled = false;
+                    bstar4.IsEnabled = false;
+                    bstar5.IsEnabled = false;
+                    bstar1.Visibility = Visibility.Hidden;
+                    bstar2.Visibility = Visibility.Hidden;
+                    bstar3.Visibility = Visibility.Hidden;
+                    bstar4.Visibility = Visibility.Hidden;
+                    bstar5.Visibility = Visibility.Hidden;
                     addReqButton.Visibility = Visibility.Hidden;
                     cancelreqButton.Content = "close";
                     costumerPro.Visibility = Visibility.Hidden;

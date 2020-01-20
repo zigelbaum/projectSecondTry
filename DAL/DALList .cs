@@ -46,12 +46,12 @@ namespace DAL
                     throw new DataException("No hosting unit");
 
                 IDAL dal = DAL.factoryDAL.getDAL("List");
-                IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
-                foreach (HostingUnit host in listHostingUnits)
-                {
-                    if (hostingUnit.CompareTo(host) == 0)
-                        throw  new DataException("This host already exists"); ;
-                }
+                //IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
+                //foreach (HostingUnit host in listHostingUnits)
+                //{
+                //    if (hostingUnit.CompareTo(host) == 0)
+                //        throw  new DataException("This host already exists"); ;
+                //}
                 hostingUnit.HostingUnitKey = Configuration.HostingUnitKey;
                 Configuration.HostingUnitKey++;
                 hostingUnitsCollection.Add(hostingUnit);

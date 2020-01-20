@@ -118,6 +118,11 @@ namespace PLWPF
                     ckbGarden.IsEnabled = false;
                     ckbAttractions.IsEnabled = false;
                     ckbMeals.IsEnabled = false;
+                    bstar1.IsEnabled = false;
+                    bstar2.IsEnabled = false;
+                    bstar3.IsEnabled = false;
+                    bstar4.IsEnabled = false;
+                    bstar5.IsEnabled = false;
                     addUnitButton.Visibility = Visibility.Hidden;
                     cancelUnitButton.Content = "Close";
                     drawY(Int32.Parse(tbStars.Text));
@@ -216,7 +221,7 @@ namespace PLWPF
                         else
                         {
 
-                            AddHostWindow addHostWindow = new AddHostWindow(my_unit/*, unitKey*/);
+                            AddHostWindow addHostWindow = new AddHostWindow(/*my_unit*/);
                             addHostWindow.ShowDialog();
                             my_unit.Owner = addHostWindow.host;
                         }

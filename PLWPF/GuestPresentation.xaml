@@ -37,12 +37,12 @@
                 <ColumnDefinition Width="312*"/>
             </Grid.ColumnDefinitions>
             <Label Content="request requirements:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="182" Height="26"/>
-            <ComboBox Name="cbbArea" IsEditable="True" HorizontalAlignment="Left" Margin="128,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Area,Mode=TwoWay}" Height="22"/>
+            <ComboBox Name="cbbArea"  HorizontalAlignment="Left" Margin="128,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Area,Mode=TwoWay}" Height="22"/>
             <Label Content="area:" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
             <Label Content="sub area:" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
             <TextBox Name="tbSubArea" HorizontalAlignment="Left"  Margin="128,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1" Text="{Binding Path=SubArea,Mode=TwoWay}"/>
             <Label Content="vacation type:" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="98" Height="26" Grid.Row="1"/>
-            <ComboBox Name="cbbVacationType" IsEditable="True" HorizontalAlignment="Left" Margin="128,107,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Type,Mode=TwoWay}" Height="22" />
+            <ComboBox Name="cbbVacationType" HorizontalAlignment="Left" Margin="128,107,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Type,Mode=TwoWay}" Height="22" />
             <Label Content="adults:" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
             <TextBox Name="tbAdults" HorizontalAlignment="Left"  Margin="128,153,0,0" TextWrapping="Wrap" Text="{Binding Path=Adults, Mode=TwoWay}" VerticalAlignment="Top" Width="120" Height="26" Grid.Row="1"/>
             <Label Content="kids:" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" Width="82" Height="26" Grid.Row="1"/>
@@ -72,7 +72,7 @@
         <Label Name="requestStatus" Content="request status" HorizontalAlignment="Left" Height="26" Margin="268,35,0,0" VerticalAlignment="Top" Width="86"/>
         <Label Name="regDate" Content="registration date" HorizontalAlignment="Left" Margin="504,35,0,0" VerticalAlignment="Top" Width="111" Height="26"/>
         <TextBox x:Name="tbRegDate" HorizontalAlignment="Left" Height="26" Margin="611,35,0,0" TextWrapping="Wrap" Text="{Binding Path=RegistrationDate, Mode=OneWay}" VerticalAlignment="Top" Width="139"/>
-        <ComboBox Name="cbbStatus" IsEditable="True" HorizontalAlignment="Left" Margin="359,39,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Status,Mode=OneWay}"/>
+        <ComboBox Name="cbbStatus" HorizontalAlignment="Left" Margin="359,39,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding Path=Status,Mode=OneWay}"/>
 
 
         <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">

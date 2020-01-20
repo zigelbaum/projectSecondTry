@@ -22,18 +22,18 @@ namespace PLWPF
     public partial class AddHostWindow : Window
     {
         #region variable  
-        IBL myBl = BL.FactoryBL.getBL("XML");
-        HostingUnit hosting;
+        IBL myBl = BL.FactoryBL.getBL("List");
+        //HostingUnit hosting;
         public Host host;
         bool premission = true;
         #endregion
 
-        public AddHostWindow(HostingUnit unit)
+        public AddHostWindow(/*HostingUnit unit*/)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             host = new Host();
             this.DataContext = host;
-            hosting = unit;
+            //hosting = unit;
             InitializeComponent();            
         }
 
@@ -142,16 +142,14 @@ namespace PLWPF
                 MessageBox.Show("You can not register if you don't have collection clearance", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 premission = false;
                 return;
-            }
-            if (premission = true)
-            {
-                BankBranch branch = new BankBranch()
-                { BankName = tbBname.Text, BankNumber = Int32.Parse(tbBnumber.Text), BranchAddress = tbBrAdress.Text, BranchCity = tbBrCity.Text, BranchNumber = Int32.Parse(tbBrNumber.Text) };
-                host.BankBranchDetails = branch;
+            } 
+            #endregion
+            if (premission == true)
+            {                             
                 Close();
             }
 
-            #endregion
+        
         }
 
         private void cancelUnitButton_Click(object sender, RoutedEventArgs e)
