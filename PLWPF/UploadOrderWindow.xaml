@@ -19,7 +19,7 @@
         </TextBox>
 
         <Label Content="group order by status:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="147" Height="35" Margin="10,35,0,0" FontWeight="Bold"/>
-        <ComboBox Name="cbbShowStatus" SelectionChanged="cbbShowStatus_SelectionChanged" SelectedItem="{Binding Path=Status,Mode=OneWay}"  HorizontalAlignment="Left" Margin="162,35,0,0" VerticalAlignment="Top" Width="215" Height="35"/>
+        <ComboBox Name="cbbShowStatus" SelectionChanged="cbbShowStatus_SelectionChanged" SelectedItem="{Binding Path=Status,Mode=OneWay}"  HorizontalAlignment="Left" Margin="162,35,0,0" VerticalAlignment="Top" Width="215" Height="35" Background="#FF131212" BorderBrush="#FF121111" Foreground="#FF0E0D0D"/>
 
         <ComboBox Name="StatusOrder"  HorizontalAlignment="Left" Margin="99,334,0,0" SelectionChanged="cbOrderStatus_SelectionChanged"  Text="{Binding Path=myorder.OrderStatus}" VerticalAlignment="Top" Width="120" BorderBrush="#FFFBFAFA" OpacityMask="White" Background="#FFB9B955"/>
         <Label Name="StatusOrderString"  HorizontalAlignment="Right" Margin="0,334,699.333,0" Content="status:" VerticalAlignment="Top" Height="39" Width="62" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
@@ -29,7 +29,10 @@
 
         <TextBox Name="OrderDate" HorizontalAlignment="Right" Margin="0,334,56.333,0" TextWrapping="Wrap" Text="{Binding Path=myorder.OrderDate}" VerticalAlignment="Top" Height="23" Width="114" RenderTransformOrigin="1.405,0.447" Background="#FFFFFFF8"/>
         <Label Name="OrderDateString" HorizontalAlignment="Right" Margin="0,334,175.333,0" Content="order date:" VerticalAlignment="Top" Height="56" Width="94" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
-        <ListView Name="orderView" HorizontalAlignment="Left" Height="226" Margin="10,103,0,0" VerticalAlignment="Top" Width="783">
+        <ListView Name="orderView" HorizontalAlignment="Left" Height="226" Margin="10,103,0,0" VerticalAlignment="Top" Width="783" MouseDoubleClick="MenuItem_Click_Info" OpacityMask="Black" Foreground="Black">
+            <ListView.BorderBrush>
+                <ImageBrush/>
+            </ListView.BorderBrush>
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>

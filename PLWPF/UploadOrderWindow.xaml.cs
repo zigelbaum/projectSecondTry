@@ -40,6 +40,10 @@ namespace PLWPF
             OrderDateString.Visibility = Visibility.Hidden;
             #endregion
 
+            StatusOrder.ItemsSource = Enum.GetValues(typeof(Enums.OrderStatus));           
+            cbbShowStatus.ItemsSource = Enum.GetValues(typeof(Enums.OrderStatus));
+            //cbbShowStatus.SelectedIndex = 0;
+
             getOrderList(hostID);
         }
 
@@ -56,26 +60,7 @@ namespace PLWPF
                     listOrders.Add(ord);
                 }
             }
-            orderView.ItemsSource = listOrders;
-            //OrderstList.Visibility = Visibility.Visible;
-
-           /* IEnumerable<IGrouping<Host, HostingUnit>> my_units = myBl.GroupHostByHostingUnit();
-            foreach (IGrouping<Host, HostingUnit> hosting in my_units)
-            {
-                foreach (HostingUnit unit in hosting)//הקוד לא יעיל להבין איך עובד הגרופינג ואז לתקן
-                {
-                    if(unit.Owner.HostKey == hostKey)
-                    {
-                        List<Order> temp = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);
-                        int num = temp.Count();
-                    }
-                }
-            }
-
-                List<HostingUnit> hostList = myBl.getHostingUnits(h => h.Owner.HostKey == hostKey);
-            host = hostList[0];
-            //מראה את ההזמנות המתאימות
-            OrderstList.Visibility = Visibility.Visible;*/
+            orderView.ItemsSource = listOrders;     
         }
 
         private void tbUnitKey_SearchFilterChanged(object sender, TextChangedEventArgs e)
@@ -97,28 +82,6 @@ namespace PLWPF
             }
         }
 
-        private void cbOrderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            /*Int32 index = OrderstList.SelectedIndex;
-            myorder = listOrders[index];*/
-
-            //למלאות את הפרטים כאשר לוחצים על הזמנה מסוימת
-            StatusOrder.Visibility = Visibility;
-            StatusOrder.SelectedItem = myorder.OrderStatus;
-            StatusOrderString.Visibility = Visibility;
-
-            CreateDate.Visibility = Visibility;
-            CreateDate.Text = myorder.CreateDate.ToString();
-            CreateDateString.Visibility = Visibility;           
-
-            if (myorder.OrderDate != null)
-            {
-                OrderDate.Visibility = Visibility;
-                OrderDate.Text = myorder.OrderDate.ToString();
-                OrderDateString.Visibility = Visibility;
-            }
-        }
-
         private void cbbShowStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Int32 index = cbbShowStatus.SelectedIndex;
@@ -136,10 +99,9 @@ namespace PLWPF
             try
             {
                 //לעדכן סטטוס כשבוחרים סטטוס חדש
-                Int32 index = StatusOrder.SelectedIndex;
+                Int32 index = StatusOrder.SelectedIndex + 1;
                 Enums.OrderStatus myStatus = (Enums.OrderStatus)index;
-                Int32 orderKey = myorder.OrderKey;
-                Order ord = myBl.getOrders(o => o.OrderKey == orderKey)[0];
+                Order ord = myBl.getOrders(o => o.OrderKey == myorder.OrderKey)[0];
                 ord.OrderStatus = myStatus;
                 myBl.setOrder(ord);
                 //יראה את ההזמנה המעודדכנת
@@ -155,6 +117,29 @@ namespace PLWPF
                 }
                 else
                     return;
+            }
+        }
+
+        private void MenuItem_Click_Info(object sender, RoutedEventArgs e)
+        {
+            if (orderView.SelectedItem != null)
+            {
+                myorder = ((Order)orderView.SelectedItem);
+
+                StatusOrder.Visibility = Visibility;
+                StatusOrderString.Visibility = Visibility;
+
+                CreateDate.Visibility = Visibility;
+                CreateDate.Text = myorder.CreateDate.ToString();
+                CreateDateString.Visibility = Visibility;
+
+                if (myorder.OrderDate != null)
+                {
+                    OrderDate.Visibility = Visibility;
+                    OrderDate.Text = myorder.OrderDate.ToString();
+                    OrderDateString.Visibility = Visibility;
+                }
+
             }
         }
     }
