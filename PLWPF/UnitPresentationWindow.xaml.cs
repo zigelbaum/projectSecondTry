@@ -69,7 +69,7 @@ namespace PLWPF
             my_unit = hostingUnit;
             this.DataContext = my_unit;
 
-        InitializeComponent();
+            InitializeComponent();
             cbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbUnitType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
 
@@ -135,7 +135,7 @@ namespace PLWPF
             bool premission = true;
 
             #region required filleds
-            if (String.IsNullOrEmpty(tbUnitName.Text)== true)
+            if (String.IsNullOrEmpty(tbUnitName.Text) == true)
             {
                 MessageBox.Show("Please enter your hosting unit name.", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 premission = false;
@@ -149,23 +149,21 @@ namespace PLWPF
                 premission = false;
                 return;
             }
-            if (String.IsNullOrEmpty(tbAdults.Text) == true)
+            if (tbAdults.Text == 0.ToString())
             {
                 MessageBox.Show("Please fill the adults filed", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 tbAdults.BorderBrush = Brushes.Red;
                 premission = false;
                 return;
             }
-            else
+            if (!tbAdults.Text.All(char.IsDigit))
             {
-                if (!tbAdults.Text.All(char.IsDigit))
-                {
-                    MessageBox.Show("The adults input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                    tbAdults.BorderBrush = Brushes.Red;
-                    premission = false;
-                    return;
-                }
-            }            
+                MessageBox.Show("The adults input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbAdults.BorderBrush = Brushes.Red;
+                premission = false;
+                return;
+            }
+
             if (!tbKids.Text.All(char.IsDigit))
             {
                 MessageBox.Show("The kids input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
@@ -173,15 +171,15 @@ namespace PLWPF
                 premission = false;
                 return;
             }
-            if (String.IsNullOrEmpty(tbStars.Text )== true)
+            if (tbStars.Text == 0.ToString())
             {
                 MessageBox.Show("please enter number strars this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 tbStars.BorderBrush = Brushes.Red;
                 premission = false;
                 return;
             }
-            else
-              if (!tbStars.Text.All(char.IsDigit))
+
+            if (!tbStars.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the stars input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 tbStars.BorderBrush = Brushes.Red;
@@ -191,7 +189,7 @@ namespace PLWPF
             if (cbArea.SelectedItem == null)
             {
 
-                MessageBox.Show("The area filed must be filled", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);               
+                MessageBox.Show("The area filed must be filled", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 premission = false;
                 return;
             }
@@ -267,7 +265,7 @@ namespace PLWPF
 
                     break;
             }
-            
+
         }
 
         private void cancelUnitButton_Click(object sender, RoutedEventArgs e)
@@ -284,8 +282,8 @@ namespace PLWPF
                     if (result2 == MessageBoxResult.OK)
                         Close();
                     break;
-                case "View":                   
-                        Close();
+                case "View":
+                    Close();
                     break;
             }
         }
