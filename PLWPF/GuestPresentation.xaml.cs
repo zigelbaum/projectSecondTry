@@ -161,7 +161,6 @@ namespace PLWPF
             }
         }
 
-
         private void costumerPro_Click(object sender, RoutedEventArgs e)
         {
             op = new OpenFileDialog();
@@ -175,7 +174,6 @@ namespace PLWPF
                 CostumerImage.Source = new BitmapImage(new Uri(op.FileName));
             }
         }
-
 
         private void cancelreqButton_Click(object sender, RoutedEventArgs e)
         {
@@ -341,6 +339,7 @@ namespace PLWPF
             }           
         }
 
+        #region draw - star
         private void drawY(int star)
         {
             if (star < 1)
@@ -458,6 +457,7 @@ namespace PLWPF
                 tbStars.Text = "5";
             }
         }
+        #endregion
     }
 
 

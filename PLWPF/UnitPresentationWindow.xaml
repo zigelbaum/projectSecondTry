@@ -60,27 +60,65 @@
 
                 <Canvas Name="star1" Canvas.Left="5" Canvas.Top="20">
                     <Path Name="pstar1" Stroke="#FFF5DA1B" Fill="#FFFF00"  StrokeThickness="3" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Data="M 0,0 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" Height="20.106" Stretch="Fill" Width="19.055" Canvas.Left="302.612" Canvas.Top="341.227" />
-                    <Button Name="bstar1"  Content="" Click="bstar1_click" Canvas.Left="303" Width="19" Height="20" RenderTransformOrigin="0.5,0.5" BorderBrush="Transparent" Canvas.Top="341" Background="Transparent"/>
+                    <Button Name="bstar1"  Content="" Click="bstar1_click" Canvas.Left="303" Width="19" Height="20" RenderTransformOrigin="0.5,0.5" BorderBrush="Transparent" Canvas.Top="341" Background="Transparent">
+                        <Button.OpacityMask>
+                            <ImageBrush/>
+                        </Button.OpacityMask>
+                        <Button.Foreground>
+                            <ImageBrush/>
+                        </Button.Foreground>
+                    </Button>
                 </Canvas>
 
                 <Canvas Name="star2" Canvas.Left="5" Canvas.Top="20">
                     <Path Name="pstar2" StrokeThickness="3" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Data="M 0,0 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" Height="20.106" Stretch="Fill" Width="19.056" Canvas.Left="326.611" Canvas.Top="341.333" />
-                    <Button Name="bstar2"  Content="" Click="bstar2_click" Canvas.Left="327" Width="19" Height="20" RenderTransformOrigin="0.5,0.5"   Background="Transparent" BorderBrush="Transparent" Canvas.Top="341"/>
+                    <Button Name="bstar2"  Content="" Click="bstar2_click" Canvas.Left="327" Width="19" Height="20" RenderTransformOrigin="0.5,0.5"   Background="Transparent" BorderBrush="Transparent" Canvas.Top="341">
+                        <Button.OpacityMask>
+                            <ImageBrush/>
+                        </Button.OpacityMask>
+                        <Button.Foreground>
+                            <ImageBrush/>
+                        </Button.Foreground>
+                    </Button>
                 </Canvas>
 
                 <Canvas Name="star3" Canvas.Left="5" Canvas.Top="20">
                     <Path Name="pstar3"  StrokeThickness="3" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Data="M 0,0 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" Height="20.106" Stretch="Fill" Width="19.056" Canvas.Left="352" Canvas.Top="342" />
-                    <Button Name="bstar3"  Content="" Click="bstar3_click" Canvas.Left="352" Width="19" Height="20" RenderTransformOrigin="0.5,0.5"   Background="Transparent" BorderBrush="Transparent" Canvas.Top="342"/>
+                    <Button Name="bstar3"  Content="" Click="bstar3_click" Canvas.Left="352" Width="19" Height="20" RenderTransformOrigin="0.5,0.5"   Background="Transparent" BorderBrush="Transparent" Canvas.Top="342">
+                        <Button.OpacityMask>
+                            <ImageBrush/>
+                        </Button.OpacityMask>
+                        <Button.Foreground>
+                            <ImageBrush/>
+                        </Button.Foreground>
+                    </Button>
                 </Canvas>
 
                 <Canvas Name="star4" Canvas.Left="5" Canvas.Top="20">
                     <Path Name="pstar4"  StrokeThickness="3" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Data="M 0,0 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" Height="20.106" Stretch="Fill" Width="19.055" Canvas.Left="376" Canvas.Top="342" />
-                    <Button Name="bstar4"  Content="" Click="bstar4_click" Canvas.Left="376" Width="19" Height="20" RenderTransformOrigin="0.5,0.5"   Background="Transparent" BorderBrush="Transparent" Canvas.Top="342"/>
+                    <Button Name="bstar4"  Content="" Click="bstar4_click" Canvas.Left="376" Width="19" Height="20" RenderTransformOrigin="0.5,0.5" BorderBrush="Transparent" Canvas.Top="342">
+                        <Button.OpacityMask>
+                            <ImageBrush/>
+                        </Button.OpacityMask>
+                        <Button.Foreground>
+                            <ImageBrush/>
+                        </Button.Foreground>
+                        <Button.Background>
+                            <ImageBrush/>
+                        </Button.Background>
+                    </Button>
                 </Canvas>
 
                 <Canvas Name="star5" Canvas.Left="5" Canvas.Top="20">
                     <Path Name="pstar5" Stroke="#808080" Fill="#C0C0C0"  StrokeThickness="3" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Data="M 0,0 l 10,0 l 5,-10 l 5,10 l 10,0 l -7,10 l 2,10 l -10,-5 l -10,5 l 2,-10 Z" Height="20.106" Stretch="Fill" Width="19.055" Canvas.Left="399.945" Canvas.Top="342" />
-                    <Button Name="bstar5"  Content="" Click="bstar5_click" Canvas.Left="400" Width="19" Height="20" RenderTransformOrigin="0.5,0.5"   Background="Transparent" BorderBrush="Transparent" Canvas.Top="342"/>
+                    <Button Name="bstar5"  Content="" Click="bstar5_click" Canvas.Left="400" Width="19" Height="20" RenderTransformOrigin="0.5,0.5"   Background="Transparent" BorderBrush="Transparent" Canvas.Top="342">
+                        <Button.Foreground>
+                            <ImageBrush/>
+                        </Button.Foreground>
+                        <Button.OpacityMask>
+                            <ImageBrush/>
+                        </Button.OpacityMask>
+                    </Button>
                 </Canvas>
             </Canvas>
         </Canvas>
