@@ -28,6 +28,7 @@ namespace PLWPF
         OpenFileDialog op;
         bool isImageChanged = false;
         public bool addedSuccessfuly = false;
+        Brush yelf, yels, grayf, grays;
         ///<summery>
         ///default ctor for adding new request
         ///</summery>
@@ -50,6 +51,24 @@ namespace PLWPF
             cbbVacationType.SelectedItem = null;
             dpEntryDate.SelectedDate = DateTime.Now;
             dpRealeseDate.SelectedDate = DateTime.Now.AddDays(1);
+            tbStars.IsEnabled = false;
+
+            #region stars
+            yelf = pstar1.Fill;
+            yels = pstar1.Stroke;
+
+            grayf = pstar5.Fill;
+            pstar1.Fill = grayf;
+            pstar2.Fill = grayf;
+            pstar3.Fill = grayf;
+            pstar4.Fill = grayf;
+
+            grays = pstar5.Stroke;
+            pstar1.Stroke = grays;
+            pstar2.Stroke = grays;
+            pstar3.Stroke = grays;
+            pstar4.Stroke = grays;
+            #endregion
         }
 
         ///<summery>
@@ -63,6 +82,25 @@ namespace PLWPF
             guestRequest = request;
             this.DataContext = guestRequest;
             InitializeComponent();
+
+            #region star
+            yelf = pstar1.Fill;
+            yels = pstar1.Stroke;
+
+            grayf = pstar5.Fill;
+            pstar1.Fill = grayf;
+            pstar2.Fill = grayf;
+            pstar3.Fill = grayf;
+            pstar4.Fill = grayf;
+
+            grays = pstar5.Stroke;
+            pstar1.Stroke = grays;
+            pstar2.Stroke = grays;
+            pstar3.Stroke = grays;
+            pstar4.Stroke = grays;
+            #endregion
+            tbStars.IsEnabled = false;
+
             cbbStatus.ItemsSource = Enum.GetValues(typeof(Enums.GuestRequestStatus));
             cbbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbbVacationType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
@@ -83,9 +121,10 @@ namespace PLWPF
                     tbRegDate.IsEnabled = false;
                     tbFirstName.IsEnabled = false;
                     tbLastName.IsEnabled = false;
-                    cbbStatus.IsEnabled = false;
+                    cbbStatus.IsEnabled = false;                   
                     costumerPro.Content = "change profile";
                     addReqButton.Content = "save changes";
+                    drawY(Int32.Parse(tbStars.Text));
                     break;
                 case "View":
                     tbRquestId.IsReadOnly = true;
@@ -288,6 +327,124 @@ namespace PLWPF
             //    if (e.ChangedButton == MouseButton.Left)
             //        this.DragMove();
             //}
+        }
+
+        private void drawY(int star)
+        {
+            if (star < 1)
+                return;
+            pstar1.Fill = yelf;
+            pstar1.Stroke = yels;
+            if (star > 1)
+            {
+                pstar2.Fill = yelf;
+                pstar2.Stroke = yels;
+                if (star > 2)
+                {
+                    pstar3.Fill = yelf;
+                    pstar3.Stroke = yels;
+                    if (star > 3)
+                    {
+                        pstar4.Fill = yelf;
+                        pstar4.Stroke = yels;
+                    }
+                    if (star > 4)
+                    {
+                        pstar5.Fill = yelf;
+                        pstar5.Stroke = yels;
+                    }
+                }
+            }
+        }
+        private void drawG(int star)
+        {
+            pstar5.Fill = grayf;
+            pstar5.Stroke = grays;
+            if (star < 5)
+            {
+                pstar4.Fill = grayf;
+                pstar4.Stroke = grays;
+                if (star < 4)
+                {
+                    pstar3.Fill = grayf;
+                    pstar3.Stroke = grays;
+                    if (star < 3)
+                    {
+                        pstar2.Fill = grayf;
+                        pstar2.Stroke = grays;
+                        if (star < 2)
+                        {
+                            pstar1.Fill = grayf;
+                            pstar1.Stroke = grays;
+                        }
+                    }
+                }
+            }
+        }
+        private void bstar1_click(object sender, RoutedEventArgs e)
+        {
+            if (pstar1.Fill == yelf)
+            {
+                drawG(1);
+                tbStars.Text = "0";
+            }
+            else
+            {
+                drawY(1);
+                tbStars.Text = "1";
+            }
+        }
+        private void bstar2_click(object sender, RoutedEventArgs e)
+        {
+            if (pstar2.Fill == yelf)
+            {
+                drawG(2);
+                tbStars.Text = "1";
+            }
+            else
+            {
+                drawY(2);
+                tbStars.Text = "2";
+            }
+        }
+        private void bstar3_click(object sender, RoutedEventArgs e)
+        {
+            if (pstar3.Fill == yelf)
+            {
+                drawG(3);
+                tbStars.Text = "2";
+            }
+            else
+            {
+                drawY(3);
+                tbStars.Text = "3";
+            }
+        }
+        private void bstar4_click(object sender, RoutedEventArgs e)
+        {
+            if (pstar4.Fill == yelf)
+            {
+                drawG(4);
+                tbStars.Text = "3";
+            }
+            else
+            {
+                drawY(4);
+                tbStars.Text = "4";
+            }
+        }
+        private void bstar5_click(object sender, RoutedEventArgs e)
+        {
+            if (pstar5.Fill == yelf)
+            {
+                drawG(5);
+                tbStars.Text = "4";
+            }
+            else
+            {
+                drawY(5);
+                tbStars.Text = "5";
+            }
         }
     }
 

@@ -26,6 +26,7 @@ namespace PLWPF
         public bool addedSuccessfully;
         string operation = "Add";
         public HostingUnit my_unit;
+        Brush yelf, yels, grayf, grays;
         #endregion
 
         public UnitPresentationWindow()
@@ -41,6 +42,25 @@ namespace PLWPF
             tbUnitKey.Visibility = Visibility.Hidden;
             tbOnwer.Visibility = Visibility.Hidden;
             lblOwner.Visibility = Visibility.Hidden;
+
+            tbStars.IsEnabled = false;
+
+            #region stars
+            yelf = pstar1.Fill;
+            yels = pstar1.Stroke;
+
+            grayf = pstar5.Fill;
+            pstar1.Fill = grayf;
+            pstar2.Fill = grayf;
+            pstar3.Fill = grayf;
+            pstar4.Fill = grayf;
+
+            grays = pstar5.Stroke;
+            pstar1.Stroke = grays;
+            pstar2.Stroke = grays;
+            pstar3.Stroke = grays;
+            pstar4.Stroke = grays;
+            #endregion
         }
 
         public UnitPresentationWindow(HostingUnit hostingUnit, string oper)
@@ -52,6 +72,26 @@ namespace PLWPF
         InitializeComponent();
             cbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbUnitType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
+
+            tbStars.IsEnabled = false;
+
+            #region stars
+            yelf = pstar1.Fill;
+            yels = pstar1.Stroke;
+
+            grayf = pstar5.Fill;
+            pstar1.Fill = grayf;
+            pstar2.Fill = grayf;
+            pstar3.Fill = grayf;
+            pstar4.Fill = grayf;
+
+            grays = pstar5.Stroke;
+            pstar1.Stroke = grays;
+            pstar2.Stroke = grays;
+            pstar3.Stroke = grays;
+            pstar4.Stroke = grays;
+            #endregion
+
             switch (oper)
             {
                 case "Update":
@@ -61,6 +101,7 @@ namespace PLWPF
                     tbUnitKey.IsReadOnly = true;
                     tbSubArea.IsReadOnly = true;
                     addUnitButton.Content = "save changes";
+                    drawY(Int32.Parse(tbStars.Text));
                     break;
                 case "View":
                     cbArea.IsEnabled = false;
@@ -79,6 +120,7 @@ namespace PLWPF
                     ckbMeals.IsEnabled = false;
                     addUnitButton.Visibility = Visibility.Hidden;
                     cancelUnitButton.Content = "Close";
+                    drawY(Int32.Parse(tbStars.Text));
                     break;
             }
         }
@@ -236,6 +278,124 @@ namespace PLWPF
                     if (result3 == MessageBoxResult.OK)
                         Close();
                     break;
+            }
+        }
+
+        private void drawY(int star)
+        {
+            if (star < 1)
+                return;
+            pstar1.Fill = yelf;
+            pstar1.Stroke = yels;
+            if (star > 1)
+            {
+                pstar2.Fill = yelf;
+                pstar2.Stroke = yels;
+                if (star > 2)
+                {
+                    pstar3.Fill = yelf;
+                    pstar3.Stroke = yels;
+                    if (star > 3)
+                    {
+                        pstar4.Fill = yelf;
+                        pstar4.Stroke = yels;
+                    }
+                    if (star > 4)
+                    {
+                        pstar5.Fill = yelf;
+                        pstar5.Stroke = yels;
+                    }
+                }
+            }
+        }
+        private void drawG(int star)
+        {
+            pstar5.Fill = grayf;
+            pstar5.Stroke = grays;
+            if (star < 5)
+            {
+                pstar4.Fill = grayf;
+                pstar4.Stroke = grays;
+                if (star < 4)
+                {
+                    pstar3.Fill = grayf;
+                    pstar3.Stroke = grays;
+                    if (star < 3)
+                    {
+                        pstar2.Fill = grayf;
+                        pstar2.Stroke = grays;
+                        if (star < 2)
+                        {
+                            pstar1.Fill = grayf;
+                            pstar1.Stroke = grays;
+                        }
+                    }
+                }
+            }
+        }
+        private void bstar1_click(object sender, RoutedEventArgs e)
+        {
+            if (pstar1.Fill == yelf)
+            {
+                drawG(1);
+                tbStars.Text = "0";
+            }
+            else
+            {
+                drawY(1);
+                tbStars.Text = "1";
+            }
+        }
+        private void bstar2_click(object sender, RoutedEventArgs e)
+        {
+            if (pstar2.Fill == yelf)
+            {
+                drawG(2);
+                tbStars.Text = "1";
+            }
+            else
+            {
+                drawY(2);
+                tbStars.Text = "2";
+            }
+        }
+        private void bstar3_click(object sender, RoutedEventArgs e)
+        {
+            if (pstar3.Fill == yelf)
+            {
+                drawG(3);
+                tbStars.Text = "2";
+            }
+            else
+            {
+                drawY(3);
+                tbStars.Text = "3";
+            }
+        }
+        private void bstar4_click(object sender, RoutedEventArgs e)
+        {
+            if (pstar4.Fill == yelf)
+            {
+                drawG(4);
+                tbStars.Text = "3";
+            }
+            else
+            {
+                drawY(4);
+                tbStars.Text = "4";
+            }
+        }
+        private void bstar5_click(object sender, RoutedEventArgs e)
+        {
+            if (pstar5.Fill == yelf)
+            {
+                drawG(5);
+                tbStars.Text = "4";
+            }
+            else
+            {
+                drawY(5);
+                tbStars.Text = "5";
             }
         }
 
