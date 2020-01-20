@@ -458,16 +458,16 @@ namespace BL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<GuestRequest> guestRequests = dal.GetGuestRequestsList();
             Predicate<GuestRequest> pred = default(Predicate<GuestRequest>);
-            bool RGPool(GuestRequest request) { return request.Pool == Enums.intrested.Necessary || request.Pool == Enums.intrested.Possible; }
-            bool RGNoPool(GuestRequest request) { return request.Pool == Enums.intrested.NoThanks || request.Pool == Enums.intrested.Possible; }
-            bool RGJacuzzi(GuestRequest request) { return request.Jacuzzi == Enums.intrested.Necessary || request.Jacuzzi == Enums.intrested.Possible; }
-            bool RGNoJacuzzi(GuestRequest request) { return request.Jacuzzi == Enums.intrested.NoThanks || request.Jacuzzi == Enums.intrested.Possible; }
-            bool RGGarden(GuestRequest request) { return request.Garden == Enums.intrested.Necessary || request.Garden == Enums.intrested.Possible; }
-            bool RGNoGarden(GuestRequest request) { return request.Garden == Enums.intrested.NoThanks || request.Garden == Enums.intrested.Possible; }
-            bool RGChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == Enums.intrested.Necessary || request.ChildrenAttraction == Enums.intrested.Possible; }
-            bool RGNoChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == Enums.intrested.NoThanks || request.ChildrenAttraction == Enums.intrested.Possible; }
-            bool RGMeals(GuestRequest request) { return request.Meals == Enums.intrested.Necessary || request.Meals == Enums.intrested.Possible; }
-            bool RGNoMeals(GuestRequest request) { return request.Meals == Enums.intrested.NoThanks || request.Meals == Enums.intrested.Possible; }
+            bool RGPool(GuestRequest request) { return request.Pool == true; }
+            bool RGNoPool(GuestRequest request) { return request.Pool == false; }
+            bool RGJacuzzi(GuestRequest request) { return request.Jacuzzi == true; }
+            bool RGNoJacuzzi(GuestRequest request) { return request.Jacuzzi == false; }
+            bool RGGarden(GuestRequest request) { return request.Garden == true; }
+            bool RGNoGarden(GuestRequest request) { return request.Garden == false; }
+            bool RGChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == true; }
+            bool RGNoChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == false; }
+            bool RGMeals(GuestRequest request) { return true; }
+            bool RGNoMeals(GuestRequest request) { return false; }
             bool RGStars(GuestRequest request) { return request.Stars <= hosting.Stars; }
             bool RGArea(GuestRequest request) { return request.Area == hosting.Area; }
             bool RGSubArea(GuestRequest request) { return request.SubArea == hosting.SubArea; }
@@ -547,14 +547,14 @@ namespace BL
 
         public void AddCostumerImage(int key, string newImagePath)
         {
-            string photoPath = @"..\..\..\TestersImages\" + key + @".jpg";
+            string photoPath = @"..\..\..\CostumersImages\" + key + @".jpg";
             (File.Create(photoPath)).Close();
             System.IO.File.Copy(newImagePath, photoPath, true);
         }
 
         public void ChangeCostuerImage(int requestKey, string newImagePath)
         {
-            string destination = @"..\..\..\TestersImages\" + requestKey + @".jpg";
+            string destination = @"..\..\..\CostumersImages\" + requestKey + @".jpg";
             try
             {
                 File.Delete(destination);

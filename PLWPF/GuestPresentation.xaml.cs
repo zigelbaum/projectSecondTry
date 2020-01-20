@@ -155,39 +155,46 @@ namespace PLWPF
             bool premitionToAdd = true;
             if (String.IsNullOrEmpty(tbFirstName.Text) || String.IsNullOrEmpty(tbLastName.Text) || tbFirstName.Text.Any(char.IsDigit) || tbLastName.Text.Any(char.IsDigit))
             {
-                MessageBox.Show("please enter name without numbers", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                MessageBox.Show("Please make sure to fill the name right", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 tbFirstName.Background = Brushes.IndianRed;
+                tbLastName.Background = Brushes.IndianRed;
                 premitionToAdd = false;
+                return;
             }
             if (cbbArea.SelectedItem == null)
             {
                 MessageBox.Show("please choose your vacation area", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 cbbArea.Background = Brushes.IndianRed;
                 premitionToAdd = false;
+                return;
             }
             if (cbbVacationType.SelectedItem == null)
             {
-                MessageBox.Show("please choose your vacation area", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                MessageBox.Show("please choose your vacation type", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 cbbVacationType.Background = Brushes.IndianRed;
                 premitionToAdd = false;
+                return;
             }
             if (!tbAdults.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the adults input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 tbAdults.Background = Brushes.IndianRed;
                 premitionToAdd = false;
+                return;
             }
             if (!tbKids.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the kids input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 tbKids.Background = Brushes.IndianRed;
                 premitionToAdd = false;
+                return;
             }
             if (!tbStars.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the stars input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 tbStars.Background = Brushes.IndianRed;
                 premitionToAdd = false;
+                return;
             }
             switch (operation)
             {
@@ -196,11 +203,13 @@ namespace PLWPF
                     {
                         premitionToAdd = false;
                         tbMail.Background = Brushes.IndianRed;
+           
                     }
                     if (String.IsNullOrEmpty(tbAdults.Text))
                     {
                         premitionToAdd = false;
-                        tbMail.Background = Brushes.IndianRed;
+                        tbAdults.Background = Brushes.IndianRed;
+  
                     }
                     else
                     {
