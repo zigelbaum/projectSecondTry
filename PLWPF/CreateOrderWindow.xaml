@@ -18,7 +18,7 @@
 
 
         <Button x:Name="AddOrderButton" Content="Add" Click="AddOrderButton_Click" HorizontalAlignment="Left" Margin="625,214.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.673,2.451" Height="36" FontSize="18" FontWeight="Bold" Background="#FFFEFEFE"/>
-        <ListView Name="requestView" HorizontalAlignment="Left" Height="322" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="773">
+        <ListView Name="requestView" HorizontalAlignment="Left" Height="322" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="773" MouseDoubleClick="MenuItem_Click_Info">
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>

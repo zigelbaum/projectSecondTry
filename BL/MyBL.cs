@@ -466,11 +466,11 @@ namespace BL
             bool RGNoGarden(GuestRequest request) { return request.Garden == false; }
             bool RGChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == true; }
             bool RGNoChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == false; }
-            bool RGMeals(GuestRequest request) { return true; }
-            bool RGNoMeals(GuestRequest request) { return false; }
+            bool RGMeals(GuestRequest request) { return request.Meals == true; }
+            bool RGNoMeals(GuestRequest request) { return request.Meals == false; }
             bool RGStars(GuestRequest request) { return request.Stars <= hosting.Stars; }
             bool RGArea(GuestRequest request) { return request.Area == hosting.Area; }
-            bool RGSubArea(GuestRequest request) { return request.SubArea == hosting.SubArea; }
+            bool RGSubArea(GuestRequest request) { return ((request.SubArea == hosting.SubArea) || (request.SubArea == null) || hosting.SubArea == null); }
             bool RGType(GuestRequest request) { return request.Type == hosting.HostingUnitType; }
 
             if (hosting.Pool)
