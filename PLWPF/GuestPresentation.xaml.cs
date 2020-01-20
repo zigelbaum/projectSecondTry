@@ -338,13 +338,7 @@ namespace PLWPF
                     MessageBox.Show("the request details have bee changed successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
 
                     break;
-            }
-
-            //private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-            //{
-            //    if (e.ChangedButton == MouseButton.Left)
-            //        this.DragMove();
-            //}
+            }           
         }
 
         private void drawY(int star)

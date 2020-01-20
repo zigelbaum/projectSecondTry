@@ -23,140 +23,159 @@ namespace PLWPF
     {
         #region variable  
         IBL myBl = BL.FactoryBL.getBL("List");
-        //HostingUnit hosting;
-        public Host host;
-        bool premission = true;
+        public Host host;       
+        public bool added=false;
         #endregion
 
-        public AddHostWindow(/*HostingUnit unit*/)
+        public AddHostWindow()
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             host = new Host();
             this.DataContext = host;
-            //hosting = unit;
             InitializeComponent();            
         }
 
         private void addHost_Click(object sender, RoutedEventArgs e)
         {
+            bool premission = true;
 
             #region required fildes
             if (tbFirstName.Text.Any(char.IsDigit))
             {
                 MessageBox.Show("please enter name without numbers", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbFirstName.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (tbFirstName.Text == null)
             {
                 MessageBox.Show("please enter name this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbFirstName.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (tbLastName.Text.Any(char.IsDigit))
             {
                 MessageBox.Show("please enter last name without numbers", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbLastName.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (tbLastName.Text == null)
             {
                 MessageBox.Show("please enter last name this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbLastName.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (!tbPhon.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the phon input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbPhon.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (tbBname.Text.Any(char.IsDigit))
             {
                 MessageBox.Show("please enter banck name without numbers", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbBname.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (tbBname.Text == null)
             {
                 MessageBox.Show("please enter banck name this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbBname.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (tbBrCity.Text.Any(char.IsDigit))
             {
                 MessageBox.Show("please enter branch banck city without numbers", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbBrCity.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (!tbBnumber.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the banck number input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbBnumber.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (tbBnumber.Text == null)
             {
                 MessageBox.Show("please enter banck number this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbBnumber.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (!tbBrNumber.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the branch banck number input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbBrNumber.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (tbBrNumber.Text == null)
             {
                 MessageBox.Show("please enter branch banck number this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbBrNumber.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (!tbAccountNumber.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the banck account number input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbAccountNumber.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (tbAccountNumber.Text == null)
             {
                 MessageBox.Show("please enter banck account number this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbAccountNumber.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (!tbID.Text.All(char.IsDigit))
             {
                 MessageBox.Show("the ID number input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbID.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
-            if (tbAccountNumber.Text == null)
+            if (tbID.Text == null)
             {
                 MessageBox.Show("please enter ID, this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbID.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
             if (ckbcollectionClearance.IsChecked==false)
             {
                 MessageBox.Show("You can not register if you don't have collection clearance", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                ckbcollectionClearance.Background = Brushes.IndianRed;
                 premission = false;
                 return;
-            } 
+            }
             #endregion
             if (premission == true)
-            {                             
+            {
+                added = true;
                 Close();
             }
-
-        
+               
         }
 
         private void cancelUnitButton_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("are you sure you want to exit?\n any changes will not be saved.", "cancaling", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
             if (result == MessageBoxResult.OK)
+            {
+                added = false;
                 Close();
+            }
         }
     }
 }

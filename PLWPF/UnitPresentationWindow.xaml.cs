@@ -129,14 +129,15 @@ namespace PLWPF
                     break;
             }
         }
+
         public void addUnitButton_Click(object sender, RoutedEventArgs e)
         {
             bool premission = true;
 
             #region required filleds
-            if (tbUnitName.IsLoaded == false)
+            if (String.IsNullOrEmpty(tbUnitName.Text)== true)
             {
-                MessageBox.Show("please enter youe hosting unit name.", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                MessageBox.Show("Please enter your hosting unit name.", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 premission = false;
                 tbUnitName.BorderBrush = Brushes.Red;
                 return;
@@ -148,7 +149,7 @@ namespace PLWPF
                 premission = false;
                 return;
             }
-            if (tbAdults.Text == null)
+            if (String.IsNullOrEmpty(tbAdults.Text) == true)
             {
                 MessageBox.Show("Please fill the adults filed", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 tbAdults.BorderBrush = Brushes.Red;
@@ -172,7 +173,7 @@ namespace PLWPF
                 premission = false;
                 return;
             }
-            if (tbStars.Text == null)
+            if (String.IsNullOrEmpty(tbStars.Text )== true)
             {
                 MessageBox.Show("please enter number strars this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                 tbStars.BorderBrush = Brushes.Red;
@@ -221,27 +222,31 @@ namespace PLWPF
                         else
                         {
 
-                            AddHostWindow addHostWindow = new AddHostWindow(/*my_unit*/);
+                            AddHostWindow addHostWindow = new AddHostWindow();
                             addHostWindow.ShowDialog();
+                            premission = addHostWindow.added;
                             my_unit.Owner = addHostWindow.host;
                         }
                         HostingUnit unit = my_unit;
-                        try
+                        if (premission == true)
                         {
-                            myBl.addHostingUnit(unit);
-                        }
-                        catch (Exception a)
-                        {
-                            var result2 = MessageBox.Show(a.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                            if (MessageBoxResult.No == result2)
+                            try
                             {
-                                Close();
-                                return;
+                                myBl.addHostingUnit(unit);
                             }
-                            else
-                                return;
+                            catch (Exception a)
+                            {
+                                var result2 = MessageBox.Show(a.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                                if (MessageBoxResult.No == result2)
+                                {
+                                    Close();
+                                    return;
+                                }
+                                else
+                                    return;
+                            }
+                            addedSuccessfully = true;
                         }
-                        addedSuccessfully = true;
                         Close();
                     }
                     break;

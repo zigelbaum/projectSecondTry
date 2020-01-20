@@ -195,7 +195,7 @@ namespace PLWPF
                 case 3:
                     foreach (var item in groupedByOwner)
                         //
-                        if (cbbShowGroup.SelectedItem != null/* && (int)item.Key == (int)cbbShowGroup.SelectedItem*/)
+                        if (cbbShowGroup.SelectedItem != null)
                         {
                             listToFilter = new ObservableCollection<HostingUnit>(item.ToList());
                             break;
