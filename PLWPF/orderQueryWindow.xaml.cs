@@ -27,6 +27,7 @@ namespace PLWPF
         {
             InitializeComponent();
             OrderView.ItemsSource = listOrders;
+            cbbShowStatus.ItemsSource = Enum.GetValues(typeof(Enums.OrderStatus));
         }
         private void tbUnitKey_SearchFilterChanged(object sender, TextChangedEventArgs e)
         {

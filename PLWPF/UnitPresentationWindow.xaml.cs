@@ -118,6 +118,7 @@ namespace PLWPF
                     ckbGarden.IsEnabled = false;
                     ckbAttractions.IsEnabled = false;
                     ckbMeals.IsEnabled = false;
+                    ckbSynagogue.IsEnabled = false;
                     bstar1.IsEnabled = false;
                     bstar2.IsEnabled = false;
                     bstar3.IsEnabled = false;

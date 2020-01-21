@@ -37,6 +37,7 @@
         <CheckBox Name="ckbGarden" Content="Garden" IsChecked="{Binding Path=Garden,Mode=TwoWay}" Height="26" HorizontalAlignment="Left" Margin="374,153,0,0" VerticalAlignment="Top" Width="113"/>
         <CheckBox Name="ckbAttractions" Content="child attractions" IsChecked="{Binding Path=ChildrenAttraction,Mode=TwoWay}" Height="26" HorizontalAlignment="Left" Margin="374,209,0,0" VerticalAlignment="Top" Width="113"/>
         <CheckBox Name="ckbMeals" IsChecked="{Binding Path=Meals,Mode=TwoWay}" Content="meals"  Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="374,265,0,0"/>
+        <CheckBox Name="ckbSynagogue" IsChecked="{Binding Path=Synagogue,Mode=TwoWay}" Content="synagogue"  Height="26" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="374,325,0,0"/>
 
         <Button Name="addUnitButton" Content="add hosting unit" HorizontalAlignment="Left" Margin="654,350,0,0" VerticalAlignment="Top" Width="102" Click="addUnitButton_Click" Height="34"/>
         <Button x:Name="cancelUnitButton" Content="cancel" HorizontalAlignment="Left" Margin="516,350,0,0" VerticalAlignment="Top" Width="88" Click="cancelUnitButton_Click" Height="34"/>
