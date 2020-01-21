@@ -348,11 +348,13 @@ namespace PLWPF
             {
                 drawG(1);
                 tbStars.Text = "0";
+                my_unit.Stars = 0;
             }
             else
             {
                 drawY(1);
                 tbStars.Text = "1";
+                my_unit.Stars = 1;
             }
         }
         private void bstar2_click(object sender, RoutedEventArgs e)
@@ -361,11 +363,13 @@ namespace PLWPF
             {
                 drawG(2);
                 tbStars.Text = "1";
+                my_unit.Stars = 1;
             }
             else
             {
                 drawY(2);
                 tbStars.Text = "2";
+                my_unit.Stars = 2;
             }
         }
         private void bstar3_click(object sender, RoutedEventArgs e)
@@ -374,11 +378,13 @@ namespace PLWPF
             {
                 drawG(3);
                 tbStars.Text = "2";
+                my_unit.Stars = 2;
             }
             else
             {
                 drawY(3);
                 tbStars.Text = "3";
+                my_unit.Stars = 3;
             }
         }
         private void bstar4_click(object sender, RoutedEventArgs e)
@@ -387,11 +393,13 @@ namespace PLWPF
             {
                 drawG(4);
                 tbStars.Text = "3";
+                my_unit.Stars = 3;
             }
             else
             {
                 drawY(4);
                 tbStars.Text = "4";
+                my_unit.Stars = 4;
             }
         }
         private void bstar5_click(object sender, RoutedEventArgs e)
@@ -400,11 +408,13 @@ namespace PLWPF
             {
                 drawG(5);
                 tbStars.Text = "4";
+                my_unit.Stars = 4;
             }
             else
             {
                 drawY(5);
                 tbStars.Text = "5";
+                my_unit.Stars = 5;
             }
         }
         #endregion

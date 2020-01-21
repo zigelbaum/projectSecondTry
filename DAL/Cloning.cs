@@ -79,7 +79,7 @@ namespace DAL
             target.Meals = original.Meals;
             target.Pool = original.Pool;
             target.Stars = original.Stars;
-            target.SubArea = original.SubArea;   
+            target.SubArea = original.SubArea;           
             return target;
         }
         #endregion
