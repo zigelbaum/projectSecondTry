@@ -472,6 +472,8 @@ namespace BL
             bool RGArea(GuestRequest request) { return request.Area == hosting.Area; }
             bool RGSubArea(GuestRequest request) { return ((request.SubArea == hosting.SubArea) || (request.SubArea == null) || hosting.SubArea == null); }
             bool RGType(GuestRequest request) { return request.Type == hosting.HostingUnitType; }
+            bool RGAdultes(GuestRequest request) { return request.Adults <= hosting.Adults; }
+            bool RGKids(GuestRequest request) { return request.Children <= hosting.Kids; }
 
             if (hosting.Pool)
                 pred += RGPool;
@@ -492,6 +494,8 @@ namespace BL
             pred += RGSubArea;
             pred += RGType;
             pred += RGStars;
+            pred += RGAdultes;
+            pred += RGKids;
             return pred;
         }
 

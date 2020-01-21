@@ -66,6 +66,9 @@
     <Compile Include="CreateOrderWindow.xaml.cs">
       <DependentUpon>CreateOrderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DirectorWindow.xaml.cs">
+      <DependentUpon>DirectorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GetKey.xaml.cs">
       <DependentUpon>GetKey.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DirectorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
