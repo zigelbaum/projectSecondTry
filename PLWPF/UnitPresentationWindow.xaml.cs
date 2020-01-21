@@ -125,6 +125,7 @@ namespace PLWPF
                     bstar5.IsEnabled = false;
                     addUnitButton.Visibility = Visibility.Hidden;
                     cancelUnitButton.Content = "Close";
+                   // cancelUnitButton.IsEnabled = true;
                     drawY(Int32.Parse(tbStars.Text));
                     break;
             }
@@ -288,6 +289,7 @@ namespace PLWPF
             }
         }
 
+        #region stars
         private void drawY(int star)
         {
             if (star < 1)
@@ -405,6 +407,7 @@ namespace PLWPF
                 tbStars.Text = "5";
             }
         }
+        #endregion
 
     }
 }

@@ -61,6 +61,7 @@ namespace PLWPF
             {
                 Order ord = myBl.NewOrder(unit.HostingUnitKey, my_request_key);
                 myBl.AddOrder(ord);
+                MessageBox.Show("Succed");
             }
             catch (Exception ex)
             {

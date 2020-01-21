@@ -22,13 +22,15 @@ namespace PLWPF
 
     public partial class GuestPresentation : Window
     {
+        #region variable
         public GuestRequest guestRequest;
-
         public string operation = "Add";
         OpenFileDialog op;
         bool isImageChanged = false;
         public bool addedSuccessfuly = false;
         Brush yelf, yels, grayf, grays;
+        #endregion
+
         ///<summery>
         ///default ctor for adding new request
         ///</summery>
@@ -276,7 +278,7 @@ namespace PLWPF
                     }
                     if (premitionToAdd == true)
                     {
-                        GuestRequest guest = guestRequest;//יכול להיות שלא יעבוד כי אין בנאי העתקה
+                        GuestRequest guest = guestRequest;//clone//יכול להיות שלא יעבוד כי אין בנאי העתקה
                         try { MainWindow.myBL.addGuestRequest(guest); }
                         catch (Exception a)
                         {

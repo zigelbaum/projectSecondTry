@@ -11,9 +11,13 @@
     </Window.Background>
     <Grid Name="mainGrid">
         <Label Name="idLabel" Content="Please enter guest request key:" FontSize="16" HorizontalAlignment="Left" Margin="30,22,0,0" VerticalAlignment="Top" Height="37" Width="234"/>
-        <TextBox Name="tbID" HorizontalAlignment="Left" FontSize="16" Height="36" Margin="30,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="234"/>
-        <Button Content="Done" HorizontalAlignment="Left" Height="37" Margin="165,122,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Height="37" Margin="52,122,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click_1"/>
+        <TextBox Name="tbID" HorizontalAlignment="Left" FontSize="16" Height="36" Margin="30,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="234">
+            <TextBox.Background>
+                <ImageBrush/>
+            </TextBox.Background>
+        </TextBox>
+        <Button Content="Done" HorizontalAlignment="Left" Height="37" Margin="165,122,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click" Background="#FFF9FAE2"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Height="37" Margin="52,122,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click_1" Background="#FFF9F7EA"/>
 
     </Grid>
 </Window>

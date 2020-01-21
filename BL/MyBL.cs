@@ -458,8 +458,8 @@ namespace BL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<GuestRequest> guestRequests = dal.GetGuestRequestsList();
             Predicate<GuestRequest> pred = default(Predicate<GuestRequest>);
-            bool RGPool(GuestRequest request) { return request.Pool == true; }
-            bool RGNoPool(GuestRequest request) { return request.Pool == false; }
+            bool RGPool(GuestRequest request) { return request.Pool == true || request.Pool == null; }
+            bool RGNoPool(GuestRequest request) { return request.Pool == false || request.Pool == null; }
             bool RGJacuzzi(GuestRequest request) { return request.Jacuzzi == true; }
             bool RGNoJacuzzi(GuestRequest request) { return request.Jacuzzi == false; }
             bool RGGarden(GuestRequest request) { return request.Garden == true; }

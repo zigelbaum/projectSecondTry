@@ -14,7 +14,7 @@
         <Button Name="UploadOrderButton" Content="Update Order"  HorizontalAlignment="Left" Margin="360,349,0,0" VerticalAlignment="Top" Width="185" Height="40" Click="UploadOrderButton_Click" FontSize="18" Background="#FFF2F1E9" FontWeight="Bold"/>
         <Button Name="CreateOrderButton" Content="Create a new Order"  HorizontalAlignment="Right" Margin="0,349,33.333,0" VerticalAlignment="Top" Width="185" Height="40" Click="CreateOrderButton_Click" FontSize="18" FontWeight="Bold" Background="#FFEEEEE4"/>
         <Button x:Name="returnButton" Content="Back" Margin="37,349,636.333,31.667" Width="120" Height="40" Background="#FFF6F6F2" FontWeight="Bold" FontSize="18" Click="ReturnButton_Click"/>
-        <ListView Name="OrderView" HorizontalAlignment="Left" Height="244" Margin="10,100,0,0" VerticalAlignment="Top" Width="773" FontFamily="Segoe UI Light">
+        <ListView Name="OrderView" HorizontalAlignment="Left" Height="244" Margin="10,100,0,0" VerticalAlignment="Top" Width="773" FontFamily="Segoe UI Light" OpacityMask="Black" Foreground="Black">
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>
@@ -36,6 +36,6 @@
             </TextBox.Background>
         </TextBox>
         <Label Content="group order by status:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="147" Height="35" Margin="10,35,0,0" FontWeight="Bold"/>
-        <ComboBox Name="cbbShowStatus" SelectionChanged="cbbShowStatus_SelectionChanged" SelectedItem="{Binding Path=Status,Mode=OneWay}"  HorizontalAlignment="Left" Margin="162,35,0,0" VerticalAlignment="Top" Width="215" Height="35"/>
+        <ComboBox Name="cbbShowStatus" SelectionChanged="cbbShowStatus_SelectionChanged" SelectedItem="{Binding Path=Status,Mode=OneWay}"  HorizontalAlignment="Left" Margin="162,35,0,0" VerticalAlignment="Top" Width="215" Height="35" OpacityMask="Black" Foreground="Black" BorderBrush="#FFACACAC" Background="Black"/>
     </Grid>
 </Window>

@@ -47,7 +47,7 @@
         <Viewbox Name="vbCalendar" HorizontalAlignment="Left" Height="192" Margin="545,61,0,0" VerticalAlignment="Top" Width="188"/>
 
 
-        <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Margin="0,0,248.333,167.667">
             <Canvas.Background>
                 <ImageBrush/>
             </Canvas.Background>
