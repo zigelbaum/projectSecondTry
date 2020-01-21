@@ -460,16 +460,18 @@ namespace BL
             Predicate<GuestRequest> pred = default(Predicate<GuestRequest>);
             bool RGPool(GuestRequest request) { return request.Pool == true || request.Pool == null; }
             bool RGNoPool(GuestRequest request) { return request.Pool == false || request.Pool == null; }
-            bool RGJacuzzi(GuestRequest request) { return request.Jacuzzi == true; }
-            bool RGNoJacuzzi(GuestRequest request) { return request.Jacuzzi == false; }
-            bool RGGarden(GuestRequest request) { return request.Garden == true; }
-            bool RGNoGarden(GuestRequest request) { return request.Garden == false; }
-            bool RGChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == true; }
-            bool RGNoChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == false; }
-            bool RGMeals(GuestRequest request) { return request.Meals == true; }
-            bool RGNoMeals(GuestRequest request) { return request.Meals == false; }
+            bool RGJacuzzi(GuestRequest request) { return request.Jacuzzi == true || request.Jacuzzi == null; }
+            bool RGNoJacuzzi(GuestRequest request) { return request.Jacuzzi == false || request.Jacuzzi == null; }
+            bool RGGarden(GuestRequest request) { return request.Garden == true || request.Garden == null; }
+            bool RGNoGarden(GuestRequest request) { return request.Garden == false || request.Garden == null; }
+            bool RGChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == true || request.ChildrenAttraction == null; }
+            bool RGNoChildrenAttraction(GuestRequest request) { return request.ChildrenAttraction == false || request.ChildrenAttraction == null; }
+            bool RGMeals(GuestRequest request) { return request.Meals == true || request.Meals == null; }
+            bool RGNoMeals(GuestRequest request) { return request.Meals == false || request.Meals == null; }
+            bool RGSynagogue(GuestRequest request) { return request.Synagogue == true || request.Synagogue == null; }
+            bool RGNoSynagogue(GuestRequest request) { return request.Synagogue == null || request.Synagogue == null; }
             bool RGStars(GuestRequest request) { return request.Stars <= hosting.Stars; }
-            bool RGArea(GuestRequest request) { return request.Area == hosting.Area; }
+            bool RGArea(GuestRequest request) { return request.Area == hosting.Area || request.Area == Enums.Area.All; }
             bool RGSubArea(GuestRequest request) { return ((request.SubArea == hosting.SubArea) || (request.SubArea == null) || hosting.SubArea == null); }
             bool RGType(GuestRequest request) { return request.Type == hosting.HostingUnitType; }
             bool RGAdultes(GuestRequest request) { return request.Adults <= hosting.Adults; }
@@ -490,6 +492,10 @@ namespace BL
             if (hosting.Meals)
                 pred += RGMeals;
             else pred += RGNoMeals;
+            if (hosting.Synagogue)
+                pred += RGSynagogue;
+            else
+                pred += RGNoSynagogue;
             pred += RGArea;
             pred += RGSubArea;
             pred += RGType;

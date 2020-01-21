@@ -23,15 +23,15 @@ namespace BE
         int _Adults;
         int _Children;
         bool? _pool;
-        bool _Jacuzzi;
-        bool _Garden;
-        bool _ChildrenAttraction;
+        bool? _Jacuzzi;
+        bool? _Garden;
+        bool? _ChildrenAttraction;
         int _Stars;
-        bool meals;
+        bool? meals;
+        bool? synagogue;
         #endregion
 
         #region properties
-       
         public int GuestRequestKey { get => _GuestRequestKey; set => _GuestRequestKey=value; }
         public string PrivateName { get => _PrivateName; set => _PrivateName = value; }
         public string FamilyName { get => _FamilyName; set => _FamilyName = value; }
@@ -46,13 +46,12 @@ namespace BE
         public int Adults { get => _Adults; set => _Adults = value; }
         public int Children { get => _Children; set => _Children = value; }
         public bool? Pool { get => _pool; set => _pool = value; }
-        public bool Jacuzzi { get => _Jacuzzi; set => _Jacuzzi = value; }
-        public bool Garden { get => _Garden; set => _Garden = value; }
-        public bool ChildrenAttraction { get => _ChildrenAttraction; set => _ChildrenAttraction = value; }      
-        public bool Meals { get => meals; set => meals = value; }
+        public bool? Jacuzzi { get => _Jacuzzi; set => _Jacuzzi = value; }
+        public bool? Garden { get => _Garden; set => _Garden = value; }
+        public bool? ChildrenAttraction { get => _ChildrenAttraction; set => _ChildrenAttraction = value; }      
+        public bool? Meals { get => meals; set => meals = value; }
+        public bool? Synagogue { get => synagogue; set => synagogue = value; }
         public int Stars { get => _Stars; set => _Stars = value; }
-
-
         #endregion
 
         #region functions

@@ -24,6 +24,7 @@ namespace BE
         private bool childrenAttraction;
         private int stars;
         private bool meals;
+        private bool synagogue;
 
         #endregion
         public HostingUnit()
@@ -46,6 +47,7 @@ namespace BE
         public bool ChildrenAttraction { get => childrenAttraction; set => childrenAttraction = value; }
         public int Stars { get => stars; set => stars = value; }
         public bool Meals { get => meals; set => meals = value; }
+        public bool Synagogue { get => synagogue; set => synagogue = value; }
         #endregion
 
         #region functions

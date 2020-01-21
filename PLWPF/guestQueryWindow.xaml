@@ -10,7 +10,7 @@
         <ImageBrush ImageSource="IconBackGround.ico" Opacity="0.8"/>
     </Window.Background>
     <Grid Margin="0,0,3.333,-2.333">
-        <ListView x:Name="requestView"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="MenuItem_Click_Info" Margin="30,140,35,0">
+        <ListView x:Name="requestView"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="MenuItem_Click_Info" Margin="10,140,10,0">
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>
@@ -27,31 +27,31 @@
             </ListView.View>
         </ListView>
 
-        <Label Content="Click on request twice to view, once to choose." HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="270" Margin="30,107,0,283"/>
-        <Button Name="reset" Content="reset search" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="80" Margin="623,111,0,283" Click="reset_Click"/>
-        <Label Content="group requests by:" FontSize="12" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="452,89,200,300"/>
-        <Label Content="show group:" FontSize="12" VerticalAlignment="Stretch" Margin="30,79,670,304"/>
-        <ComboBox Name="cbbGroupBy" SelectionChanged="cbbGroupBy_SelectionChanged" Background="#FFFFFFFF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="120,71,494,316" RenderTransformOrigin="0.5,0.5"/>
-        <ComboBox Name="cbbShowGroup" BorderBrush="#FFFFFFFF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="cbbShowGroup_SelectionChanged" Margin="568,84,35,304">
+        <Label Content="Click on request twice to view, once to choose." HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="270" Margin="10,107,0,283"/>
+        <Button Name="reset" Content="reset search" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="80" Margin="621,115,0,279" Click="reset_Click"/>
+        <Label Content="group requests by:" FontSize="12" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="452,89,222,288"/>
+        <Label Content="show group:" FontSize="12" VerticalAlignment="Stretch" Margin="30,79,670,312"/>
+        <ComboBox Name="cbbGroupBy" SelectionChanged="cbbGroupBy_SelectionChanged" Background="#FFFFFFFF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="120,79,510,312" RenderTransformOrigin="0.5,0.5"/>
+        <ComboBox Name="cbbShowGroup" BorderBrush="#FFFFFFFF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="cbbShowGroup_SelectionChanged" Margin="568,89,35,304">
             <ComboBox.Background>
                 <ImageBrush/>
             </ComboBox.Background>
         </ComboBox>
 
-        <Label Content="Enter request key:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="auto" Margin="30,-5,651,400"/>
-        <Label Content="Enter mail address:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="auto" Margin="30,41,637,349"/>
-        <Label Content="Enter last name:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="auto" Width="100" Margin="30,23,660,368"/>
-        <TextBox Name="tbKey"  Text="" TextChanged="tbKey_SearchFilterChanged" Grid.Row="0" Margin="568,0,39,400">
+        <Label Content="Enter request key:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="auto" Margin="30,-5,651,395"/>
+        <Label Content="Enter mail address:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="auto" Margin="30,56,637,334"/>
+        <Label Content="Enter last name:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="auto" Width="100" Margin="30,28,660,364"/>
+        <TextBox Name="tbKey"  Text="" TextChanged="tbKey_SearchFilterChanged" Grid.Row="0" Margin="527,0,35,395">
             <TextBox.Background>
                 <ImageBrush/>
             </TextBox.Background>
         </TextBox>
-        <TextBox Name="tbMail" Text="" TextChanged="tbMail_SearchFilterChanged" Margin="527,56,35,339" >
+        <TextBox Name="tbMail" Text="" TextChanged="tbMail_SearchFilterChanged" Margin="527,60,35,334" >
             <TextBox.Background>
                 <ImageBrush/>
             </TextBox.Background>
         </TextBox>
-        <TextBox Name="tbLastName" Text="" TextChanged="tbLastName_SearchFilterChanged" Margin="568,22,35,368">
+        <TextBox Name="tbLastName" Text="" TextChanged="tbLastName_SearchFilterChanged" Margin="527,28,35,362">
             <TextBox.Background>
                 <ImageBrush/>
             </TextBox.Background>

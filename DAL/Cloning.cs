@@ -46,6 +46,7 @@ namespace DAL
             target.Type = original.Type;
             target.Stars = original.Stars;
             target.Meals = original.Meals;
+            target.Synagogue = original.Synagogue;
             return target;
         }
         #endregion
@@ -79,7 +80,8 @@ namespace DAL
             target.Meals = original.Meals;
             target.Pool = original.Pool;
             target.Stars = original.Stars;
-            target.SubArea = original.SubArea;           
+            target.SubArea = original.SubArea;
+            target.Synagogue = original.Synagogue;
             return target;
         }
         #endregion

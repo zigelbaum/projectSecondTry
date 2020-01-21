@@ -32,12 +32,14 @@ namespace PLWPF
 
         private void HostingQuery_Click(object sender, RoutedEventArgs e)
         {
-
+            unitQueryWindow unitQuery = new unitQueryWindow();
+            unitQuery.ShowDialog();
         }
 
         private void OrderQuery_Click(object sender, RoutedEventArgs e)
         {
-
+            orderQueryWindow orderQwindow = new orderQueryWindow();
+            orderQwindow.ShowDialog();
         }
     }
 }
