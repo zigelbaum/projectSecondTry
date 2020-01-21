@@ -65,9 +65,7 @@ namespace BE
                 "@Registration Date: " + RegistrationDate + "@Request's status: " + Status;
             request = request.Replace("@", System.Environment.NewLine);
             return request.ToString();
-        }
-
-      
+        }      
         #endregion
 
     }

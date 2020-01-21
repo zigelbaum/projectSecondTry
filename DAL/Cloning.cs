@@ -44,6 +44,8 @@ namespace DAL
             target.Status = original.Status;
             target.SubArea = original.SubArea;
             target.Type = original.Type;
+            target.Stars = original.Stars;
+            target.Meals = original.Meals;
             return target;
         }
         #endregion

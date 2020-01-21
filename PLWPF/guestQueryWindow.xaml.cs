@@ -12,15 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using BE;
+using BL;
 
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for GuestRequestWindow.xaml
+    /// Interaction logic for guestQueryWindow.xaml
     /// </summary>
-    public partial class GuestRequestWindow : Window
+    public partial class guestQueryWindow : Window
     {
         enum filterRequest { everything, status, area, type, stars }
         private ObservableCollection<GuestRequest> requestsList = new ObservableCollection<GuestRequest>(MainWindow.myBL.GetGuestRequestsList());
@@ -29,8 +29,7 @@ namespace PLWPF
         ObservableCollection<IGrouping<Enums.HostingUnitType, GuestRequest>> groupedByType;
         ObservableCollection<IGrouping<int, GuestRequest>> groupedByStars;
         private ObservableCollection<GuestRequest> listToFilter;
-
-        public GuestRequestWindow()
+        public guestQueryWindow()
         {
             InitializeComponent();
             listToFilter = requestsList;
@@ -38,61 +37,6 @@ namespace PLWPF
             cbbGroupBy.ItemsSource = Enum.GetValues(typeof(filterRequest));
             cbbGroupBy.SelectedIndex = 0;
             cbbShowGroup.IsEnabled = false;
-        }
-
-        private void addRequestButton_Click(object sender, RoutedEventArgs e)
-        {
-            GuestPresentation guestPresentationWindow = new GuestPresentation();
-            guestPresentationWindow.ShowDialog();
-            if (guestPresentationWindow.addedSuccessfuly == true)
-            {
-                requestsList = new ObservableCollection<GuestRequest>(MainWindow.myBL.GetGuestRequestsList());
-                listToFilter = requestsList;
-                requestView.ItemsSource = listToFilter;
-            }
-        }
-
-        private void updateRequestButton_Click(object sender, RoutedEventArgs e)
-        {
-            GuestRequest request;
-            GetKey getKey = new GetKey("GuestRequest");
-            getKey.ShowDialog();
-            if (getKey.numVal != 0)
-            {
-                try
-                {
-                    request = MainWindow.myBL.FindGuestRequest(getKey.numVal);
-                    if (request.Status != Enums.GuestRequestStatus.Active)
-                    {
-                        throw new Exception("You cant change the details of your request due to its status");
-                    }
-                    else
-                    {
-                        List<Order> orders = MainWindow.myBL.getOrders(o => o.GuestRequestKey == getKey.numVal);
-                        if (orders.Any(x=>x.OrderStatus==Enums.OrderStatus.Closed))
-                            throw new Exception("You cannot change the details.\nThere is a closed order for this request");
-                        foreach (Order order in orders)
-                        { order.OrderStatus = Enums.OrderStatus.NotRelevent; }
-                        GuestPresentation presentation = new GuestPresentation(request, "Update");
-                        presentation.ShowDialog();
-                        if (presentation.addedSuccessfuly == true)
-                        {
-                            requestsList = new ObservableCollection<GuestRequest>(MainWindow.myBL.GetGuestRequestsList());
-                            listToFilter = requestsList;
-                            requestView.ItemsSource = listToFilter;
-                        }
-                    }
-                }
-                catch (Exception a)
-                {
-                    MessageBox.Show("failed updating details" + a.Message, "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                }
-            }
-        }
-
-        private void returnButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
 
         private void tbKey_SearchFilterChanged(object sender, TextChangedEventArgs e)
@@ -253,18 +197,13 @@ namespace PLWPF
             requestView.ItemsSource = listToFilter;
         }
 
-        private void MenuItem_Click_Info(object sender, RoutedEventArgs e)
+        private void MenuItem_Click_Info(object sender, MouseButtonEventArgs e)
         {
             if (requestView.SelectedItem != null)
             {
                 GuestPresentation presentation = new GuestPresentation(((GuestRequest)requestView.SelectedItem), "View");
                 presentation.ShowDialog();
             }
-        }
-
-        private void MenuItem_Click_Info(object sender, MouseButtonEventArgs e)
-        { 
-            MenuItem_Click_Info(sender, e as RoutedEventArgs);
         }
     }
 }

@@ -23,5 +23,21 @@ namespace PLWPF
         {
             InitializeComponent();
         }
+
+        private void GuestQuery_Click(object sender, RoutedEventArgs e)
+        {
+            guestQueryWindow requestQueryWindow = new guestQueryWindow();
+            requestQueryWindow.ShowDialog();
+        }
+
+        private void HostingQuery_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OrderQuery_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

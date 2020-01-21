@@ -10,6 +10,21 @@
         <ImageBrush ImageSource="IconBackGround.ico" Opacity="0.8"/>
     </Window.Background>
     <Grid>
-        
+        <Button Name="guestQuery" Content="guest request query" HorizontalAlignment="Left" Margin="55,350,0,0" VerticalAlignment="Top" Width="104" Height="32" Click="GuestQuery_Click">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <Button Name="HostingQuery" Content="hosting unit query" HorizontalAlignment="Left" Margin="326,350,0,0" VerticalAlignment="Top" Width="104" Height="32" Click="HostingQuery_Click">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <Button Name="orderQuery" Content="order query" HorizontalAlignment="Left" Margin="647,350,0,0" VerticalAlignment="Top" Width="104" Height="32" Click="OrderQuery_Click">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+
     </Grid>
 </Window>

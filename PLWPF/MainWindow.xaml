@@ -35,5 +35,10 @@
                 <ImageBrush/>
             </Button.Background>
         </Button>
+        <Button Name="DirectorButton" Content="Director" Grid.Column="2" FontWeight="Bold" HorizontalAlignment="Left" Margin="9.667,63.333,0,0" VerticalAlignment="Top" Width="226" Height="114" Click="DirectorButton_Click" Grid.Row="2">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

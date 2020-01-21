@@ -72,6 +72,9 @@
     <Compile Include="GetKey.xaml.cs">
       <DependentUpon>GetKey.xaml</DependentUpon>
     </Compile>
+    <Compile Include="guestQueryWindow.xaml.cs">
+      <DependentUpon>guestQueryWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PersonalAreaWindow.xaml.cs">
       <DependentUpon>PersonalAreaWindow.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GuestPresentation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="guestQueryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
