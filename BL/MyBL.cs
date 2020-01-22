@@ -120,13 +120,8 @@ namespace BL
 
         public bool RevocationPermission(Host host)
         {
-            List<Order> openOrders = getOrders(x => x.OrderStatus == Enums.OrderStatus.Active);
-            List<HostingUnit> hostingUnits = null;
-            foreach (var order in openOrders)
-                hostingUnits.Add(FindHostingUnit(order.HostingUnitKey));
-            foreach (var unit in hostingUnits)
-                if (unit.Owner.HostKey == host.HostKey)
-
+            List<Order> openOrders = getOrders(x => x.OrderStatus != Enums.OrderStatus.Closed || x.OrderStatus != Enums.OrderStatus.NotRelevent);
+            if(openOrders.Count!=0)
                     return false;
             return true;
         }
@@ -180,7 +175,13 @@ namespace BL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             try
             {
-                dal.SetHostingUnit(hostingUnit);
+                List<HostingUnit> my_unit = dal.getHostingUnits(u => u.HostingUnitKey == hostingUnit.HostingUnitKey);
+                HostingUnit hosting = my_unit.Find(u => u.HostingUnitKey == hostingUnit.HostingUnitKey);
+                if (hosting.Owner.CollectionClearance == true && hostingUnit.Owner.CollectionClearance == false)
+                    if(!RevocationPermission(hostingUnit.Owner))
+                        dal.SetHostingUnit(hostingUnit);
+                else
+                    dal.SetHostingUnit(hostingUnit);
             }
             catch (Exception e)
             {
