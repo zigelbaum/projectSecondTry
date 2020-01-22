@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BE;
-using static DS.DataSource;
+using DS;
 namespace DAL
 {
-    internal class DALList :IDAL
+    internal class DALList : IDAL
     {
         #region Singleton
         private static readonly DALList instance = new DALList();
@@ -25,12 +25,13 @@ namespace DAL
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
-            foreach (HostingUnit host in listHostingUnits)
-            {
-                if(unit.HostingUnitKey == host.HostingUnitKey)
-                    return true;
-            }
-            return false;
+            var temp = from HostingUnit host in listHostingUnits
+                       where host.HostingUnitKey == unit.HostingUnitKey
+                       let flag = true
+                       select flag;
+            if (temp.Count() == 0)
+                return false;
+            return true;
         }
 
         public List<HostingUnit> getHostingUnitsList()
@@ -46,15 +47,9 @@ namespace DAL
                     throw new DataException("No hosting unit");
 
                 IDAL dal = DAL.factoryDAL.getDAL("List");
-                //IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
-                //foreach (HostingUnit host in listHostingUnits)
-                //{
-                //    if (hostingUnit.CompareTo(host) == 0)
-                //        throw  new DataException("This host already exists"); ;
-                //}
                 hostingUnit.HostingUnitKey = Configuration.HostingUnitKey;
                 Configuration.HostingUnitKey++;
-                hostingUnitsCollection.Add(hostingUnit);
+                DS.DataSource.hostingUnitsCollection.Add(hostingUnit.Clone());
                 return hostingUnit.HostingUnitKey;
             }
             catch (DataException c)
@@ -70,7 +65,7 @@ namespace DAL
                 if (!UnitExist(hostingUnit))
                     throw new DataException("The hosting unit not exist");
                 else
-                    hostingUnitsCollection.RemoveAll(x => x.HostingUnitKey == hostingUnit.HostingUnitKey);
+                    DS.DataSource.hostingUnitsCollection.RemoveAll(x => x.HostingUnitKey == hostingUnit.HostingUnitKey);
             }
             catch (DataException c)
             {
@@ -82,13 +77,13 @@ namespace DAL
         {
             try
             {
-                if(!UnitExist(hostingUnit))
+                if (!UnitExist(hostingUnit))
                     throw new DataException("The hosting unit is not exist");
                 else
-                {                    
-                    hostingUnitsCollection.RemoveAll(u=>u.HostingUnitKey == hostingUnit.HostingUnitKey);
+                {
+                    DS.DataSource.hostingUnitsCollection.RemoveAll(u => u.HostingUnitKey == hostingUnit.HostingUnitKey);
                 }
-                hostingUnitsCollection.Add(hostingUnit);
+                DS.DataSource.hostingUnitsCollection.Add(hostingUnit.Clone());
             }
             catch (DataException c)
             {
@@ -96,9 +91,9 @@ namespace DAL
             }
         }
 
-        public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate )
+        public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate)
         {
-            return hostingUnitsCollection.Where(predicate).Select(hu => (HostingUnit)hu.Clone()).ToList();
+            return DS.DataSource.hostingUnitsCollection.Where(predicate).Select(hu => (HostingUnit)hu.Clone()).ToList();
         }
         #endregion
 
@@ -107,25 +102,30 @@ namespace DAL
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             List<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
-            foreach(GuestRequest guest in listGuestRequests)
+            /*foreach(GuestRequest guest in listGuestRequests)
             {
                 if(request.GuestRequestKey == guest.GuestRequestKey)
                     return true;
-            }
-            return false;
+            }*/
+            var temp = from GuestRequest guest in listGuestRequests
+                       where request.GuestRequestKey == guest.GuestRequestKey
+                       select new { request, t = true };
+            if (temp.Count() == 0)
+                return false;
+            return true;
         }
 
         public void SetGuestRequest(GuestRequest guest)
         {
             try
             {
-                if(!RequestExist(guest))
+                if (!RequestExist(guest))
                     throw new DataException("The request is not exist");
                 else
                 {
-                    guestRequestsCollection.RemoveAll(g=>g.GuestRequestKey == guest.GuestRequestKey);
+                    DS.DataSource.guestRequestsCollection.RemoveAll(g => g.GuestRequestKey == guest.GuestRequestKey);
                 }
-                guestRequestsCollection.Add(guest);
+                DS.DataSource.guestRequestsCollection.Add(guest.Clone());
             }
             catch (DataException c)
             {
@@ -143,7 +143,7 @@ namespace DAL
                 Configuration.GuestRequestKey++;
                 guest.Status = Enums.GuestRequestStatus.Active;
                 guest.RegistrationDate = DateTime.Now;
-                guestRequestsCollection.Add(guest);
+                DS.DataSource.guestRequestsCollection.Add(guest.Clone());
                 return guest.GuestRequestKey;
             }
             catch (DataException c)
@@ -153,13 +153,13 @@ namespace DAL
         }
 
         public List<GuestRequest> GetGuestRequestsList()
-        { 
-           return DS.DataSource.guestRequestsCollection.Select(item => (GuestRequest)item.Clone()).ToList(); 
+        {
+            return DS.DataSource.guestRequestsCollection.Select(item => (GuestRequest)item.Clone()).ToList();
         }
 
         public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)
         {
-            return guestRequestsCollection.Where(predicate).Select(hu => (GuestRequest)hu.Clone()).ToList();
+            return DS.DataSource.guestRequestsCollection.Where(predicate).Select(hu => (GuestRequest)hu.Clone()).ToList();
         }
         #endregion
 
@@ -168,23 +168,35 @@ namespace DAL
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<Order> listOrders = dal.GetOrdersList();
-            foreach(Order ord in listOrders)
+            /*foreach(Order ord in listOrders)
             {
                 if(ord.OrderKey == order.OrderKey)
                     return true;
             }
-            return false;
+            return false;*/
+            var temp = from Order ord in listOrders
+                       where ord.OrderKey == order.OrderKey
+                       select order;
+            if (temp.Count() == 0)
+                return false;
+            return true;
         }
 
         public Order FindOrder(Int32 ordKey)
         {
             List<Order> orders = GetOrdersList();
-            foreach (Order order in orders)
+            /*foreach (Order order in orders)
             {
                 if (order.OrderKey == ordKey)
-                    return order;
+                    return order.Clone();
             }
-            return null;
+            return null;*/
+            var temp = from Order ord in orders
+                       where ord.OrderKey == ordKey
+                       select ord;
+            if (temp.Count() == 0)
+                return null;
+            return temp.First();
         }
 
         public int addOrder(Order order)
@@ -195,7 +207,7 @@ namespace DAL
                 {
                     order.OrderKey = Configuration.OrderKey;
                     Configuration.OrderKey++;
-                    ordersCollection.Add(order);
+                    DS.DataSource.ordersCollection.Add(order.Clone());
                     return order.OrderKey;
                 }
                 else
@@ -211,13 +223,13 @@ namespace DAL
         {
             try
             {
-                if(!OrderExist(order))
+                if (!OrderExist(order))
                     throw new DataException("The order is not exist");
                 else
                 {
-                    ordersCollection.RemoveAll(o => o.OrderKey == order.OrderKey);
+                    DS.DataSource.ordersCollection.RemoveAll(o => o.OrderKey == order.OrderKey);
                 }
-                ordersCollection.Add(order);
+                DS.DataSource.ordersCollection.Add(order.Clone());
             }
             catch (DataException c)
             {
@@ -227,7 +239,7 @@ namespace DAL
 
         public List<Order> getOrders(Func<Order, bool> predicate)
         {
-           return ordersCollection.Where(predicate).Select(hu => (Order)hu.Clone()).ToList();
+            return DS.DataSource.ordersCollection.Where(predicate).Select(hu => (Order)hu.Clone()).ToList();
         }
 
         public List<Order> GetOrdersList()
@@ -235,7 +247,6 @@ namespace DAL
             return DS.DataSource.ordersCollection.Select(item => (Order)item.Clone()).ToList();
         }
         #endregion
-      
 
         #region BanckBranch
         public List<BankBranch> GetBankBranchesList()
