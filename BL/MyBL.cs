@@ -38,7 +38,7 @@ namespace BL
         {
             TimeSpan vacationDays = guestRequest.ReleaseDate - guestRequest.EnteryDate;
             if (vacationDays.Days < 1)
-                throw new ArgumentException("The vacation is less than one day");
+                throw new ExceptionBL("The vacation is less than one day");
             return true;
         }
 
@@ -56,7 +56,7 @@ namespace BL
             List<GuestRequest> guestRequests = dal.getGuestRequests(x => order.GuestRequestKey == x.GuestRequestKey);
             GuestRequest guest = guestRequests.Find(x => order.GuestRequestKey == x.GuestRequestKey);
             if (!CheckAvailable(unit, guest.EnteryDate, guest.ReleaseDate))
-                throw new ArgumentException("the unit is not available for these dates");
+                throw new ExceptionBL("the unit is not available for these dates");
             return true;
            
         }
@@ -135,7 +135,7 @@ namespace BL
         {
             //TimeSpan vacationDays = DateTime.Today - guest.EnteryDate;
             if (DateTime.Today > guest.EnteryDate)
-                throw new ArgumentException("The entry date pass");
+                throw new ExceptionBL("The entry date pass");
             return true;
         }
         #endregion
@@ -448,7 +448,7 @@ namespace BL
             IEnumerable<Order> listOrders = dal.GetOrdersList();
             foreach (Order ord in listOrders)
             {
-                if (ord.HostingUnitKey == hostingunit.HostingUnitKey)
+                if (ord.HostingUnitKey == hostingunit.HostingUnitKey && ord.OrderStatus == Enums.OrderStatus.Closed)
                     i++;
             }
             return i;
