@@ -21,13 +21,14 @@ namespace PLWPF
     /// </summary>
     public partial class HostingUnitWindow : Window
     {
+
         enum filterRequest { everything, type, area, owner }
         private ObservableCollection<HostingUnit> mainUnitsList = new ObservableCollection<HostingUnit>(MainWindow.myBL.getHostingUnitsList());
         ObservableCollection<IGrouping<Host, HostingUnit>> groupedByOwner;
         ObservableCollection<IGrouping<Enums.Area, HostingUnit>> groupedByArea;
         ObservableCollection<IGrouping<Enums.HostingUnitType, HostingUnit>> groupedByType;
         private ObservableCollection<HostingUnit> listToFilter;
-        public HostingUnitWindow()
+        public HostingUnitWindow(string type="")
         {
             InitializeComponent();
             listToFilter = mainUnitsList;
@@ -35,6 +36,12 @@ namespace PLWPF
             cbbGroupBy.ItemsSource = Enum.GetValues(typeof(filterRequest));
             cbbGroupBy.SelectedIndex = 0;
             cbbShowGroup.IsEnabled = false;
+            if (type=="Director")
+            {
+                deleteRequestButton.Visibility = Visibility.Hidden;
+                updateRequestButton.Visibility = Visibility.Hidden;
+                addUnitButton.Visibility = Visibility.Hidden;
+            }
         }
 
         private void addUnitButton_Click(object sender, RoutedEventArgs e)

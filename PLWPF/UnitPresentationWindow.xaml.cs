@@ -100,6 +100,7 @@ namespace PLWPF
                     tbOnwer.IsReadOnly = true;
                     tbUnitKey.IsReadOnly = true;
                     tbSubArea.IsReadOnly = true;
+                    tbOnwer.IsReadOnly = true;
                     addUnitButton.Content = "save changes";
                     drawY(Int32.Parse(tbStars.Text));
                     break;

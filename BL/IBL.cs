@@ -50,7 +50,8 @@ namespace BL
         double TotalFee(Order order);
         bool TheHostingUnitHasAnOpenOrder(HostingUnit hostingUnit);
         bool RevocationPermission(Host host);//Checks whether account debit authorization can be revoked
-        void SendEmail(Order ord);//Sends a customer to the customer with the order details
+        void SendEmail(Order ord);//Sends a customer to the customer with the order details\
+        bool IsValidEmail(string email);
         #endregion
 
         #region functions

@@ -72,9 +72,6 @@
     <Compile Include="GetKey.xaml.cs">
       <DependentUpon>GetKey.xaml</DependentUpon>
     </Compile>
-    <Compile Include="guestQueryWindow.xaml.cs">
-      <DependentUpon>guestQueryWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="orderQueryWindow.xaml.cs">
       <DependentUpon>orderQueryWindow.xaml</DependentUpon>
     </Compile>
@@ -83,9 +80,6 @@
     </Compile>
     <Compile Include="UnitPresentationWindow.xaml.cs">
       <DependentUpon>UnitPresentationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="unitQueryWindow.xaml.cs">
-      <DependentUpon>unitQueryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UploadOrderWindow.xaml.cs">
       <DependentUpon>UploadOrderWindow.xaml</DependentUpon>
@@ -107,10 +101,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GuestPresentation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="guestQueryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,10 +146,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UnitPresentationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="unitQueryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

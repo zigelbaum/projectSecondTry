@@ -33,9 +33,6 @@ namespace PLWPF
                 case "HostingUnit":
                     idLabel.Content = "Please enter hosting unit key:";
                     break;
-               /* case "Order":
-                    idLabel.Content = "Please enter order key:";
-                    break;*/
                 case "Host":
                     idLabel.Content = "Please enter your ID:";
                     break;

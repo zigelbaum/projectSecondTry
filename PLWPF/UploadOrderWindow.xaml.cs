@@ -94,31 +94,6 @@ namespace PLWPF
             orderView.ItemsSource = tempOrders;
         }
 
-        private void cbOrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                //לעדכן סטטוס כשבוחרים סטטוס חדש
-                Int32 index = StatusOrder.SelectedIndex + 1;
-                Enums.OrderStatus myStatus = (Enums.OrderStatus)index;
-                Order ord = myBl.getOrders(o => o.OrderKey == myorder.OrderKey)[0];
-                ord.OrderStatus = myStatus;
-                myBl.setOrder(ord);
-                //יראה את ההזמנה המעודדכנת
-                myorder = myBl.FindOrder(myorder.OrderKey);
-            }
-            catch (Exception ex)
-            {
-                var result = MessageBox.Show(ex.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                if (MessageBoxResult.No == result)
-                {
-                    Close();
-                    return;
-                }
-                else
-                    return;
-            }
-        }
 
         private void MenuItem_Click_Info(object sender, RoutedEventArgs e)
         {
@@ -140,6 +115,33 @@ namespace PLWPF
                     OrderDateString.Visibility = Visibility;
                 }
 
+            }
+        }
+
+        private void setStatus_button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //לעדכן סטטוס כשבוחרים סטטוס חדש
+                Int32 index = StatusOrder.SelectedIndex + 1;
+                Enums.OrderStatus myStatus = (Enums.OrderStatus)index;
+                Order ord = myBl.getOrders(o => o.OrderKey == myorder.OrderKey)[0];
+                ord.OrderStatus = myStatus;
+                myBl.setOrder(ord);
+                //יראה את ההזמנה המעודדכנת
+                myorder = myBl.FindOrder(myorder.OrderKey);
+                MessageBox.Show("The order has been closed successfully", "closing order", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+            }
+            catch (Exception ex)
+            {
+                var result = MessageBox.Show(ex.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                if (MessageBoxResult.No == result)
+                {
+                    Close();
+                    return;
+                }
+                else
+                    return;
             }
         }
     }
