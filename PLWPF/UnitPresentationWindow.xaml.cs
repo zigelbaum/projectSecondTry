@@ -100,6 +100,7 @@ namespace PLWPF
                     tbOnwer.IsReadOnly = true;
                     tbUnitKey.IsReadOnly = true;
                     tbSubArea.IsReadOnly = true;
+                    tbOnwer.IsReadOnly = true;
                     addUnitButton.Content = "save changes";
                     drawY(Int32.Parse(tbStars.Text));
                     break;
@@ -165,7 +166,6 @@ namespace PLWPF
                 premission = false;
                 return;
             }
-
             if (!tbKids.Text.All(char.IsDigit))
             {
                 MessageBox.Show("The kids input has to be number", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);

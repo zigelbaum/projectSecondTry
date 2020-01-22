@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.IO;
+using System.Net.Mail;
 
 namespace BL
 {
@@ -58,7 +59,7 @@ namespace BL
             if (!CheckAvailable(unit, guest.EnteryDate, guest.ReleaseDate))
                 throw new ExceptionBL("the unit is not available for these dates");
             return true;
-           
+
         }
 
         public void UpdateDiary(Order order)
@@ -88,17 +89,23 @@ namespace BL
 
         public void UpdateInfoAfterOrderClosed(Order order)
         {
+
             List<GuestRequest> guestRequest = getGuestRequests(x => x.GuestRequestKey == order.GuestRequestKey);
-            guestRequest.Find(x => x.GuestRequestKey == order.GuestRequestKey).Status = Enums.GuestRequestStatus.ClosedOnTheWeb;
+            GuestRequest request = guestRequest.Find(x => x.GuestRequestKey == order.GuestRequestKey);
+            request.Status = Enums.GuestRequestStatus.ClosedOnTheWeb;
+            SetGuestRequest(request);
             List<Order> ordersForTheRequest = getOrders(x => x.GuestRequestKey == order.GuestRequestKey);
             foreach (var order1 in ordersForTheRequest)
                 if (order1.OrderStatus != Enums.OrderStatus.Closed)
+                {
                     order1.OrderStatus = Enums.OrderStatus.NotRelevent;
+                    setOrder(order1);
+                }
         }
 
         public bool AbleToChangeOrderStatus(Order order)
         {
-            if (order.OrderStatus == Enums.OrderStatus.Closed)
+            if (order.OrderStatus == Enums.OrderStatus.Closed || order.OrderStatus == Enums.OrderStatus.NotRelevent)
                 throw new ExceptionBL("The order is already closed");
             return true;
         }
@@ -115,7 +122,7 @@ namespace BL
             List<Order> openOrders = getOrders(x => x.HostingUnitKey == hostingUnit.HostingUnitKey && x.OrderStatus == Enums.OrderStatus.Active);
             if (openOrders.Count != 0)
                 throw new ExceptionBL("the Hosting unit has open orders");
-            return false; 
+            return false;
         }
 
         public bool RevocationPermission(Host host)
@@ -128,8 +135,39 @@ namespace BL
 
         public void SendEmail(Order ord)
         {
-            Console.WriteLine("email was sent");
+            IDAL dal = DAL.factoryDAL.getDAL("List");
+
+            GuestRequest gr = dal.getGuestRequests(x => x.GuestRequestKey == ord.GuestRequestKey).Find(x => x.GuestRequestKey == ord.GuestRequestKey);
+            Host h = dal.getHostingUnits(hu => hu.HostingUnitKey == ord.HostingUnitKey).Find(hut => hut.HostingUnitKey == ord.HostingUnitKey).Owner;
+            try
+            {
+                IsValidEmail(gr.MailAddress);
+                IsValidEmail(h.MailAddress);
+            }
+            catch (InvalidOperationException a)
+            {
+                throw a;
+            }
+            MailMessage mail = new MailMessage();
+            mail.To.Add(gr.MailAddress);
+            mail.From = new MailAddress("zimmersProCT@gmail.com");
+            mail.Subject = "vacation offer";
+            mail.Body = "Hello, I am a Host at 'Zimmers'.I have a proposition that suits your request perfectly.if you are interested in coninuing the process please contact me at " + h.MailAddress;
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Credentials = new System.Net.NetworkCredential("zimmersProCT@gmail.com", "Prozimmers");
+            smtp.EnableSsl = true;
+            try
+            {
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
 
         public bool validDate(GuestRequest guest)
         {
@@ -137,6 +175,19 @@ namespace BL
             if (DateTime.Today > guest.EnteryDate)
                 throw new ExceptionBL("The entry date pass");
             return true;
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                throw new InvalidOperationException("invalid email address");
+            }
         }
         #endregion
 
@@ -325,7 +376,7 @@ namespace BL
 
         public Order FindOrder(Int32 ordKey)
         {
-            IDAL dal = DAL.factoryDAL.getDAL("List");         
+            IDAL dal = DAL.factoryDAL.getDAL("List");
             return dal.FindOrder(ordKey);
         }
         #endregion
@@ -336,7 +387,7 @@ namespace BL
 
         public bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, DateTime realese)
         {
-            int d =(realese - entry).Days;
+            int d = (realese - entry).Days;
             bool[,] diary = hostingUnit.Diary;
             int i = entry.Month - 1;
             int j = entry.Day - 1;
@@ -384,7 +435,7 @@ namespace BL
             foreach (HostingUnit unit in listHostingUnit)
             {
                 if (unit.HostingUnitKey == unitKey)
-                    return unit;               
+                    return unit;
             }
             return null;
         }
@@ -511,15 +562,15 @@ namespace BL
             Order ord = new Order
             { GuestRequestKey = guestRequestKey, HostingUnitKey = hostingUnitkey, OrderStatus = Enums.OrderStatus.Active, CreateDate = DateTime.Now };
             return ord;
-        }  
+        }
 
         public GuestRequest FindGuestRequest(Int32 requestKey)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             List<GuestRequest> guests = dal.GetGuestRequestsList();
-            foreach(GuestRequest item in guests)
+            foreach (GuestRequest item in guests)
             {
-                if(item.GuestRequestKey == requestKey)
+                if (item.GuestRequestKey == requestKey)
                     return item;
             }
             return null;
@@ -636,7 +687,7 @@ namespace BL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
             IEnumerable<IGrouping<Enums.HostingUnitType, HostingUnit>> groupToReturn = from unit in listHostingUnits
-                                                                      group unit by unit.HostingUnitType;
+                                                                                       group unit by unit.HostingUnitType;
             return groupToReturn;
         }
 

@@ -159,6 +159,26 @@ namespace PLWPF
                 premission = false;
                 return;
             }
+            if(tbMail.Text==null)
+            {
+                MessageBox.Show("please enter mailaddress, this is a required field", "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbID.Background = Brushes.IndianRed;
+                premission = false;
+                return;
+            }
+            try
+            {
+                myBl.IsValidEmail(tbMail.Text);
+            }
+            catch(Exception a)
+            {
+
+                MessageBox.Show(a.Message, "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                tbID.Background = Brushes.IndianRed;
+                premission = false;
+                return;
+            }
+         
             #endregion
             if (premission == true)
             {

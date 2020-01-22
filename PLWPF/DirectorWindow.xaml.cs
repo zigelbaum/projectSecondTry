@@ -26,14 +26,14 @@ namespace PLWPF
 
         private void GuestQuery_Click(object sender, RoutedEventArgs e)
         {
-            guestQueryWindow requestQueryWindow = new guestQueryWindow();
-            requestQueryWindow.ShowDialog();
+            GuestRequestWindow guestRequest = new GuestRequestWindow("Director");
+            guestRequest.ShowDialog();
         }
 
         private void HostingQuery_Click(object sender, RoutedEventArgs e)
         {
-            unitQueryWindow unitQuery = new unitQueryWindow();
-            unitQuery.ShowDialog();
+            HostingUnitWindow unitWindow = new HostingUnitWindow("Director");
+            unitWindow.ShowDialog();
         }
 
         private void OrderQuery_Click(object sender, RoutedEventArgs e)

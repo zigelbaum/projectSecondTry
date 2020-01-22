@@ -22,22 +22,30 @@ namespace PLWPF
     /// </summary>
     public partial class GuestRequestWindow : Window
     {
+        //string typeOfWindow="regular"
         enum filterRequest { everything, status, area, type, stars }
-        private ObservableCollection<GuestRequest> requestsList = new ObservableCollection<GuestRequest>(MainWindow.myBL.GetGuestRequestsList());
+        private ObservableCollection<GuestRequest> requestsList; 
         ObservableCollection<IGrouping<Enums.GuestRequestStatus, GuestRequest>> groupedByStatus;
         ObservableCollection<IGrouping<Enums.Area, GuestRequest>> groupedByArea;
         ObservableCollection<IGrouping<Enums.HostingUnitType, GuestRequest>> groupedByType;
         ObservableCollection<IGrouping<int, GuestRequest>> groupedByStars;
         private ObservableCollection<GuestRequest> listToFilter;
 
-        public GuestRequestWindow()
+
+        public GuestRequestWindow(string type="")
         {
             InitializeComponent();
+            requestsList= new ObservableCollection<GuestRequest>(MainWindow.myBL.GetGuestRequestsList());
             listToFilter = requestsList;
             requestView.ItemsSource = listToFilter;
             cbbGroupBy.ItemsSource = Enum.GetValues(typeof(filterRequest));
             cbbGroupBy.SelectedIndex = 0;
             cbbShowGroup.IsEnabled = false;
+            if(type=="Director")
+            {
+                updateRequestButton.Visibility = Visibility.Hidden;
+                addRequestButton.Visibility = Visibility.Hidden;
+            }
         }
 
         private void addRequestButton_Click(object sender, RoutedEventArgs e)
@@ -249,6 +257,7 @@ namespace PLWPF
 
         private void reset_Click(object sender, RoutedEventArgs e)
         {
+            requestsList = new ObservableCollection<GuestRequest>(MainWindow.myBL.GetGuestRequestsList());
             listToFilter = requestsList;
             requestView.ItemsSource = listToFilter;
         }
