@@ -168,7 +168,6 @@ namespace BL
             }
         }
 
-
         public bool validDate(GuestRequest guest)
         {
             //TimeSpan vacationDays = DateTime.Today - guest.EnteryDate;
@@ -199,7 +198,7 @@ namespace BL
             try
             {
                 IDAL dal = DAL.factoryDAL.getDAL("List");
-                return dal.addHostingUnit(hostingUnit);
+                return dal.addHostingUnit(hostingUnit.Clone());
             }
             catch (Exception e)
             {
@@ -213,7 +212,7 @@ namespace BL
             try
             {
                 if (TheHostingUnitHasAnOpenOrder(hostingUnit) == false)
-                    dal.DeleteHostingUnit(hostingUnit);
+                    dal.DeleteHostingUnit(hostingUnit.Clone());
             }
             catch (Exception e)
             {
@@ -229,10 +228,12 @@ namespace BL
                 List<HostingUnit> my_unit = dal.getHostingUnits(u => u.HostingUnitKey == hostingUnit.HostingUnitKey);
                 HostingUnit hosting = my_unit.Find(u => u.HostingUnitKey == hostingUnit.HostingUnitKey);
                 if (hosting.Owner.CollectionClearance == true && hostingUnit.Owner.CollectionClearance == false)
-                    if(!RevocationPermission(hostingUnit.Owner))
-                        dal.SetHostingUnit(hostingUnit);
+                    if (!RevocationPermission(hostingUnit.Owner))
+                        dal.SetHostingUnit(hostingUnit.Clone());
+                    else
+                        throw new ExceptionBL("you have order open");//change text
                 else
-                    dal.SetHostingUnit(hostingUnit);
+                    dal.SetHostingUnit(hostingUnit.Clone());
             }
             catch (Exception e)
             {
@@ -240,7 +241,7 @@ namespace BL
             }
         }
 
-        public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate)
+        public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate)//!!!!
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             return dal.getHostingUnits(predicate);
@@ -259,7 +260,7 @@ namespace BL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             try
             {
-                dal.SetGuestRequest(guestRequest);
+                dal.SetGuestRequest(guestRequest.Clone());
             }
             catch (Exception e)
             {
@@ -273,7 +274,7 @@ namespace BL
             return dal.GetGuestRequestsList();
         }
 
-        public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)
+        public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)//!!!!
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             return dal.getGuestRequests(predicate);
@@ -285,7 +286,7 @@ namespace BL
             {
                 IDAL dal = DAL.factoryDAL.getDAL("List");
                 if ((OverNightVacation(guestRequest)) && (validDate(guestRequest)))
-                    return dal.addGuestRequest(guestRequest);
+                    return dal.addGuestRequest(guestRequest.Clone());
             }
             catch (Exception e)
             {
@@ -308,7 +309,7 @@ namespace BL
                 {
                     if (order.OrderStatus == Enums.OrderStatus.Closed)
                     {
-                        dal.setOrder(order);
+                        dal.setOrder(order.Clone());
                         UpdateDiary(order);
                         TotalFee(order);//what to do with returned value?
                         UpdateInfoAfterOrderClosed(order);
@@ -322,14 +323,14 @@ namespace BL
                             HostingUnit unit = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
                             if (BankAccountDebitAuthorization(unit.Owner) == true)
                             {
-                                dal.setOrder(order);
+                                dal.setOrder(order.Clone());
                                 SendEmail(order);
                             }
                             else
                                 throw new ExceptionBL("Has not banck account permission");
                         }
                         else
-                            dal.setOrder(order);
+                            dal.setOrder(order.Clone());
                     }
 
                 }
@@ -347,7 +348,7 @@ namespace BL
             try
             {
                 if (HostingUnitAvability(order))
-                    return dal.addOrder(order);
+                    return dal.addOrder(order.Clone());
             }
             catch (Exception e)
             {
@@ -362,7 +363,7 @@ namespace BL
             return dal.GetOrdersList();
         }
 
-        public List<Order> getOrders(Func<Order, bool> predicate)
+        public List<Order> getOrders(Func<Order, bool> predicate)//!!!!
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             return dal.getOrders(predicate);
@@ -371,10 +372,10 @@ namespace BL
         public bool OrderExist(Order order)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
-            return dal.OrderExist(order);
+            return dal.OrderExist(order.Clone());
         }
 
-        public Order FindOrder(Int32 ordKey)
+        public Order FindOrder(Int32 ordKey)//!!!!
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             return dal.FindOrder(ordKey);
