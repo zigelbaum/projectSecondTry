@@ -26,9 +26,9 @@ namespace DAL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<HostingUnit> listHostingUnits = dal.getHostingUnitsList();
             var temp = from HostingUnit host in listHostingUnits
-                       where host.HostingUnitKey == unit.HostingUnitKey
-                       let flag = true
-                       select flag;
+                       let hostingKey = host.HostingUnitKey
+                       where hostingKey == unit.HostingUnitKey                       
+                       select host;
             if (temp.Count() == 0)
                 return false;
             return true;
@@ -102,11 +102,6 @@ namespace DAL
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             List<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
-            /*foreach(GuestRequest guest in listGuestRequests)
-            {
-                if(request.GuestRequestKey == guest.GuestRequestKey)
-                    return true;
-            }*/
             var temp = from GuestRequest guest in listGuestRequests
                        where request.GuestRequestKey == guest.GuestRequestKey
                        select new { request, t = true };

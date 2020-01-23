@@ -170,7 +170,6 @@ namespace BL
 
         public bool validDate(GuestRequest guest)
         {
-            //TimeSpan vacationDays = DateTime.Today - guest.EnteryDate;
             if (DateTime.Today > guest.EnteryDate)
                 throw new ExceptionBL("The entry date pass");
             return true;
@@ -193,7 +192,7 @@ namespace BL
         #region Dalfunctions
 
         #region HostingUnit
-        public int addHostingUnit(HostingUnit hostingUnit)
+        public int addHostingUnit(HostingUnit hostingUnit)//!!!!!!!
         {
             try
             {
@@ -212,7 +211,7 @@ namespace BL
             try
             {
                 if (TheHostingUnitHasAnOpenOrder(hostingUnit) == false)
-                    dal.DeleteHostingUnit(hostingUnit.Clone());
+                    dal.DeleteHostingUnit(hostingUnit);
             }
             catch (Exception e)
             {
@@ -229,7 +228,7 @@ namespace BL
                 HostingUnit hosting = my_unit.Find(u => u.HostingUnitKey == hostingUnit.HostingUnitKey);
                 if (hosting.Owner.CollectionClearance == true && hostingUnit.Owner.CollectionClearance == false)
                     if (!RevocationPermission(hostingUnit.Owner))
-                        dal.SetHostingUnit(hostingUnit.Clone());
+                        dal.SetHostingUnit(hostingUnit);
                     else
                         throw new ExceptionBL("you have order open");//change text
                 else
@@ -241,7 +240,7 @@ namespace BL
             }
         }
 
-        public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate)//!!!!
+        public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             return dal.getHostingUnits(predicate);
@@ -260,7 +259,7 @@ namespace BL
             IDAL dal = DAL.factoryDAL.getDAL("List");
             try
             {
-                dal.SetGuestRequest(guestRequest.Clone());
+                dal.SetGuestRequest(guestRequest);
             }
             catch (Exception e)
             {
@@ -286,7 +285,7 @@ namespace BL
             {
                 IDAL dal = DAL.factoryDAL.getDAL("List");
                 if ((OverNightVacation(guestRequest)) && (validDate(guestRequest)))
-                    return dal.addGuestRequest(guestRequest.Clone());
+                    return dal.addGuestRequest(guestRequest);
             }
             catch (Exception e)
             {
@@ -309,7 +308,7 @@ namespace BL
                 {
                     if (order.OrderStatus == Enums.OrderStatus.Closed)
                     {
-                        dal.setOrder(order.Clone());
+                        dal.setOrder(order);
                         UpdateDiary(order);
                         TotalFee(order);//what to do with returned value?
                         UpdateInfoAfterOrderClosed(order);
@@ -323,14 +322,14 @@ namespace BL
                             HostingUnit unit = hostingUnits.Find(x => order.HostingUnitKey == x.HostingUnitKey);
                             if (BankAccountDebitAuthorization(unit.Owner) == true)
                             {
-                                dal.setOrder(order.Clone());
+                                dal.setOrder(order);
                                 SendEmail(order);
                             }
                             else
                                 throw new ExceptionBL("Has not banck account permission");
                         }
                         else
-                            dal.setOrder(order.Clone());
+                            dal.setOrder(order);
                     }
 
                 }
@@ -348,7 +347,7 @@ namespace BL
             try
             {
                 if (HostingUnitAvability(order))
-                    return dal.addOrder(order.Clone());
+                    return dal.addOrder(order);
             }
             catch (Exception e)
             {
@@ -363,7 +362,7 @@ namespace BL
             return dal.GetOrdersList();
         }
 
-        public List<Order> getOrders(Func<Order, bool> predicate)//!!!!
+        public List<Order> getOrders(Func<Order, bool> predicate)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             return dal.getOrders(predicate);
@@ -372,10 +371,10 @@ namespace BL
         public bool OrderExist(Order order)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
-            return dal.OrderExist(order.Clone());
+            return dal.OrderExist(order);
         }
 
-        public Order FindOrder(Int32 ordKey)//!!!!
+        public Order FindOrder(Int32 ordKey)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             return dal.FindOrder(ordKey);
@@ -405,17 +404,14 @@ namespace BL
             return true;
         }
 
-        public List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays)
+        public IEnumerable<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
-            List<BE.HostingUnit> listToReturn = null;
             IEnumerable<HostingUnit> listHostingUnit = dal.getHostingUnitsList();
-            foreach (HostingUnit hostingUnit in listHostingUnit)
-            {
-                if (CheckAvailable(hostingUnit, entry, entry.AddDays(vactiondays)))
-                    listToReturn.Add(hostingUnit.Clone());
-            }
-            return listToReturn;
+            var my_unit_list = from HostingUnit hostingUnit in listHostingUnit
+                               where CheckAvailable(hostingUnit, entry, entry.AddDays(vactiondays))
+                               select hostingUnit;
+            return my_unit_list;
         }
 
         public Int32 NumDays(DateTime start, DateTime end)
@@ -443,17 +439,22 @@ namespace BL
 
         public List<Order> DaysPassedOrders(Int32 days)
         {
-            List<Order> listToReturn = null;
+            //List<Order> listToReturn = null;
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<Order> listOrders = dal.GetOrdersList();
-            foreach (Order ord in listOrders)
+            /*foreach (Order ord in listOrders)
             {
                 Int32 create = (DateTime.Now - ord.CreateDate).Days;
                 Int32 sent = (DateTime.Now - ord.OrderDate).Days;
                 if ((days < create) || (days < sent))
                     listToReturn.Add(ord);
             }
-            return listToReturn;
+            return listToReturn;*/
+            var result = from Order ord in listOrders
+                         let tr = (days < (DateTime.Now - ord.CreateDate).Days) || (days < (DateTime.Now - ord.OrderDate).Days)
+                         where tr
+                         select ord;
+            return result.ToList();
         }
 
         public List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic)
@@ -480,17 +481,21 @@ namespace BL
             return listToReturn;
         }
 
-        public Int32 NumOfInvetations(GuestRequest costumer)
+        public Int32 NumOfInvetations(GuestRequest costumer)//!!!
         {
-            List<Order> temp = null; ;
+            //List<Order> temp = null; ;
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<Order> listOrders = dal.GetOrdersList();
-            foreach (Order ord in listOrders)
+            /*foreach (Order ord in listOrders)
             {
                 if (ord.GuestRequestKey == costumer.GuestRequestKey)
-                    temp.Add(ord.Clone());
-            }
-            return temp.Count;
+                    temp.Add(ord);
+            }*/
+            int i = 0;
+            var temp = from Order ord in listOrders
+                       where ord.GuestRequestKey == costumer.GuestRequestKey
+                       select new { ord, couner = ++i };                     
+            return temp.Last().couner;
         }
 
         public Int32 NumOfSuccessfullOrders(BE.HostingUnit hostingunit)
@@ -498,12 +503,16 @@ namespace BL
             int i = 0;
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<Order> listOrders = dal.GetOrdersList();
-            foreach (Order ord in listOrders)
+            /*foreach (Order ord in listOrders)
             {
                 if (ord.HostingUnitKey == hostingunit.HostingUnitKey && ord.OrderStatus == Enums.OrderStatus.Closed)
                     i++;
             }
-            return i;
+            return i;*/
+            var temp = from Order ord in listOrders
+                       where ord.HostingUnitKey == hostingunit.HostingUnitKey && ord.OrderStatus == Enums.OrderStatus.Closed
+                       select new {ord, couner= ++i};
+            return temp.Last().couner;
         }
 
         public Predicate<GuestRequest> BuildPredicate(HostingUnit hosting)//Builds a predicate that filters the hosting units according to the client's requirements

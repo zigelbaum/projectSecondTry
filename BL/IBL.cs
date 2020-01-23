@@ -56,7 +56,7 @@ namespace BL
 
         #region functions
         bool CheckAvailable(HostingUnit hostingUnit, DateTime entry, DateTime release);//Checks whether the requested vacation time in a particular unit is free
-        List<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays);//Returns the list of all available accommodation units on this date
+        IEnumerable<BE.HostingUnit> AvailableHostingUnits(DateTime entry, Int32 vactiondays);//Returns the list of all available accommodation units on this date
         Int32 NumDays(DateTime start, DateTime end);//Returns the number of days passed from the first date to the second
         Int32 NumDays(DateTime start);//Returns the number of days that have passed from the given date to the present
         List<Order> DaysPassedOrders(Int32 days);//Returns all orders that have elapsed since they were created / since sent emails to a customer greater than or equal to the number of days the function received
