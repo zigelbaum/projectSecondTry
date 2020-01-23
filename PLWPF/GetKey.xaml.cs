@@ -36,6 +36,9 @@ namespace PLWPF
                 case "Host":
                     idLabel.Content = "Please enter your ID:";
                     break;
+                case "Direct":
+                    idLabel.Content = "Pleas enter your password:";
+                    break;
             }
         }
 
@@ -74,6 +77,16 @@ namespace PLWPF
                         {
                             numVal = 0;
                             throw new Exception("The ID you looked for doestn exists in the system");
+                        }
+                        else
+                            retriveSuccess = true;
+                        Close();
+                        break;
+                    case "Direct":
+                        if(numVal != 1234)
+                        {
+                            numVal = 0;
+                            throw new Exception("The incorrect password");
                         }
                         else
                             retriveSuccess = true;

@@ -58,7 +58,7 @@ namespace PLWPF
         private void DirectorButton_Click(object sender, RoutedEventArgs e)
         {
             DirectorWindow directorWindow;
-            GetKey getKey = new GetKey("");
+            GetKey getKey = new GetKey("Direct");
             getKey.ShowDialog();
             if(getKey.numVal != 0)
             {
