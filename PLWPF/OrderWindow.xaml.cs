@@ -91,24 +91,6 @@ namespace PLWPF
             }
         }
 
-        /*private void getOrderList()
-        {
-            List<HostingUnit> hostList = myBl.getHostingUnits(h => h.Owner.ID == hostID);
-            foreach(HostingUnit my_unit in hostList)
-            {
-                List<Order> tempOrderList = myBl.getOrders(o => o.HostingUnitKey == my_unit.HostingUnitKey);
-                foreach(Order ord in tempOrderList)
-                {
-                    listOrders.Add(ord);
-                }
-            }*/
-        /*unit = hostList[0];
-        listOrders = myBl.getOrders(o => o.HostingUnitKey == unit.HostingUnitKey);*/
-        /*cbOrderstList.Visibility = Visibility.Visible;
-        UploadOrderButton.Visibility = Visibility.Visible;
-        CreateOrderButton.Visibility = Visibility.Visible;
-    }*/
-
         private void cbbShowStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Int32 index = cbbShowStatus.SelectedIndex;

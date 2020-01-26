@@ -44,12 +44,13 @@ namespace PLWPF
             cbbShowStatus.ItemsSource = Enum.GetValues(typeof(Enums.OrderStatus));
             //cbbShowStatus.SelectedIndex = 0;
 
+            this.DataContext = myorder;//???????????????????????????????????????????????????????
+
             getOrderList(hostID);
         }
 
         private void getOrderList(Int32 hostID)
         {
-            //לעשות רשימה שתחזיר את כל ההזמנות של מארח מסוים
             List<HostingUnit> unitsTemp = myBl.getHostingUnits(h => h.Owner.Id == hostID);
             foreach(HostingUnit unit in unitsTemp)
             {
@@ -94,7 +95,6 @@ namespace PLWPF
             orderView.ItemsSource = tempOrders;
         }
 
-
         private void MenuItem_Click_Info(object sender, RoutedEventArgs e)
         {
             if (orderView.SelectedItem != null)
@@ -122,13 +122,11 @@ namespace PLWPF
         {
             try
             {
-                //לעדכן סטטוס כשבוחרים סטטוס חדש
                 Int32 index = StatusOrder.SelectedIndex + 1;
                 Enums.OrderStatus myStatus = (Enums.OrderStatus)index;
                 Order ord = myBl.getOrders(o => o.OrderKey == myorder.OrderKey)[0];
                 ord.OrderStatus = myStatus;
                 myBl.setOrder(ord);
-                //יראה את ההזמנה המעודדכנת
                 myorder = myBl.FindOrder(myorder.OrderKey);
                 MessageBox.Show("The order has been closed successfully", "closing order", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
             }
@@ -144,5 +142,6 @@ namespace PLWPF
                     return;
             }
         }
+
     }
 }
