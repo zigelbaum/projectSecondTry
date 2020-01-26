@@ -40,7 +40,6 @@ namespace PLWPF
 
         private void getGuestRequestList()
         {            
-            //אמור להביא את רשימת הדרישות המתאימות ליחידת אירוח
             IEnumerable<IGrouping<Host, HostingUnit>> my_units = myBl.GroupHostByHostingUnit();
             foreach (IGrouping<Host, HostingUnit> hostings in my_units)
             {
@@ -48,7 +47,7 @@ namespace PLWPF
                 {
                     if (hosting.HostingUnitKey == unit.HostingUnitKey)
                     {
-                        matchRequests = myBl.RequestMatchToStipulation(myBl.BuildPredicate(hosting));
+                        matchRequests = myBl.RequestMatchToStipulation(myBl.BuildPredicate(hosting), hosting);
                     }
                 }
             }

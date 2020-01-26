@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Net.Mail;
 using System.IO;
 using System.Net.Mail;
@@ -300,6 +301,7 @@ namespace BL
         public void setOrder(Order order)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
+            Thread myThread;
             try
             {
                 List<Order> orders = getOrders(x => x.OrderKey == order.OrderKey);
@@ -323,7 +325,12 @@ namespace BL
                             if (BankAccountDebitAuthorization(unit.Owner) == true)
                             {
                                 dal.setOrder(order);
-                                SendEmail(order);
+                                new Thread(() =>
+                                {
+                                    myThread = Thread.CurrentThread;
+                                    SendEmail(order);
+                                }).Start();
+                                
                             }
                             else
                                 throw new ExceptionBL("Has not banck account permission");
@@ -457,16 +464,16 @@ namespace BL
             return result.ToList();
         }
 
-        public List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic)
+        public List<GuestRequest> RequestMatchToStipulation(Predicate<GuestRequest> predic, HostingUnit hosting)
         {
-
             List<GuestRequest> listToReturn = new List<GuestRequest>();
             IDAL dal = DAL.factoryDAL.getDAL("List");
             List<GuestRequest> listGuestRequests = dal.GetGuestRequestsList();
+            List<Order> myOrders = dal.getOrders(o => o.HostingUnitKey == hosting.HostingUnitKey);
             bool temp = true;
             foreach (GuestRequest request in listGuestRequests)
             {
-                if (request.Status == Enums.GuestRequestStatus.Active)
+                if (request.Status == Enums.GuestRequestStatus.Active && myOrders.Find(o=>o.GuestRequestKey == request.GuestRequestKey) == null) 
                 {
                     foreach (Predicate<GuestRequest> item in predic.GetInvocationList())
                     {
