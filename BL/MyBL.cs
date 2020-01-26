@@ -137,7 +137,6 @@ namespace BL
         public void SendEmail(Order ord)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
-
             GuestRequest gr = dal.getGuestRequests(x => x.GuestRequestKey == ord.GuestRequestKey).Find(x => x.GuestRequestKey == ord.GuestRequestKey);
             Host h = dal.getHostingUnits(hu => hu.HostingUnitKey == ord.HostingUnitKey).Find(hut => hut.HostingUnitKey == ord.HostingUnitKey).Owner;
             try
@@ -149,24 +148,27 @@ namespace BL
             {
                 throw a;
             }
-            MailMessage mail = new MailMessage();
-            mail.To.Add(gr.MailAddress);
-            mail.From = new MailAddress("zimmersProCT@gmail.com");
-            mail.Subject = "vacation offer";
-            mail.Body = "Hello, I am a Host at 'Zimmers'.I have a proposition that suits your request perfectly.if you are interested in coninuing the process please contact me at " + h.MailAddress;
-            mail.IsBodyHtml = true;
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.Credentials = new System.Net.NetworkCredential("zimmersProCT@gmail.com", "Prozimmers");
-            smtp.EnableSsl = true;
-            try
+            new Thread(() =>
             {
-                smtp.Send(mail);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+                MailMessage mail = new MailMessage();
+                mail.To.Add(gr.MailAddress);
+                mail.From = new MailAddress("zimmersProCT@gmail.com");
+                mail.Subject = "vacation offer";
+                mail.Body = "Hello, I am a Host at 'Zimmers'.I have a proposition that suits your request perfectly.if you are interested in coninuing the process please contact me at " + h.MailAddress;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Credentials = new System.Net.NetworkCredential("zimmersProCT@gmail.com", "Prozimmers");
+                smtp.EnableSsl = true;
+                try
+                {
+                    smtp.Send(mail);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }).Start();
         }
 
         public bool validDate(GuestRequest guest)
@@ -301,7 +303,6 @@ namespace BL
         public void setOrder(Order order)
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
-            Thread myThread;
             try
             {
                 List<Order> orders = getOrders(x => x.OrderKey == order.OrderKey);
@@ -325,11 +326,7 @@ namespace BL
                             if (BankAccountDebitAuthorization(unit.Owner) == true)
                             {
                                 dal.setOrder(order);
-                                new Thread(() =>
-                                {
-                                    myThread = Thread.CurrentThread;
-                                    SendEmail(order);
-                                }).Start();
+                                SendEmail(order);
                                 
                             }
                             else
