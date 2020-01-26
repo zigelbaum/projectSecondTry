@@ -119,7 +119,7 @@ namespace DAL
             file.Close();
         }
 
-        XElement ConvertTest(Order order)
+        XElement ConvertOrder(Order order)
         {
             XElement testElement = new XElement("test");
 
@@ -139,7 +139,7 @@ namespace DAL
             return testElement;
         }
 
-        Order ConvertTest(XElement element)
+        Order ConvertOrder(XElement element)
         {
             Order order = new Order();
 
@@ -153,6 +153,57 @@ namespace DAL
             }
             return order;
         }
+
+        #region Order
+        public int addOrder(Order order)
+        {
+            LoadData(ref configRoot,configPath);
+            int code = int.Parse(configRoot.Element("OrderKey").Value);
+
+            order.TestCode = ++code;
+            if (test.TestCode > 99999999)
+                throw new Exception("DAL: you cannot add the current test, you passed the limit of 8 digits code ");
+            configRoot.Element("TestCode").Value = code.ToString();
+            configRoot.Save(configPath);
+
+            Test t = getTest(test.TestCode);
+            if (t != null)
+                throw new Exception("test with the same code already exists...");
+
+            testRoot.Add(ConvertTest(test));
+            testRoot.Save(testPath);
+        }
+
+        public bool OrderExist(Order order)
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("XML");
+
+        }
+
+        public List<Order> GetOrdersList()
+        {
+            LoadData(ref orderRoot, orderPath);
+            List<Order> orders;
+            try
+            {
+                orders = (from item in orderRoot.Elements()
+                          select ConvertOrder(item).ToList();
+                            new Student()
+                            {
+                                Id = Convert.ToInt32(p.Element("id").Value),
+                                FirstName = p.Element("name").Element("firstName").Value,
+                                LastName = p.Element("name").Element("lastName").Value
+                            }.ToList();
+            }
+            catch
+            {
+                students = null;
+            }
+            return students;
+            return from item in orderRoot.Elements()
+                   select ConvertOrder(item);
+        }
+        #endregion
     }
 }
 
