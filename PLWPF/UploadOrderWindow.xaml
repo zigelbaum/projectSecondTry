@@ -21,8 +21,8 @@
         <Label Content="group order by status:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="147" Height="35" Margin="10,35,0,0" FontWeight="Bold"/>
         <ComboBox Name="cbbShowStatus" SelectionChanged="cbbShowStatus_SelectionChanged" SelectedItem="{Binding Path=Status,Mode=OneWay}"  HorizontalAlignment="Left" Margin="162,35,0,0" VerticalAlignment="Top" Width="215" Height="35" Background="#FF131212" BorderBrush="#FF121111" Foreground="#FF0E0D0D"/>
 
-        <ComboBox Name="StatusOrder"  HorizontalAlignment="Left" Margin="99,362,0,0" Text="{Binding Path=myorder.OrderStatus}" VerticalAlignment="Top" Width="120" BorderBrush="#FFFBFAFA" OpacityMask="White" Background="#FFB9B955"/>
-        <Label Name="StatusOrderString"  HorizontalAlignment="Right" Margin="0,356,698,0" Content="status:" VerticalAlignment="Top" Height="35" Width="62" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
+        <ComboBox Name="StatusOrder"  HorizontalAlignment="Left" Margin="453,362,0,0" Text="{Binding Path=myorder.OrderStatus}" VerticalAlignment="Top" Width="120" BorderBrush="#FFFBFAFA" OpacityMask="White" Background="#FFB9B955" RenderTransformOrigin="0.935,0.604"/>
+        <Label Name="StatusOrderString"  HorizontalAlignment="Right" Margin="0,356,340.333,0" Content="status:" VerticalAlignment="Top" Height="35" Width="62" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
 
         <TextBox Name="CreateDate" HorizontalAlignment="Right" Margin="0,85,276,0" TextWrapping="Wrap" Text="{Binding Path=myorder.CreateDate}" VerticalAlignment="Top" Height="28" Width="114" RenderTransformOrigin="1.405,0.447" Background="#FFFEFEF0"/>
         <Label Name="CreateDateString" HorizontalAlignment="Right" Margin="0,85,395,0" Content="create date:" VerticalAlignment="Top" Height="28" Width="102" RenderTransformOrigin="1.405,0.447" FontSize="16" FontWeight="Bold"/>
@@ -47,7 +47,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        
         <Button Name="setStatus_button" Content="set status" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Margin="616,362,0,0" VerticalAlignment="Top" Width="119" Height="29" Click="setStatus_button_Click"/>
+        <Button Name="returnButton" Content="Back" Margin="37,349,636.333,31.667" Width="120" Height="40" Background="#FFF6F6F2" FontWeight="Bold" FontSize="18" Click="ReturnButton_Click"/>
 
     </Grid>
 </Window>

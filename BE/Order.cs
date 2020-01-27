@@ -38,7 +38,7 @@ namespace BE
             string order;
             order = "OrderKey: " + OrderKey + "@Guest Request Key: " + GuestRequestKey +
                 "@Hosting Unit Key: " + HostingUnitKey + "@OrderStatus: " + OrderStatus +
-                "@Created At: " + CreateDate + "@Order Date: " + OrderDate;
+                "@Created At: " + CreateDate + "@Order Date: " + OrderDate + "@Fee Order: " + Fee;
             order = order.Replace("@", System.Environment.NewLine);
             return order.ToString();
         }

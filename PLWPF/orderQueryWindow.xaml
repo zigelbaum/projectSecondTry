@@ -22,6 +22,7 @@
                     <GridViewColumn Header="status" DisplayMemberBinding="{Binding OrderStatus}" Width="95"/>
                     <GridViewColumn Header="create date" DisplayMemberBinding="{Binding CreateDate}" Width="90"/>
                     <GridViewColumn Header="order date" DisplayMemberBinding="{Binding OrderDate}" Width="90"/>
+                    <GridViewColumn Header="fee" DisplayMemberBinding="{Binding Fee}" Width="90"/>
                 </GridView>
             </ListView.View>
         </ListView>

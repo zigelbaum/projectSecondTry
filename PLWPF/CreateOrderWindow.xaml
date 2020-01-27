@@ -38,5 +38,7 @@
             </ListView.View>
         </ListView>
 
+        <Button Name="returnButton" Content="Back" HorizontalAlignment="Left" Background="#FFF6F6F2" Margin="40,214.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="103" Height="31" Click="ReturnButton_Click"/>
+
     </Grid>
 </Window>

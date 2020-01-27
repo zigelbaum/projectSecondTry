@@ -25,6 +25,7 @@ namespace PLWPF
         IBL myBl = BL.FactoryBL.getBL("XML");
         List<Order> listOrders = new List<Order>();
         Order myorder;
+        Int32 IDhost;
         #endregion
 
         public UploadOrderWindow(Int32 hostID)
@@ -38,7 +39,10 @@ namespace PLWPF
             CreateDateString.Visibility = Visibility.Hidden;
             OrderDate.Visibility = Visibility.Hidden;
             OrderDateString.Visibility = Visibility.Hidden;
+            setStatus_button.Visibility = Visibility.Hidden;
             #endregion
+
+            IDhost = hostID;
 
             StatusOrder.ItemsSource = Enum.GetValues(typeof(Enums.OrderStatus));           
             cbbShowStatus.ItemsSource = Enum.GetValues(typeof(Enums.OrderStatus));
@@ -103,6 +107,7 @@ namespace PLWPF
 
                 StatusOrder.Visibility = Visibility;
                 StatusOrderString.Visibility = Visibility;
+                setStatus_button.Visibility = Visibility;
 
                 CreateDate.Visibility = Visibility;
                 CreateDate.Text = myorder.CreateDate.ToString();
@@ -141,6 +146,13 @@ namespace PLWPF
                 else
                     return;
             }
+        }
+
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+            OrderWindow orderWindow = new OrderWindow(IDhost);
+            orderWindow.ShowDialog();
         }
 
     }

@@ -85,5 +85,12 @@ namespace PLWPF
                 presentation.ShowDialog();               
             }
         }
+
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+            OrderWindow orderWindow = new OrderWindow(unit.Owner.Id);
+            orderWindow.ShowDialog();
+        }
     }
 }
