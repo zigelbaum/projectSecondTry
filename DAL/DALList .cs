@@ -163,12 +163,6 @@ namespace DAL
         {
             IDAL dal = DAL.factoryDAL.getDAL("List");
             IEnumerable<Order> listOrders = dal.GetOrdersList();
-            /*foreach(Order ord in listOrders)
-            {
-                if(ord.OrderKey == order.OrderKey)
-                    return true;
-            }
-            return false;*/
             var temp = from Order ord in listOrders
                        where ord.OrderKey == order.OrderKey
                        select order;
@@ -179,13 +173,7 @@ namespace DAL
 
         public Order FindOrder(Int32 ordKey)
         {
-            List<Order> orders = GetOrdersList();
-            /*foreach (Order order in orders)
-            {
-                if (order.OrderKey == ordKey)
-                    return order.Clone();
-            }
-            return null;*/
+            List<Order> orders = GetOrdersList();          
             var temp = from Order ord in orders
                        where ord.OrderKey == ordKey
                        select ord;
