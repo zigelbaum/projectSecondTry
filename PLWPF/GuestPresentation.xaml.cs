@@ -129,7 +129,9 @@ namespace PLWPF
                     addReqButton.Content = "save changes";                    
                     break;
                 case "View":
-                    tbRquestId.IsReadOnly = true;
+                    //tbRquestId.IsReadOnly = true;
+                    tbRquestId.Visibility = Visibility.Hidden;
+                    requestID.Visibility = Visibility.Hidden;
                     tbRegDate.IsReadOnly = true;
                     tbFirstName.IsReadOnly = true;
                     tbLastName.IsReadOnly = true;
