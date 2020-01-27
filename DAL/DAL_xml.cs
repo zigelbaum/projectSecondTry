@@ -25,8 +25,8 @@ namespace DAL
         string hostingUnitPath = @"HostingUnitXml.xml";
         string guestRequestPath = @"GuestRequestXml.xml";
         string orderPath = @"OrderXml.xml";
-        string bankBranchPath = @"https://www.boi.org.il/he/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/snifim_dnld_he.xml";
         string configPath = @"ConfigXml.xml";
+        string bankBranchPath = @"https://www.boi.org.il/he/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/snifim_dnld_he.xml";
 
         public static DAL_xml Instance
         {
@@ -36,6 +36,14 @@ namespace DAL
 
         private DAL_xml()
         {
+            if (!File.Exists(configPath))
+            {
+                configRoot = new XElement("Configure", new XElement("GuestRequestKey", "10000000"), new XElement("HostingUnitKey", "10000000"), new XElement("OrderKey", "10000000"));
+                configRoot.Save(configPath);
+            }
+            else
+                LoadData(ref configRoot, configPath);
+
             if (!File.Exists(hostingUnitPath))
             {
                 FileStream fileHostingUnit = new FileStream(hostingUnitPath, FileMode.Create);
@@ -60,21 +68,15 @@ namespace DAL
             else
                 LoadData(ref orderRoot, orderPath);
 
-            if (!File.Exists(bankBranchPath))
-            {
-                bankBranchRoot = new XElement("BankBranches");
-                orderRoot.Save(bankBranchPath);
-            }
-            else
-                LoadData(ref bankBranchRoot, bankBranchPath);
+            //if (!File.Exists(bankBranchPath))
+            //{
+            //    bankBranchRoot = new XElement("BankBranches");
+            //    orderRoot.Save(bankBranchPath);
+            //}
+            //else
+            //    LoadData(ref bankBranchRoot, bankBranchPath);
 
-            if (!File.Exists(configPath))
-            {
-                configRoot = new XElement("Configure", new XElement("GuestRequestKey", "10000000"), new XElement("HostingUnitKey", "10000000"), new XElement("OrderKey", "10000000"));
-                configRoot.Save(configPath);
-            }
-            else
-                LoadData(ref configRoot, configPath);
+           
 
             saveListToXML<HostingUnit>(DS.DataSource.hostingUnitsCollection, hostingUnitPath);
             saveListToXML<GuestRequest>(DS.DataSource.guestRequestsCollection, guestRequestPath);
@@ -198,7 +200,7 @@ namespace DAL
         public bool OrderExist(Order order)
         {
             IDAL dal = DAL.factoryDAL.getDAL("XML");
-            IEnumerable<Order> listOrders = dal.GetOrdersList();            
+            IEnumerable<Order> listOrders = dal.GetOrdersList();
             var temp = from ord in listOrders
                        where (ord.OrderKey == order.OrderKey)
                        select order;
@@ -232,11 +234,11 @@ namespace DAL
                 Order ord;
                 foreach (XElement item in orderRoot.Elements())
                 {
-                    ord=ConvertOrder(item);
+                    ord = ConvertOrder(item);
                     if (predicate(ord))
                         orders.Add(ord);
 
-                }           
+                }
             }
             catch
             {
@@ -252,8 +254,8 @@ namespace DAL
             try
             {
                 order = (from item in orderRoot.Elements()
-                        where Convert.ToInt32(item.Element("OrderKey").Value) == ordKey
-                        select item).FirstOrDefault();
+                         where Convert.ToInt32(item.Element("OrderKey").Value) == ordKey
+                         select item).FirstOrDefault();
 
             }
             catch (Exception)
@@ -331,31 +333,27 @@ namespace DAL
             catch (Exception a)
             {
                 throw a;
-            }            
+            }
         }
 
         public List<HostingUnit> getHostingUnitsList()
         {
             DS.DataSource.hostingUnitsCollection = (loadListFromXML<HostingUnit>(hostingUnitPath));
-            List<HostingUnit> units = null;
-            foreach (HostingUnit item in DS.DataSource.hostingUnitsCollection)
-                units.Add(item);
-            return units;
+            return DS.DataSource.hostingUnitsCollection;
         }
 
         public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate)
         {
             DS.DataSource.hostingUnitsCollection = (loadListFromXML<HostingUnit>(hostingUnitPath));
-            List<HostingUnit> units = null;
             foreach (HostingUnit item in DS.DataSource.hostingUnitsCollection)
-                if (predicate(item))
-                units.Add(item);
-            return units;
+                if (!predicate(item))
+                    DS.DataSource.hostingUnitsCollection.Remove(item);
+            return DS.DataSource.hostingUnitsCollection;
         }
 
         public void SetHostingUnit(HostingUnit hostingUnit)
         {
-            DS.DataSource.hostingUnitsCollection= (loadListFromXML<HostingUnit>(hostingUnitPath));
+            DS.DataSource.hostingUnitsCollection = (loadListFromXML<HostingUnit>(hostingUnitPath));
             int index = DS.DataSource.hostingUnitsCollection.FindIndex(t => t.HostingUnitKey == hostingUnit.HostingUnitKey);
             if (index == -1)
                 throw new DataException("DAL: the requested hosting unit was not found in the system...");
@@ -405,26 +403,22 @@ namespace DAL
         public List<GuestRequest> GetGuestRequestsList()
         {
             DS.DataSource.guestRequestsCollection = (loadListFromXML<GuestRequest>(guestRequestPath));
-            List<GuestRequest> requests = null;
-            foreach (GuestRequest item in DS.DataSource.guestRequestsCollection)
-                requests.Add(item);
-            return requests;
+            return DS.DataSource.guestRequestsCollection;
         }
 
         public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)
         {
-            DS.DataSource.guestRequestsCollection = (loadListFromXML<GuestRequest>(guestRequestPath));
-            List<GuestRequest> requests = null;
+            DS.DataSource.guestRequestsCollection = (loadListFromXML<GuestRequest>(guestRequestPath));           
             foreach (GuestRequest item in DS.DataSource.guestRequestsCollection)
-                if (predicate(item))
-                    requests.Add(item);
-            return requests;
+                if (!predicate(item))
+                    DS.DataSource.guestRequestsCollection.Remove(item);
+            return DS.DataSource.guestRequestsCollection;
         }
 
         public void SetGuestRequest(GuestRequest guest)
         {
             try
-            {               
+            {
                 DS.DataSource.guestRequestsCollection = (loadListFromXML<GuestRequest>(guestRequestPath));
                 int index = DS.DataSource.guestRequestsCollection.FindIndex(t => t.GuestRequestKey == guest.GuestRequestKey);
                 if (index == -1)

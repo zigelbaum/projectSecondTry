@@ -13,7 +13,7 @@ namespace DAL
             switch (typeDAL)
             {
                 case "List": return DALList.Instance;
-                case "XML": return DALList.Instance;
+                case "XML": return DAL_xml.Instance;
                 default: return null;
             }
         }

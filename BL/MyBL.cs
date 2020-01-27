@@ -28,9 +28,9 @@ namespace BL
         static MyBL()
         {
             // string TypeDAL = ConfigurationSettings.AppSettings.Get("TypeDS");
-            string TypeDAL = Configuration.TypeDAL;
+            //string TypeDAL = Configuration.TypeDAL;
             // string TypeDAL = "List";
-            myDAL = factoryDAL.getDAL(TypeDAL);
+            myDAL = factoryDAL.getDAL("XML");
         }
         private MyBL() { }
         #endregion
