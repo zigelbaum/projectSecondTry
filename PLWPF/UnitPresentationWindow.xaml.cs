@@ -230,9 +230,10 @@ namespace PLWPF
                         HostingUnit unit = my_unit;
                         if (premission == true)
                         {
+                            int key;
                             try
                             {
-                                myBl.addHostingUnit(unit);
+                               key=myBl.addHostingUnit(unit);
                             }
                             catch (Exception a)
                             {
@@ -246,6 +247,7 @@ namespace PLWPF
                                     return;
                             }
                             addedSuccessfully = true;
+                            MessageBox.Show("the unit has been added successfully\nYour unit key is: "+key, "adding unit", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                         }
                         Close();
                     }

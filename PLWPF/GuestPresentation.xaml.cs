@@ -107,15 +107,7 @@ namespace PLWPF
             cbbStatus.ItemsSource = Enum.GetValues(typeof(Enums.GuestRequestStatus));
             cbbArea.ItemsSource = Enum.GetValues(typeof(Enums.Area));
             cbbVacationType.ItemsSource = Enum.GetValues(typeof(Enums.HostingUnitType));
-            try
-            {
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(System.IO.Path.GetFullPath(MainWindow.myBL.GetCostumerImagePath(guestRequest.GuestRequestKey)));
-                bitmap.EndInit();
-                CostumerImage.Source = bitmap;
-            }
-            catch { } //costumer doesnt have image
+           
 
             switch (oper)
             {
@@ -124,8 +116,7 @@ namespace PLWPF
                     tbRegDate.IsEnabled = false;
                     tbFirstName.IsEnabled = false;
                     tbLastName.IsEnabled = false;
-                    cbbStatus.IsEnabled = false;                   
-                    costumerPro.Content = "change profile";
+                    cbbStatus.IsEnabled = false;                                       
                     addReqButton.Content = "save changes";                    
                     break;
                 case "View":
@@ -159,22 +150,7 @@ namespace PLWPF
                     bstar5.Visibility = Visibility.Hidden;
                     addReqButton.Visibility = Visibility.Hidden;
                     cancelreqButton.Content = "close";
-                    costumerPro.Visibility = Visibility.Hidden;
                     break;
-            }
-        }
-
-        private void costumerPro_Click(object sender, RoutedEventArgs e)
-        {
-            op = new OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-            {
-                isImageChanged = true;
-                CostumerImage.Source = new BitmapImage(new Uri(op.FileName));
             }
         }
 
@@ -279,8 +255,9 @@ namespace PLWPF
                     }
                     if (premitionToAdd == true)
                     {
-                        GuestRequest guest = guestRequest;//clone//יכול להיות שלא יעבוד כי אין בנאי העתקה
-                        try { MainWindow.myBL.addGuestRequest(guest); }
+                        GuestRequest guest = guestRequest;
+                        int key;
+                        try { key=MainWindow.myBL.addGuestRequest(guest); }
                         catch (Exception a)
                         {
                             var result = MessageBox.Show(a.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
@@ -292,20 +269,8 @@ namespace PLWPF
                             else
                                 return;
                         }
-                        //Close();
-                        if (isImageChanged)
-                        {
-                            try
-                            {
-                                MainWindow.myBL.AddCostumerImage(guest.GuestRequestKey, op.FileName);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("failed uploading profile picture" + ex.Message, "action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                            }
-                        }
                         Close();//might be in the wrong place
-                        MessageBox.Show("the requet has been added successfully", "adding request", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                        MessageBox.Show("the requet has been added successfully\nYour requests key is: "+key, "adding request", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                         addedSuccessfuly = true;
                     }
                     else
@@ -324,18 +289,6 @@ namespace PLWPF
                         }
                     addedSuccessfuly = true;
                     Close();
-                    CostumerImage.Source = null;
-                    if (isImageChanged)
-                    {
-                        try
-                        {
-                            MainWindow.myBL.ChangeCostuerImage(guestRequest.GuestRequestKey, op.FileName);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("failed adding ptofile photo" + ex.Message, "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                        }
-                    }
                     MessageBox.Show("the request details have bee changed successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
 
                     break;

@@ -69,7 +69,7 @@ namespace PLWPF
                 Close();
                 new_ord_Window = new CreateOrderWindow(hostID, myBl.FindUnit(getKey.numVal));
                 new_ord_Window.ShowDialog();
-            }                
+            }
         }
 
         private void tbUnitKey_SearchFilterChanged(object sender, TextChangedEventArgs e)

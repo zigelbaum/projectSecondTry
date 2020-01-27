@@ -216,8 +216,10 @@ namespace DAL
             List<Order> orders = null;
             try
             {
-                foreach (XElement item in orderRoot.Elements())
-                    orders.Add(ConvertOrder(item));
+                var v = from item in orderRoot.Elements()
+                        let c = ConvertOrder(item)
+                        select c;
+                orders = v.Select(ord => ord.Clone()).ToList();
             }
             catch
             {
