@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace BE
 {
+    [Serializable]
     public class HostingUnit:IComparable
     {
         #region fileds
@@ -34,6 +37,7 @@ namespace BE
         #region properties
         public Enums.HostingUnitType HostingUnitType { get => hostingUnitType; set => hostingUnitType=value; }
         public string HostingUnitName { get => hostingUnitName; set => hostingUnitName=value; }
+        [XmlIgnore]
         public bool[,] Diary { get => diary; set => diary = value; }
         public Host Owner { get => owner; set => owner = value; }
         public int HostingUnitKey { get => hostingUnitKey; set => hostingUnitKey = value; }
@@ -48,6 +52,13 @@ namespace BE
         public int Stars { get => stars; set => stars = value; }
         public bool Meals { get => meals; set => meals = value; }
         public bool Synagogue { get => synagogue; set => synagogue = value; }
+
+        [XmlArray("Diary")]
+        public bool[] DiaryDto
+        {
+            get { return diary.Flatten(); }
+            set { Diary = value.Expand(12); } 
+        }
         #endregion
 
         #region functions
