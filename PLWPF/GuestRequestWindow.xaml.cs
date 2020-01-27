@@ -133,9 +133,9 @@ namespace PLWPF
                 var request = from item in listToFilter
                               let key = item.MailAddress
                               where
-                              key.StartsWith(lower)
+                              (key.StartsWith(lower)
                               || key.StartsWith(upper)
-                              || key.Contains(searchTxt)
+                              || key.Contains(searchTxt))
                               select item;
 
                 requestView.ItemsSource = request;
