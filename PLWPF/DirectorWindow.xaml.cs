@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BE;
+using BL;
 
 namespace PLWPF
 {
@@ -19,9 +21,15 @@ namespace PLWPF
     /// </summary>
     public partial class DirectorWindow : Window
     {
+        IBL myBl = BL.FactoryBL.getBL("XML");
+        double all_fee ;
+
         public DirectorWindow()
         {
-            InitializeComponent();
+            InitializeComponent();           
+            all_fee = myBl.Aggregate_fee();
+            tbFee.Text = all_fee.ToString();
+            tbFee.IsEnabled = false;
         }
 
         private void GuestQuery_Click(object sender, RoutedEventArgs e)

@@ -583,6 +583,17 @@ namespace BL
             return null;
         }
 
+        public double Aggregate_fee()
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("XML");
+            double all_fee = 0;
+            List<Order> orders = dal.GetOrdersList();
+            foreach (Order ord in orders)
+            {
+                all_fee += ord.Fee;
+            }
+            return all_fee;
+        }
 
         public string GetCostumerImagePath(int requestKey)
         {
