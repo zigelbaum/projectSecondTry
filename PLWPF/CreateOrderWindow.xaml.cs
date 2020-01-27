@@ -35,11 +35,11 @@ namespace PLWPF
 
             unit = my_unit;
 
-            getGuestRequestList();           
+            getGuestRequestList();
         }
 
         private void getGuestRequestList()
-        {            
+        {
             IEnumerable<IGrouping<Host, HostingUnit>> my_units = myBl.GroupHostByHostingUnit();
             foreach (IGrouping<Host, HostingUnit> hostings in my_units)
             {
@@ -82,7 +82,7 @@ namespace PLWPF
                 GuestRequest request = ((GuestRequest)requestView.SelectedItem);
                 my_request_key = request.GuestRequestKey;
                 GuestPresentation presentation = new GuestPresentation(request, "View");
-                presentation.ShowDialog();               
+                presentation.ShowDialog();
             }
         }
 

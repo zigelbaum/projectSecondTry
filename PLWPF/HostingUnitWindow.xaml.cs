@@ -41,6 +41,7 @@ namespace PLWPF
                 deleteRequestButton.Visibility = Visibility.Hidden;
                 updateRequestButton.Visibility = Visibility.Hidden;
                 addUnitButton.Visibility = Visibility.Hidden;
+
             }
         }
 
