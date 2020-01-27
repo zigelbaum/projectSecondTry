@@ -477,7 +477,7 @@ namespace BL
             return listToReturn;
         }
 
-        public Int32 NumOfInvetations(GuestRequest costumer)//!!!
+        public Int32 NumOfInvetations(GuestRequest costumer)
         {
 
             IDAL dal = DAL.factoryDAL.getDAL("XML");
@@ -595,7 +595,7 @@ namespace BL
             return all_fee;
         }
 
-        public string GetCostumerImagePath(int requestKey)
+       /* public string GetCostumerImagePath(int requestKey)
         {
             string tempSource = System.IO.Path.GetTempFileName();
             File.Copy(@"..\..\..\CostumersImages\" + requestKey + @".jpg", tempSource, true);
@@ -619,7 +619,7 @@ namespace BL
                 System.IO.File.Copy(newImagePath, destination, true);
             }
             catch { throw; }
-        }
+        }*/
         #endregion
 
         #region grouping

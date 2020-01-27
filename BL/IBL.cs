@@ -68,9 +68,9 @@ namespace BL
         GuestRequest FindGuestRequest(Int32 requestKey);//find the request with this key
         HostingUnit FindUnit(Int32 unitKey);//find the unit with this key
         double Aggregate_fee();//calculates the commission from all orders
-        string GetCostumerImagePath(int requestKey);
+        /*string GetCostumerImagePath(int requestKey);
         void AddCostumerImage(int key, string newImagePath);
-        void ChangeCostuerImage(int requestKey, string newImagePath);
+        void ChangeCostuerImage(int requestKey, string newImagePath);*/
         #endregion
 
         #region grouping
