@@ -61,6 +61,8 @@ namespace PLWPF
                 Order ord = myBl.NewOrder(unit.HostingUnitKey, my_request_key);
                 myBl.AddOrder(ord);
                 MessageBox.Show("the order has been added successfully", "adding order", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                matchRequests.RemoveAll(rg => rg.GuestRequestKey == my_request_key);
+                requestView.ItemsSource = matchRequests;
             }
             catch (Exception ex)
             {

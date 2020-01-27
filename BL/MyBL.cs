@@ -595,31 +595,7 @@ namespace BL
             return all_fee;
         }
 
-        public string GetCostumerImagePath(int requestKey)
-        {
-            string tempSource = System.IO.Path.GetTempFileName();
-            File.Copy(@"..\..\..\CostumersImages\" + requestKey + @".jpg", tempSource, true);
-            return tempSource;
-        }
 
-        public void AddCostumerImage(int key, string newImagePath)
-        {
-            string photoPath = @"..\..\..\CostumersImages\" + key + @".jpg";
-            (File.Create(photoPath)).Close();
-            System.IO.File.Copy(newImagePath, photoPath, true);
-        }
-
-        public void ChangeCostuerImage(int requestKey, string newImagePath)
-        {
-            string destination = @"..\..\..\CostumersImages\" + requestKey + @".jpg";
-            try
-            {
-                File.Delete(destination);
-                (File.Create(destination)).Close();
-                System.IO.File.Copy(newImagePath, destination, true);
-            }
-            catch { throw; }
-        }
         #endregion
 
         #region grouping

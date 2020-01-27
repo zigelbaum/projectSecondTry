@@ -20,17 +20,17 @@ namespace DAL
         #region Singleton
         private static readonly DAL_xml instance = new DAL_xml();
         XElement orderRoot;
-        XElement bankBranchRoot;
+        //XElement bankBranchRoot;
         XElement configRoot;
 
         string hostingUnitPath = @"HostingUnitXml.xml";
         string guestRequestPath = @"GuestRequestXml.xml";
         string orderPath = @"OrderXml.xml";
         string configPath = @"ConfigXml.xml";
-        string bankBranchPath = @"https://www.boi.org.il/he/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/snifim_dnld_he.xml";
+       
 
         public static volatile bool bankDownloaded = false;
-
+        BackgroundWorker worker;
         public static DAL_xml Instance
         {
             get { return instance; }
@@ -39,6 +39,18 @@ namespace DAL
 
         private DAL_xml()
         {
+            try//bank download
+            {
+                worker = new BackgroundWorker();
+                worker.DoWork += Worker_DoWork;
+                worker.RunWorkerAsync();
+
+            }
+            catch
+            {
+
+            }
+
             if (!File.Exists(configPath))
             {
                 configRoot = new XElement("Configure", new XElement("GuestRequestKey", "10000000"), new XElement("HostingUnitKey", "10000000"), new XElement("OrderKey", "10000000"));

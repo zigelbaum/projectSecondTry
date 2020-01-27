@@ -255,6 +255,11 @@ namespace PLWPF
                         premitionToAdd = false;
                         tbLastName.Background = Brushes.IndianRed;
                     }
+                    if (!MainWindow.myBL.IsValidEmail(tbMail.Text))
+                    {
+                        premitionToAdd = false;
+                        tbMail.Background = Brushes.IndianRed;
+                    }
                     if (premitionToAdd == true)
                     {
                         GuestRequest guest = guestRequest;
