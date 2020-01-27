@@ -53,7 +53,7 @@ namespace DAL
 
             if (!File.Exists(configPath))
             {
-                configRoot = new XElement("Configure", new XElement("GuestRequestKey", "10000000"), new XElement("HostingUnitKey", "10000000"), new XElement("OrderKey", "10000000"));
+                configRoot = new XElement("Configure", new XElement("GuestRequestKey", "10000000"), new XElement("HostingUnitKey", "10000000"), new XElement("OrderKey", "10000000"),new XElement("Fee", "10"));
                 configRoot.Save(configPath);
             }
             else
@@ -136,22 +136,22 @@ namespace DAL
 
         XElement ConvertOrder(Order order)
         {
-            XElement testElement = new XElement("test");
+            XElement orderElement = new XElement("order");
 
             foreach (PropertyInfo item in typeof(Order).GetProperties())
             {
                 if (item.GetValue(order, null) != null)
                 {
 
-                    testElement.Add(new XElement(item.Name, item.GetValue(order, null).ToString()));
+                    orderElement.Add(new XElement(item.Name, item.GetValue(order, null).ToString()));
 
                 }
                 else
                 {
-                    testElement.Add(new XElement(item.Name, "null"));
+                    orderElement.Add(new XElement(item.Name, "null"));
                 }
             }
-            return testElement;
+            return orderElement;
         }
 
         Order ConvertOrder(XElement element)
