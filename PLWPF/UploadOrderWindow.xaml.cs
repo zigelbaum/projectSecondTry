@@ -46,7 +46,6 @@ namespace PLWPF
 
             StatusOrder.ItemsSource = Enum.GetValues(typeof(Enums.OrderStatus));           
             cbbShowStatus.ItemsSource = Enum.GetValues(typeof(Enums.OrderStatus));
-            //cbbShowStatus.SelectedIndex = 0;
 
             this.DataContext = myorder;//???????????????????????????????????????????????????????
 
@@ -134,6 +133,9 @@ namespace PLWPF
                 myBl.setOrder(ord);
                 myorder = myBl.FindOrder(myorder.OrderKey);
                 MessageBox.Show("The order has been closed successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                Close();
+                OrderWindow orderWindow = new OrderWindow(IDhost);
+                orderWindow.ShowDialog();
             }
             catch (Exception ex)
             {

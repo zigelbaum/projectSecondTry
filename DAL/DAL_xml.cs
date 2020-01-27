@@ -83,6 +83,7 @@ namespace DAL
 
             saveListToXML<HostingUnit>(DS.DataSource.hostingUnitsCollection, hostingUnitPath);
             saveListToXML<GuestRequest>(DS.DataSource.guestRequestsCollection, guestRequestPath);
+            saveListToXML <Order>(DS.DataSource.ordersCollection, orderPath);
         }
 
         static DAL_xml() { }
@@ -234,14 +235,11 @@ namespace DAL
             List<Order> orders = null;
             try
             {
-                Order ord;
-                foreach (XElement item in orderRoot.Elements())
-                {
-                    ord = ConvertOrder(item);
-                    if (predicate(ord))
-                        orders.Add(ord);
-
-                }
+                var v= from item in orderRoot.Elements()
+                           let c = ConvertOrder(item)
+                           where predicate(c)
+                           select c;
+                orders = v.Select(ord => ord.Clone()).ToList();
             }
             catch
             {
@@ -347,10 +345,8 @@ namespace DAL
 
         public List<HostingUnit> getHostingUnits(Func<HostingUnit, bool> predicate)
         {
-            DS.DataSource.hostingUnitsCollection = (loadListFromXML<HostingUnit>(hostingUnitPath));
-            foreach (HostingUnit item in DS.DataSource.hostingUnitsCollection)
-                if (!predicate(item))
-                    DS.DataSource.hostingUnitsCollection.Remove(item);
+            DS.DataSource.hostingUnitsCollection = (loadListFromXML<HostingUnit>(hostingUnitPath));                
+            DS.DataSource.hostingUnitsCollection.RemoveAll(hu=>!predicate(hu));
             return DS.DataSource.hostingUnitsCollection;
         }
 
@@ -411,10 +407,8 @@ namespace DAL
 
         public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)
         {
-            DS.DataSource.guestRequestsCollection = (loadListFromXML<GuestRequest>(guestRequestPath));
-            foreach (GuestRequest item in DS.DataSource.guestRequestsCollection)
-                if (!predicate(item))
-                    DS.DataSource.guestRequestsCollection.Remove(item);
+            DS.DataSource.guestRequestsCollection = (loadListFromXML<GuestRequest>(guestRequestPath));                       
+            DS.DataSource.guestRequestsCollection.RemoveAll(gr=>!predicate(gr));
             return DS.DataSource.guestRequestsCollection;
         }
 
