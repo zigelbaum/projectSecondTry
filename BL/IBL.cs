@@ -42,13 +42,13 @@ namespace BL
 
         #region enforcements
         bool OverNightVacation(GuestRequest guestRequest);//Checks if the holiday duration is at least one day
-        bool BankAccountDebitAuthorization(Host host);
-        bool HostingUnitAvability(Order order);
-        void UpdateDiary(Order order);
-        void UpdateInfoAfterOrderClosed(Order order);
-        bool AbleToChangeOrderStatus(Order order);
+        bool BankAccountDebitAuthorization(Host host);//Checks whether a collection certificate is available from the host
+        bool HostingUnitAvability(Order order);//Checks whether the unit is available on the order dates
+        void UpdateDiary(Order order);//Updates dates in the matrix as the order closes
+        void UpdateInfoAfterOrderClosed(Order order);//Updates customer status when order is closed
+        bool AbleToChangeOrderStatus(Order order);//Checks whether order status can be changed
         double TotalFee(Order order);//Calculates commission fee based on number of days off
-        bool TheHostingUnitHasAnOpenOrder(HostingUnit hostingUnit);
+        bool TheHostingUnitHasAnOpenOrder(HostingUnit hostingUnit);//Checks whether the unit has an open invitation
         bool RevocationPermission(Host host);//Checks whether account debit authorization can be revoked
         void SendEmail(Order ord);//Sends a customer to the customer with the order details
         bool IsValidEmail(string email);//Checks whether the email address is valid

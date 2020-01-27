@@ -97,7 +97,6 @@
                 </ListView.Background>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="request key" DisplayMemberBinding="{Binding GuestRequestKey}" Width="100"/>
                         <GridViewColumn Header="private name" DisplayMemberBinding="{Binding PrivateName}" Width="100"/>
                         <GridViewColumn Header="last name" DisplayMemberBinding="{Binding FamilyName}" Width="100"/>
                         <GridViewColumn Header="mail" DisplayMemberBinding="{Binding MailAddress}" Width="120"/>
