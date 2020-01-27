@@ -311,9 +311,9 @@ namespace BL
                 {
                     if (order.OrderStatus == Enums.OrderStatus.Closed)
                     {
-                        dal.setOrder(order);
-                        UpdateDiary(order);
                         order.Fee = TotalFee(order);
+                        dal.setOrder(order);
+                        UpdateDiary(order);                        
                         UpdateInfoAfterOrderClosed(order);
                     }
                     else

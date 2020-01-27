@@ -47,6 +47,36 @@ namespace PLWPF
                 OrderView.ItemsSource = order;
             }
         }
+        private void tbHostName_SearchFilterChanged(object sender, TextChangedEventArgs e)
+        {
+            if(tbHostName != null)
+            {
+                string searchTxt = tbHostName.Text;
+                string upper = searchTxt.ToUpper();
+                string lower = searchTxt.ToLower();
+
+                var order = from item in listOrders
+                            let name = myBl.FindUnit(item.HostingUnitKey).Owner.PrivateName
+                            where name.StartsWith(lower) || name.StartsWith(upper) || name.Contains(searchTxt)
+                            select item;
+                OrderView.ItemsSource = order;
+            }
+        }
+        private void tbHostLastName_SearchFilterChanged(object sender, TextChangedEventArgs e)
+        {
+            if(tbHostLastName != null)
+            {
+                string searchTxt = tbHostLastName.Text;
+                string upper = searchTxt.ToUpper();
+                string lower = searchTxt.ToLower();
+
+                var order = from item in listOrders
+                            let name = myBl.FindUnit(item.HostingUnitKey).Owner.FamilyName
+                            where name.StartsWith(lower) || name.StartsWith(upper) || name.Contains(searchTxt)
+                            select item;
+                OrderView.ItemsSource = order;
+            }
+        }
         private void cbbShowStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Int32 index = cbbShowStatus.SelectedIndex;

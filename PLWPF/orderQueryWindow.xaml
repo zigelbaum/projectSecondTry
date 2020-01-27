@@ -27,7 +27,19 @@
             </ListView.View>
         </ListView>
         <Label Content="Enter hosting unit key:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="35" Width="362" FontWeight="Bold"/>
-        <TextBox Name="tbUnitKey" HorizontalAlignment="Left" Height="35" Margin="377,0,0,0" TextWrapping="Wrap" Text="" TextChanged="tbUnitKey_SearchFilterChanged" VerticalAlignment="Top" Width="406" FontWeight="Bold" FontSize="14" RenderTransformOrigin="2.723,0.485">
+        <TextBox Name="tbUnitKey" HorizontalAlignment="Left" Height="35" Margin="157,0,0,0" TextWrapping="Wrap" Text="" TextChanged="tbUnitKey_SearchFilterChanged" VerticalAlignment="Top" Width="213" FontWeight="Bold" FontSize="14" RenderTransformOrigin="2.723,0.485">
+            <TextBox.Background>
+                <ImageBrush/>
+            </TextBox.Background>
+        </TextBox>
+        <Label Content="Enter hosting host name:" HorizontalAlignment="Left" Margin="381,0,0,0" VerticalAlignment="Top" Height="35" Width="172" FontWeight="Bold"/>
+        <TextBox Name="tbHostName" HorizontalAlignment="Left" Height="35" Margin="570,0,0,0" TextWrapping="Wrap" Text="" TextChanged="tbHostName_SearchFilterChanged" VerticalAlignment="Top" Width="213" FontWeight="Bold" FontSize="14" RenderTransformOrigin="2.723,0.485">
+            <TextBox.Background>
+                <ImageBrush/>
+            </TextBox.Background>
+        </TextBox>
+        <Label Content="Enter hosting host family name:" HorizontalAlignment="Left" Margin="381,35,0,0" VerticalAlignment="Top" Height="35" Width="189" FontWeight="Bold"/>
+        <TextBox Name="tbHostLastName" HorizontalAlignment="Left" Height="35" Margin="570,35,0,0" TextWrapping="Wrap" Text="" TextChanged="tbHostLastName_SearchFilterChanged" VerticalAlignment="Top" Width="213" FontWeight="Bold" FontSize="14" RenderTransformOrigin="2.723,0.485">
             <TextBox.Background>
                 <ImageBrush/>
             </TextBox.Background>
