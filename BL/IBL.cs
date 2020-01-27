@@ -47,7 +47,7 @@ namespace BL
         void UpdateDiary(Order order);
         void UpdateInfoAfterOrderClosed(Order order);
         bool AbleToChangeOrderStatus(Order order);
-        double TotalFee(Order order);
+        double TotalFee(Order order);//Calculates commission fee based on number of days off
         bool TheHostingUnitHasAnOpenOrder(HostingUnit hostingUnit);
         bool RevocationPermission(Host host);//Checks whether account debit authorization can be revoked
         void SendEmail(Order ord);//Sends a customer to the customer with the order details
