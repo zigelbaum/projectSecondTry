@@ -17,6 +17,7 @@ namespace BE
         private Enums.OrderStatus orderStatus;
         private DateTime createDate;
         private DateTime orderDate;
+        double fee;
         #endregion
 
 
@@ -27,6 +28,7 @@ namespace BE
         public int OrderKey { get => _OrderKey; set => _OrderKey = value; }
         public int GuestRequestKey { get => _GuestRequestKey; set => _GuestRequestKey = value; }
         public int HostingUnitKey { get => _HostingUnitKey; set => _HostingUnitKey = value; }
+        public double Fee { get => fee; set => fee = value; }
         #endregion
 
 

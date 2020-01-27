@@ -96,6 +96,7 @@ namespace DAL
             target.OrderKey = original.OrderKey;
             target.OrderStatus = original.OrderStatus;
             target.CreateDate = original.CreateDate;
+            target.Fee = original.Fee;
             return target;
         }
         #endregion

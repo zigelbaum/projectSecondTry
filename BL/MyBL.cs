@@ -313,7 +313,7 @@ namespace BL
                     {
                         dal.setOrder(order);
                         UpdateDiary(order);
-                        TotalFee(order);//what to do with returned value?
+                        order.Fee = TotalFee(order);
                         UpdateInfoAfterOrderClosed(order);
                     }
                     else
