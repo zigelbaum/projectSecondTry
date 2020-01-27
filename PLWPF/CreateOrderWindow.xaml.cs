@@ -60,7 +60,7 @@ namespace PLWPF
             {
                 Order ord = myBl.NewOrder(unit.HostingUnitKey, my_request_key);
                 myBl.AddOrder(ord);
-                MessageBox.Show("Succed");
+                MessageBox.Show("the order has been added successfully", "adding order", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
             }
             catch (Exception ex)
             {

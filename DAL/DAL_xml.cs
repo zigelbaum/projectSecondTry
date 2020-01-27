@@ -180,12 +180,12 @@ namespace DAL
 
                 order.OrderKey = code++;
                 if (order.OrderKey > 99999999)
-                    throw new Exception("DAL: you cannot add the current order, you passed the limit of 8 digits code ");
+                    throw new DataException("DAL: you cannot add the current order, you passed the limit of 8 digits code ");
                 configRoot.Element("OrderKey").Value = code.ToString();
                 configRoot.Save(configPath);
 
-                if (dal.OrderExist(order))
-                    throw new Exception("DAL: you cannot add the current order,an order with the same key allready exists ");
+                if(dal.OrderExist(order))
+                    throw new DataException("DAL: you cannot add the current order,an order with the same key allready exists ");
 
                 orderRoot.Add(ConvertOrder(order));
                 orderRoot.Save(orderPath);
@@ -278,7 +278,7 @@ namespace DAL
                                      select item).FirstOrDefault();
 
                 if (toUpdate == null)
-                    throw new Exception("the requested order was not found...");
+                    throw new DataException("the requested order was not found...");
                 XElement updatedTest = ConvertOrder(order);
 
                 toUpdate.ReplaceNodes(updatedTest.Elements());
@@ -298,14 +298,14 @@ namespace DAL
             try
             {
                 if (hostingUnit == null)
-                    throw new Exception("DAL: there is no unit to add");
+                    throw new DataException("DAL: there is no unit to add");
                 DS.DataSource.hostingUnitsCollection = (loadListFromXML<HostingUnit>(hostingUnitPath));
                 LoadData(ref configRoot, configPath);
                 int code = Convert.ToInt32(configRoot.Element("HostingUnitKey").Value);
                 hostingUnit.HostingUnitKey = code++;
                 HostingUnit unit = DS.DataSource.hostingUnitsCollection.FirstOrDefault(t => t.HostingUnitKey == hostingUnit.HostingUnitKey);
                 if (unit != null)
-                    throw new Exception("DAL: hosting unit with the same key already exists...");
+                    throw new DataException("DAL: hosting unit with the same key already exists...");
                 configRoot.Element("HostingUnitKey").Value = code.ToString();
                 configRoot.Save(configPath);
                 DS.DataSource.hostingUnitsCollection.Add(hostingUnit);
@@ -325,7 +325,7 @@ namespace DAL
                 DS.DataSource.hostingUnitsCollection = (loadListFromXML<HostingUnit>(hostingUnitPath));
                 int index = DS.DataSource.hostingUnitsCollection.FindIndex(t => t.HostingUnitKey == hostingUnit.HostingUnitKey);
                 if (index == -1)
-                    throw new Exception("DAL: the requested hosting unit was not found in the system...");
+                    throw new DataException("DAL: the requested hosting unit was not found in the system...");
                 HostingUnit unit = DS.DataSource.hostingUnitsCollection.FirstOrDefault(t => t.HostingUnitKey == hostingUnit.HostingUnitKey);
                 DS.DataSource.hostingUnitsCollection.Remove(unit);
                 saveListToXML(DS.DataSource.hostingUnitsCollection, hostingUnitPath);
@@ -356,7 +356,7 @@ namespace DAL
             DS.DataSource.hostingUnitsCollection = (loadListFromXML<HostingUnit>(hostingUnitPath));
             int index = DS.DataSource.hostingUnitsCollection.FindIndex(t => t.HostingUnitKey == hostingUnit.HostingUnitKey);
             if (index == -1)
-                throw new Exception("DAL: the requested hosting unit was not found in the system...");
+                throw new DataException("DAL: the requested hosting unit was not found in the system...");
 
             DS.DataSource.hostingUnitsCollection.RemoveAt(index);
             DS.DataSource.hostingUnitsCollection.Add(hostingUnit);
@@ -379,13 +379,13 @@ namespace DAL
             try
             {
                 if (guest == null)
-                    throw new Exception("No request to add");
+                    throw new DataException("No request to add");
                 DS.DataSource.guestRequestsCollection = (loadListFromXML<GuestRequest>(guestRequestPath));
                 LoadData(ref configRoot, configPath);
                 int code = Convert.ToInt32(configRoot.Element("GuestRequestKey").Value);
                 guest.GuestRequestKey = code++;
                 if (guest.GuestRequestKey > 99999999)
-                    throw new Exception("DAL: you cannot add the current request, you passed the limit of 8 digits code ");
+                    throw new DataException("DAL: you cannot add the current request, you passed the limit of 8 digits code ");
                 configRoot.Element("GuestRequestKey").Value = code.ToString();
                 configRoot.Save(configPath);
                 guest.Status = Enums.GuestRequestStatus.Active;
@@ -422,7 +422,7 @@ namespace DAL
                 DS.DataSource.guestRequestsCollection = (loadListFromXML<GuestRequest>(guestRequestPath));
                 int index = DS.DataSource.guestRequestsCollection.FindIndex(t => t.GuestRequestKey == guest.GuestRequestKey);
                 if (index == -1)
-                    throw new Exception("DAL: the requested guest request was not found in the system...");
+                    throw new DataException("DAL: the requested guest request was not found in the system...");
 
                 DS.DataSource.guestRequestsCollection.RemoveAt(index);
                 DS.DataSource.guestRequestsCollection.Add(guest);
