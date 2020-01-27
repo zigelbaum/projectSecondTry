@@ -9,6 +9,14 @@
     <Window.Background>
         <ImageBrush ImageSource="IconBackGround.ico" Opacity="0.8"/>
     </Window.Background>
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Button Name="guestQuery" Content="guest request query" HorizontalAlignment="Left" Margin="55,350,0,0" VerticalAlignment="Top" Width="104" Height="32" Click="GuestQuery_Click">
             <Button.Background>
@@ -25,6 +33,12 @@
                 <ImageBrush/>
             </Button.Background>
         </Button>
+        <TextBox Name="tbFee"  HorizontalAlignment="Left" Height="36" Margin="129,84,0,0" Text="" VerticalAlignment="Top" Width="120">
+            <TextBox.Background>
+                <ImageBrush/>
+            </TextBox.Background>
+        </TextBox>
+        <Label Content="Aggregate fee:" HorizontalAlignment="Left" Margin="30,84,0,0" VerticalAlignment="Top" Height="36" Width="94"/>
 
     </Grid>
 </Window>
