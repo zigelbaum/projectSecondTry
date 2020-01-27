@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.Reflection;
 using System.ComponentModel;
+using System.Net;
 
 namespace DAL
 {
@@ -27,6 +28,8 @@ namespace DAL
         string orderPath = @"OrderXml.xml";
         string configPath = @"ConfigXml.xml";
         string bankBranchPath = @"https://www.boi.org.il/he/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/snifim_dnld_he.xml";
+
+        public static volatile bool bankDownloaded = false;
 
         public static DAL_xml Instance
         {
@@ -68,15 +71,15 @@ namespace DAL
             else
                 LoadData(ref orderRoot, orderPath);
 
-            //if (!File.Exists(bankBranchPath))
-            //{
-            //    bankBranchRoot = new XElement("BankBranches");
-            //    orderRoot.Save(bankBranchPath);
-            //}
-            //else
-            //    LoadData(ref bankBranchRoot, bankBranchPath);
+            /* if (!File.Exists(bankBranchPath))
+             {
+                 bankBranchRoot = new XElement("BankBranches");
+                 orderRoot.Save(bankBranchPath);
+             }
+             else
+                 LoadData(ref bankBranchRoot, bankBranchPath);*/
 
-           
+
 
             saveListToXML<HostingUnit>(DS.DataSource.hostingUnitsCollection, hostingUnitPath);
             saveListToXML<GuestRequest>(DS.DataSource.guestRequestsCollection, guestRequestPath);
@@ -184,7 +187,7 @@ namespace DAL
                 configRoot.Element("OrderKey").Value = code.ToString();
                 configRoot.Save(configPath);
 
-                if(dal.OrderExist(order))
+                if (dal.OrderExist(order))
                     throw new DataException("DAL: you cannot add the current order,an order with the same key allready exists ");
 
                 orderRoot.Add(ConvertOrder(order));
@@ -408,7 +411,7 @@ namespace DAL
 
         public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)
         {
-            DS.DataSource.guestRequestsCollection = (loadListFromXML<GuestRequest>(guestRequestPath));           
+            DS.DataSource.guestRequestsCollection = (loadListFromXML<GuestRequest>(guestRequestPath));
             foreach (GuestRequest item in DS.DataSource.guestRequestsCollection)
                 if (!predicate(item))
                     DS.DataSource.guestRequestsCollection.Remove(item);
@@ -447,23 +450,119 @@ namespace DAL
         #endregion
 
         #region BankBranches
+
+        private List<BankBranch> banks = null;
+
         public List<BankBranch> GetBankBranchesList()
         {
-            LoadData(ref bankBranchRoot, bankBranchPath);
-            List<BankBranch> branches = null;
+            if (bankDownloaded)
+            {
+                if (banks == null)
+                {
+                    banks = new List<BankBranch>();
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(@"atm.xml");
+                    XmlNode rootNode = doc.DocumentElement;
+                    XmlNodeList children = rootNode.ChildNodes;
+                    foreach (XmlNode child in children)
+                    {
+                        BankBranch b = GetBranchByXmlNode(child);
+                        if (b != null)
+                        {
+                            banks.Add(b);
+                        }
+                    }
+                }
+                return banks;
+            }
+            else
+                throw new DataException("bank didn't download");
+        }
+
+        private static BankBranch GetBranchByXmlNode(XmlNode node)
+        {
+            if (node.Name != "BRANCH") return null;
+            BankBranch branch = new BankBranch();
+            branch.BankNumber = -1;
+
+            XmlNodeList children = node.ChildNodes;
+
+            foreach (XmlNode child in children)
+            {
+                switch (child.Name)
+                {
+                    case "Bank_Code":
+                        branch.BankNumber = int.Parse(child.InnerText);
+                        break;
+                    case "Bank_Name":
+                        branch.BankName = child.InnerText;
+                        break;
+                    case "Branch_Code":
+                        branch.BranchNumber = int.Parse(child.InnerText);
+                        break;
+                    case "Branch_Address":
+                        branch.BranchAddress = child.InnerText;
+                        break;
+                    case "City":
+                        branch.BranchCity = child.InnerText;
+                        break;
+
+                }
+
+            }
+
+            if (branch.BranchNumber > 0)
+                return branch;
+
+            return null;
+
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            object ob = e.Argument;
+            while (bankDownloaded == false)//continues until it downloads
+            {
+                try
+                {
+                    DownloadBank();
+                    Thread.Sleep(2000);//sleeps before trying
+                }
+                catch
+                { }
+            }
+            GetBankBranchesList();//saves branches to ds
+        }
+
+        private void DownloadBank()
+        {
+            #region downloadBank
+            string xmlLocalPath = @"atm.xml";
+            WebClient wc = new WebClient();
             try
             {
-                foreach (XElement item in bankBranchRoot.Elements())
-                    branches.Add(ConvertBranch(item));
+                string xmlServerPath =
+               @"https://www.boi.org.il/en/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/snifim_en.xml";
+                wc.DownloadFile(xmlServerPath, xmlLocalPath);
+                bankDownloaded = true;
             }
             catch
             {
-                branches = null;
+
+                string xmlServerPath = @"http://www.jct.ac.il/~coshri/atm.xml";
+                wc.DownloadFile(xmlServerPath, xmlLocalPath);
+                bankDownloaded = true;
+
             }
-            return branches;
+            finally
+            {
+                wc.Dispose();
+            }
+            #endregion
         }
+
         #endregion
     }
 }
-
 
