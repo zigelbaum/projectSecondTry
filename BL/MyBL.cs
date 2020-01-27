@@ -477,7 +477,7 @@ namespace BL
             return listToReturn;
         }
 
-        public Int32 NumOfInvetations(GuestRequest costumer)//!!!
+        public Int32 NumOfInvetations(GuestRequest costumer)
         {
 
             IDAL dal = DAL.factoryDAL.getDAL("XML");
