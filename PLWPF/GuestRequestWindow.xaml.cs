@@ -41,7 +41,7 @@ namespace PLWPF
             cbbGroupBy.ItemsSource = Enum.GetValues(typeof(filterRequest));
             cbbGroupBy.SelectedIndex = 0;
             cbbShowGroup.IsEnabled = false;
-            if(type=="Director")
+            if (type=="Director")
             {
                 updateRequestButton.Visibility = Visibility.Hidden;
                 addRequestButton.Visibility = Visibility.Hidden;
