@@ -595,7 +595,15 @@ namespace BL
             return all_fee;
         }
 
-
+        public List<GuestRequest> DaysPassFromMail(Int32 days)
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("XML");
+            List<GuestRequest> requests = dal.GetGuestRequestsList();
+            var requestsList = from GuestRequest request in requests
+                               where (request.RegistrationDate.AddDays(days) < DateTime.Today && request.Status == Enums.GuestRequestStatus.Active)
+                               select request;
+            return requestsList.ToList();
+        }
         #endregion
 
         #region grouping

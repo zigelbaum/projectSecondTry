@@ -28,9 +28,9 @@ namespace DAL
         string orderPath = @"OrderXml.xml";
         string configPath = @"ConfigXml.xml";
        
-
         public static volatile bool bankDownloaded = false;
         BackgroundWorker worker;
+
         public static DAL_xml Instance
         {
             get { return instance; }
@@ -46,9 +46,9 @@ namespace DAL
                 worker.RunWorkerAsync();
 
             }
-            catch
+            catch (Exception e)
             {
-
+                throw e;
             }
 
             if (!File.Exists(configPath))
@@ -530,17 +530,17 @@ namespace DAL
         {
 
             object ob = e.Argument;
-            while (bankDownloaded == false)//continues until it downloads
+            while (bankDownloaded == false)
             {
                 try
                 {
                     DownloadBank();
-                    Thread.Sleep(2000);//sleeps before trying
+                    Thread.Sleep(2000);
                 }
                 catch
                 { }
             }
-            GetBankBranchesList();//saves branches to ds
+            GetBankBranchesList();
         }
 
         private void DownloadBank()
