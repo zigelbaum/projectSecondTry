@@ -133,7 +133,7 @@ namespace PLWPF
                 ord.OrderStatus = myStatus;
                 myBl.setOrder(ord);
                 myorder = myBl.FindOrder(myorder.OrderKey);
-                MessageBox.Show("The order has been closed successfully", "closing order", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                MessageBox.Show("The order has been closed successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
             }
             catch (Exception ex)
             {
