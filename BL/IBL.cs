@@ -38,6 +38,10 @@ namespace BL
         bool OrderExist(Order order);//Checks if the order exists in the system
         Order FindOrder(Int32 ordKey);//Returns this order from the system
         #endregion
+
+        #region BankBranches
+        IEnumerable<IGrouping<int, BankBranch>> GetBankBranchesGroup();//Returns a group of all bank branches
+        #endregion
         #endregion
 
         #region enforcements

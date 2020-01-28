@@ -385,6 +385,24 @@ namespace BL
         }
         #endregion
 
+        #region BankBranches
+        public IEnumerable<IGrouping<int, BankBranch>> GetBankBranchesGroup()
+        {
+            IDAL dal = DAL.factoryDAL.getDAL("XML");
+            try
+            {
+                List<BankBranch> my_bank = dal.GetBankBranchesList();
+                var my_group = from branches in my_bank
+                       group branches by branches.BankNumber into allBanks
+                       select allBanks;
+                return my_group;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        #endregion
         #endregion
 
         #region functions       
