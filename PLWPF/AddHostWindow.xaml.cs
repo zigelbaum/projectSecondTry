@@ -145,6 +145,11 @@ namespace PLWPF
             #endregion
             if (premission == true)
             {
+                BankBranch branch = new BankBranch() { BankNumber = int.Parse(cbBnumber.SelectedItem.ToString()), BankName=cbBname.SelectedItem.ToString(), BranchNumber=int.Parse(cbBrNumber.SelectedItem.ToString()),
+                BranchAddress=cbBrAdress.SelectedItem.ToString(),
+                    BranchCity=tbBrCity.Text
+                };
+                host.BankBranchDetails = branch;
                 added = true;
                 Close();
             }

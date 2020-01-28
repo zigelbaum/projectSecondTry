@@ -150,6 +150,8 @@ namespace BL
             }
             new Thread(() =>
             {
+                try
+                { 
                 MailMessage mail = new MailMessage();
                 mail.To.Add(gr.MailAddress);
                 mail.From = new MailAddress("zimmersProCT@gmail.com");
@@ -160,9 +162,8 @@ namespace BL
                 smtp.Host = "smtp.gmail.com";
                 smtp.Credentials = new System.Net.NetworkCredential("zimmersProCT@gmail.com", "Prozimmers");
                 smtp.EnableSsl = true;
-                try
-                {
-                    smtp.Send(mail);
+             
+                smtp.Send(mail);
                 }
                 catch (Exception ex)
                 {
@@ -340,7 +341,7 @@ namespace BL
             }
             catch (Exception e)
             {
-                throw new ExceptionBL(e.Message);
+                throw e;
             }
 
         }
