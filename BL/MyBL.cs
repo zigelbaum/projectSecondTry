@@ -705,9 +705,8 @@ namespace BL
                     if (Configuration.DateLastRun < DateTime.Now.Date)
                     {
                         OrderDailyMethod();
-                        Configuration.DateLastRun = DateTime.Now.Date;
-                        TimeSpan ts = DateTime.Now.Date - Configuration.DateLastRun;
-                        Thread.Sleep(ts);
+                        Configuration.DateLastRun = DateTime.Now.Date;                       
+                        Thread.Sleep(24*60*60);
                     }
                 }
             }).Start();
