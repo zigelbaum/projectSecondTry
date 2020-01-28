@@ -120,6 +120,8 @@ namespace PLWPF
                     ckbAttractions.IsEnabled = false;
                     ckbMeals.IsEnabled = false;
                     ckbSynagogue.IsEnabled = false;
+                    lblUnitKey.Visibility = Visibility.Hidden;
+                    tbUnitKey.Visibility = Visibility.Hidden;
                     bstar1.IsEnabled = false;
                     bstar2.IsEnabled = false;
                     bstar3.IsEnabled = false;

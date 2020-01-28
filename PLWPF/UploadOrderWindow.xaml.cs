@@ -132,7 +132,14 @@ namespace PLWPF
                 ord.OrderStatus = myStatus;
                 myBl.setOrder(ord);
                 myorder = myBl.FindOrder(myorder.OrderKey);
+                if (myStatus==Enums.OrderStatus.Closed)
                 MessageBox.Show("The order has been closed successfully", "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                else
+                if (myStatus == Enums.OrderStatus.SentEmail)
+                    MessageBox.Show("The mail has been sent", "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                else
+                    MessageBox.Show("The order status has been updated", "update", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+
                 Close();
                 OrderWindow orderWindow = new OrderWindow(IDhost);
                 orderWindow.ShowDialog();

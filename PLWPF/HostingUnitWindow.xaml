@@ -78,12 +78,12 @@
                 </ListView.Background>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="unit key" DisplayMemberBinding="{Binding HostingUnitKey}" Width="200">
-                        </GridViewColumn>
+                        
                         <GridViewColumn Header="unit name" DisplayMemberBinding="{Binding HostingUnitName}" Width="200"/>
                         <GridViewColumn Header="owner last name" DisplayMemberBinding="{Binding Owner.FamilyName}" Width="200"/>
                         <GridViewColumn Header="area" DisplayMemberBinding="{Binding Area}" Width="200"/>
-                        <GridViewColumn Header="type" DisplayMemberBinding="{Binding HostingUnitType}" Width="200"/>
+                        <GridViewColumn Header="type" DisplayMemberBinding="{Binding HostingUnitType}" Width="100"/>
+                        <GridViewColumn Header="stars" DisplayMemberBinding="{Binding Stars}" Width="100"/>
                     </GridView>
                 </ListView.View>
             </ListView>

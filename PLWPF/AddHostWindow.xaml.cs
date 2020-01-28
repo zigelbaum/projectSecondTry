@@ -137,7 +137,7 @@ namespace PLWPF
             {
 
                 MessageBox.Show(a.Message, "registration action failed", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                tbID.Background = Brushes.IndianRed;
+                tbMail.Background = Brushes.IndianRed;
                 premission = false;
                 return;
             }
@@ -240,7 +240,7 @@ namespace PLWPF
         #region comboboxes
         private void cbBanckName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cbBnumber.SelectedIndex = cbBnumber.SelectedIndex;
+            cbBnumber.SelectedIndex = cbBname.SelectedIndex;
             initBank();
 
         }
@@ -258,20 +258,20 @@ namespace PLWPF
         private void Cb_branchNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbBrAdress.SelectedIndex = cbBnumber.SelectedIndex;
-            setBank();
+            //setBank();
 
         }
-        private void setBank()
-        {
-            var b = branches.ElementAt(cbBnumber.SelectedIndex).ElementAt(cbBrNumber.SelectedIndex);
+        //private void setBank()
+        //{
+        //    var b = branches.ElementAt(cbBnumber.SelectedIndex).ElementAt(cbBrNumber.SelectedIndex);
 
-            host.BankBranchDetails.BankName = b.BankName;
-            host.BankBranchDetails.BankNumber = b.BankNumber;
-            host.BankBranchDetails.BranchAddress = b.BranchAddress;
-            host.BankBranchDetails.BranchCity = b.BranchCity;
-            host.BankBranchDetails.BranchNumber = b.BranchNumber;
+        //    host.BankBranchDetails.BankName = b.BankName;
+        //    host.BankBranchDetails.BankNumber = b.BankNumber;
+        //    host.BankBranchDetails.BranchAddress = b.BranchAddress;
+        //    host.BankBranchDetails.BranchCity = b.BranchCity;
+        //    host.BankBranchDetails.BranchNumber = b.BranchNumber;
 
-        }
+        //}
 
         #endregion
 

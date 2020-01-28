@@ -71,8 +71,7 @@ namespace BL
         Order NewOrder(int hostingUnitkey, int guestRequestKey);//Creating order  
         GuestRequest FindGuestRequest(Int32 requestKey);//find the request with this key
         HostingUnit FindUnit(Int32 unitKey);//find the unit with this key
-        double Aggregate_fee();//calculates the commission from all order
-        List<GuestRequest> DaysPassFromMail(Int32 days); ////returns all gr that were sent a email/ created "numOfDays" ago
+        double Aggregate_fee();//calculates the commission from all order       
         #endregion
 
         #region grouping
@@ -86,5 +85,9 @@ namespace BL
         IEnumerable<IGrouping<Enums.Area, HostingUnit>> GroupHostingUnitByArea();//Creates a group of hosting units by area
         #endregion
 
+        #region dailyUpdate
+        void DailyUpdate();
+        void OrderDailyMethod();
+        #endregion
     }
 }

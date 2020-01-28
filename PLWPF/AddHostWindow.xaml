@@ -37,10 +37,10 @@
         <Label Content="branch number" HorizontalAlignment="Left" Margin="268,184,0,0" VerticalAlignment="Top" Width="97" Height="26" RenderTransformOrigin="0.484,3.433"/>
         <ComboBox Name="cbBrNumber" HorizontalAlignment="Left" Height="26" Margin="359,184,0,0" Text="{Binding Path=BankBranchDetails.BranchNumber,Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
 
-        <Label Content="branch address" HorizontalAlignment="Left" Margin="268,131,0,0" VerticalAlignment="Top" Width="102" Height="26" RenderTransformOrigin="0.319,3.433"/>
+        <Label Content="branch city" HorizontalAlignment="Left" Margin="268,131,0,0" VerticalAlignment="Top" Width="102" Height="26" RenderTransformOrigin="0.319,3.433"/>
         <ComboBox Name="cbBrAdress" HorizontalAlignment="Left" Height="26" Margin="359,131,0,0"   VerticalAlignment="Top" Width="120"/>
 
-        <Label Content="branch city" HorizontalAlignment="Left" Margin="504,131,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
+        <Label Content="branch address" HorizontalAlignment="Left" Margin="504,131,0,0" VerticalAlignment="Top" Width="82" Height="26"/>
         <TextBox Name="tbBrCity" HorizontalAlignment="Left" Height="26" Margin="630,131,0,0" TextWrapping="Wrap" Text="{Binding Path=BankBranchDetails.BranchCity,Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
 
         <Label Content="bank account number" HorizontalAlignment="Left" Margin="504,184,0,0" VerticalAlignment="Top" Width="132" Height="26"/>

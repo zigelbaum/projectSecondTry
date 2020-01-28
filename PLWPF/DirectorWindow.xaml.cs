@@ -53,46 +53,6 @@ namespace PLWPF
             orderQwindow.ShowDialog();
         }
 
-        #region dailyUpdate
-        private void DailyUpdate()
-        {
-            while (true)
-            {
-                DateTime _DateLastRun;
-                _DateLastRun = DateTime.Now.Date;
-
-                if (_DateLastRun < DateTime.Now.Date)
-                {
-                    OrderDailyMethod();
-                    ReqDailyMethod();
-                    _DateLastRun = DateTime.Now.Date;
-                }
-            }
-        }
-
-        private void ReqDailyMethod()
-        {
-            List<GuestRequest> listOfreq = myBl.DaysPassFromMail(31);
-            List<GuestRequest> guestList = new List<GuestRequest>();
-            foreach (GuestRequest g in listOfreq)
-            {
-                guestList.Add(g);
-            }
-            guestList.ForEach(element => element.Status = Enums.GuestRequestStatus.RequestExpired);
-            guestList.ForEach(element => myBl.SetGuestRequest(element));
-        }
-
-        private void OrderDailyMethod()
-        {
-            List<Order> listOfOrder = myBl.DaysPassedOrders(31);
-            List<Order> ord = new List<Order>();
-            foreach (Order o in listOfOrder)
-            {
-                ord.Add(o);
-            }
-            ord.ForEach(element => element.OrderStatus = Enums.OrderStatus.Closed);
-            ord.ForEach(element => myBl.setOrder(element));
-        }
-        #endregion
+       
     }
 }

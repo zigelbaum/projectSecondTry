@@ -613,16 +613,7 @@ namespace BL
             }
             return all_fee;
         }
-
-        public List<GuestRequest> DaysPassFromMail(Int32 days)
-        {
-            IDAL dal = DAL.factoryDAL.getDAL("XML");
-            List<GuestRequest> requests = dal.GetGuestRequestsList();
-            var requestsList = from GuestRequest request in requests
-                               where (request.RegistrationDate.AddDays(days) < DateTime.Today && request.Status == Enums.GuestRequestStatus.Active)
-                               select request;
-            return requestsList.ToList();
-        }
+       
         #endregion
 
         #region grouping
@@ -696,6 +687,34 @@ namespace BL
             var groupToReturn = from unit in listHostingUnits
                                 group unit by unit.Area;
             return groupToReturn;
+        }
+        #endregion
+
+        #region dailyUpdate
+        private void DailyUpdate()
+        {
+            while (true)
+            {
+                DateTime _DateLastRun;
+                _DateLastRun = DateTime.Now.Date;
+
+                if (_DateLastRun < DateTime.Now.Date)
+                {
+                    OrderDailyMethod();                   
+                    _DateLastRun = DateTime.Now.Date;
+                }
+            }
+        }
+        private void OrderDailyMethod()
+        {
+            List<Order> listOfOrder = DaysPassedOrders(31);
+            List<Order> ord = new List<Order>();
+            foreach (Order o in listOfOrder)
+            {
+                ord.Add(o);
+            }
+            ord.ForEach(element => element.OrderStatus = Enums.OrderStatus.Closed);
+            ord.ForEach(element => setOrder(element));
         }
         #endregion
     }

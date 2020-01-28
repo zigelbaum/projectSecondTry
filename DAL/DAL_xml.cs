@@ -83,16 +83,6 @@ namespace DAL
             else
                 LoadData(ref orderRoot, orderPath);
 
-            /* if (!File.Exists(bankBranchPath))
-             {
-                 bankBranchRoot = new XElement("BankBranches");
-                 orderRoot.Save(bankBranchPath);
-             }
-             else
-                 LoadData(ref bankBranchRoot, bankBranchPath);*/
-
-
-
             saveListToXML<HostingUnit>(DS.DataSource.hostingUnitsCollection, hostingUnitPath);
             saveListToXML<GuestRequest>(DS.DataSource.guestRequestsCollection, guestRequestPath);
             saveListToXML <Order>(DS.DataSource.ordersCollection, orderPath);
@@ -509,10 +499,10 @@ namespace DAL
                         branch.BranchNumber = int.Parse(child.InnerText);
                         break;
                     case "Branch_Address":
-                        branch.BranchAddress = child.InnerText;
+                        branch.BranchCity = child.InnerText;
                         break;
                     case "City":
-                        branch.BranchCity = child.InnerText;
+                        branch.BranchAddress = child.InnerText;                       
                         break;
 
                 }
