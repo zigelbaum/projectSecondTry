@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<ArrayOfGuestRequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GuestRequest>
+    <GuestRequestKey>10000011</GuestRequestKey>
+    <PrivateName>Avrohom</PrivateName>
+    <FamilyName>Diter</FamilyName>
+    <MailAddress>dit@gmail.com</MailAddress>
+    <Status>Active</Status>
+    <RegistrationDate>2020-01-03T00:00:00</RegistrationDate>
+    <EnteryDate>2019-10-20T00:00:00</EnteryDate>
+    <ReleaseDate>2004-10-28T00:00:00</ReleaseDate>
+    <Area>Center</Area>
+    <SubArea>Tel Aviv</SubArea>
+    <Type>Hotel</Type>
+    <Adults>2</Adults>
+    <Children>5</Children>
+    <Pool>true</Pool>
+    <Jacuzzi>true</Jacuzzi>
+    <Garden>true</Garden>
+    <ChildrenAttraction>true</ChildrenAttraction>
+    <Meals>true</Meals>
+    <Synagogue xsi:nil="true" />
+    <Stars>4</Stars>
+  </GuestRequest>
+  <GuestRequest>
+    <GuestRequestKey>10000012</GuestRequestKey>
+    <PrivateName>Yizchak</PrivateName>
+    <FamilyName>Molivt</FamilyName>
+    <MailAddress>Mol@gmail.com</MailAddress>
+    <Status>Active</Status>
+    <RegistrationDate>2020-01-02T00:00:00</RegistrationDate>
+    <EnteryDate>2005-08-03T00:00:00</EnteryDate>
+    <ReleaseDate>2005-08-10T00:00:00</ReleaseDate>
+    <Area>All</Area>
+    <SubArea> </SubArea>
+    <Type>Zimmer</Type>
+    <Adults>6</Adults>
+    <Children>14</Children>
+    <Pool>true</Pool>
+    <Jacuzzi>true</Jacuzzi>
+    <Garden>true</Garden>
+    <ChildrenAttraction>true</ChildrenAttraction>
+    <Meals>true</Meals>
+    <Synagogue xsi:nil="true" />
+    <Stars>3</Stars>
+  </GuestRequest>
+  <GuestRequest>
+    <GuestRequestKey>10000013</GuestRequestKey>
+    <PrivateName>Yaakov</PrivateName>
+    <FamilyName>Zigbel</FamilyName>
+    <MailAddress>yaZ@gmail.com</MailAddress>
+    <Status>ClosedOnTheWeb</Status>
+    <RegistrationDate>2019-11-29T00:00:00</RegistrationDate>
+    <EnteryDate>2020-01-05T00:00:00</EnteryDate>
+    <ReleaseDate>2020-01-20T00:00:00</ReleaseDate>
+    <Area>North</Area>
+    <SubArea> </SubArea>
+    <Type>Camping</Type>
+    <Adults>2</Adults>
+    <Children>5</Children>
+    <Pool>false</Pool>
+    <Jacuzzi>false</Jacuzzi>
+    <Garden>true</Garden>
+    <ChildrenAttraction>false</ChildrenAttraction>
+    <Meals>false</Meals>
+    <Synagogue xsi:nil="true" />
+    <Stars>0</Stars>
+  </GuestRequest>
+</ArrayOfGuestRequest>

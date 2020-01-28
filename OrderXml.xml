@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Order>
+    <OrderStatus>NoAnswer</OrderStatus>
+    <CreateDate>2020-01-01T00:00:00</CreateDate>
+    <OrderDate>2020-01-02T00:00:00</OrderDate>
+    <OrderKey>10000211</OrderKey>
+    <GuestRequestKey>10000012</GuestRequestKey>
+    <HostingUnitKey>10040002</HostingUnitKey>
+    <Fee>0</Fee>
+  </Order>
+  <Order>
+    <OrderStatus>Active</OrderStatus>
+    <CreateDate>2020-01-04T00:00:00</CreateDate>
+    <OrderDate>2020-01-04T00:00:00</OrderDate>
+    <OrderKey>10000111</OrderKey>
+    <GuestRequestKey>10000011</GuestRequestKey>
+    <HostingUnitKey>10030001</HostingUnitKey>
+    <Fee>0</Fee>
+  </Order>
+  <Order>
+    <OrderStatus>Closed</OrderStatus>
+    <CreateDate>2020-01-06T00:00:00</CreateDate>
+    <OrderDate>2020-01-20T00:00:00</OrderDate>
+    <OrderKey>10000311</OrderKey>
+    <GuestRequestKey>10000013</GuestRequestKey>
+    <HostingUnitKey>10050003</HostingUnitKey>
+    <Fee>0</Fee>
+  </Order>
+</ArrayOfOrder>

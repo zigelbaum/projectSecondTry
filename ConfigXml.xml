@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configure>
+  <DateLastRun>0001-01-01T00:00:00</DateLastRun>
+  <GuestRequestKey>10000000</GuestRequestKey>
+  <HostingUnitKey>10000000</HostingUnitKey>
+  <OrderKey>10000000</OrderKey>
+  <Fee>10</Fee>
+  <HostKey>10000000</HostKey>
+</Configure>
