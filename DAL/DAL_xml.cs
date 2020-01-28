@@ -53,7 +53,7 @@ namespace DAL
 
             if (!File.Exists(configPath))
             {
-                configRoot = new XElement("Configure", new XElement("GuestRequestKey", "10000000"), new XElement("HostingUnitKey", "10000000"), new XElement("OrderKey", "10000000"),new XElement("Fee", "10"), new XElement("HostKey", "10000000"));
+                configRoot = new XElement("Configure", new XElement("DateLastRun", default(DateTime)), new XElement("GuestRequestKey", "10000000"), new XElement("HostingUnitKey", "10000000"), new XElement("OrderKey", "10000000"),new XElement("Fee", "10"), new XElement("HostKey", "10000000"));
                 configRoot.Save(configPath);
             }
             else

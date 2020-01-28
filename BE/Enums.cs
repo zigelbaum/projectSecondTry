@@ -23,8 +23,7 @@
         public enum GuestRequestStatus
         { 
             Active=1, 
-            ClosedOnTheWeb,
-            RequestExpired
+            ClosedOnTheWeb
         }
 
         public enum Area

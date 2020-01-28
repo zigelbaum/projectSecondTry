@@ -27,9 +27,7 @@ namespace PLWPF
 
         public DirectorWindow()
         {
-            InitializeComponent();
-            Thread thread = new Thread(DailyUpdate);
-            thread.Start();
+            InitializeComponent();           
             all_fee = myBl.Aggregate_fee();
             tbFee.Text = all_fee.ToString();
             tbFee.IsEnabled = false;

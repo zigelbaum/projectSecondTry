@@ -696,19 +696,22 @@ namespace BL
         #endregion
 
         #region dailyUpdate//find delete expired orders 
-        private void DailyUpdate()
+        public void DailyUpdate()
         {
-            while (true)
+            new Thread(() =>
             {
-                DateTime _DateLastRun;
-                _DateLastRun = DateTime.Now.Date;
-
-                if (_DateLastRun < DateTime.Now.Date)
+                while (true)
                 {
-                    OrderDailyMethod();                   
-                    _DateLastRun = DateTime.Now.Date;
+                    if (Configuration.DateLastRun < DateTime.Now.Date)
+                    {
+                        OrderDailyMethod();
+                        Configuration.DateLastRun = DateTime.Now.Date;
+                        TimeSpan ts = DateTime.Now.Date - Configuration.DateLastRun;
+                        Thread.Sleep(ts);
+                    }
                 }
-            }
+            }).Start();
+            
         }
         private void OrderDailyMethod()
         {
@@ -718,7 +721,7 @@ namespace BL
             {
                 ord.Add(o);
             }
-            ord.ForEach(element => element.OrderStatus = Enums.OrderStatus.Closed);
+            ord.ForEach(element => element.OrderStatus = Enums.OrderStatus.NotRelevent);
             ord.ForEach(element => setOrder(element));
         }
         #endregion

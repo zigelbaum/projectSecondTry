@@ -71,7 +71,8 @@ namespace BL
         Order NewOrder(int hostingUnitkey, int guestRequestKey);//Creating order  
         GuestRequest FindGuestRequest(Int32 requestKey);//find the request with this key
         HostingUnit FindUnit(Int32 unitKey);//find the unit with this key
-        double Aggregate_fee();//calculates the commission from all order       
+        double Aggregate_fee();//calculates the commission from all order   
+        void DailyUpdate();//find delete expired orders 
         #endregion
 
         #region grouping
