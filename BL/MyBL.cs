@@ -312,10 +312,15 @@ namespace BL
                 {
                     if (order.OrderStatus == Enums.OrderStatus.Closed)
                     {
-                        order.Fee = TotalFee(order);
-                        dal.setOrder(order);
-                        UpdateDiary(order);                        
-                        UpdateInfoAfterOrderClosed(order);
+                        if (HostingUnitAvability(order))
+                        {
+                            order.Fee = TotalFee(order);
+                            dal.setOrder(order);
+                            UpdateDiary(order);
+                            UpdateInfoAfterOrderClosed(order);
+                        }
+                        else
+                            throw new ExceptionBL("the unit is allready occuiped during tose days");
                     }
                     else
                     {
@@ -690,7 +695,7 @@ namespace BL
         }
         #endregion
 
-        #region dailyUpdate
+        #region dailyUpdate//find delete expired orders 
         private void DailyUpdate()
         {
             while (true)

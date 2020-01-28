@@ -85,9 +85,5 @@ namespace BL
         IEnumerable<IGrouping<Enums.Area, HostingUnit>> GroupHostingUnitByArea();//Creates a group of hosting units by area
         #endregion
 
-        #region dailyUpdate
-        void DailyUpdate();
-        void OrderDailyMethod();
-        #endregion
     }
 }
