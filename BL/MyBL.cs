@@ -195,12 +195,12 @@ namespace BL
         #region Dalfunctions
 
         #region HostingUnit
-        public int addHostingUnit(HostingUnit hostingUnit)//!!!!!!!
+        public int addHostingUnit(HostingUnit hostingUnit)
         {
             try
             {
                 IDAL dal = DAL.factoryDAL.getDAL("XML");
-                return dal.addHostingUnit(hostingUnit.Clone());
+                return dal.addHostingUnit(hostingUnit);
             }
             catch (Exception e)
             {
@@ -276,7 +276,7 @@ namespace BL
             return dal.GetGuestRequestsList();
         }
 
-        public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)//!!!!
+        public List<GuestRequest> getGuestRequests(Func<GuestRequest, bool> predicate)
         {
             IDAL dal = DAL.factoryDAL.getDAL("XML");
             return dal.getGuestRequests(predicate);

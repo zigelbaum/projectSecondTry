@@ -255,10 +255,24 @@ namespace PLWPF
                         premitionToAdd = false;
                         tbLastName.Background = Brushes.IndianRed;
                     }
-                    if (!MainWindow.myBL.IsValidEmail(tbMail.Text))
+                    try
                     {
-                        premitionToAdd = false;
-                        tbMail.Background = Brushes.IndianRed;
+                        if (!MainWindow.myBL.IsValidEmail(tbMail.Text))
+                        {
+                            premitionToAdd = false;
+                            tbMail.Background = Brushes.IndianRed;
+                        }
+                    }
+                    catch (Exception en)
+                    {
+                        var result = MessageBox.Show(en.Message + ". whould you like to retry?", "registration action failed", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.None, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                        if (MessageBoxResult.No == result)
+                        {
+                            Close();
+                            return;
+                        }
+                        else
+                            return;
                     }
                     if (premitionToAdd == true)
                     {
