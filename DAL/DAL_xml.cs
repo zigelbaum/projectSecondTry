@@ -53,7 +53,7 @@ namespace DAL
 
             if (!File.Exists(configPath))
             {
-                configRoot = new XElement("Configure", new XElement("GuestRequestKey", "10000000"), new XElement("HostingUnitKey", "10000000"), new XElement("OrderKey", "10000000"),new XElement("Fee", "10"));
+                configRoot = new XElement("Configure", new XElement("GuestRequestKey", "10000000"), new XElement("HostingUnitKey", "10000000"), new XElement("OrderKey", "10000000"),new XElement("Fee", "10"), new XElement("HostKey", "10000000"));
                 configRoot.Save(configPath);
             }
             else
@@ -307,11 +307,15 @@ namespace DAL
                 DS.DataSource.hostingUnitsCollection = (loadListFromXML<HostingUnit>(hostingUnitPath));
                 LoadData(ref configRoot, configPath);
                 int code = Convert.ToInt32(configRoot.Element("HostingUnitKey").Value);
-                hostingUnit.HostingUnitKey = code++;
+                hostingUnit.HostingUnitKey = code++;              
                 HostingUnit unit = DS.DataSource.hostingUnitsCollection.FirstOrDefault(t => t.HostingUnitKey == hostingUnit.HostingUnitKey);
                 if (unit != null)
                     throw new DataException("DAL: hosting unit with the same key already exists...");
                 configRoot.Element("HostingUnitKey").Value = code.ToString();
+                configRoot.Save(configPath);
+                code = Convert.ToInt32(configRoot.Element("HostKey").Value);
+                hostingUnit.Owner.HostKey = code++;
+                configRoot.Element("HostKey").Value = code.ToString();
                 configRoot.Save(configPath);
                 DS.DataSource.hostingUnitsCollection.Add(hostingUnit);
                 saveListToXML(DS.DataSource.hostingUnitsCollection, hostingUnitPath);

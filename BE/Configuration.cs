@@ -13,6 +13,7 @@ namespace BE
         public static Int32 GuestRequestKey = 10000000;
         public static Int32 HostingUnitKey = 10000000;
         public static Int32 OrderKey = 10000000;
+        public static Int32 HostKey = 100000000;
         public static double Fee = 10;
     }
 }
