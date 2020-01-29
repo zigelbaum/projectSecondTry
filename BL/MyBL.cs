@@ -706,7 +706,7 @@ namespace BL
                     {
                         OrderDailyMethod();
                         Configuration.DateLastRun = DateTime.Now.Date;                       
-                        Thread.Sleep(24*60*60);
+                        Thread.Sleep(24*60*60*1000);
                     }
                 }
             }).Start();
